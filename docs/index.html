@@ -1495,6 +1495,17 @@ async function init(){
     const res=await fetch("./fuentes.json?v=2",{cache:"no-store"});
     if(!res.ok)throw Error("Sin catálogo");
     const data=await res.json();feeds=Array.isArray(data.feeds)?data.feeds:[];
+    // Quien ya eligió periódicos decide si incorpora nuevos medios del catálogo:
+    // no activar sorpresivamente un RSS recién añadido tras una selección personal.
+    if(Object.keys(prefs.sources||{}).length){
+      let changed=false;
+      for(const feed of feeds){
+        if(!Object.prototype.hasOwnProperty.call(prefs.sources,feed.id)){
+          prefs.sources[feed.id]=false;changed=true;
+        }
+      }
+      if(changed)save();
+    }
     ownFeeds=ownFeeds.filter(x=>!feeds.some(f=>f.id===x.id||f.url===x.url));
     if(CUSTOM)CUSTOM.save(ownFeeds);
     feeds.push(...ownFeeds);
