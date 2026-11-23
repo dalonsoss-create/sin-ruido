@@ -171,8 +171,8 @@
 <script>
 (function(){
 "use strict";
-const GROUPS=[["Tecnología","✦",5],["Ciencia","◈",5],["Economía","↗",4],["Salud","♥",4],["Naturaleza","❀",4],["Internacional","◎",2],["Deportes","◉",1]];
-const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};
+const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};
 const EXAMPLES=[
 {title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
 {title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
@@ -561,7 +561,7 @@ el("source-form").onsubmit=e=>{
   el("source-form").reset();
   msg.textContent="Propuesta guardada. Pulsa «Solicitar activación» para incorporarla a las noticias.";
 };
-el("start-fresh").onclick=()=>{if(!confirm("¿Crear una edición nueva sin vetos, con todos los temas y fuentes disponibles?"))return;prefs={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};activeTopic="Todas";save();renderControls();render()};
+el("start-fresh").onclick=()=>{if(!confirm("¿Crear una edición nueva sin vetos y volver a elegir tus temas y medios?"))return;prefs=JSON.parse(JSON.stringify(DEFAULT));activeTopic="Todas";save();renderControls();render();openWelcome()};
 el("reset").onclick=()=>{
   if(!confirm("¿Borrar tus preferencias, fuentes desactivadas y propuestas?"))return;
   prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
