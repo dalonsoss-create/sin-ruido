@@ -89,7 +89,7 @@ function plain(html){
 function meta(obj,k){return plain(obj?.[k]?.value||"")}
 function correctLicense(metaObj){
   const name=meta(metaObj,"LicenseShortName").trim();
-  const license=metaObj?.LicenseUrl?.value||"";
+  const license=String(metaObj?.LicenseUrl?.value||"").replace(/^http:\/\/creativecommons\.org\//i,"https://creativecommons.org/");
   // Licencias admitidas explícitamente; nunca tratar CC BY-SA como CC BY.
   if(!(/^(?:CC0(?:\s|$)|CC BY [1-4]\.0$)/i.test(name)))return null;
   if(!/^https:\/\/creativecommons\.org\/(?:publicdomain\/zero\/1\.0|licenses\/by\/[1-4]\.0)\/?$/i.test(license))return null;
@@ -107,7 +107,7 @@ function parseResults(data,subject){
     const licensed=correctLicense(ext);
     if(!licensed)continue;
     const creator=meta(ext,"Artist").replace(/^\s*(?:Photo|Photograph|Image)\s*:\s*/i,"").slice(0,100);
-    if(!creator&&licensed.name.toUpperCase()!=="CC0")continue;
+    if(!creator&&!/^CC0\b/i.test(licensed.name))continue;
     const src=info.thumburl||info.url;
     if(!/^https:\/\/(?:upload\.wikimedia\.org|thumb\.wikimedia\.org)\//.test(src||""))continue;
     const page="https://commons.wikimedia.org/wiki/"+encodeURIComponent(p.title.replace(/ /g,"_")).replace(/%3A/gi,":");
