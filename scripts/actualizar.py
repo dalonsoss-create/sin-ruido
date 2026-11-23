@@ -102,6 +102,31 @@ def collect(feed):
         articles.append(article)
     return articles
 
+def select_balanced(items, limit=900, minimum_per_source=5):
+    """Reserva titulares recientes de cada medio, luego llena por actualidad.
+
+    Sin esta reserva, medios locales con pocos titulares desaparecen al
+    superar el corte global de 900 artículos de periódicos grandes.
+    Los artículos ya están depurados y limitados a las últimas 72 horas.
+    """
+    if len(items) <= limit:
+        return items
+    quotas={}
+    chosen=set()
+    for index, article in enumerate(items):
+        source=article.get("source_id") or article.get("source") or ""
+        if quotas.get(source, 0) < minimum_per_source:
+            chosen.add(index)
+            quotas[source]=quotas.get(source, 0)+1
+    if len(chosen)>limit:
+        chosen=set(sorted(chosen)[:limit])
+    for index in range(len(items)):
+        if len(chosen)>=limit:
+            break
+        chosen.add(index)
+    return [a for index,a in enumerate(items) if index in chosen]
+
+
 def main():
     now=dt.datetime.now(dt.timezone.utc)
     feed_list=json.loads(CONFIG.read_text(encoding="utf-8")).get("feeds",[])
@@ -173,7 +198,7 @@ def main():
         sys.exit(1)
     # Las cabeceras de referencia y coincidencias ayudan a detectar relevancia.
     # El resto de noticias se mantiene: no filtramos por apertura ni suscripción.
-    fresh=enrich(fresh[:900])
+    fresh=enrich(select_balanced(fresh, limit=900, minimum_per_source=5))
     OUT.write_text(json.dumps({
         "updated":now.isoformat(),"sources_ok":successes,"classification_version":5,
         "feed_count":len(feed_list),
