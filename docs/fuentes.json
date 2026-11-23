@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "feeds": [
     {
       "id": "elpais-tecnologia",
@@ -326,6 +326,16 @@
       "category": "Sucesos",
       "place": "Madrid",
       "url": "https://rss.madridiario.es/rss/seccion/642/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "diariodepozuelo-local",
+      "name": "Diario de Pozuelo",
+      "category": "Sociedad",
+      "place": "Pozuelo de Alarcón",
+      "homepage": "https://www.diariodepozuelo.es/",
+      "url": "https://www.diariodepozuelo.es/noticias-pozuelo/?format=feed&type=rss",
       "images_allowed": false,
       "language": "es"
     }
