@@ -32,3 +32,13 @@ body{background:radial-gradient(ellipse at top left,#fffaf3,transparent 45rem),v
 /* Menú de secciones: navegación horizontal compacta incluso con 22 temas */
 .topics{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;scrollbar-width:thin;scroll-behavior:smooth;overscroll-behavior-inline:contain;padding:8px 1px 11px;position:sticky;top:0;z-index:4;background:var(--paper)}
 .topic-button{flex:0 0 auto;white-space:nowrap}
+
+/* Fotografías CC0 ilustrativas: la ilustración SVG queda detrás como respaldo. */
+.art{position:relative}
+.article-photo{position:absolute;inset:0;z-index:2;overflow:hidden;border-radius:inherit}
+.article-photo-link{position:absolute;inset:0;display:block;overflow:hidden}
+.article-photo-link img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .3s ease}
+.article-photo-link:hover img{transform:scale(1.02)}
+.photo-credit{position:absolute;right:6px;bottom:6px;z-index:3;padding:5px 7px;border-radius:6px;background:#1d1d1dd4;color:#fff!important;font:700 10px/1.2 ui-sans-serif,-apple-system,system-ui,sans-serif;text-shadow:none}
+.photo-credit:hover{background:#101010}
+@media(max-width:760px){.photo-credit{font-size:9px;padding:4px 6px}}
