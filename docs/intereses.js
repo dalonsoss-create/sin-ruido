@@ -56,6 +56,10 @@
     let residual=t;
     for(const [,rx] of [...groups,...places])residual=residual.replace(new RegExp(rx.source,"g")," ");
     const terms=[...new Set((residual.match(/[a-z0-9]{3,}/g)||[]).filter(w=>!filler.has(w)))].slice(0,9);
+    // Un club, una persona o una marca concretos deben coincidir, no basta con la categoría.
+    for(const entity of ["real madrid","fc barcelona","atletico de madrid","pedro sanchez","salvador illa","marc marquez"]){
+      if(t.includes(entity)&&!terms.includes(entity))terms.unshift(entity);
+    }
     return {raw:line,only,categories:foundCats,places:foundPlaces,terms,recognized:!!(foundCats.length||foundPlaces.length||terms.length)};
   }
   function parse(raw){
