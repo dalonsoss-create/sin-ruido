@@ -1,5 +1,909 @@
 {
-  "updated": null,
-  "sources_ok": 0,
-  "articles": []
+  "updated": "2026-11-23T08:47:22.215009+00:00",
+  "sources_ok": 9,
+  "articles": [
+    {
+      "title": "En 1977, EEUU le cambió el nombre a un pez feísimo que vio en Sudamérica. La idea fue tan buena que casi acabamos con la lubina que no era lubina",
+      "link": "https://www.xataka.com/magnet/1977-eeuu-le-cambio-nombre-a-pez-feisimo-encontrado-sudamerica-idea-fue-buena-que-casi-acabamos-lubina-que-no-era-lubina",
+      "date": "2026-11-23T08:30:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Las mujeres viven más años que los hombres, pero la ciencia ha medido la cara B de esa ventaja: 2,4 años extra de enfermedad",
+      "link": "https://www.xataka.com/medicina-y-salud/mujeres-viven-anos-que-hombres-ciencia-ha-medido-cara-b-esa-ventaja-2-4-anos-extra-enfermedad",
+      "date": "2026-11-23T08:00:27+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Encuentran en Mallorca un barco hundido de época islámica con una carga muy peculiar: un montón de cuernos de ciervo",
+      "link": "https://www.xataka.com/magnet/encuentran-mallorca-barco-hundido-epoca-islamica-carga-muy-peculiar-monton-cuernos-ciervo",
+      "date": "2026-11-23T07:00:24+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "La generación Z ha acuñado un nuevo término para quienes quieren salir a su hora y no busca ascensos: minimalismo profesional",
+      "link": "https://www.xataka.com/empresas-y-economia/generacion-z-ha-acunado-nuevo-termino-para-quienes-quieren-salir-a-su-hora-no-busca-ascensos-minimalismo-profesional",
+      "date": "2026-11-23T05:02:26+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Las aerolíneas anticipan una subida de precios y un recorte de plazas para el próximo verano",
+      "link": "https://elpais.com/economia/2026-11-23/las-aerolineas-anticipan-una-subida-de-precios-y-un-recorte-de-plazas-para-el-proximo-verano.html",
+      "date": "2026-11-23T04:45:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "La sede fantasma de la CNMC en Barcelona",
+      "link": "https://elpais.com/economia/2026-11-23/la-sede-fantasma-de-la-cnmc-en-barcelona.html",
+      "date": "2026-11-23T04:45:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Luciano Floridi, filósofo: “La teoría del apocalipsis de la IA es la suma de desinformación, propaganda, intereses y codicia”",
+      "link": "https://elpais.com/tecnologia/2026-11-23/luciano-floridi-filosofo-la-teoria-del-apocalipsis-de-la-ia-es-la-suma-de-desinformacion-propaganda-intereses-y-codicia.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Netanyahu negocia con Eisenkot seguir en el poder mientras calienta frentes bélicos",
+      "link": "https://elpais.com/internacional/2026-11-23/netanyahu-negocia-con-eisenkot-seguir-en-el-poder-mientras-calienta-frentes-belicos.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "El entusiasmo de Burnham por superar el Brexit choca con la realidad política",
+      "link": "https://elpais.com/internacional/2026-11-23/el-entusiasmo-de-burnham-por-superar-el-brexit-choca-con-la-realidad-politica.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Meloni culmina cuatro años de recortes en sanidad y educación en Italia",
+      "link": "https://elpais.com/internacional/2026-11-23/meloni-culmina-cuatro-anos-de-recortes-en-sanidad-y-educacion-en-italia.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Los jubilados al PSOE y los policías a Vox: la diferencia del voto por ocupación",
+      "link": "https://elpais.com/espana/elecciones-generales/2026-11-23/los-jubilados-al-psoe-y-los-policias-a-vox-la-diferencia-del-voto-por-ocupacion.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Promesas electorales bajo sospecha",
+      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Una ciudad, dos equipos, dos libros",
+      "link": "https://elpais.com/deportes/futbol/2026-11-23/una-ciudad-dos-equipos-dos-libros.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Imperdonablemente te quiero: un whatsapp sin enviar en el Bernabéu",
+      "link": "https://elpais.com/deportes/futbol/2026-11-23/imperdonablemente-te-quiero-un-whatsapp-sin-enviar-en-el-bernabeu.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "El último huésped del Motel Holloway",
+      "link": "https://elpais.com/deportes/futbol/2026-11-23/el-ultimo-huesped-del-motel-holloway.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Tokenización de activos reales: el punto de inflexión que redefine los mercados financieros",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-23/tokenizacion-de-activos-reales-el-punto-de-inflexion-que-redefine-los-mercados-financieros.html",
+      "date": "2026-11-23T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "La inflación se come las subidas salariales y harta a los trabajadores",
+      "link": "https://elpais.com/economia/negocios/2026-11-23/la-inflacion-se-come-las-subidas-salariales-y-harta-a-los-trabajadores.html",
+      "date": "2026-11-23T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Tony Olivo (Babel): “Llegué a tener siete perros, mi relación con los animales es una parte importante de mi vida”",
+      "link": "https://elpais.com/economia/negocios/entrevistas-afterwork/2026-11-23/tony-olivo-babel-llegue-a-tener-siete-perros-mi-relacion-con-los-animales-es-una-parte-importante-de-mi-vida.html",
+      "date": "2026-11-23T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Federico Barriga (Fitch): “La flexibilidad para bajar impuestos en España no es muy significativa”",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-23/federico-barriga-fitch-la-flexibilidad-para-bajar-impuestos-en-espana-no-es-muy-significativa.html",
+      "date": "2026-11-23T04:25:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Las sanciones internacionales enfangan la aprobación del euro digital y revelan los límites de la soberanía europea",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-23/las-sanciones-internacionales-enfangan-la-aprobacion-del-euro-digital-y-revelan-los-limites-de-la-soberania-europea.html",
+      "date": "2026-11-23T04:25:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Las grandes grupos textiles rebajan el optimismo y temen un menor gasto en invierno por la inflación",
+      "link": "https://cincodias.elpais.com/companias/2026-11-23/las-grandes-grupos-textiles-rebajan-el-optimismo-y-temen-un-menor-gasto-en-invierno-por-la-inflacion.html",
+      "date": "2026-11-23T04:15:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "El fraude del CEO llega a la justicia europea, que vuelve a poner a la banca en el punto de mira",
+      "link": "https://cincodias.elpais.com/companias/2026-11-23/el-fraude-del-ceo-llega-a-la-justicia-europea-que-vuelve-a-poner-a-la-banca-en-el-punto-de-mira.html",
+      "date": "2026-11-23T04:15:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "El Gobierno de De la Espriella le pide a X que suspenda la cuenta de Petro",
+      "link": "https://elpais.com/america-colombia/2026-11-23/el-gobierno-de-de-la-espriella-le-pide-a-x-que-suspenda-la-cuenta-de-petro.html",
+      "date": "2026-11-23T03:13:22+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "El padre y la hija detenidos por el ICE en Seattle son solicitantes de asilo, según la abogada",
+      "link": "https://elpais.com/us/migracion/2026-11-23/el-padre-y-la-hija-detenidos-por-el-ice-en-seattle-son-solicitantes-de-asilo-segun-la-abogada.html",
+      "date": "2026-11-23T02:49:12+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Alcaraz, un año de temor, autoconocimiento y éxito: “Hablaban, pero sabía que iba a ir genial”",
+      "link": "https://elpais.com/deportes/tenis/2026-11-22/alcaraz-sin-tregua-a-por-la-copa-davis-le-tengo-muchas-ganas.html",
+      "date": "2026-11-22T22:21:52+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Marc Márquez: “Es un título que dedico a la afición; creyeron más en mí ellos y los míos que yo mismo”",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-22/marc-marquez-tras-su-nueva-coronacion-es-un-titulo-que-dedico-a-la-aficion-y-a-la-gente-que-ha-creido-en-mi.html",
+      "date": "2026-11-22T22:19:36+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Baena sostiene la llama de un buen Atlético en su victoria en Getafe",
+      "link": "https://elpais.com/deportes/futbol/2026-11-22/baena-sostiene-la-llama-de-un-buen-atletico-en-su-victoria-en-getafe.html",
+      "date": "2026-11-22T22:16:35+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "De la máquina de Turing a la pizarra de Broncano: 167 años de locura tras el enigma matemático del millón dólares",
+      "link": "https://www.elmundo.es/ciencia/2026/11/22/6b02cef8fc6c8388428b4579.html",
+      "date": "2026-11-22T21:50:29+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "El Valencia Basket celebra su 40 aniversario con un récord de anotación: 129 puntos",
+      "link": "https://elpais.com/deportes/baloncesto/2026-11-22/el-valencia-basket-celebra-su-40-aniversario-con-un-record-de-anotacion-129-puntos.html",
+      "date": "2026-11-22T21:47:08+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Hace 100 años, un explorador gallego se convirtió en el autoproclamado rey de los jíbaros: Alfonso I de la Amazonia",
+      "link": "https://www.xataka.com/magnet/hace-100-anos-explorador-gallego-se-convirtio-autoproclamado-rey-jibaros-alfonso-i-amazonia-1",
+      "date": "2026-11-22T21:00:29+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "El maestro Carlos Alcaraz, hasta donde él quiera: ni el isquio ni Zverev pudieron con él",
+      "link": "https://elpais.com/deportes/tenis/2026-11-22/despues-de-todo-alcaraz-ya-es-maestro-ni-el-isquio-ni-zverev-pudieron-con-el.html",
+      "date": "2026-11-22T20:09:40+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Una explosión hunde un barco de guerra ruso en la costa oriental de Libia",
+      "link": "https://elpais.com/internacional/2026-11-22/una-explosion-hunde-un-barco-de-guerra-ruso-en-la-costa-oriental-de-libia.html",
+      "date": "2026-11-22T19:50:38+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "La nueva guerra fría entre Estados Unidos y China no es por los chips: es por los monos de laboratorio",
+      "link": "https://www.xataka.com/investigacion/nueva-guerra-fria-estados-unidos-china-no-chips-monos-laboratorio",
+      "date": "2026-11-22T19:30:28+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Vuelve a tiendas Lidl el sábado 28 (por 100 euros menos) el robot de cocina superventas Monsieur Cuisine con pantalla táctil, báscula y más",
+      "link": "https://www.xataka.com/seleccion/vuelve-a-tiendas-lidl-sabado-28-100-euros-robot-cocina-superventas-monsieur-cuisine-pantalla-tactil-bascula",
+      "date": "2026-11-22T19:16:24+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Hace 2.000 años, en Menorca despedían a sus muertos por todo lo alto: con vino y leche",
+      "link": "https://www.xataka.com/magnet/hace-2000-anos-menorca-despedian-a-suyos-todo-alto-funerales-vino-leche",
+      "date": "2026-11-22T19:00:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Sabemos que entrenar sin descanso perjudica al cuerpo. Ahora han descubierto qué puede ocurrir también en el cerebro",
+      "link": "https://www.xataka.com/medicina-y-salud/sabemos-que-entrenar-descanso-perjudica-al-cuerpo-ahora-han-descubierto-que-puede-ocurrir-tambien-cerebro",
+      "date": "2026-11-22T18:00:24+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Marc Márquez y el fin de la maldición de la bola 8",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-22/marc-marquez-y-la-maldicion-de-la-bola-8.html",
+      "date": "2026-11-22T17:36:20+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "La intrahistoria del título de Marc Márquez, un campeón inagotable incluso con un brazo y medio: “Lo que ha hecho es una salvajada”",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-22/la-intrahistoria-del-titulo-de-marc-marquez-un-campeon-inagotable-incluso-con-un-brazo-y-medio-lo-que-ha-hecho-es-una-salvajada.html",
+      "date": "2026-11-22T17:12:35+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Zverev, el rey cuestionado al que encara Alcaraz: “Soy el único número uno que debe justificarse”",
+      "link": "https://elpais.com/deportes/tenis/2026-11-21/zverev-el-rey-cuestionado-al-que-encara-alcaraz-soy-el-unico-numero-uno-que-debe-justificarse.html",
+      "date": "2026-11-22T17:08:45+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "El gran centro de IA de Huawei visto por satélite: China tiene energía, pero aún le faltan chips",
+      "link": "https://www.xataka.com/robotica-e-ia/china-tiene-energia-no-chips-que-revelan-satelites-centro-ia-huawei",
+      "date": "2026-11-22T17:00:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Hansi Flick: “Siempre pasa lo mismo con este árbitro”",
+      "link": "https://elpais.com/deportes/futbol/2026-11-22/hansi-flick-siempre-pasa-lo-mismo-con-este-arbitro.html",
+      "date": "2026-11-22T16:57:59+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Un carguero ruso sancionado sigue ardiendo un día después del ataque de un dron en el golfo de Finlandia",
+      "link": "https://elpais.com/internacional/2026-11-22/un-carguero-ruso-sancionado-sigue-ardiendo-un-dia-despues-del-ataque-de-un-dron-en-el-golfo-de-finlandia.html",
+      "date": "2026-11-22T16:50:21+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "La remontada como identidad en el Barcelona",
+      "link": "https://elpais.com/deportes/futbol/2026-11-22/la-remontada-como-identidad-en-el-barcelona.html",
+      "date": "2026-11-22T16:01:15+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "En 1961, unos niños imitaron a un adulto que pegaba a un muñeco. Unos ratones de Princeton han empezado a explicar por qué",
+      "link": "https://www.xataka.com/investigacion/1961-unos-ninos-imitaron-a-adulto-que-pegaba-a-muneco-unos-ratones-princeton-han-empezado-a-explicar-que",
+      "date": "2026-11-22T16:00:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "'GTA VI' es polémico por razones inesperadas: miles de jugadores odian que retrate una relación de pareja saludable",
+      "link": "https://www.xataka.com/videojuegos/primera-vez-rockstar-premia-gta-vi-relacion-pareja-saludable-machosfera-esta-que-trina",
+      "date": "2026-11-22T15:30:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Mova E50 Ultra, análisis: este es el robot aspirador que más voy a recomendar",
+      "link": "https://www.xataka.com/analisis/mova-e50-ultra-analisis-caracteristicas-precio-especificaciones",
+      "date": "2026-11-22T15:00:24+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "La cumbre del clima fracasa incapaz de cerrar un acuerdo que señale a los combustibles fósiles",
+      "link": "https://elpais.com/clima-y-medio-ambiente/2026-11-22/la-presidencia-de-la-cop31-lanza-un-nuevo-borrador-de-acuerdo-para-desatascar-el-caotico-final-de-la-cumbre-del-clima.html",
+      "date": "2026-11-22T14:46:58+00:00",
+      "source": "EL PAÍS",
+      "category": "Naturaleza"
+    },
+    {
+      "title": "La paradoja del otoño: se ha convertido en un cliché muy rentable justo cuando ha empezado a desaparecer",
+      "link": "https://www.xataka.com/magnet/paradoja-otono-se-ha-convertido-cliche-muy-rentable-justo-cuando-ha-empezado-a-desaparecer",
+      "date": "2026-11-22T14:22:22+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Marc Márquez es eterno: levanta su octavo título de MotoGP tras culminar una remontada increíble en el GP de Portugal",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-22/marc-marquez-es-eterno-levanta-su-octavo-titulo-de-motogp-tras-culminar-una-remontada-increible-en-el-gp-de-portugal.html",
+      "date": "2026-11-22T14:19:04+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Sueldo de 164.000 dólares por vivir a -203 ºC en la Luna: la nueva oferta de empleo de la NASA",
+      "link": "https://www.xataka.com/espacio/nasa-esta-reclutando-astronautas-para-vivir-luna-a-203-c-polvo-abrasivo-sueldos-164-000-dolares",
+      "date": "2026-11-22T14:00:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Creer hasta el final y olvidarse de los rivales: así impulsaron Marc Márquez y Ducati su espectacular remontada en MotoGP",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-21/creer-hasta-el-final-y-olvidarse-de-los-rivales-asi-impulsaron-marc-marquez-y-ducati-su-espectacular-remontada-en-motogp.html",
+      "date": "2026-11-22T13:46:46+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Colapsa la cumbre del clima más larga de la historia: la UE rechaza un acuerdo sin mención a los combustibles fósiles",
+      "link": "https://www.elmundo.es/ciencia/2026/11/22/6b02a7d721efa09c698b4575.html",
+      "date": "2026-11-22T13:03:35+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "Google ha convertido Gemini en una tabla periódica. El problema es que ahora hay dos modelos de programación y ninguna pista de cuál elegir",
+      "link": "https://www.xataka.com/robotica-e-ia/google-ha-convertido-gemini-tabla-periodica-problema-que-ahora-hay-dos-modelos-programacion-ninguna-pista-cual-elegir",
+      "date": "2026-11-22T13:00:29+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Los directivos españoles moderan su optimismo a medio plazo, pero mantienen la apuesta por el empleo y la IA",
+      "link": "https://elpais.com/economia/2026-11-22/los-directivos-espanoles-moderan-su-optimismo-a-medio-plazo-pero-mantienen-la-apuesta-por-el-empleo-y-la-ia.html",
+      "date": "2026-11-22T13:00:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Una jaguar recorre 2.100 kilómetros cruzando todo Brasil con un objetivo: preservar su especie",
+      "link": "https://www.xataka.com/ecologia-y-naturaleza/jaguar-recorre-2-100-kilometros-cruzando-todo-brasil-objetivo-preservar-su-especie",
+      "date": "2026-11-22T12:35:29+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "'GTA VI' nos asoma a una realidad: es quizá el último gran videojuego de la historia desarrollado prácticamente sin IA",
+      "link": "https://www.xataka.com/videojuegos/gta-vi-ultimo-gran-juego-desarrollado-usar-ia",
+      "date": "2026-11-22T12:30:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "\"Notamos una caída de pacientes\": cómo están viviendo los psicólogos el auge de la IA entre la población",
+      "link": "https://www.xataka.com/medicina-y-salud/notamos-caida-pacientes-como-estan-viviendo-psicologos-auge-ia-poblacion",
+      "date": "2026-11-22T12:20:26+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Durante años el mundo se obsesionó con los rascacielos XL. Ahora gana fuerza otra idea: los \"rascacielos horizontales\"",
+      "link": "https://www.xataka.com/magnet/durante-anos-mundo-se-obsesiono-rascacielos-xl-ahora-gana-fuerza-otra-idea-rascacielos-horizontales",
+      "date": "2026-11-22T12:00:24+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Todos conocemos a Samsung por sus móviles y sus televisores. La gran \"tapada\" es su división de empresas",
+      "link": "https://www.xataka.com/empresas-y-economia/todos-conocemos-a-samsung-sus-moviles-sus-televisores-gran-tapada-su-division-empresas",
+      "date": "2026-11-22T11:30:26+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Alemania diseña, China pone la base y España fabrica: así se hará el próximo Opel eléctrico",
+      "link": "https://www.xataka.com/movilidad/proximo-opel-electrico-se-fabricara-zaragoza-capo-habra-tecnologia-china",
+      "date": "2026-11-22T10:30:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Muere abatido un ejemplar de oso pardo durante un control de jabalíes en Picos de Europa",
+      "link": "https://www.elmundo.es/ciencia/2026/11/22/6b02c39fe85ece873e8b458c.html",
+      "date": "2026-11-22T10:27:46+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "Esta semana medio mundo está jugando al mismo GTA. El futuro es que cada uno juegue al de su pueblo",
+      "link": "https://www.xataka.com/videojuegos/esta-semana-medio-mundo-esta-jugando-al-gta-futuro-que-cada-uno-juegue-al-su-pueblo",
+      "date": "2026-11-22T10:00:28+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Las mejores ofertas de MediaMarkt durante su Black Friday: PlayStation Portal, Samsung Galaxy, Nintendo y más, hoy 22 de noviembre",
+      "link": "https://www.xataka.com/seleccion/mejores-ofertas-mediamarkt-durante-su-black-friday-playstation-portal-samsung-galaxy-nintendo-hoy-20-noviembre",
+      "date": "2026-11-22T09:30:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "El mapa de las empresas más antiguas de Europa que aún funcionan: hay una bodega abierta desde 86",
+      "link": "https://www.xataka.com/empresas-y-economia/bodega-862-pub-900-casa-moneda-886-empresas-antiguas-europa-mapa",
+      "date": "2026-11-22T09:00:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Verstappen gana en Las Vegas la carrera más caótica de la historia",
+      "link": "https://elpais.com/deportes/formula-1/2026-11-22/verstappen-gana-en-las-vegas-la-carrera-mas-caotica-de-la-historia.html",
+      "date": "2026-11-22T08:52:30+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Begoña Villacís, directora de Spain DC: el nuevo Real Decreto sobre los centros de datos es \"una prohibición de facto\"",
+      "link": "https://www.xataka.com/empresas-y-economia/begona-villacis-prohibicion-facto-patronal-centros-datos-pie-guerra-gobierno",
+      "date": "2026-11-22T08:30:00+00:00",
+      "source": "Xataka",
+      "category": "Tecnología"
+    },
+    {
+      "title": "La sonda conjunta de Europa y Japón entra en la órbita de Mercurio",
+      "link": "https://www.elmundo.es/ciencia/2026/11/22/6b02a26521efa0cd718b458c.html",
+      "date": "2026-11-22T08:16:48+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "“Tenemos el mejor candidato”: así lanzó España la carrera por la presidencia del BCE",
+      "link": "https://elpais.com/economia/2026-11-22/tenemos-el-mejor-candidato-asi-lanzo-espana-la-carrera-por-la-presidencia-del-bce.html",
+      "date": "2026-11-22T04:45:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Los fallos en los sistemas antiblanqueo ponen a Revolut y otros neobancos en el punto de mira",
+      "link": "https://elpais.com/economia/2026-11-22/los-fallos-en-los-sistemas-antiblanqueo-ponen-a-revolut-y-otros-neobancos-en-el-punto-de-mira.html",
+      "date": "2026-11-22T04:45:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Economistas e intelectuales denuncian en París la amenaza de la oligarquía internacional para las democracias",
+      "link": "https://elpais.com/economia/2026-11-22/economistas-e-intelectuales-denuncian-en-una-cumbre-en-paris-la-amenaza-de-la-oligarquia-internacional-para-las-democracias.html",
+      "date": "2026-11-22T04:45:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Christian Sewing, el aficionado al tenis que pelea otro revés para su banco",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-22/christian-sewing-el-aficionado-al-tenis-que-pelea-otro-reves-para-su-banco.html",
+      "date": "2026-11-22T04:40:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Las claves: el largo corte del trayecto en tren Madrid-Sevilla es motivo para la reflexión",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-22/las-claves-el-largo-corte-del-trayecto-en-tren-madrid-sevilla-es-motivo-para-la-reflexion.html",
+      "date": "2026-11-22T04:40:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Si hubiéramos tenido Presupuestos Generales",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-22/si-hubieramos-tenido-presupuestos-generales.html",
+      "date": "2026-11-22T04:40:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Crisis de la vivienda, desigualdad y crecimiento",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/crisis-de-la-vivienda-desigualdad-y-crecimiento.html",
+      "date": "2026-11-22T04:40:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Más industria y tecnología para una economía andaluza resiliente",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/mas-industria-y-tecnologia-para-una-economia-andaluza-resiliente.html",
+      "date": "2026-11-22T04:31:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Ni Yalta, ni cumbre: la nada con sifón",
+      "link": "https://elpais.com/internacional/2026-11-22/ni-yalta-ni-cumbre-la-nada-con-sifon.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "La UE abraza la línea dura sobre migración al aceptar los centros de deportación en Ruanda que tachaba de inhumanos",
+      "link": "https://elpais.com/internacional/2026-11-22/la-ue-abraza-la-linea-dura-sobre-migracion-al-aceptar-los-centros-de-deportacion-en-ruanda-que-tachaba-de-inhumanos.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Del genocidio a las deportaciones: por qué Europa elige Ruanda para expulsar migrantes",
+      "link": "https://elpais.com/internacional/2026-11-22/del-genocidio-a-las-deportaciones-por-que-europa-elige-ruanda-para-expulsar-migrantes.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "“Abuela” o “cabra”: los talibanes privan a las afganas de su nombre e imponen esos epítetos para dirigirse a ellas",
+      "link": "https://elpais.com/internacional/2026-11-22/abuela-o-cabra-los-talibanes-privan-a-las-afganas-de-su-nombre-e-imponen-los-epitetos-para-dirigirse-a-ellas.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "El fallo del Tribunal Internacional de Justicia sobre el genocidio rohinyá influirá en el caso de Gaza",
+      "link": "https://elpais.com/internacional/2026-11-22/el-fallo-del-tribunal-internacional-de-justicia-sobre-el-genocidio-rohinya-influira-en-el-caso-de-gaza.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "La derrota republicana abre la puerta a una nueva era en el Supremo de Estados Unidos",
+      "link": "https://elpais.com/us/2026-11-22/la-derrota-republicana-abre-la-puerta-a-una-nueva-era-en-el-supremo-de-estados-unidos.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Ante la ausencia de Rodri, llega el momento Pedri en el Barcelona",
+      "link": "https://elpais.com/deportes/futbol/2026-11-22/ante-la-ausencia-de-rodri-llega-el-momento-pedri-en-el-barcelona.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "La esperanza de Simeone con el gol",
+      "link": "https://elpais.com/deportes/futbol/2026-11-22/la-esperanza-de-simeone-con-el-gol.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "La maldición de la Lazio",
+      "link": "https://elpais.com/deportes/futbol/2026-11-22/la-maldicion-de-la-lazio.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "El caso Weil: así se desmantela un despacho de abogados",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/el-caso-weil-asi-se-desmantela-un-despacho-de-abogados.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "El arte se abre a nuevos públicos",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/el-arte-se-abre-a-nuevos-publicos.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "La obra militar que transforma Córdoba en un eje de la defensa",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/la-obra-militar-que-transforma-cordoba-en-un-eje-de-la-defensa.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Compromisos climáticos económicamente viables",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/compromisos-climaticos-economicamente-viables.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Agricultura ecológica, sin puertas al campo",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/agricultura-ecologica-sin-puertas-al-campo.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Huelva, el reto de crecer y retener la riqueza",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/huelva-el-reto-de-crecer-y-retener-la-riqueza.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Un polo tecnológico en pleno desierto",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/un-polo-tecnologico-en-pleno-desierto.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Francia: el precio de la parálisis",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/francia-el-precio-de-la-catastrofe.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Invertir en las infraestructuras del futuro",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/invertir-en-las-infraestructuras-del-futuro.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "La escena cultural andaluza goza de buena estrella",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/la-escena-cultural-andaluza-goza-de-buena-estrella.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "España tiene talento. ¿Sabemos aprovecharlo?",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/espana-tiene-talento-sabemos-aprovecharlo.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Granada, en la carrera por la energía de fusión",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/granada-en-la-carrera-por-la-energia-de-fusion.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Cádiz innova desde la tradición marinera",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/cadiz-innova-desde-la-tradicion-marinera.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "La guerra contra drones se perfecciona en Jaén",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/la-guerra-contra-drones-se-perfecciona-en-jaen.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Revolución tecnológica y riesgos financieros",
+      "link": "https://elpais.com/economia/negocios/2026-11-22/revolucion-tecnologica-y-riesgos-financieros.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Inteligencia artificial creativa con epicentro en Málaga",
+      "link": "https://elpais.com/extra/andalucia/2026-11-22/inteligencia-artificial-creativa-con-epicentro-en-malaga.html",
+      "date": "2026-11-22T04:30:00+00:00",
+      "source": "Cinco Días",
+      "category": "Economía"
+    },
+    {
+      "title": "Trump obstaculiza la supervisión de contratos por un Congreso controlado por los demócratas",
+      "link": "https://elpais.com/us/2026-11-21/trump-obstaculiza-la-supervision-de-contratos-por-un-congreso-controlado-por-los-democratas.html",
+      "date": "2026-11-21T23:48:39+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Así te hemos contado la remontada del Real Madrid contra el Celta en Liga",
+      "link": "https://elpais.com/deportes/futbol/2026-11-21/real-madrid-celta-en-directo-el-partido-de-la-liga-en-vivo.html",
+      "date": "2026-11-21T23:06:02+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Análisis de ajedrez | Carlsen azuza la polémica",
+      "link": "https://elpais.com/ajedrez/partidas/2026-11-21/analisis-de-ajedrez-carlsen-azuza-la-polemica.html",
+      "date": "2026-11-21T22:59:12+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "El Real Madrid remonta al Celta al estilo Rafa Nadal",
+      "link": "https://elpais.com/deportes/futbol/2026-11-21/el-madrid-remonta-al-celta-como-rafa-nadal.html",
+      "date": "2026-11-21T22:27:05+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Guasave despierta hecha una zona de guerra: “El hospital del IMSS estuvo secuestrado por sicarios y luego llegaron los militares”",
+      "link": "https://elpais.com/mexico/2026-11-21/guasave-despierta-hecha-una-zona-de-guerra-el-hospital-del-imss-estuvo-secuestrado-por-sicarios-y-luego-llegaron-militares.html",
+      "date": "2026-11-21T21:53:05+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "El alma del Sevilla rescata un punto ante un Betis reservón",
+      "link": "https://elpais.com/deportes/futbol/2026-11-21/el-alma-del-sevilla-rescata-un-punto-ante-un-betis-reservon.html",
+      "date": "2026-11-21T20:18:38+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Los países productores de petróleo bloquean un acuerdo final en la cumbre del clima",
+      "link": "https://www.elmundo.es/ciencia/2026/11/21/6b0172e9fdddfffa058b4588.html",
+      "date": "2026-11-21T19:34:04+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "Jair Bolsonaro, ingresado en cuidados intensivos y sin previsión de alta",
+      "link": "https://elpais.com/internacional/2026-11-21/jair-bolsonaro-ingresado-en-cuidados-intensivos-y-sin-prevision-de-alta-pero-estable.html",
+      "date": "2026-11-21T19:18:07+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "La cumbre del clima encalla en un caótico final de las negociaciones",
+      "link": "https://elpais.com/clima-y-medio-ambiente/2026-11-21/la-cumbre-del-clima-encalla-en-un-caotico-final-de-las-negociaciones.html",
+      "date": "2026-11-21T16:56:59+00:00",
+      "source": "EL PAÍS",
+      "category": "Naturaleza"
+    },
+    {
+      "title": "Multinacionales de pueblo: los pequeños municipios que ganaron la lotería con Zara, Ikea, Lego o Adidas",
+      "link": "https://elpais.com/economia/negocios/2026-11-21/multinacionales-de-pueblo-cuando-a-un-pequeno-municipio-le-toca-la-loteria.html",
+      "date": "2026-11-21T16:45:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Así te hemos contado la victoria de Alcaraz frente a Shelton en las semifinales de las ATP Finals",
+      "link": "https://elpais.com/deportes/tenis/2026-11-21/carlos-alcaraz-ben-shelton-en-directo-las-semifinales-de-las-atp-finals-en-vivo.html",
+      "date": "2026-11-21T16:37:44+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "Alcaraz, o un desafío a la lógica: sufrir, levantarse, remontar (a Shelton) y final",
+      "link": "https://elpais.com/deportes/tenis/2026-11-21/alcaraz-finalista-contra-toda-logica-sufrir-levantarse-y-remontar-a-shelton.html",
+      "date": "2026-11-21T16:35:27+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "La lluvia traiciona a Marc Márquez, que se cae a una vuelta y media de rematar el título en la ‘sprint’ del GP de Portugal",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-21/marc-marquez-se-cae-a-vuelta-y-media-del-final-de-la-sprint-cuando-rozaba-el-titulo.html",
+      "date": "2026-11-21T15:45:54+00:00",
+      "source": "EL PAÍS",
+      "category": "Deportes"
+    },
+    {
+      "title": "La UE plantea una tasa digital para financiar los próximos presupuestos europeos y reducir los recortes",
+      "link": "https://elpais.com/economia/2026-11-21/la-ue-plantea-una-tasa-digital-para-financiar-los-proximos-presupuestos-europeos-y-reducir-los-recortes.html",
+      "date": "2026-11-21T12:40:45+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Trilateral en Shenzhen: la cumbre donde Trump presumió, Putin volvió y Xi ganó",
+      "link": "https://elpais.com/internacional/2026-11-21/trilateral-en-shenzhen-la-cumbre-donde-trump-presumio-putin-volvio-y-xi-gano.html",
+      "date": "2026-11-21T09:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "De osos panda a hospitales inteligentes: Sheinbaum quiere diversificar el comercio y la inversión en su visita a China sin arriesgar el TMEC",
+      "link": "https://elpais.com/mexico/economia/2026-11-21/de-osos-panda-a-hospitales-inteligentes-sheinbaum-quiere-diversificar-el-comercio-y-la-inversion-en-su-visita-a-china.html",
+      "date": "2026-11-21T09:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Internacional"
+    },
+    {
+      "title": "Jian Tang, fabricante de robots: “Lo primero que harán será recoger cosas y poner lavadoras”",
+      "link": "https://elpais.com/tecnologia/2026-11-21/jian-tang-fabricante-de-robots-lo-primero-que-haran-sera-recoger-cosas-y-poner-lavadoras.html",
+      "date": "2026-11-21T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Un clic para ser adulto: así llegan los menores a 3.930 videojuegos pornográficos",
+      "link": "https://elpais.com/tecnologia/2026-11-21/un-clic-para-ser-adulto-asi-llegan-los-menores-a-3930-videojuegos-pornograficos.html",
+      "date": "2026-11-21T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Los tics del dinero negro aún manchan el ladrillo: “Hagamos parte de la compra del piso en efectivo. 20.000 euros o 30.000, lo que veamos”",
+      "link": "https://elpais.com/economia/negocios/2026-11-21/los-tics-del-dinero-negro-aun-manchan-el-ladrillo-hagamos-parte-de-la-compra-del-piso-en-efectivo-20000-euros-o-30000-lo-que-veamos.html",
+      "date": "2026-11-21T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "El mercado no quita ojo al ‘efecto Mélenchon’ en Francia, una economía que sufre “una crisis a cámara lenta”",
+      "link": "https://elpais.com/economia/negocios/2026-11-21/el-mercado-no-quita-ojo-al-efecto-melenchon-en-francia-una-economia-que-sufre-una-crisis-a-camara-lenta.html",
+      "date": "2026-11-21T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Bulgaria quiere que el ahorro de las pensiones vaya a carreteras",
+      "link": "https://elpais.com/economia/negocios/carta-del-corresponsal/2026-11-21/bulgaria-quiere-que-el-ahorro-de-las-pensiones-vaya-a-carreteras.html",
+      "date": "2026-11-21T04:30:00+00:00",
+      "source": "EL PAÍS",
+      "category": "Economía"
+    },
+    {
+      "title": "Marte no está muerto: su cloruro de hidrógeno sugiere actividad volcánica",
+      "link": "https://www.elmundo.es/ciencia/2026/11/21/6aff0f26e4d4d875568b45b1.html",
+      "date": "2026-11-20T23:15:46+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "La inteligencia artificial dice haber resuelto un acertijo que lleva 167 años volviendo locos a los matemáticos",
+      "link": "https://www.elmundo.es/ciencia/2026/11/20/6b008ba2fc6c83a60f8b45ac.html",
+      "date": "2026-11-20T18:18:58+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "Los abonos de transporte pueden duplicar su precio el 1 de enero: en el aire las ayudas estatales",
+      "link": "https://elpais.com/clima-y-medio-ambiente/2026-11-20/los-abonos-de-transporte-pueden-duplicar-su-precio-el-1-de-enero-en-el-aire-las-ayudas-estatales.html",
+      "date": "2026-11-20T17:30:41+00:00",
+      "source": "EL PAÍS",
+      "category": "Naturaleza"
+    },
+    {
+      "title": "España se une a Francia y Panamá en el bloque de países que presiona para incluir los combustibles fósiles en el acuerdo de la COP31",
+      "link": "https://www.elmundo.es/ciencia/2026/11/20/6b002a41fdddff30348b45b5.html",
+      "date": "2026-11-20T16:46:00+00:00",
+      "source": "El Mundo",
+      "category": "Ciencia"
+    },
+    {
+      "title": "El Gobierno elimina la asfixia burocrática para la ciencia estratégica: los centros podrán pagar más a sus investigadores y comprar más rápido",
+      "link": "https://elpais.com/ciencia/2026-11-20/el-gobierno-elimina-la-asfixia-burocratica-para-la-ciencia-estrategica-los-centros-podran-pagar-mas-a-sus-investigadores-y-comprar-mas-rapido.html",
+      "date": "2026-11-20T14:27:27+00:00",
+      "source": "EL PAÍS",
+      "category": "Ciencia"
+    },
+    {
+      "title": "La cumbre del clima llega a su recta final entre el bloqueo y las críticas a sus propias reglas: “Son una receta para el fracaso”",
+      "link": "https://elpais.com/clima-y-medio-ambiente/2026-11-20/la-cumbre-del-clima-llega-a-su-recta-final-entre-el-bloqueo-y-las-criticas-a-sus-propias-reglas-son-una-receta-para-el-fracaso.html",
+      "date": "2026-11-20T11:16:41+00:00",
+      "source": "EL PAÍS",
+      "category": "Naturaleza"
+    },
+    {
+      "title": "Más de la mitad de los jóvenes se encuentra a menudo con imágenes o vídeos falsos sobre el cambio climático: “Ya no me puedo creer nada”",
+      "link": "https://elpais.com/clima-y-medio-ambiente/2026-11-20/mas-de-la-mitad-de-los-jovenes-se-encuentra-a-menudo-con-imagenes-o-videos-falsos-sobre-el-cambio-climatico-ya-no-me-puedo-creer-nada.html",
+      "date": "2026-11-20T10:53:56+00:00",
+      "source": "EL PAÍS",
+      "category": "Naturaleza"
+    },
+    {
+      "title": "El tiempo del fin de semana: otoño en estado puro, con alternancia de días lluviosos y estables",
+      "link": "https://elpais.com/el-tiempo/2026-11-20/el-tiempo-del-fin-de-semana-otono-en-estado-puro-con-alternancia-de-dias-lluviosos-y-estables.html",
+      "date": "2026-11-20T10:42:20+00:00",
+      "source": "EL PAÍS",
+      "category": "Naturaleza"
+    }
+  ]
 }
