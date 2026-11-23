@@ -84,7 +84,7 @@ def collect(feed):
         rss_tags.extend(c.get("term") for c in item.findall(ATOM+"category") if c.get("term"))
         rss_tags.extend(c.text for c in item.findall(DC+"subject") if c.text)
         category=classify(title,link,feed["category"],rss_tags,feed["name"])
-        access_status, access_evidence=detect_access(link,item,rss_tags)
+        access_status, access_evidence=detect_access(link,item,rss_tags,feed["name"])
         article={
             "title":title[:260],"link":link,"date":date_iso(published),
             "source":feed["name"],"source_id":feed["id"],"category":category,
@@ -138,7 +138,7 @@ def main():
     # conservamos las señales RSS ya confirmadas en ediciones anteriores.
     for a in old:
         if a.get("access_status") not in ("subscription","free"):
-            access, evidence=detect_access(a.get("link",""))
+            access, evidence=detect_access(a.get("link",""),source=a.get("source",""))
             a["access_status"]=access
             if evidence:a["access_evidence"]=evidence
     # Retener noticias recientes si alguna fuente falla temporalmente.
