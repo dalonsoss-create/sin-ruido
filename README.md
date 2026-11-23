@@ -79,3 +79,12 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - Bajo cada titular hay un enlace **↗ WhatsApp** para compartir el título, la cabecera y el enlace original; no se envían imágenes de terceros.
 - **☆ Guardar** almacena un máximo de 150 enlaces con titular, cabecera, tema y fecha en el navegador (`localStorage: sinruido-bookmarks-v1`). La pestaña **🔖 Guardadas** permite revisarlos otro día, también cuando ya no estén en la portada. El mismo botón permite quitar el guardado. No se sincronizan entre navegadores, móviles, instalaciones PWA o cuentas; no existe servidor de cuentas.
 - El texto libre de intereses acepta varias frases por línea y expresiones de preferencia, exclusión y «solo». Su intérprete gratuito es **heurístico**, no inteligencia semántica universal: para comprender *cualquier* petición con fiabilidad sería necesario un modelo de lenguaje o servicio adicional, sujeto a estudio de coste y privacidad.
+
+## Fotos verificadas y derechos de imagen
+
+- Las tarjetas pueden mostrar **fotografías ilustrativas reales CC0** procedentes de Wikimedia Commons, con enlace a la ficha original, autoría y aviso visible «Foto ilustrativa · CC0». No representan necesariamente el acontecimiento concreto narrado; se seleccionan por coincidencias de lugar u objeto del titular, para reducir errores.
+- El catálogo se define en `docs/fotos.js`; se descarga directamente de Wikimedia Commons mediante URLs de miniaturas y se carga de forma diferida, salvo la portada principal. Si la foto falla, queda la ilustración editorial SVG propia, sin bloquear el contenido.
+- **No se reutilizan automáticamente las imágenes de prensa**: `docs/fuentes.json` tiene `images_allowed:false` en todos sus RSS. Un feed se puede habilitar solo tras verificar permiso/licencia aplicable para mostrar su imagen en una web pública. El recopilador conservará entonces la imagen y `image_license_ok:true`; el cliente solo dibujará imágenes de ese origen si aparece el permiso.
+- Las fotos están alojadas en Wikimedia Commons. Al mostrarlas, el navegador contacta con ese proveedor, y se facilita acceso a la licencia y a la fuente.
+- Una miniatura de WhatsApp (`og:image`) no equivale por sí sola a autorización para republicarla en Sin Ruido. No se copian ni descargan imágenes de periódicos sin verificar derechos.
+- Se mantiene el diseño y la alternativa SVG si una noticia no tiene fotografía apta o si el usuario está sin conexión.
