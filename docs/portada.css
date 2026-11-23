@@ -43,14 +43,12 @@ body{background:radial-gradient(ellipse at top left,#fffaf3,transparent 45rem),v
 .photo-credit:hover{background:#101010}
 @media(max-width:760px){.photo-credit{font-size:9px;padding:4px 6px}}
 
-/* Indicadores de suscripción: solo datos RSS/URL explícitos o marca del usuario. */
+/* Acceso al artículo: solo estados confirmados por su fuente. */
 .access-legend{font-size:11px;line-height:1.45;color:#685c53;margin:2px 0 12px;padding:0 2px}
-.paywall-badge{display:inline-flex;align-items:center;gap:4px;background:#f5dfd2!important;color:#853f22!important;border:1px solid #dfbca5;border-radius:20px;padding:3px 7px;font-weight:800;font-size:11px;letter-spacing:0;white-space:nowrap}
-.kicker .paywall-badge{background:#f5dfd2!important;color:#853f22!important}
-.access-report{border:1px solid #d0c3b5;background:#fffaf3;color:#65564a;font:750 11px/1.25 ui-sans-serif,-apple-system,system-ui,sans-serif;padding:7px 9px;border-radius:20px;cursor:pointer}
-.access-report.is-marked{border-color:#c88769;color:#934a29;background:#f9e9dc}
-.access-report:hover{border-color:#b48a72}
-@media(max-width:760px){.paywall-badge{font-size:10px}.access-legend{font-size:10px}}
+.paywall-badge,.free-access-badge{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:3px 8px;font-weight:800;font-size:11px;letter-spacing:0;white-space:nowrap}
+.paywall-badge,.kicker .paywall-badge{background:#f5dfd2!important;color:#853f22!important;border:1px solid #dfbca5}
+.free-access-badge,.kicker .free-access-badge{background:#e3efe6!important;color:#2e6843!important;border:1px solid #bed7c4}
+@media(max-width:760px){.paywall-badge,.free-access-badge{font-size:10px}.access-legend{font-size:10px}}
 
 /* Selección extraordinaria: noticias relevantes del día anterior, sin contaminar la edición de Hoy. */
 .mustread-panel{margin:10px 0 20px;padding:14px 15px;background:#f7efe2;border:1px solid #ddcdb9;border-radius:14px}
