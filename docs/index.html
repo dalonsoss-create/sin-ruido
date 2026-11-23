@@ -115,7 +115,7 @@
 .collection-btn.selected #saved-count{background:#d7b976}
 @media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
 </style>
-<link rel="stylesheet" href="./portada.css?v=acceso-simple-20261123">
+<link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
 <style id="sinruido-mobile-header-fix">
 @media (max-width:760px) {
@@ -175,11 +175,13 @@
   <div class="logo">sin ruido<span>.</span></div>
   <div class="tagline">Tu periódico personal: las noticias que te interesan, sin el ruido de siempre.</div>
   <input type="search" id="search" placeholder="Buscar noticias, temas o fuentes…" aria-label="Buscar noticias, temas o fuentes">
-  <button class="personalizar" id="mobile-settings" aria-controls="settings">⚙ Personalizar</button>
+  <button class="personalizar" id="mobile-settings" type="button" aria-controls="settings" aria-expanded="false" aria-haspopup="dialog">⚙ Personalizar</button>
 </header>
 <div class="container subline"><span id="edition-date">EDICIÓN DIGITAL</span><button id="share">↗ Compartir periódico</button><span id="source-counter">10 FUENTES DISPONIBLES</span></div>
+<div id="settings-backdrop" class="settings-backdrop" hidden></div>
 <main class="container main">
-  <aside class="settings" id="settings" aria-label="Personaliza tus noticias">
+  <aside class="settings" id="settings" role="dialog" aria-modal="true" aria-label="Personaliza tus noticias">
+    <div class="settings-panel-head"><strong>⚙ Personalizar</strong><button id="settings-close" class="settings-close" type="button" aria-label="Cerrar personalización">× Cerrar</button></div>
     <span class="coffee" aria-hidden="true">☕</span><h2>Tu periódico,<br>a tu medida</h2><p class="side-note">Elige los temas y periódicos que quieres leer.</p><button id="open-welcome" class="setup-again" type="button">✨ Configurar mi periódico paso a paso</button>
     <div class="section-heading"><h3>✨ Dime qué noticias quieres</h3></div>
     <form id="interests-form" class="interest-form">
@@ -953,20 +955,41 @@ el("learning-erase").onclick=()=>{
   readingHistory=[];try{localStorage.removeItem(LEARNING_KEY)}catch(e){}
   renderLearning();render();
 };el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
-const mobile=matchMedia("(max-width:760px)");
 const settings=el("settings"),toggle=el("mobile-settings");
-function syncPanel(){
-  toggle.setAttribute("aria-expanded",String(!mobile.matches||settings.classList.contains("show")));
+const backdrop=el("settings-backdrop"),closeSettings=el("settings-close");
+function closePanel(restoreFocus=true){
+  if(!settings.classList.contains("show"))return;
+  settings.classList.remove("show");
+  document.body.classList.remove("settings-open");
+  backdrop.hidden=true;
+  toggle.setAttribute("aria-expanded","false");
+  toggle.textContent="⚙ Personalizar";
+  if(restoreFocus)toggle.focus({preventScroll:true});
 }
-mobile.addEventListener("change",syncPanel);syncPanel();
-toggle.onclick=()=>{
-  if(mobile.matches)settings.classList.toggle("show");
-  syncPanel();
-  if(!mobile.matches||settings.classList.contains("show")){
-    settings.scrollIntoView({block:"start"});
-    settings.querySelector("input").focus({preventScroll:true});
-  }
-};
+function openPanel(){
+  settings.classList.add("show");
+  document.body.classList.add("settings-open");
+  backdrop.hidden=false;
+  toggle.setAttribute("aria-expanded","true");
+  toggle.textContent="⚙ Cerrar ajustes";
+  settings.scrollTop=0;
+  closeSettings.focus({preventScroll:true});
+}
+toggle.onclick=()=>settings.classList.contains("show")?closePanel():openPanel();
+closeSettings.onclick=()=>closePanel();
+backdrop.onclick=()=>closePanel();
+document.addEventListener("keydown",event=>{
+  if(!settings.classList.contains("show"))return;
+  if(event.key==="Escape"){event.preventDefault();closePanel();return}
+  if(event.key!=="Tab")return;
+  const items=[...settings.querySelectorAll("button, input, select, textarea, a[href], [tabindex]:not([tabindex='-1'])")]
+    .filter(x=>!x.disabled&&x.getClientRects().length);
+  if(!items.length)return;
+  const first=items[0],last=items[items.length-1];
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+});
+el("open-welcome").onclick=()=>{closePanel(false);openWelcome()};
 el("share").onclick=async()=>{
   const url=location.origin+location.pathname+"?bienvenida=1";
   const data={title:"Sin Ruido",text:"Prueba Sin Ruido y crea tu propio periódico de noticias, con tus temas y fuentes.",url};
