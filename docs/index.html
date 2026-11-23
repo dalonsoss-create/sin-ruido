@@ -32,6 +32,8 @@
 @media(max-width:760px){.container{width:min(100% - 24px,700px)}.ribbon{font-size:9px;letter-spacing:.6px}.ribbon .container{padding:7px 0}.masthead{padding:16px 0}.logo{font-size:clamp(53px,13vw,84px);letter-spacing:-4px}.subline{font-size:9px;gap:5px}.subline .mid{display:none}.main{display:block;margin-top:18px}.settings{display:none;position:relative;max-height:none;margin-bottom:20px}.settings.show{display:block}.mobile-button{display:inline-block}.feature-grid{grid-template-columns:1fr;gap:10px}.lead{padding:0;border-right:0;border-bottom:1px solid var(--line);padding-bottom:18px}.feature-side{grid-template-columns:1fr 1fr;gap:12px}.feature-side .visual{aspect-ratio:5/3}.secondary h3{font-size:18px}.deskhead h1{font-size:29px}.bottom{display:block}.news-list{grid-template-columns:1fr}.news-item .list-visual{width:100px}}
 @media(max-width:430px){.feature-side{grid-template-columns:1fr}.feature-side .visual{display:none}.news-item .list-visual{width:87px}.news-item h3{font-size:17px}.toolbar{gap:5px;flex-wrap:wrap}.toolbar input[type="search"]{flex-basis:100%}.toolbar select{flex:1;max-width:none;padding:10px 4px}.positive-switch{flex:1;justify-content:center}.logo{font-size:53px}.tagline{font-size:10px}}
 .pay-trigger{font-size:10px;font-weight:800;border:1px solid #c9bba8;background:var(--white);border-radius:3px;color:#6e3b26;padding:5px 7px;text-align:left}.pay-trigger:hover{border-color:var(--red);color:var(--red)}.pay-dialog{border:1px solid #c4b6a3;border-radius:6px;max-width:min(92vw,500px);width:100%;padding:25px 27px;background:var(--white);color:var(--ink);box-shadow:0 20px 90px #0005}.pay-dialog::backdrop{background:#1a1a1a99}.pay-top{font-size:10px;color:var(--red);text-transform:uppercase;font-weight:900;letter-spacing:1.5px}.pay-dialog h2{font-family:var(--serif);font-size:29px;margin:7px 0 4px;line-height:1.2}.pay-price{font-family:var(--serif);font-weight:800;font-size:36px;color:var(--red-deep);margin:13px 0 4px}.pay-notes{font-size:13px;line-height:1.6;margin:9px 0;color:#4d4c49}.pay-caveat{font-size:11px;color:var(--muted);line-height:1.5;margin:13px 0}.pay-links{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px}.pay-subscribe{display:inline-block;background:var(--red);color:white;font-size:13px;font-weight:800;padding:11px 14px;border-radius:3px}.pay-check{font-size:12px;text-decoration:underline;color:var(--muted)}.pay-close{position:absolute;right:12px;top:9px;border:0;background:none;color:var(--muted);font-size:27px;line-height:1}.foot-actions{flex-wrap:wrap}
+.more-wrap{display:grid;justify-items:center;gap:7px;margin:24px 0 12px}.more-btn{font:800 14px var(--sans);border:1px solid var(--red);background:var(--red);color:#fff;border-radius:999px;padding:12px 24px;box-shadow:0 5px 18px #ab5a392b}.more-btn:hover{background:#8d3726}.more-btn:focus-visible{outline:3px solid #e9a569}.more-counter{font-size:12px;color:var(--muted)}
+.learning-box{background:#f2f7ef;border:1px solid #cbd9c4;border-radius:9px;padding:12px;margin-top:10px}.learning-box p{font-size:12px;color:#50624d;margin:5px 0}.learning-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.learning-tags span{font-size:11px;background:#dcebd7;color:#36583c;border-radius:999px;padding:4px 8px}.learning-erase{border:1px solid #aabbac;background:transparent;color:#36583c;border-radius:6px;padding:7px 9px;margin-top:9px;font-size:11px;font-weight:800}
 </style>
 <link rel="stylesheet" href="./portada.css">
 </head>
@@ -58,7 +60,10 @@
     <form id="source-form" class="source-add"><input type="text" id="source-name" maxlength="60" placeholder="Nombre del medio (ej. BBC)" aria-label="Nombre de la fuente"><input type="url" id="source-url" maxlength="450" placeholder="https://medio.com/rss.xml" aria-label="URL RSS de la nueva fuente" required><button type="submit">+ Proponer fuente RSS</button></form>
     <p class="muted-note">La nueva fuente quedará como propuesta en este navegador. Para recibir sus titulares tendremos que activarla en el agregador; no se conecta automáticamente.</p>
     <div id="pending-sources"></div><div class="toast" id="source-feedback" aria-live="polite"></div>
-    <hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button> <button class="reset" id="start-fresh">Empezar desde cero</button>
+    <hr class="rule"><div class="section-heading"><h3>Tu perfil de lectura</h3><small>Solo en este dispositivo</small></div>
+<div class="learning-box"><p id="learning-summary">Tu portada aprenderá según los titulares que abras.</p><div id="learning-tags" class="learning-tags"></div><button id="learning-erase" class="learning-erase" type="button">Borrar lo aprendido</button></div>
+<p class="muted-note">Sin cuenta ni seguimiento externo. Abrir un titular cuenta como interés, no significa que hayas leído el artículo entero.</p>
+<hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button> <button class="reset" id="start-fresh">Empezar desde cero</button>
   </aside>
   <section class="editorial">
     <h1 class="sr-only">Tu portada de Sin Ruido</h1>
@@ -69,6 +74,10 @@
     <div id="features"></div>
     <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
     <div id="news-list" class="news-list"></div>
+<div id="more-wrap" class="more-wrap" hidden>
+<button id="load-more" class="more-btn" type="button">Cargar 20 noticias más ↓</button>
+<span id="more-counter" class="more-counter" aria-live="polite"></span>
+</div>
   </section>
 </main>
 <footer class="container bottom"><span>© Sin Ruido · Prototipo personal, sin publicidad ni seguimiento</span><span>Las noticias pertenecen a sus respectivos medios. Sin Ruido solo enlaza a los originales.</span></footer>
