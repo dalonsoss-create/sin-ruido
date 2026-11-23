@@ -47,7 +47,7 @@
     const line=String(raw||"").trim().slice(0,260);
     if(!line)return null;
     const t=normalize(line);
-    const exclude=/(?:^|\s)(?:no quiero|no me interesan|no deseo|sin noticias de|sin noticias sobre|sin informacion sobre|evita|evitar|excluye|quita|quitar|descarta|bloquea|no mostrar|no me muestres)(?:\s|$)/.test(t);
+    const exclude=/(?:^|\s)(?:no quiero|no me interesan|no deseo|sin|sin noticias de|sin noticias sobre|sin informacion sobre|evita|evitar|excluye|quita|quitar|descarta|bloquea|no mostrar|no me muestres)(?:\s|$)/.test(t);
     const only=!exclude&&(/(?:^|\s)(?:solo|solamente|unicamente|exclusivamente)(?:\s|$)/.test(t)||/\bno quiero ver nada mas\b/.test(t));
     let foundCats=groups.filter(([,rx])=>rx.test(t)).map(([name])=>name);
     // 'Política catalana' es política nacional/regional; no una sección de deportes.
