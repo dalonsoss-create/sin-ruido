@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Obtiene titulares y enlaces de feeds RSS, sin descargar los artículos."""
+"""Sin Ruido: recopilación de feeds RSS en un JSON para la web estática."""
 import concurrent.futures
 import datetime as dt
 import email.utils
@@ -13,26 +13,22 @@ from urllib.parse import urlsplit
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"docs"/"noticias.json"
-FEEDS=[
- ("EL PAÍS","Tecnología","https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/tecnologia/portada"),
- ("EL PAÍS","Ciencia","https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/ciencia/portada"),
- ("EL PAÍS","Economía","https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada"),
- ("EL PAÍS","Naturaleza","https://feeds.elpais.com/mrss-s/list/ep/site/elpais.com/section/clima-y-medio-ambiente"),
- ("EL PAÍS","Internacional","https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada"),
- ("EL PAÍS","Deportes","https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/deportes/portada"),
- ("Cinco Días","Economía","https://feeds.elpais.com/mrss-s/list/ep/site/cincodias.elpais.com/section/economia"),
- ("Xataka","Tecnología","https://www.xataka.com/index.xml"),
- ("El Mundo","Ciencia","https://e00-elmundo.uecdn.es/elmundo/rss/ciencia.xml"),
- ("El Mundo","Salud","https://e00-elmundo.uecdn.es/elmundo/rss/salud.xml"),
-]
+CONFIG=ROOT/"docs"/"fuentes.json"
+ATOM="{http://www.w3.org/2005/Atom}"
+MEDIA="{http://search.yahoo.com/mrss/}"
+DC="{http://purl.org/dc/elements/1.1/}"
 BAD=re.compile(r"^(publicidad|contenido patrocinado|podcast|v[ií]deo)[: ]",re.I)
 MEDICAL=re.compile(r"(m[eé]dic|farmac|ensayo cl[ií]nico|vacuna|c[aá]ncer|alzheimer|gen[eé]tic|paciente|enfermedad|hospital)",re.I)
-def get_text(node,*tags):
+NATURE=re.compile(r"(biodiversidad|animales|medio ambiente|bosques|clima|conservaci[oó]n|especies|ecosistema)",re.I)
+
+def text(node,*tags):
     for tag in tags:
-        e=node.find(tag)
-        if e is not None and e.text and e.text.strip(): return e.text.strip()
+        item=node.find(tag)
+        if item is not None and item.text and item.text.strip():
+            return item.text.strip()
     return ""
-def parse_date(raw):
+
+def date_iso(raw):
     if not raw:return dt.datetime.now(dt.timezone.utc).isoformat()
     try:d=email.utils.parsedate_to_datetime(raw)
     except (ValueError,TypeError):
@@ -40,60 +36,109 @@ def parse_date(raw):
         except ValueError:return dt.datetime.now(dt.timezone.utc).isoformat()
     if d.tzinfo is None:d=d.replace(tzinfo=dt.timezone.utc)
     return d.astimezone(dt.timezone.utc).isoformat()
+
+def image_in_rss(node):
+    """Solo metadatos RSS; no rastrea páginas de periódicos ni descarga fotografías."""
+    for item in node.iter():
+        tag=item.tag.rsplit("}",1)[-1].lower()
+        if tag in ("thumbnail","content","enclosure"):
+            url=item.attrib.get("url","").strip()
+            mime=item.attrib.get("type","").lower()
+            medium=item.attrib.get("medium","").lower()
+            if tag=="content" and medium not in ("image","") and not mime.startswith("image/"):continue
+            if tag=="enclosure" and not mime.startswith("image/"):continue
+            if urlsplit(url).scheme=="https" and urlsplit(url).netloc and not url.lower().endswith(".svg"):
+                return url
+    return None
+
 def collect(feed):
-    source,category,url=feed
-    req=urllib.request.Request(url,headers={"User-Agent":"SinRuidoPersonalRSSReader/0.1 (noncommercial)","Accept":"application/rss+xml, application/atom+xml, application/xml, text/xml, */*"})
-    with urllib.request.urlopen(req,timeout=18) as response:raw=response.read(1700000)
+    url=feed["url"]
+    req=urllib.request.Request(url,headers={
+        "User-Agent":"SinRuidoPersonalRSSReader/0.2 (noncommercial)",
+        "Accept":"application/rss+xml, application/atom+xml, application/xml, text/xml, */*"})
+    with urllib.request.urlopen(req,timeout=20) as resp:
+        raw=resp.read(1700000)
     root=ET.fromstring(raw)
     channel=root.find("channel")
-    is_atom=channel is None
-    nodes=root.findall("{http://www.w3.org/2005/Atom}entry") if is_atom else channel.findall("item")
-    result=[]
-    for node in nodes[:55]:
-        if is_atom:
-            title=get_text(node,"{http://www.w3.org/2005/Atom}title")
-            link=next((l.get("href") for l in node.findall("{http://www.w3.org/2005/Atom}link") if l.get("rel","alternate")=="alternate" and l.get("href")),"")
-            date=get_text(node,"{http://www.w3.org/2005/Atom}published","{http://www.w3.org/2005/Atom}updated")
+    atom=channel is None
+    nodes=root.findall(ATOM+"entry") if atom else channel.findall("item")
+    articles=[]
+    for item in nodes[:60]:
+        if atom:
+            title=text(item,ATOM+"title")
+            link=next((n.get("href") for n in item.findall(ATOM+"link")
+                if n.get("rel","alternate")=="alternate" and n.get("href")),"")
+            published=text(item,ATOM+"published",ATOM+"updated")
         else:
-            title=get_text(node,"title")
-            link=get_text(node,"link")
-            date=get_text(node,"pubDate","{http://purl.org/dc/elements/1.1/}date")
+            title=text(item,"title")
+            link=text(item,"link")
+            published=text(item,"pubDate",DC+"date")
         title=re.sub(r"\s+"," ",title).strip()
         if len(title)<16 or BAD.search(title):continue
         link=link.strip()
         if urlsplit(link).scheme!="https" or not urlsplit(link).netloc:continue
-        cat="Salud" if category=="Ciencia" and MEDICAL.search(title) else category
-        result.append({"title":title[:260],"link":link,"date":parse_date(date),"source":source,"category":cat})
-    return result
+        category=feed["category"]
+        if category in ("Ciencia","Tecnología") and MEDICAL.search(title):
+            category="Salud"
+        elif category=="Tecnología" and NATURE.search(title):
+            category="Naturaleza"
+        article={
+            "title":title[:260],"link":link,"date":date_iso(published),
+            "source":feed["name"],"source_id":feed["id"],"category":category}
+        # La imagen se almacena SOLO si se ha comprobado permiso explícito.
+        if feed.get("images_allowed") is True:
+            img=image_in_rss(item)
+            if img:article["image"]=img
+        articles.append(article)
+    return articles
+
 def main():
     now=dt.datetime.now(dt.timezone.utc)
+    feed_list=json.loads(CONFIG.read_text(encoding="utf-8")).get("feeds",[])
+    feed_list=[f for f in feed_list if f.get("id") and f.get("url","").startswith("https://")]
     try:old=json.loads(OUT.read_text(encoding="utf-8")).get("articles",[])
     except (FileNotFoundError,ValueError):old=[]
-    articles=[];success=0
+    successes=0
+    articles=[]
+    statuses=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
-        futures={pool.submit(collect,feed):feed for feed in FEEDS}
-        for future in concurrent.futures.as_completed(futures):
-            f=futures[future]
+        future_map={pool.submit(collect,f):f for f in feed_list}
+        for future in concurrent.futures.as_completed(future_map):
+            feed=future_map[future]
+            status={"id":feed["id"],"ok":False,"count":0}
             try:
-                batch=future.result();articles+=batch
-                if batch:success+=1
-                print(f"[OK] {f[0]} / {f[1]}: {len(batch)}")
-            except Exception as exc:print(f"[AVISO] {f[0]} / {f[1]}: {exc}",file=sys.stderr)
+                batch=future.result()
+                articles.extend(batch)
+                status.update({"ok":True,"count":len(batch)})
+                successes+=1
+                print(f"[OK] {feed['name']} / {feed['category']}: {len(batch)}")
+            except Exception as exc:
+                print(f"[AVISO] {feed['name']}: {exc}",file=sys.stderr)
+            statuses.append(status)
+    # Retener noticias de las últimas 72h si alguna fuente falla temporalmente.
     articles+=old
-    fresh=[];seen=set()
-    for article in sorted(articles,key=lambda a:a.get("date",""),reverse=True):
-        try:when=dt.datetime.fromisoformat(article["date"].replace("Z","+00:00"))
+    active_ids={f["id"] for f in feed_list}
+    fresh=[]
+    seen=set()
+    for a in sorted(articles,key=lambda x:x.get("date",""),reverse=True):
+        try:
+            when=dt.datetime.fromisoformat(a["date"].replace("Z","+00:00"))
         except (KeyError,ValueError,TypeError):continue
         if when.tzinfo is None:when=when.replace(tzinfo=dt.timezone.utc)
         if now-when>dt.timedelta(hours=72) or when-now>dt.timedelta(hours=4):continue
-        titlekey=re.sub(r"\W+","",article.get("title","").casefold())
-        urlkey=article.get("link","").split("?")[0]
+        if a.get("source_id") and a["source_id"] not in active_ids:continue
+        titlekey=re.sub(r"\W+","",a.get("title","").casefold())
+        urlkey=a.get("link","").split("?")[0]
         if not titlekey or not urlkey or titlekey in seen or urlkey in seen:continue
-        seen.update((titlekey,urlkey));fresh.append(article)
+        seen.update((titlekey,urlkey))
+        fresh.append(a)
     if not fresh:
-        print("[ERROR] No hay artículos nuevos y recientes; se conserva archivo anterior",file=sys.stderr)
+        print("[ERROR] Sin noticias recientes; conservamos el fichero anterior",file=sys.stderr)
         sys.exit(1)
-    OUT.parent.mkdir(parents=True,exist_ok=True)
-    OUT.write_text(json.dumps({"updated":now.isoformat(),"sources_ok":success,"articles":fresh[:500]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(f"Guardados {min(len(fresh),500)} titulares")
+    OUT.write_text(json.dumps({
+        "updated":now.isoformat(),"sources_ok":successes,
+        "sources_status":sorted(statuses,key=lambda x:x["id"]),
+        "articles":fresh[:500]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print(f"Guardados {min(len(fresh),500)} titulares; {successes} fuentes consultadas.")
+
 if __name__=="__main__":main()
