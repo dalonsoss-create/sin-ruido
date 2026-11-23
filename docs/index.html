@@ -99,7 +99,7 @@
 .refresh-btn:disabled{opacity:.55}
 .refresh-btn.is-loading{background:#e8f2e8;color:#296b3b;border-color:#b4d2b9}
 .pull-indicator{border-radius:12px;background:#e6eee6;padding:11px;text-align:center;font-size:12px;font-weight:850;color:#396c4e;margin-bottom:8px}
-.pull-indicator[hidden]{display:none}
+.pull-indicator[hidden]{display:none}.refresh-status{font-size:11px;color:#366543;font-weight:750;min-height:1em}.refresh-status:empty{display:none}
 .collection-nav{display:flex;gap:10px;margin:13px 0;flex-wrap:wrap}
 .collection-btn{font-weight:800;font-size:13px;border:1px solid var(--line);background:#fff;padding:9px 16px;border-radius:99px}
 .collection-btn.selected{background:var(--ink);color:white;border-color:var(--ink)}
@@ -160,7 +160,7 @@
     <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
     <div id="notice" class="notice" hidden></div>
     <div id="pull-indicator" class="pull-indicator" aria-live="polite" hidden>↻ Suelta para actualizar noticias</div>
-    <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
+    <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
     <div class="collection-nav">
       <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
       <button id="show-saved" class="collection-btn" type="button">🔖 Guardadas <span id="saved-count">0</span></button>
@@ -802,6 +802,7 @@ el("reset").onclick=()=>{
 };
 el("search").oninput=render;el("sort").onchange=render;
 el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
+el("refresh-news").onclick=()=>refreshPublishedEdition(true);
 el("show-feed").onclick=()=>switchCollection("feed");
 el("show-saved").onclick=()=>switchCollection("saved");
 el("learning-erase").onclick=()=>{
@@ -841,17 +842,68 @@ function applyEdition(data){
     el("notice").hidden=true;
     lastEdition=Date.parse(data.updated)||0;
 }
-async function refreshPublishedEdition(){
-  // Pages puede seguir sirviendo la edición anterior tras un commit del bot RSS.
-  if(location.hostname!=="dalonsoss-create.github.io"||document.hidden)return;
+let refreshPending=false;
+async function refreshPublishedEdition(manual=false){
+  if(document.hidden||refreshPending)return false;
+  refreshPending=true;
+  const btn=el("refresh-news"),status=el("refresh-status");
+  if(manual){
+    btn.disabled=true;
+    btn.classList.add("is-loading");
+    btn.textContent="↻ Comprobando…";
+    status.textContent="Consultando la última edición publicada…";
+  }
+  let changed=false;
   try{
-    const res=await fetch("https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json",{cache:"no-cache"});
-    if(!res.ok)return;
+    const url=location.hostname==="dalonsoss-create.github.io"
+      ?"https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json?t="+Date.now()
+      :"./noticias.json?t="+Date.now();
+    const res=await fetch(url,{cache:"no-store"});
+    if(!res.ok)throw new Error("No se pudo consultar la edición");
     const data=await res.json();
-    if(Date.parse(data.updated)>lastEdition && Array.isArray(data.articles) && data.articles.length){
-      applyEdition(data);renderSources();render();
+    if(Date.parse(data.updated)>lastEdition&&Array.isArray(data.articles)&&data.articles.length){
+      applyEdition(data);renderSources();render();changed=true;
     }
-  }catch(e){/* La edición ya publicada sigue disponible. */}
+    if(manual)status.textContent=changed
+      ?"✓ Se ha descargado una edición más reciente. Tu portada muestra solo titulares de hoy."
+      :"✓ Comprobado. Todavía no hay una edición más reciente. Los RSS se actualizan automáticamente en GitHub.";
+  }catch(err){
+    if(manual)status.textContent="No se ha podido comprobar. Conservamos la edición descargada.";
+  }finally{
+    refreshPending=false;
+    if(manual){
+      btn.disabled=false;btn.classList.remove("is-loading");btn.textContent="↻ Actualizar noticias";
+    }
+  }
+  return changed;
+}
+function enablePullToRefresh(){
+  let startY=null,startX=null,travel=0;
+  const indicator=el("pull-indicator");
+  document.addEventListener("touchstart",e=>{
+    if(e.touches.length!==1||window.scrollY>4||el("welcome-dialog").open||el("pay-dialog").open){
+      startY=null;return;
+    }
+    startY=e.touches[0].clientY;startX=e.touches[0].clientX;travel=0;
+  },{passive:true});
+  document.addEventListener("touchmove",e=>{
+    if(startY===null||e.touches.length!==1)return;
+    const dy=e.touches[0].clientY-startY;
+    const dx=Math.abs(e.touches[0].clientX-startX);
+    if(dx>Math.max(20,dy)){startY=null;indicator.hidden=true;return}
+    if(dy>42&&window.scrollY<=5){
+      travel=dy;indicator.hidden=false;
+      indicator.textContent=dy>100?"Suelta para comprobar titulares nuevos ↻":"↓ Desliza un poco más para actualizar";
+    }else if(dy<20){indicator.hidden=true}
+  },{passive:true});
+  const finish=()=>{
+    const shouldRefresh=startY!==null&&travel>100&&window.scrollY<=5;
+    startY=null;startX=null;travel=0;
+    indicator.hidden=true;
+    if(shouldRefresh)refreshPublishedEdition(true);
+  };
+  document.addEventListener("touchend",finish,{passive:true});
+  document.addEventListener("touchcancel",finish,{passive:true});
 }
 async function init(){
   try{
@@ -887,6 +939,7 @@ async function init(){
   if(!alreadyWelcomed&&(invited||!storedPrefs))openWelcome();
 }
 init().then(()=>{
+  enablePullToRefresh();
   refreshPublishedEdition();
   // Cuando se vuelve a la app desde el icono o tras leer una noticia,
   // solicitamos la última edición publicada, sin tocar los filtros personales.
