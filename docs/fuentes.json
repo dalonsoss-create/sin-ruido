@@ -348,6 +348,22 @@
       "url": "https://elcorreodepozuelo.com/feed/",
       "images_allowed": false,
       "language": "es"
+    },
+    {
+      "id": "cincodias-mercados",
+      "name": "Cinco Días",
+      "category": "Economía",
+      "url": "https://feeds.elpais.com/mrss-s/list/ep/site/cincodias.elpais.com/section/mercados-financieros",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "expansion-mercados",
+      "name": "Expansión",
+      "category": "Economía",
+      "url": "https://e00-expansion.uecdn.es/rss/mercados.xml",
+      "images_allowed": false,
+      "language": "es"
     }
   ],
   "image_policy": "Solo activar images_allowed si el medio ha autorizado expresamente el uso de sus miniaturas.",
