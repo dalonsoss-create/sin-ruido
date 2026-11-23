@@ -1,24 +1,28 @@
-# Sin Ruido — noticias sin ruido
+# Sin Ruido — tu periódico, tus reglas
 
-Primera versión personal: titulares con enlaces directos a los periódicos, filtros de intereses y vetos por palabras.
+Prototipo personal de agregador RSS (0 €): muestra titulares seleccionados y enlaza directamente al medio de origen. Sin cuentas de lector, anuncios, rastreo ni API de pago.
 
-## Publicación gratis
-1. Abre **Settings → Pages** en este repositorio.
-2. En **Build and deployment**, selecciona **Deploy from a branch**.
-3. Elige la rama **main** y la carpeta **/docs**. Pulsa **Save**.
-4. Al publicarse, la web estará en https://dalonsoss-create.github.io/sin-ruido/ .
+## Probar la web
+Página: https://dalonsoss-create.github.io/sin-ruido/
 
-## Noticias reales
-El script `scripts/actualizar.py` consulta 10 feeds RSS públicos, sin copiar artículos completos. Para generar titulares reales por primera vez:
-- En **Actions**, abre **Actualizar titulares de Sin Ruido**.
-- Pulsa **Run workflow**.
-- Si aparece un error por permisos de escritura: **Settings → Actions → General → Workflow permissions → Read and write permissions**.
-El programa también intenta actualizar cada día en cuatro franjas. Pueden fallar algunos RSS, y GitHub puede suspender tareas por inactividad.
+1. Selecciona tus **temas** y añade **asuntos vetados**.
+2. En **Mis fuentes**, activa o desactiva individualmente los RSS consultados. La selección de fuentes es personal: no detiene la recopilación general.
+3. En **Añadir una fuente** pega su dirección **RSS**. Se guarda como **propuesta**, no comienza a recopilar de inmediato. Pulsa **Solicitar activación** para abrir una solicitud en GitHub; hay que comprobar el feed y sus condiciones antes de sumarlo a `docs/fuentes.json`.
+4. **Compartir periódico** envía la URL. Elena puede abrirla en otro móvil o navegador y guardar sus propios filtros, totalmente independientes; la configuración se guarda solo en **localStorage** y no se sincroniza.
+5. Cualquier titular puede ocultarse con «No me interesa».
 
-Hasta que haya noticias en `docs/noticias.json`, la web mostrará **ejemplos ficticios claramente etiquetados**.
+## Diseño e imágenes
+La portada utiliza diseño editorial de periódico, destacados, tipografía serif y bloques visuales. El código ya admite fotos RSS por noticia en `image`. **Las fotos de periódicos NO están activadas**: todas las fuentes tienen `images_allowed: false` hasta verificar derechos de reproducción de cada medio. Las ilustraciones degradadas con símbolos son parte del diseño y no copian imágenes de terceros.
 
-## Personalización
-Las preferencias se almacenan en el navegador del usuario; no se comparten entre dispositivos. La clasificación es básica y los filtros de palabras pueden ocultar noticias útiles o dejar pasar temas vetados: este producto es una prueba para mejorarla con el uso.
+## Actualizaciones RSS
+- Catálogo de medios y secciones: `docs/fuentes.json` (cada RSS tiene `id`, `name`, `category`, `url` e `images_allowed`).
+- Procesador: `scripts/actualizar.py`.
+- Resultado actualizado: `docs/noticias.json` incluye titulares, enlaces, fuente concreta, estado de cada RSS y fecha de consulta.
+- GitHub Actions: `.github/workflows/actualizar.yml`. Actualiza cuatro veces al día (UTC) y al modificar el catálogo o el procesador. También se puede ejecutar manualmente.
+- Un RSS puede fallar temporalmente. No se inventan noticias, y solo se conservan titulares de hasta 72 horas.
 
-## Costes y derechos
-El desarrollo de prueba no utiliza servicios de IA de pago, servidor propio ni dominio comprado. GitHub Pages y GitHub Actions pueden utilizarse sin coste dentro de los límites de GitHub Free para este prototipo personal público. Antes de comercializarlo, verificar los derechos de uso de titulares y las condiciones de los feeds. GitHub Pages no está pensado para alojar un negocio comercial completo.
+## Publicación (GitHub Pages)
+Settings → Pages → Deploy from a branch → main → /docs → Save.
+
+## Legal y comercial
+Este repositorio es una prueba personal, no un negocio en producción. Reproducir titulares e imágenes en un agregador público puede requerir autorización según la Ley de Propiedad Intelectual española y las condiciones de cada feed. Antes de ampliar y comercializar: revisar licencias, privacidad y acuerdos con medios. GitHub Pages tampoco debe utilizarse como alojamiento de un servicio comercial completo.
