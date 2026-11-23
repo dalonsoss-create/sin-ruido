@@ -69,7 +69,7 @@
     const cat=String(a.category||"");
     const title=normalize(a.title);
     const link=normalize(a.link);
-    const searchable=title+" "+link;
+    const searchable=title+" "+link+" "+normalize(a.place||"");
     if(clause.categories.length&&!clause.categories.includes(cat))return false;
     if(clause.places.length){
       const inArea=clause.places.some(name=>{
