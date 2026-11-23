@@ -85,7 +85,7 @@ def collect(feed):
         article={
             "title":title[:260],"link":link,"date":date_iso(published),
             "source":feed["name"],"source_id":feed["id"],"category":category,
-            "classification_version":3}
+            "classification_version":4}
         # La imagen se almacena SOLO si se ha comprobado permiso explícito.
         if feed.get("images_allowed") is True:
             img=image_in_rss(item)
@@ -119,7 +119,7 @@ def main():
     # Reetiquetar titulares antiguos: también se corrigen las secciones al desplegar.
     fmap={f["id"]:f for f in feed_list}
     for a in old:
-        if a.get("classification_version")!=3:
+        if a.get("classification_version")!=4:
             origin=fmap.get(a.get("source_id"),{})
             a["category"]=classify(a.get("title",""),a.get("link",""),origin.get("category",a.get("category","Sociedad")),(),a.get("source",""))
             a["classification_version"]=3
