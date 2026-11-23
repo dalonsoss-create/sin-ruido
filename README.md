@@ -7,9 +7,15 @@ Página: https://dalonsoss-create.github.io/sin-ruido/
 
 1. Selecciona tus **temas** y añade **asuntos vetados**.
 2. En **Mis fuentes**, activa o desactiva individualmente los RSS consultados. La selección de fuentes es personal: no detiene la recopilación general.
-3. En **Añadir una fuente** pega su dirección **RSS**. Se guarda como **propuesta**, no comienza a recopilar de inmediato. Pulsa **Solicitar activación** para abrir una solicitud en GitHub; hay que comprobar el feed y sus condiciones antes de sumarlo a `docs/fuentes.json`.
+3. Pulsa **⚙ Personalizar → Añadir periódico** y escribe su **nombre o web** (por ejemplo, `Diario de Pozuelo`). Si está en el catálogo, Sin Ruido activa el medio y su tema automáticamente, sin pedir direcciones RSS ni abrir GitHub. Si no está conectado, se indica claramente: por ahora hace falta validar e incorporar su RSS al catálogo del servidor.
 4. **Compartir periódico** envía la URL. Elena puede abrirla en otro móvil o navegador y guardar sus propios filtros, totalmente independientes; la configuración se guarda solo en **localStorage** y no se sincroniza.
 5. Cualquier titular puede ocultarse con «No me interesa».
+
+## Añadir nuevos periódicos sin complicaciones
+- Desde **Personalizar → Añadir periódico**, escribe nombre o dominio. Se proponen las cabeceras **ya conectadas** y se activa la seleccionada con un clic.
+- **Diario de Pozuelo** se ha incorporado con su RSS de Noticias de Pozuelo (`https://www.diariodepozuelo.es/noticias-pozuelo/?format=feed&type=rss`) y localidad Pozuelo de Alarcón. Su recepción real se comprueba en el siguiente ciclo de GitHub Actions.
+- Un periódico completamente nuevo **todavía no puede incorporarse automáticamente** desde el navegador: GitHub Pages es una web estática y recopilar RSS exige validar el canal en el proceso central. El formulario ya no envía a los lectores a GitHub; si no encuentra el medio, explica por qué.
+- El panel **Personalizar** se abre como cajón sobre el periódico tanto en escritorio como en móvil.
 
 ## Diseño e imágenes
 La portada utiliza diseño editorial de periódico, destacados, tipografía serif y bloques visuales. El código ya admite fotos RSS por noticia en `image`. **Las fotos de periódicos NO están activadas**: todas las fuentes tienen `images_allowed: false` hasta verificar derechos de reproducción de cada medio. Las ilustraciones degradadas con símbolos son parte del diseño y no copian imágenes de terceros.
@@ -18,7 +24,7 @@ La portada utiliza diseño editorial de periódico, destacados, tipografía seri
 - Catálogo de medios y secciones: `docs/fuentes.json` (cada RSS tiene `id`, `name`, `category`, `url` e `images_allowed`).
 - Procesador: `scripts/actualizar.py`.
 - Resultado actualizado: `docs/noticias.json` incluye titulares, enlaces, fuente concreta, estado de cada RSS y fecha de consulta.
-- GitHub Actions: `.github/workflows/actualizar.yml`. Actualiza cuatro veces al día (UTC) y al modificar el catálogo o el procesador. También se puede ejecutar manualmente.
+- GitHub Actions: `.github/workflows/actualizar.yml`. Comprueba las fuentes cada hora de 05:17 a 23:17 UTC y al modificar el catálogo o el procesador (la ejecución puede retrasarse por GitHub). También se puede ejecutar manualmente.
 - Un RSS puede fallar temporalmente. No se inventan noticias, y solo se conservan titulares de hasta 72 horas.
 
 ## Publicación (GitHub Pages)
@@ -56,7 +62,7 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 
 
 ## Medios sin duplicados y actualización al volver a la app
-- **Todos los lectores nuevos** ven los siete temas disponibles en el formulario de bienvenida y los cuatro medios conectados en este momento: **EL PAÍS, Cinco Días, Xataka y El Mundo**; sus selecciones son personales. No se copian los filtros de otro lector.
+- **Todos los lectores nuevos** ven los 22 temas y los medios del catálogo vigente, incluido **Diario de Pozuelo**. Las selecciones se guardan por navegador y no se copian los filtros de otro lector.
 - El formulario y la barra lateral agrupan los RSS por nombre de medio: **EL PAÍS aparece una sola vez aunque agregue 6 secciones**. Al marcar/desmarcar un medio se activan/desactivan sus RSS. En **«Ver secciones RSS»** es posible consultar las secciones, enlaces RSS y estado y afinar por cada sección si se desea.
 - El enlace de invitación sigue siendo https://dalonsoss-create.github.io/sin-ruido/?bienvenida=1 .
 - **Noticias:** en cada carga de la web se consulta `noticias.json`; además, se comprueba si hay una edición más reciente en GitHub al volver a la pestaña o a la app, recuperar una página desde caché y cada 5 minutos mientras está abierta. Esto **no descarga RSS en cada clic**: el RSS se actualiza mediante GitHub Actions según su programación de cuatro turnos al día (sujeta a retrasos de GitHub y fallos de feed).
