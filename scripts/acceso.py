@@ -37,15 +37,22 @@ def paid_from_url(url):
 
 
 def detect_access(url, item=None, tags=()):
-    """Devuelve 'subscription' solo con indicios editoriales explícitos.
+    """Clasifica el acceso solo con metadatos explícitos del propio medio.
 
-    No se hacen peticiones a artículos, ni se extraen textos protegidos.
+    'unknown' no significa gratuito. Sin visitar artículos ni saltar muros.
+    Una señal de pago siempre prevalece sobre una de gratuidad.
     """
     if paid_from_url(url):
         return "subscription", "url"
+
+    free_signal = False
     for tag in tags:
-        if PAY_TAG.fullmatch(_normal(tag)):
+        label = _normal(tag)
+        if PAY_TAG.fullmatch(label):
             return "subscription", "rss"
+        if label in ("acceso gratuito", "acceso libre", "free access", "open access"):
+            free_signal = True
+
     if item is not None:
         for node in item.iter():
             tagname = node.tag.rsplit("}", 1)[-1].lower()
@@ -55,12 +62,18 @@ def detect_access(url, item=None, tags=()):
                              "subscriber", "subscribers only", "solo suscriptores",
                              "de pago", "para suscriptores"):
                     return "subscription", "rss"
-            if tagname == "isaccessibleforfree" and value in ("false", "0"):
-                return "subscription", "rss"
+                if value in ("free", "free access", "open access",
+                             "acceso libre", "acceso gratuito"):
+                    free_signal = True
+            if tagname == "isaccessibleforfree":
+                if value in ("false", "0"):
+                    return "subscription", "rss"
+                if value in ("true", "1"):
+                    free_signal = True
             if tagname == "link" and node.attrib.get("rel", "").lower() in ("payment", "subscription"):
                 return "subscription", "rss"
-    return "unknown", ""
 
+    return ("free", "rss") if free_signal else ("unknown", "")
 
 if __name__ == "__main__":
     import xml.etree.ElementTree as ET
@@ -71,10 +84,16 @@ if __name__ == "__main__":
         ("https://medio.es/2026/11/como-cancelar-suscripciones-netflix", (), "unknown"),
         ("https://medio.es/2026/11/normal", ("premium",), "subscription"),
         ("https://medio.es/2026/11/normal", ("tecnología",), "unknown"),
+        ("https://medio.es/2026/11/normal", ("acceso gratuito",), "free"),
+        ("https://medio.es/2026/11/normal", ("open access",), "free"),
     ]
     for url, tags, expected in tests:
         got, _ = detect_access(url, tags=tags)
         assert got == expected, f"{url}: {got} en vez de {expected}"
     node = ET.fromstring('<item xmlns:dc="http://purl.org/dc/terms/"><dc:accessRights>paid</dc:accessRights></item>')
     assert detect_access("https://medio.es/normal", node)[0] == "subscription"
-    print("Detección prudente de acceso verificada:", len(tests) + 1, "pruebas.")
+    free = ET.fromstring('<item xmlns:s="https://schema.org/"><s:isAccessibleForFree>true</s:isAccessibleForFree></item>')
+    assert detect_access("https://medio.es/normal", free)[0] == "free"
+    mixed = ET.fromstring('<item><isAccessibleForFree>true</isAccessibleForFree><paywall>paid</paywall></item>')
+    assert detect_access("https://medio.es/normal", mixed)[0] == "subscription"
+    print("Detección prudente de acceso verificada:", len(tests) + 3, "pruebas.")
