@@ -353,7 +353,7 @@ body.settings-open{overflow:hidden}
     </form>
   </div>
 </dialog>
-<script src="./ilustraciones.js"></script>
+<script src="./ilustraciones.js?v=3"></script>
 <script src="./intereses.js?v=2"></script>
 <script src="./acceso.js?v=2"></script>
 <script src="./fuentes-personales.js?v=1"></script>
@@ -856,8 +856,9 @@ function render(){
   }
   const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
   if(!list.length){
-    const empty=mk("div","empty",getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros.");
-    empty.append(mk("small","",getInterestClauses().some(c=>c.only)?"Prueba a ampliar la zona, quitar «solo» o activar más fuentes. No añadiremos noticias que no coincidan.":prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
+    const allReviewed=reviewedStories.size>0&&articles.some(a=>isToday(a)&&matchesReader(a));
+    const empty=mk("div","empty",allReviewed?"¡Estás al día! Ya has marcado como vistas las noticias de tu selección.":getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros.");
+    empty.append(mk("small","",allReviewed?"Cuando se publiquen titulares nuevos aparecerán aquí. Puedes recuperar cualquiera desde «Ya vistas».":getInterestClauses().some(c=>c.only)?"Prueba a ampliar la zona, quitar «solo» o activar más fuentes. No añadiremos noticias que no coincidan.":prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
     cover.append(empty);el("list-heading").hidden=true;return;
   }
   cover.append(makeCard(list[0],true));
