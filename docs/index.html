@@ -201,6 +201,16 @@ body.settings-open{overflow:hidden}
   .last-minute-reviewed{min-height:46px;padding:9px 11px;font-size:11px}
   .last-minute-edition{font-size:10px}
 }
+
+/* Copia portátil y privada de preferencias: accesible desde el móvil. */
+.backup-section h3{font-family:var(--serif);font-size:19px;margin:0 0 5px}
+.backup-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.backup-buttons button{flex:1 1 150px;border:1px solid #bcb5a9;background:#fff9f0;color:#272521;
+  font:800 12px ui-sans-serif,system-ui,sans-serif;padding:11px 10px;border-radius:9px;
+  min-height:46px}
+.backup-buttons button:first-child{background:#222a31;color:#fff;border-color:#222a31}
+.backup-buttons button:hover{filter:brightness(.95)}
+.backup-feedback{min-height:20px;font-weight:650;margin-top:9px}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -374,6 +384,18 @@ body.settings-open{overflow:hidden}
     <hr class="rule"><div class="section-heading"><h3>Tu perfil de lectura</h3><small>Solo en este dispositivo</small></div>
 <div class="learning-box"><p id="learning-summary">Tu portada aprenderá según los titulares que abras.</p><div id="learning-tags" class="learning-tags"></div><button id="learning-erase" class="learning-erase" type="button">Borrar lo aprendido</button></div>
 <p class="muted-note">Sin cuenta ni seguimiento externo. Abrir un titular cuenta como interés, no significa que hayas leído el artículo entero.</p>
+<hr class="rule">
+<section class="backup-section" aria-labelledby="backup-heading">
+  <h3 id="backup-heading">💾 Guardar mi periódico</h3>
+  <p class="muted-note">Llévate tus periódicos, filtros, noticias guardadas y marcadas como vistas a otro móvil o al nuevo icono.</p>
+  <div class="backup-buttons">
+    <button type="button" id="backup-export">⬇ Guardar una copia</button>
+    <button type="button" id="backup-import">↥ Recuperar mi copia</button>
+  </div>
+  <input type="file" id="backup-file" accept=".json,application/json" hidden aria-label="Seleccionar un archivo de copia de Sin Ruido">
+  <p id="backup-feedback" class="muted-note backup-feedback" role="status" aria-live="polite">El archivo queda en tu dispositivo: no se envía a Sin Ruido.</p>
+  <p class="muted-note">La copia incluye tu historial de lectura. Guárdala en un sitio privado, como Archivos o iCloud Drive.</p>
+</section>
 <hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button> <button class="reset" id="start-fresh">Empezar desde cero</button>
   </aside>
   <section class="editorial">
@@ -467,6 +489,7 @@ body.settings-open{overflow:hidden}
 <script src="./intereses.js?v=2"></script>
 <script src="./acceso.js?v=2"></script>
 <script src="./fuentes-personales.js?v=1"></script>
+<script src="./copia.js?v=1"></script>
 <script>
 (function(){
 "use strict";
@@ -1339,6 +1362,53 @@ el("start-fresh").onclick=()=>{if(!confirm("¿Crear una edición nueva sin vetos
 el("reset").onclick=()=>{
   if(!confirm("¿Borrar tus preferencias, fuentes desactivadas y propuestas?"))return;
   prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
+};
+const COPIA=window.SinRuidoCopia;
+function backupFeedback(message){el("backup-feedback").textContent=message}
+el("backup-export").onclick=async()=>{
+  if(!COPIA){backupFeedback("La función de copia no se ha cargado. Actualiza la página.");return}
+  try{
+    const backup=COPIA.create();
+    const json=JSON.stringify(backup,null,2);
+    const filename="sin-ruido-copia-"+new Date().toISOString().slice(0,10)+".json";
+    const file=new File([json],filename,{type:"application/json"});
+    // En iPhone, el menú Compartir permite elegir «Guardar en Archivos».
+    if(typeof navigator.share==="function"&&
+      typeof navigator.canShare==="function"&&navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file],title:"Mi copia de Sin Ruido"});
+        backupFeedback("✓ Copia enviada al menú Compartir. Guárdala en Archivos para recuperarla después.");
+        return;
+      }catch(e){if(e?.name==="AbortError"){backupFeedback("No se guardó la copia. Puedes volver a intentarlo.");return}}
+    }
+    const url=URL.createObjectURL(file),link=document.createElement("a");
+    link.href=url;link.download=filename;link.hidden=true;
+    document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),60000);
+    backupFeedback("✓ Copia preparada para guardar: "+filename+". Comprueba que está en Descargas.");
+  }catch(e){
+    backupFeedback("No se ha podido guardar la copia: "+String(e?.message||"error desconocido"));
+  }
+};
+el("backup-import").onclick=()=>el("backup-file").click();
+el("backup-file").onchange=async()=>{
+  const input=el("backup-file"),file=input.files?.[0];
+  if(!file)return;
+  try{
+    if(!COPIA)throw Error("La función de copia no se ha cargado.");
+    if(file.size>COPIA.MAX_BYTES)throw Error("El archivo supera el límite de 2,5 MB.");
+    const data=COPIA.parse(await file.text()),counts=COPIA.count(data);
+    if(!confirm("¿Recuperar esta copia de Sin Ruido?\n\n"+
+      "Contiene "+counts.privateFeeds+" periódicos añadidos, "+counts.bookmarks+
+      " guardadas y "+counts.reviewed+" ya vistas.\n\n"+
+      "Sustituirá la configuración actual de ESTE navegador. Si quieres conservarla, pulsa Cancelar y guarda primero una copia.")){
+      backupFeedback("Restauración cancelada; no hemos cambiado nada.");return;
+    }
+    COPIA.restore(data);
+    backupFeedback("✓ Copia restaurada. Recargando tu periódico…");
+    location.reload();
+  }catch(e){backupFeedback("No se pudo recuperar la copia: "+String(e?.message||"archivo incompatible"))}
+  finally{input.value=""}
 };
 el("search").oninput=render;el("sort").onchange=render;
 el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
