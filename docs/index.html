@@ -201,7 +201,7 @@
 (function(){
 "use strict";
 const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
-const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
 const EXAMPLES=[
 {title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
 {title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
@@ -213,6 +213,30 @@ const el=id=>document.getElementById(id), mk=(tag,cls,txt)=>{const o=document.cr
 const normal=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const storyId=a=>a.link||a.title;
 let prefs,feeds=[],articles=[],statuses={},subscriptionPlans={},pricingUpdated="",activeTopic="Todas",demo=false;
+let cachedInterestsText=null,cachedInterestClauses=[];
+function getInterestClauses(){
+  const phrase=String(prefs.interests||"");
+  if(cachedInterestsText!==phrase){
+    cachedInterestsText=phrase;
+    cachedInterestClauses=window.SinRuidoIntereses?window.SinRuidoIntereses.parse(phrase):[];
+  }
+  return cachedInterestClauses;
+}
+function renderInterests(){
+  const input=el("interests-input"),status=el("interests-summary");
+  if(input)input.value=prefs.interests||"";
+  if(status)status.textContent=window.SinRuidoIntereses?window.SinRuidoIntereses.describe(getInterestClauses()):"Intérprete de intereses no disponible.";
+}
+function applyInterests(value){
+  prefs.interests=String(value||"").trim().slice(0,750);
+  const clauses=getInterestClauses();
+  // Las preferencias no exclusivas habilitan automáticamente las categorías sugeridas.
+  for(const clause of clauses.filter(c=>!c.only)){
+    for(const category of clause.categories)prefs.topics[category]=true;
+  }
+  activeTopic="Todas";
+  save();renderControls();renderInterests();render();
+}
 const PAGE_SIZE=20,LEARNING_KEY="sinruido-learning-v1",SEEN_KEY="sinruido-seen-v1";
 function loadOpened(){
   try{return new Set(JSON.parse(localStorage.getItem(SEEN_KEY)||"[]").filter(x=>typeof x==="string").slice(-800))}catch(e){return new Set()}
@@ -282,7 +306,7 @@ function renderLearning(){
 function loadPrefs(){
   try{
     const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
-    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly};
+    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly,interests:typeof x.interests==="string"?x.interests:""};
   }catch(e){return JSON.parse(JSON.stringify(DEFAULT))}
 }
 prefs=loadPrefs();
@@ -321,10 +345,18 @@ function weight(a){
   const relevance=/\b(?:inteligencia artificial|salud|medicina|investigacion|biotecnologia|energias renovables|medio ambiente|tecnologia|genetica|innovacion|medioambiente)\b/.test(t)?3:0;
   const sentiment=mood(a);
   const optimisticBoost=sentiment==="positive"?15:sentiment==="negative"?-3:0;
-  return base*10+impact+relevance+optimisticBoost+learningBonus(a)-Math.max(0,Math.min(hours,168))*.22;
+  return base*10+impact+relevance+optimisticBoost+learningBonus(a)+(window.SinRuidoIntereses?window.SinRuidoIntereses.boost(a,getInterestClauses()):0)-Math.max(0,Math.min(hours,168))*.22;
 }
 function filtered(){
-  let list=articles.filter(a=>prefs.topics[a.category]!==false&&allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&!prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&(activeTopic==="Todas"||a.category===activeTopic)&&(!prefs.positiveOnly||mood(a)==="positive"));
+  const clauses=getInterestClauses(),strict=clauses.some(c=>c.only);
+  let list=articles.filter(a=>
+    (strict||prefs.topics[a.category]!==false)&&
+    allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&
+    !prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&
+    (activeTopic==="Todas"||a.category===activeTopic)&&
+    (!prefs.positiveOnly||mood(a)==="positive")&&
+    (!window.SinRuidoIntereses||window.SinRuidoIntereses.matches(a,clauses))
+  );
   const q=normal(el("search").value.trim());
   if(q)list=list.filter(a=>normal(a.title+" "+a.source+" "+a.category).includes(q));
   if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
@@ -426,8 +458,8 @@ function balanceTopics(list){
   return output;
 }
 function render(){
-  if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
-  const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden]);
+  if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
+  const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
   const list=balanceTopics(filtered());
   const visible=Math.min(shownCount,list.length);
@@ -436,15 +468,16 @@ function render(){
   more.hidden=visible>=list.length;
   el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
   const tabs=el("topic-tabs");tabs.replaceChildren();
-  for(const name of ["Todas",...GROUPS.filter(g=>prefs.topics[g[0]]!==false).map(g=>g[0])]){
+  const extraTopics=new Set(getInterestClauses().filter(c=>c.only).flatMap(c=>c.categories));
+  for(const name of ["Todas",...GROUPS.filter(g=>prefs.topics[g[0]]!==false||extraTopics.has(g[0])).map(g=>g[0])]){
     const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name==="Todas"?"Todo":GROUPS.find(g=>g[0]===name)[1]+" "+name);
     btn.type="button";btn.setAttribute("aria-pressed",String(activeTopic===name));
     btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
   }
   const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
   if(!list.length){
-    const empty=mk("div","empty",prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"No hay noticias que pasen tus filtros.");
-    empty.append(mk("small","",prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
+    const empty=mk("div","empty",getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"No hay noticias que pasen tus filtros.");
+    empty.append(mk("small","",getInterestClauses().some(c=>c.only)?"Prueba a ampliar la zona, quitar «solo» o activar más fuentes. No añadiremos noticias que no coincidan.":prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
     cover.append(empty);el("list-heading").hidden=true;return;
   }
   cover.append(makeCard(list[0],true));
@@ -453,6 +486,7 @@ function render(){
 }
 function renderControls(){
   el("positive-only").checked=!!prefs.positiveOnly;
+  renderInterests();
   const topics=el("topic-toggles");topics.replaceChildren();
   for(const [name,symbol,w] of GROUPS){
     const label=mk("label","checkline");const input=mk("input");input.type="checkbox";input.checked=prefs.topics[name]!==false;
