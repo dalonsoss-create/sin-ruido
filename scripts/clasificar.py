@@ -57,7 +57,7 @@ HEALTH=r"\b(?:salud|medicina|medico|medica|paciente|enfermedad|terapia|tratamien
 SCIENCE=r"\b(?:cientific|investigacion cientifica|experimento|laboratorio|fisica cuantica|quimica|astronom|astrofisic|nasa|esa|espacial|exoplaneta|planeta|galaxia|universo|agujero negro|paleontolog|fosil|regolito|misiones? lunar|hallazgo cientifico|investigadores? descubren)\b"
 TECH=r"\b(?:tecnolog|smartphone|movil(?:es)?|iphone|ipad|android|ordenador|software|hardware|chip|procesador|robot(?:ica)?|ciberseguridad|aplicacion|apps?|internet|digital|internet|informatic|computacion|consola|videojuego|gadget)\b"
 AI=r"\b(?:inteligencia artificial|machine learning|aprendizaje automatico|modelo de lenguaje|chatgpt|openai|gemini|claude|gpt[- ]?[456]|ia generativa|red neuronal|agentes? de ia)\b"
-NATURE=r"\b(?:fauna|flora|biodiversidad|especie|bosques|selva|ecosistema|marino|ocean|ballena|tiburon|lobo|elefante|aves|pinguino|coral|parque natural|jaguar|cordillera|geologia|geologico|glaciares?)\b"
+NATURE=r"\b(?:fauna|flora|biodiversidad|especies?|bosques?|selva|ecosistemas?|marino|ocean|ballenas?|tiburones?|lobos?|osos?|osas?|jabal[ií]es?|elefantes?|aves|pinguinos?|corales?|parque natural|jaguares?|cordilleras?|geologia|geologico|glaciares?|animales? salvajes?|caza furtiva|vida silvestre)\b"
 CLIMATE=r"\b(?:cambio climatico|cumbre del clima|el tiempo de la semana|pronostico del tiempo|calentamiento global|emisiones de co2|emisiones de carbono|contaminacion atmosferica|descarboniz|sequias?|fenomenos meteorologicos|inundac|energias? renovables|medio ambiente|climatico|climatica|cop3[012])\b"
 ECON=r"\b(?:inflacion|pib|euribor|tipos de interes|tipos del bce|economia|economico|economica|mercado bursatil|bolsa de|cotizacion|salarios?|hipotecas?|fiscalidad|recaudacion|presupuestos?|inversiones?|crisis financiera|subida de precios|deuda publica)\b"
 BIZ=r"\b(?:empresa|empresas|companias|multinacional|ceo|startups?|emprendedor|empresari|plantilla|empleo|trabajadores|contratacion|despidos|fusion|adquisicion|financiacion|facturacion|beneficios empresariales)\b"
@@ -85,6 +85,14 @@ def classify(title,link,default="Sociedad",tags=(),source=""):
         return "Fútbol"
     if sport_source or default in ("Deportes","Tenis","Fútbol") or has(p,r"/(?:deportes|sports|baloncesto|ciclismo|atletismo|golf)(?:/|$)") or has(t,SPORT):
         return "Deportes"
+    # Fauna y conservación: un oso abatido no es un descubrimiento científico,
+    # aunque EL MUNDO publique la pieza dentro de su sección de Ciencia.
+    if has(t,NATURE) and (
+        has(t,r"\b(?:abatid[oa]s?|avistad[oa]s?|cazad[oa]s?|capturad[oa]s?|rescatad[oa]s?|muere|mueren|muerto|muerta|matan|conservacion|proteccion|parques? nacionales?|ejemplar|poblacion|especies?|ecosistema|salvaje|fauna|jabalies|caza furtiva)\b")
+        or default in ("Ciencia","Naturaleza","Medio ambiente")
+        or has(p,r"/(?:fauna|naturaleza|animales|especies|medio-ambiente)(?:/|$)")
+    ) and not has(t,r"\b(?:comercio|negociaciones? comerciales?|diversificar la inversion|mercados? financieros?|acuerdo comercial)\b"):
+        return "Naturaleza"
     # El conflicto militar prevalece sobre la política internacional genérica.
     if has(t,CONFLICT) or has(p,r"/(?:guerras?|conflictos|defensa-militar)(?:/|$)") or default=="Conflictos":
         if not has(t,r"\b(?:guerra comercial|guerra de precios|guerra de ofertas)\b"):
@@ -137,7 +145,11 @@ if __name__=="__main__":
         ("Carlos Alcaraz se impone a Sinner en el Masters 1000", "https://ejemplo.com/internacional/tenis", "Internacional", "Tenis"),
         ("Investigadores descubren restos de la antigua Roma", "https://ejemplo.com/tecnologia/arqueologia", "Tecnología", "Historia"),
         ("Nuevas tendencias de la inteligencia artificial en 2026", "https://ejemplo.com/tecnologia/ia", "Tecnología", "IA"),
-        ("El GP de Portugal coronará al campeón de MotoGP", "https://ejemplo.com/motor/motogp", "Deportes", "Motor")
+        ("El GP de Portugal coronará al campeón de MotoGP", "https://ejemplo.com/motor/motogp", "Deportes", "Motor"),
+        ("Muere abatido un ejemplar de oso pardo durante un control de jabalíes en Picos de Europa", "https://www.elmundo.es/ciencia/2026/11/22/6b02c39fe85ece873e8b458c.html", "Ciencia", "Naturaleza"),
+        ("Un lobo es avistado en los Picos de Europa", "https://ejemplo.com/ciencia/lobo", "Ciencia", "Naturaleza"),
+        ("La biodiversidad de los océanos preocupa a los científicos", "https://ejemplo.com/ciencia/fauna", "Ciencia", "Naturaleza"),
+        ("De osos panda a hospitales inteligentes: Sheinbaum quiere diversificar el comercio y la inversión", "https://elpais.com/mexico/economia/2026/11/21/osos-panda-hospitales.html", "Economía", "Economía")
     ]
     errors=[]
     for title,url,default,expected in examples:
