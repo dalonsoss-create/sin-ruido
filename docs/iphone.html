@@ -115,7 +115,7 @@
 .collection-btn.selected #saved-count{background:#d7b976}
 @media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
 </style>
-<link rel="stylesheet" href="./portada.css?v=iphone-clean-v3">
+<link rel="stylesheet" href="./portada.css?v=fotos-iphone-1">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
 <style id="sinruido-mobile-header-fix">
 @media(max-width:760px){
@@ -283,6 +283,7 @@
 </dialog>
 <script src="./ilustraciones.js"></script>
 <script src="./intereses.js?v=2"></script>
+<script src="./fotos.js?v=1"></script>
 <script>
 (function(){
 "use strict";
@@ -455,9 +456,26 @@ function titleAnchor(a){
   else anchor.removeAttribute("href");
   return anchor;
 }
-function visual(a){
+function visual(a,lead=false){
   const box=mk("div","art");
   box.innerHTML=ilustracionEditorial(a);
+  const photo=window.SinRuidoFotos&&window.SinRuidoFotos.select(a);
+  if(photo&&/^https:\/\//.test(photo.src)){
+    const layer=mk("div","article-photo"),link=mk("a","article-photo-link"),img=mk("img");
+    link.href=/^https:\/\//.test(a.link||"")?a.link:photo.attribution;
+    link.target="_blank";link.rel="noopener noreferrer";
+    link.title="Abrir noticia original en "+a.source;
+    link.addEventListener("click",()=>trackClick(a));
+    img.src=photo.src;img.alt=photo.alt;img.loading=lead?"eager":"lazy";
+    img.decoding="async";img.referrerPolicy="no-referrer";
+    if(lead)img.fetchPriority="high";
+    img.onerror=()=>{layer.remove()};
+    link.append(img);layer.append(link);
+    const credit=mk("a","photo-credit",photo.type==="illustrative"?"📷 Foto ilustrativa · CC0":"📷 Foto del medio");
+    credit.href=photo.attribution;credit.target="_blank";credit.rel="noopener noreferrer";
+    credit.title=(photo.credit||"Wikimedia Commons")+" · "+photo.license+" · Ver licencia y autoría";
+    layer.append(credit);box.append(layer);
+  }
   return box;
 }
 function kicker(a){
@@ -566,7 +584,7 @@ function makeCard(a,lead=false){
   if(wasOpened(a))card.classList.add("seen");
   const copy=mk("div","story-copy"),h=mk("h3");
   h.append(titleAnchor(a));copy.append(kicker(a),h,actions(a));
-  card.append(visual(a),copy);return card;
+  card.append(visual(a,lead),copy);return card;
 }
 function balanceTopics(list){
   if(list.length<2)return list;
