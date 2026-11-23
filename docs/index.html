@@ -159,7 +159,7 @@
 (function(){
 "use strict";
 const GROUPS=[["Tecnología","✦",5],["Ciencia","◈",5],["Economía","↗",4],["Salud","♥",4],["Naturaleza","❀",4],["Internacional","◎",2],["Deportes","◉",1]];
-const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:["moda","corazón","famosos","vida social","cotilleo","alfombra roja","sánchez","feijóo","abascal","psoe","sumar","moncloa","elecciones generales"],hidden:[],sources:{},proposals:[],positiveOnly:false};
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};
 const EXAMPLES=[
 {title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
 {title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
@@ -424,6 +424,77 @@ function renderSources(){
     btns.append(ask,del);box.append(btns);pend.append(box);
   }
 }
+
+const WELCOME_KEY="sinruido-welcome-v1";
+function buildWelcome(){
+  const topicsBox=el("welcome-topics"),sourcesBox=el("welcome-sources");
+  topicsBox.replaceChildren();sourcesBox.replaceChildren();
+  for(const [name,symbol] of GROUPS){
+    const label=mk("label","welcome-option"),input=mk("input");
+    input.type="checkbox";input.name="welcome-topic";input.value=name;
+    input.checked=prefs.topics[name]!==false;
+    const copy=mk("span","",symbol+" "+name);
+    label.append(input,copy);topicsBox.append(label);
+  }
+  for(const f of feeds){
+    const label=mk("label","welcome-option"),input=mk("input");
+    input.type="checkbox";input.name="welcome-source";input.value=f.id;
+    input.checked=prefs.sources[f.id]!==false;
+    const copy=mk("span","",f.name),category=mk("small","",f.category);
+    copy.append(category);label.append(input,copy);sourcesBox.append(label);
+  }
+  if(!feeds.length)sourcesBox.append(mk("p","muted-note","Las fuentes se cargarán cuando haya conexión. Puedes volver a configurarlas después."));
+  el("welcome-veto").value=prefs.blocked.join(", ");
+  el("welcome-positive").checked=!!prefs.positiveOnly;
+  const suggestions=el("welcome-veto-suggestions");suggestions.replaceChildren();
+  for(const term of ["famosos","moda","política","fútbol","sucesos","Sánchez","Feijóo","Abascal","realeza","cotilleos"]){
+    const btn=mk("button","","+ "+term);btn.type="button";
+    btn.onclick=()=>{
+      const input=el("welcome-veto"),current=input.value.split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
+      if(!current.some(s=>normal(s)===normal(term)))current.push(term);
+      input.value=current.join(", ");input.focus();
+    };
+    suggestions.append(btn);
+  }
+  el("welcome-error").textContent="";
+}
+function openWelcome(){
+  buildWelcome();
+  const dialog=el("welcome-dialog");
+  if(!dialog.open){
+    if(typeof dialog.showModal==="function")dialog.showModal();
+    else dialog.setAttribute("open","");
+  }
+}
+function closeWelcome(){
+  const dialog=el("welcome-dialog");
+  if(typeof dialog.close==="function"&&dialog.open)dialog.close();
+  else dialog.removeAttribute("open");
+  try{localStorage.setItem(WELCOME_KEY,"1")}catch(e){}
+}
+el("open-welcome").onclick=openWelcome;
+el("welcome-skip").onclick=()=>{
+  // No imponemos los vetos personales del creador a un visitante.
+  if(!localStorage.getItem("sinruido-prefs-v1")){
+    prefs={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};
+    save();renderControls();render();
+  }
+  closeWelcome();
+};
+el("welcome-form").onsubmit=e=>{
+  e.preventDefault();
+  const chosen=[...document.querySelectorAll('input[name="welcome-topic"]:checked')].map(x=>x.value);
+  const selectedFeeds=[...document.querySelectorAll('input[name="welcome-source"]:checked')].map(x=>x.value);
+  if(!chosen.length){el("welcome-error").textContent="Elige al menos un tema.";return}
+  if(feeds.length&&!selectedFeeds.length){el("welcome-error").textContent="Elige al menos un medio.";return}
+  const chosenTopics=new Set(chosen),chosenFeeds=new Set(selectedFeeds);
+  prefs.topics=Object.fromEntries(GROUPS.map(g=>[g[0],chosenTopics.has(g[0])]));
+  if(feeds.length)prefs.sources=Object.fromEntries(feeds.map(f=>[f.id,chosenFeeds.has(f.id)]));
+  prefs.blocked=[...new Set(el("welcome-veto").value.split(/[,;\n]/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1&&x.length<66))].slice(0,50);
+  prefs.positiveOnly=el("welcome-positive").checked;
+  activeTopic="Todas";save();renderControls();render();closeWelcome();
+};
+
 el("block-form").onsubmit=e=>{
   e.preventDefault();const input=el("block-input"),word=input.value.trim().toLowerCase();
   if(word&&!prefs.blocked.includes(word)){prefs.blocked.push(word);save();renderControls();render()}
@@ -466,7 +537,7 @@ toggle.onclick=()=>{
   }
 };
 el("share").onclick=async()=>{
-  const url=location.origin+location.pathname;
+  const url=location.origin+location.pathname+"?bienvenida=1";
   const data={title:"Sin Ruido",text:"Prueba Sin Ruido y crea tu propio periódico de noticias, con tus temas y fuentes.",url};
   try{
     if(navigator.share){await navigator.share(data);return}
@@ -523,6 +594,10 @@ async function init(){
     el("notice").hidden=false;
   }
   el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();render();
+  let storedPrefs=false,alreadyWelcomed=false;
+  try{storedPrefs=localStorage.getItem("sinruido-prefs-v1")!==null;alreadyWelcomed=localStorage.getItem(WELCOME_KEY)==="1"}catch(e){}
+  const invited=new URLSearchParams(location.search).get("bienvenida")==="1";
+  if(!alreadyWelcomed&&(invited||!storedPrefs))openWelcome();
 }
 init().then(()=>{
   refreshPublishedEdition();
