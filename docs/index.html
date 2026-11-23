@@ -133,6 +133,11 @@ body.settings-open{overflow:hidden}
 
 .source-remove{border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--red);font-size:10px;padding:6px;white-space:nowrap}
 .source-remove:hover{background:#fff0e7}
+
+.sources-batch{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 9px}
+.sources-batch button{border:1px solid var(--line);border-radius:8px;background:var(--cream);color:var(--ink);font-size:12px;font-weight:800;padding:9px 12px}
+.sources-batch button:hover:not(:disabled){border-color:var(--red);color:var(--red)}
+.sources-batch button:disabled{opacity:.45;cursor:default}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -222,6 +227,10 @@ body.settings-open{overflow:hidden}
     <p class="muted-note">No volverán a aparecer titulares que contengan esas palabras.</p>
     <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
     <p class="muted-note">Selecciona el periódico una sola vez. Si quieres afinar por secciones, despliega sus canales RSS. Tus cambios solo afectan a tu edición.</p>
+    <div class="sources-batch" aria-label="Selección rápida de periódicos">
+      <button type="button" id="sources-select-all">✓ Marcar todos</button>
+      <button type="button" id="sources-clear-all">✕ Desmarcar todos</button>
+    </div>
     <div class="sources-list" id="sources-list"></div>
     <div class="section-heading"><h3>Añadir periódico</h3></div>
     <form id="source-form" class="source-add">
@@ -791,6 +800,15 @@ function groupedPublishers(){
   return [...byName.values()];
 }
 const expandedPublishers=new Set();
+function setAllSources(checked){
+  // Incluye tanto los medios del catálogo como los agregados por este lector.
+  for(const feed of feeds)prefs.sources[feed.id]=checked;
+  save();
+  renderSources();
+  render();
+}
+el("sources-select-all").onclick=()=>setAllSources(true);
+el("sources-clear-all").onclick=()=>setAllSources(false);
 function renderSources(){
   const list=el("sources-list");list.replaceChildren();
   const groups=groupedPublishers();
@@ -846,6 +864,9 @@ function renderSources(){
     entry.append(details);list.append(entry);
   }
   const active=groups.filter(g=>g.feeds.some(f=>prefs.sources[f.id]!==false)).length;
+  const enabledFeeds=feeds.filter(f=>prefs.sources[f.id]!==false).length;
+  el("sources-select-all").disabled=!feeds.length||enabledFeeds===feeds.length;
+  el("sources-clear-all").disabled=!enabledFeeds;
   el("sources-enabled").textContent=active+" de "+groups.length+" medios";
   el("source-counter").textContent=groups.length+" medios · "+feeds.length+" canales RSS";
   const suggestions=el("source-suggestions");suggestions.replaceChildren();
