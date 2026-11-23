@@ -40,5 +40,18 @@ jobs:
           git add docs/noticias.json
           if ! git diff --cached --quiet; then
             git commit -m "Actualización automática de titulares"
-            git push
+            # Mientras se recogen RSS puede cambiar index.html u otro archivo
+            # en main. Rebasar primero evita rechazos por referencia desfasada.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Edición RSS publicada correctamente"
+                exit 0
+              fi
+              echo "El repositorio avanzó durante el envío. Reintento $attempt/3."
+              sleep 2
+            done
+            echo "No se ha podido publicar la edición tras tres intentos." >&2
+            exit 1
           fi
