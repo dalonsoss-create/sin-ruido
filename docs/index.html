@@ -112,6 +112,51 @@ const el=id=>document.getElementById(id), mk=(tag,cls,txt)=>{const o=document.cr
 const normal=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const storyId=a=>a.link||a.title;
 let prefs,feeds=[],articles=[],statuses={},subscriptionPlans={},pricingUpdated="",activeTopic="Todas",demo=false;
+const PAGE_SIZE=20,LEARNING_KEY="sinruido-learning-v1";
+let shownCount=PAGE_SIZE,lastFilterSignature="";
+function loadLearning(){
+  try{
+    const data=JSON.parse(localStorage.getItem(LEARNING_KEY)||"[]");
+    return Array.isArray(data)?data.filter(x=>x&&typeof x.category==="string"&&Array.isArray(x.terms)).slice(-100):[];
+  }catch(e){return []}
+}
+let readingHistory=loadLearning();
+function articleTerms(title){
+  const stop=new Set(["para","sobre","desde","entre","cuando","donde","como","hasta","esta","este","estos","estas","unos","unas","pero","porque","tiene","tienen","hacer","hace","tras","ante","mucho","muchos","poco","pocos","nuevo","nueva","nuevos","nuevas","primer","primera","segundo","tercera","aqui","ahora","todos","todas","todo","segun","aquel","esto","podria","habria","dice","dicen","mientras","cada","euros","mundo","espana","anos","sido","solo","tambien","noticia","noticias","medio","sera","seran","estan"]);
+  return [...new Set((normal(title).match(/[a-z]{4,}/g)||[]).filter(w=>!stop.has(w)))].slice(0,14);
+}
+function trackClick(a){
+  if(!a.link||!a.link.startsWith("https://"))return;
+  readingHistory.push({category:a.category,source_id:a.source_id||a.source||"",terms:articleTerms(a.title),at:Date.now()});
+  readingHistory=readingHistory.slice(-100);
+  try{localStorage.setItem(LEARNING_KEY,JSON.stringify(readingHistory))}catch(e){}
+  renderLearning();
+}
+function learningBonus(a){
+  if(!readingHistory.length)return 0;
+  let cat=0,source=0,word=0;
+  const terms=new Set(articleTerms(a.title)),now=Date.now();
+  for(const rec of readingHistory){
+    const ageDays=Math.max(0,(now-Number(rec.at||now))/86400000);
+    const factor=ageDays<30?1:ageDays<90?0.6:0.3;
+    if(rec.category===a.category)cat+=factor;
+    if(rec.source_id===(a.source_id||a.source||""))source+=factor;
+    const matches=rec.terms.filter(t=>terms.has(t)).length;
+    word+=Math.min(3,matches)*factor;
+  }
+  // Preferencia aprendida importante, pero con techo para no tapar toda la actualidad.
+  return Math.min(10,cat*1.5)+Math.min(4,source*.6)+Math.min(12,word*1.25);
+}
+function renderLearning(){
+  const summary=el("learning-summary"),tags=el("learning-tags"),reset=el("learning-erase");
+  if(!summary||!tags||!reset)return;
+  tags.replaceChildren();
+  summary.textContent=readingHistory.length?("Has abierto "+readingHistory.length+" noticia"+(readingHistory.length===1?"":"s")+". Tu portada se adapta poco a poco."):"Tu portada aprenderá según los titulares que abras.";
+  const counts={};
+  for(const rec of readingHistory)counts[rec.category]=(counts[rec.category]||0)+1;
+  for(const [cat,count] of Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,4))tags.append(mk("span","",cat+" · "+count));
+  reset.hidden=!readingHistory.length;
+}
 function loadPrefs(){
   try{
     const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
