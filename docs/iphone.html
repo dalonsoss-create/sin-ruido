@@ -115,7 +115,7 @@
 .collection-btn.selected #saved-count{background:#d7b976}
 @media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
 </style>
-<link rel="stylesheet" href="./portada.css?v=candado-iphone-v1">
+<link rel="stylesheet" href="./portada.css?v=editorial-iphone-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
 <style id="sinruido-mobile-header-fix">
 @media(max-width:760px){
@@ -230,6 +230,10 @@
       <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
       <button id="show-saved" class="collection-btn" type="button">🔖 Guardadas <span id="saved-count">0</span></button>
     </div>
+    <section id="mustread-panel" class="mustread-panel" hidden aria-labelledby="mustread-title">
+      <div class="mustread-head"><strong id="mustread-title">⭐ Ayer, por si te lo perdiste</strong><span>Hasta 48 horas · destacados en RSS de cinco periódicos de referencia</span></div>
+      <div id="mustread-grid" class="mustread-grid"></div>
+    </section>
     <div class="sectionbar"><h2 id="headline-heading">Noticias de hoy</h2><span id="visible-count"></span></div>
     <div id="features"></div>
     <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
@@ -240,7 +244,7 @@
 </div>
   </section>
 </main>
-<footer class="container bottom"><span>© Sin Ruido · Prototipo personal, sin publicidad ni seguimiento</span><span>Las noticias pertenecen a sus respectivos medios. Sin Ruido solo enlaza a los originales.</span></footer>
+<footer class="container bottom"><span>© Sin Ruido · Prototipo personal, sin publicidad · analítica de visitas agregada</span><span>Las noticias pertenecen a sus respectivos medios. Sin Ruido solo enlaza a los originales.</span></footer>
 <dialog class="pay-dialog" id="pay-dialog" aria-labelledby="pay-title">
   <button type="button" class="pay-close" id="pay-close" aria-label="Cerrar">×</button>
   <div class="pay-top">¿No puedes acceder al artículo?</div>
@@ -427,33 +431,77 @@ function mood(a){
   if(clearlyGood.test(t)||positive.test(t))return "positive";
   return "neutral";
 }
+const GRANDES_PORTADAS={"elmundo-portada":"El Mundo","abc-portada":"ABC","lavanguardia-portada":"La Vanguardia","elespanol-portada":"El Español","elconfidencial-portada":"El Confidencial"};
+function portadasDe(a){
+  if(Array.isArray(a.editorial_portadas)&&a.editorial_portadas.length)return a.editorial_portadas;
+  const source=GRANDES_PORTADAS[a.source_id];return source?[source]:[];
+}
 function weight(a){
   const base=GROUPS.find(g=>g[0]===a.category)?.[2]||1;
   let hours=(Date.now()-new Date(a.date).valueOf())/3600000;
   if(!Number.isFinite(hours))hours=72;
   const t=normal(a.title);
-  // Importancia estimada: trascendencia, novedades científicas y actualidad, además del interés elegido.
+  // Criterio de importancia: peso del tema, presencia en RSS de portada
+  // de cinco medios y coincidencias prudentes entre fuentes independientes.
+  // El orden de un RSS es normalmente cronológico, no la jerarquía real de la portada.
   const impact=/\b(?:historico|historia|primera vez|primera|primer|mundial|global|internacional|pionero|cientificos|investigadores|descubrimiento|avance|aprobacion|acuerdo|nueva ley|nuevo tratamiento|nuevo sistema|economia mundial|onu|oms|union europea|record)\b/.test(t)?7:0;
   const relevance=/\b(?:inteligencia artificial|salud|medicina|investigacion|biotecnologia|energias renovables|medio ambiente|tecnologia|genetica|innovacion|medioambiente)\b/.test(t)?3:0;
-  const sentiment=mood(a);
-  const optimisticBoost=sentiment==="positive"?15:sentiment==="negative"?-3:0;
-  return base*10+impact+relevance+optimisticBoost+learningBonus(a)+(window.SinRuidoIntereses?window.SinRuidoIntereses.boost(a,getInterestClauses()):0)-Math.max(0,Math.min(hours,168))*.22;
+  const present=portadasDe(a).length;
+  const coverBoost=present?20+Math.min(2,present-1)*9:0;
+  const corroboration=Math.min(3,Number(a.editorial_coincidencias)||0)*8;
+  // Las buenas noticias siguen teniendo preferencia, pero no deben
+  // ocultar descubrimientos importantes ni otras exclusivas relevantes.
+  const optimism=mood(a)==="positive"?5:mood(a)==="negative"?-1:0;
+  return base*10+impact+relevance+coverBoost+corroboration+optimism+learningBonus(a)+(window.SinRuidoIntereses?window.SinRuidoIntereses.boost(a,getInterestClauses()):0)-Math.max(0,Math.min(hours,168))*.18;
 }
-function filtered(){
+function matchesReader(a){
   const clauses=getInterestClauses(),strict=clauses.some(c=>c.only);
-  let list=articles.filter(a=>
-    isToday(a)&&
-    (strict||prefs.topics[a.category]!==false)&&
+  const q=normal(el("search").value.trim());
+  return (strict||prefs.topics[a.category]!==false)&&
     allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&
     !prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&
     (activeTopic==="Todas"||a.category===activeTopic)&&
     (!prefs.positiveOnly||mood(a)==="positive")&&
-    (!window.SinRuidoIntereses||window.SinRuidoIntereses.matches(a,clauses))
-  );
-  const q=normal(el("search").value.trim());
-  if(q)list=list.filter(a=>normal(a.title+" "+a.source+" "+a.category).includes(q));
+    (!window.SinRuidoIntereses||window.SinRuidoIntereses.matches(a,clauses))&&
+    (!q||normal(a.title+" "+a.source+" "+a.category).includes(q));
+}
+function filtered(){
+  let list=articles.filter(a=>isToday(a)&&matchesReader(a));
   if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
   return list;
+}
+function essentialsFromYesterday(){
+  // Excepción editorial explícita: hasta 48 h y solamente lo recogido
+  // en al menos una de las cinco fuentes RSS de portada.
+  const now=Date.now();
+  const previous=articles.filter(a=>{
+    const age=(now-Date.parse(a.date))/3600000;
+    return Number.isFinite(age)&&age>=0&&age<=48&&!isToday(a)&&
+      portadasDe(a).length>0&&matchesReader(a);
+  }).sort((a,b)=>weight(b)-weight(a));
+  const out=[],categories=new Set(),publishers=new Set();
+  for(const a of previous){
+    if(out.length>=6)break;
+    if(categories.has(a.category)||publishers.has(a.source))continue;
+    out.push(a);categories.add(a.category);publishers.add(a.source);
+  }
+  return out;
+}
+function renderEssentials(){
+  const panel=el("mustread-panel");
+  if(collectionMode!=="feed"){panel.hidden=true;return}
+  const stories=essentialsFromYesterday();
+  panel.hidden=!stories.length;
+  const grid=el("mustread-grid");grid.replaceChildren();
+  for(const a of stories){
+    const card=mk("a","mustread-item");
+    card.href=a.link;card.target="_blank";card.rel="noopener noreferrer";
+    card.addEventListener("click",()=>trackClick(a));
+    const topic=mk("span","mustread-topic","⭐ "+a.category+" · RSS de portada");
+    const title=mk("span","mustread-title",a.title);
+    const source=mk("span","mustread-source",a.source+" · "+readableDate(a.date));
+    card.append(topic,title,source);grid.append(card);
+  }
 }
 function titleAnchor(a){
   const anchor=mk("a","headline-link",a.title);
@@ -668,11 +716,12 @@ function renderSaved(){
 }
 function render(){
   el("headline-heading").textContent="Noticias de hoy";
-  if(collectionMode==="saved"){renderSaved();return}
+  if(collectionMode==="saved"){el("mustread-panel").hidden=true;renderSaved();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
   const list=balanceTopics(filtered());
+  renderEssentials();
   const visible=Math.min(shownCount,list.length);
   el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
   const more=el("more-wrap");
