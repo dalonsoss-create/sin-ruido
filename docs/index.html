@@ -652,6 +652,15 @@ async function init(){
 }
 init().then(()=>{
   refreshPublishedEdition();
+  // Cuando se vuelve a la app desde el icono o tras leer una noticia,
+  // solicitamos la última edición publicada, sin tocar los filtros personales.
+  document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden)refreshPublishedEdition();
+  });
+  window.addEventListener("pageshow",event=>{
+    if(event.persisted)refreshPublishedEdition();
+  });
+  window.addEventListener("focus",()=>refreshPublishedEdition());
   setInterval(refreshPublishedEdition,300000);
 });
 })();
