@@ -114,6 +114,22 @@
 #saved-count{display:inline-flex;align-items:center;justify-content:center;background:#f0e1c0;color:#5a4528;padding:2px 6px;border-radius:30px;margin-left:4px;font-size:11px}
 .collection-btn.selected #saved-count{background:#d7b976}
 @media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
+
+/* Panel de ajustes accesible desde escritorio y móvil. */
+.personalizar{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin:12px auto 0;padding:10px 17px;border-radius:999px;border:1px solid var(--red);background:var(--red);color:#fff;font-size:13px;font-weight:850}
+.personalizar:hover{background:var(--red-deep)}
+.main{display:block}
+.settings{display:none;position:fixed;z-index:102;top:0;left:0;width:min(430px,96vw);height:100vh;height:100dvh;max-height:none;margin:0;overflow-y:auto;overscroll-behavior:contain;background:var(--white);box-shadow:15px 0 55px #0004;padding:20px 18px 30px}
+.settings.show{display:block}
+.settings-backdrop:not([hidden]){display:block;position:fixed;z-index:101;inset:0;background:#12191fc0}
+.settings-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px;font-size:12px}
+.settings-close{border:1px solid var(--line);background:var(--cream);border-radius:8px;color:var(--ink);padding:7px 10px;font-size:12px;font-weight:800}
+body.settings-open{overflow:hidden}
+.source-suggestions{display:grid;gap:7px;margin-top:8px}
+.source-suggestions button{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:left;font-size:12px;font-weight:750}
+.source-suggestions button:hover{border-color:var(--red);color:var(--red)}
+.source-suggestions[hidden]{display:none}
+@media(max-width:760px){.main{display:block}.settings{display:none;position:fixed;top:0;left:0;width:min(430px,96vw);height:100dvh;max-height:none;margin:0;z-index:102;overflow-y:auto}.settings.show{display:block}}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -204,9 +220,15 @@
     <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
     <p class="muted-note">Selecciona el periódico una sola vez. Si quieres afinar por secciones, despliega sus canales RSS. Tus cambios solo afectan a tu edición.</p>
     <div class="sources-list" id="sources-list"></div>
-    <div class="section-heading"><h3>Añadir una fuente</h3></div>
-    <form id="source-form" class="source-add"><input type="text" id="source-name" maxlength="60" placeholder="Nombre del medio (ej. BBC)" aria-label="Nombre de la fuente"><input type="url" id="source-url" maxlength="450" placeholder="https://medio.com/rss.xml" aria-label="URL RSS de la nueva fuente" required><button type="submit">+ Proponer fuente RSS</button></form>
-    <p class="muted-note">La nueva fuente quedará como propuesta en este navegador. Para recibir sus titulares tendremos que activarla en el agregador; no se conecta automáticamente.</p>
+    <div class="section-heading"><h3>Añadir periódico</h3></div>
+    <form id="source-form" class="source-add">
+      <label for="source-query" class="muted-note">Escribe el nombre del periódico o su web. Sin buscar enlaces RSS ni abrir GitHub.</label>
+      <input type="search" id="source-query" maxlength="160" list="source-suggestions" placeholder="Ej.: Diario de Pozuelo" aria-label="Nombre o web del periódico" required>
+      <datalist id="source-suggestions"></datalist>
+      <button type="submit">+ Añadir a mi periódico</button>
+    </form>
+    <p class="muted-note">Los periódicos conectados se añaden al instante. Si todavía no tenemos su canal de noticias, te lo diremos aquí mismo.</p>
+    <div id="source-results" class="source-suggestions" hidden></div>
     <div id="pending-sources"></div><div class="toast" id="source-feedback" aria-live="polite"></div>
     <hr class="rule"><div class="section-heading"><h3>Tu perfil de lectura</h3><small>Solo en este dispositivo</small></div>
 <div class="learning-box"><p id="learning-summary">Tu portada aprenderá según los titulares que abras.</p><div id="learning-tags" class="learning-tags"></div><button id="learning-erase" class="learning-erase" type="button">Borrar lo aprendido</button></div>
@@ -802,19 +824,20 @@ function renderSources(){
   const active=groups.filter(g=>g.feeds.some(f=>prefs.sources[f.id]!==false)).length;
   el("sources-enabled").textContent=active+" de "+groups.length+" medios";
   el("source-counter").textContent=groups.length+" medios · "+feeds.length+" canales RSS";
+  const suggestions=el("source-suggestions");suggestions.replaceChildren();
+  for(const group of groups){
+    const option=mk("option");option.value=group.name;suggestions.append(option);
+  }
+  // Las propuestas antiguas que ya están conectadas no deben seguir pendientes.
+  const stillPending=prefs.proposals.filter(p=>!groups.some(g=>normal(g.name)===normal(p.name)||g.feeds.some(f=>f.url===p.url)));
+  if(stillPending.length!==prefs.proposals.length){prefs.proposals=stillPending;save()}
   const pend=el("pending-sources");pend.replaceChildren();
   for(const item of prefs.proposals){
     const box=mk("div","pending");
-    box.append(mk("strong","",item.name),mk("span","",item.url),mk("small",""," · Pendiente de incorporar"));
-    const btns=mk("div","actions");
-    const ask=mk("button","","Solicitar activación ↗");ask.type="button";
-    ask.onclick=()=>{
-      const title="Añadir fuente RSS: "+item.name;
-      const body="Propongo añadir esta fuente a Sin Ruido.\n\nMedio: "+item.name+"\nRSS: "+item.url+"\n\nComprobar acceso y condiciones de uso antes de activarla.";
-      window.open("https://github.com/dalonsoss-create/sin-ruido/issues/new?title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body),"_blank","noopener");
-    };
-    const del=mk("button","","Quitar");del.type="button";del.onclick=()=>{prefs.proposals=prefs.proposals.filter(p=>p.url!==item.url);save();renderSources()};
-    btns.append(ask,del);box.append(btns);pend.append(box);
+    box.append(mk("strong","",item.name||"Medio sugerido"),mk("span","","Sugerencia antigua guardada solo en este navegador; no se envió automáticamente."));
+    const del=mk("button","","Quitar");del.type="button";
+    del.onclick=()=>{prefs.proposals=prefs.proposals.filter(p=>p!==item);save();renderSources()};
+    box.append(del);pend.append(box);
   }
 }
 
@@ -930,15 +953,46 @@ el("block-form").onsubmit=e=>{
   if(word&&!prefs.blocked.includes(word)){prefs.blocked.push(word);save();renderControls();render()}
   input.value="";
 };
+function activatePublisher(group){
+  const already=group.feeds.every(f=>prefs.sources[f.id]!==false);
+  for(const f of group.feeds){
+    prefs.sources[f.id]=true;
+    // Mostrar titulares del medio, incluso si la categoría estaba apagada.
+    prefs.topics[f.category]=true;
+  }
+  prefs.proposals=prefs.proposals.filter(p=>normal(p.name)!==normal(group.name)&&!group.feeds.some(f=>f.url===p.url));
+  save();
+  activeTopic="Todas";
+  el("source-query").value="";
+  el("source-results").hidden=true;
+  el("source-results").replaceChildren();
+  el("source-feedback").textContent=already
+    ?"✓ "+group.name+" ya estaba incluido en tu periódico. Sus noticias aparecen cuando las publica el agregador."
+    :"✓ "+group.name+" activado. Verás sus titulares en la próxima edición disponible, si el canal RSS responde.";
+  renderControls();
+  if(collectionMode==="saved")switchCollection("feed");else render();
+}
 el("source-form").onsubmit=e=>{
-  e.preventDefault();const name=el("source-name").value.trim(),raw=el("source-url").value.trim(),msg=el("source-feedback");
-  let u;try{u=new URL(raw)}catch(err){msg.textContent="Introduce una URL RSS válida.";return}
-  if(u.protocol!=="https:"||!u.hostname){msg.textContent="Por seguridad, la fuente debe tener una dirección https.";return}
-  const url=u.href;
-  if(feeds.some(f=>f.url===url)||prefs.proposals.some(p=>p.url===url)){msg.textContent="Esta fuente ya está en tu lista.";return}
-  prefs.proposals.push({name:name||u.hostname,url});save();renderSources();
-  el("source-form").reset();
-  msg.textContent="Propuesta guardada. Pulsa «Solicitar activación» para incorporarla a las noticias.";
+  e.preventDefault();
+  const query=el("source-query").value.trim(),box=el("source-results"),msg=el("source-feedback");
+  box.replaceChildren();box.hidden=true;msg.textContent="";
+  if(!query)return;
+  const q=normal(query).replace(/^https?:\/\//,"").replace(/^www\./,"").replace(/\/.*$/,"").trim();
+  const groups=groupedPublishers();
+  const hostname=f=>{try{return new URL(f.homepage||f.url).hostname.replace(/^www\./,"").toLowerCase()}catch(err){return ""}};
+  const exact=groups.filter(g=>normal(g.name)===q||g.feeds.some(f=>hostname(f)===q));
+  const matches=exact.length?exact:(q.length>=3?groups.filter(g=>normal(g.name).includes(q)||g.feeds.some(f=>hostname(f).includes(q))):[]);
+  if(!matches.length){
+    msg.textContent="Este periódico todavía no está conectado. No te enviaremos a otra página: necesitamos verificar su canal de noticias para incorporarlo.";
+    return;
+  }
+  if(matches.length===1){activatePublisher(matches[0]);return}
+  msg.textContent="Hemos encontrado varios medios. Elige cuál quieres añadir:";
+  box.hidden=false;
+  for(const group of matches.slice(0,12)){
+    const btn=mk("button","","+ "+group.name);
+    btn.type="button";btn.onclick=()=>activatePublisher(group);box.append(btn);
+  }
 };
 el("start-fresh").onclick=()=>{if(!confirm("¿Crear una edición nueva sin vetos y volver a elegir tus temas y medios?"))return;prefs=JSON.parse(JSON.stringify(DEFAULT));activeTopic="Todas";save();renderControls();render();openWelcome()};
 el("reset").onclick=()=>{
