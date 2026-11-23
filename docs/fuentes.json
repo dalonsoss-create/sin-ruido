@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "feeds": [
     {
       "id": "elpais-tecnologia",
@@ -70,7 +70,272 @@
       "category": "Salud",
       "url": "https://www.elmundo.es/rss/googlenews/salud.xml",
       "images_allowed": false
+    },
+    {
+      "id": "elpais-espana",
+      "name": "EL PAÍS",
+      "category": "Política nacional",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/espana/portada",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elpais-cultura",
+      "name": "EL PAÍS",
+      "category": "Cultura",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/cultura/portada",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elmundo-portada",
+      "name": "El Mundo",
+      "category": "Sociedad",
+      "url": "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elmundo-espana",
+      "name": "El Mundo",
+      "category": "Política nacional",
+      "url": "https://e00-elmundo.uecdn.es/elmundo/rss/espana.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elmundo-internacional",
+      "name": "El Mundo",
+      "category": "Internacional",
+      "url": "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "abc-portada",
+      "name": "ABC",
+      "category": "Sociedad",
+      "url": "https://www.abc.es/rss/feeds/abc_ultima.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "lavanguardia-portada",
+      "name": "La Vanguardia",
+      "category": "Sociedad",
+      "url": "https://www.lavanguardia.com/rss/home.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "20minutos-portada",
+      "name": "20minutos",
+      "category": "Sociedad",
+      "url": "https://www.20minutos.es/rss/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "eldiario-portada",
+      "name": "elDiario.es",
+      "category": "Sociedad",
+      "url": "https://www.eldiario.es/rss/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elespanol-portada",
+      "name": "El Español",
+      "category": "Sociedad",
+      "url": "https://www.elespanol.com/rss/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elconfidencial-portada",
+      "name": "El Confidencial",
+      "category": "Sociedad",
+      "url": "https://rss.elconfidencial.com/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elperiodico-portada",
+      "name": "El Periódico",
+      "category": "Sociedad",
+      "url": "https://www.elperiodico.com/es/rss/rss_portada.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "rtve-noticias",
+      "name": "RTVE Noticias",
+      "category": "Sociedad",
+      "url": "https://api2.rtve.es/rss/temas_noticias.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "infobae-portada",
+      "name": "Infobae",
+      "category": "Sociedad",
+      "url": "https://www.infobae.com/arc/outboundfeeds/rss/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "bbc-mundo",
+      "name": "BBC Mundo",
+      "category": "Internacional",
+      "url": "https://feeds.bbci.co.uk/mundo/rss.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "dw-espanol",
+      "name": "DW Español",
+      "category": "Internacional",
+      "url": "https://rss.dw.com/rdf/rss-sp-top",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "france24-es",
+      "name": "France 24 Español",
+      "category": "Internacional",
+      "url": "https://www.france24.com/es/rss",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "euronews-mundo",
+      "name": "Euronews Español",
+      "category": "Internacional",
+      "url": "https://es.euronews.com/rss?format=mrss&level=theme&name=news",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "as-futbol",
+      "name": "AS",
+      "category": "Fútbol",
+      "url": "https://feeds.as.com/mrss-s/pages/as/site/as.com/section/futbol/portada/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "as-tenis",
+      "name": "AS",
+      "category": "Tenis",
+      "url": "https://feeds.as.com/mrss-s/pages/as/site/as.com/section/tenis/portada/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "as-motor",
+      "name": "AS",
+      "category": "Motor",
+      "url": "https://feeds.as.com/mrss-s/pages/as/site/as.com/section/motor/portada/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "marca-portada",
+      "name": "MARCA",
+      "category": "Deportes",
+      "url": "https://e00-marca.uecdn.es/rss/portada.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "expansion-portada",
+      "name": "Expansión",
+      "category": "Economía",
+      "url": "https://e00-expansion.uecdn.es/rss/portada.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "genbeta-general",
+      "name": "Genbeta",
+      "category": "Tecnología",
+      "url": "https://www.genbeta.com/index.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "hipertextual-general",
+      "name": "Hipertextual",
+      "category": "Tecnología",
+      "url": "https://hipertextual.com/feed",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "motorpasion-general",
+      "name": "Motorpasión",
+      "category": "Motor",
+      "url": "https://www.motorpasion.com/index.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "elblogsalmon-general",
+      "name": "El Blog Salmón",
+      "category": "Economía",
+      "url": "https://www.elblogsalmon.com/index.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "directopaladar-general",
+      "name": "Directo al Paladar",
+      "category": "Gastronomía",
+      "url": "https://www.directoalpaladar.com/index.xml",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "agenciasinc-ciencia",
+      "name": "Agencia SINC",
+      "category": "Ciencia",
+      "url": "https://www.agenciasinc.es/feed/noticias",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "theconversation-es",
+      "name": "The Conversation España",
+      "category": "Ciencia",
+      "url": "https://theconversation.com/es/home-page/articles.atom",
+      "images_allowed": false,
+      "language": "es"
     }
   ],
-  "image_policy": "Solo activar images_allowed si el medio ha autorizado expresamente el uso de sus miniaturas."
+  "image_policy": "Solo activar images_allowed si el medio ha autorizado expresamente el uso de sus miniaturas.",
+  "categories": [
+    "Política nacional",
+    "Internacional",
+    "Conflictos",
+    "Sucesos",
+    "Economía",
+    "Empresas",
+    "Ciencia",
+    "Tecnología",
+    "IA",
+    "Salud",
+    "Naturaleza",
+    "Medio ambiente",
+    "Sociedad",
+    "Cultura",
+    "Educación",
+    "Historia",
+    "Viajes",
+    "Gastronomía",
+    "Deportes",
+    "Fútbol",
+    "Tenis",
+    "Motor"
+  ],
+  "description": "Las marcas agrupan uno o más RSS. Las fuentes pueden fallar o tardar en responder; el estado de cada canal se publica en noticias.json. Sin imágenes de medios sin licencia."
 }
