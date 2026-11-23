@@ -9,6 +9,7 @@ import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from urllib.parse import urlsplit
 from clasificar import classify
 from editorial import COVER_FEEDS, enrich
@@ -199,8 +200,19 @@ def main():
     # Las cabeceras de referencia y coincidencias ayudan a detectar relevancia.
     # El resto de noticias se mantiene: no filtramos por apertura ni suscripción.
     fresh=enrich(select_balanced(fresh, limit=900, minimum_per_source=5))
+    # Métrica real en la zona del lector, para detectar ediciones sin noticias
+    # del día después de medianoche (la programación de GitHub puede retrasarse).
+    madrid=ZoneInfo("Europe/Madrid")
+    madrid_day=now.astimezone(madrid).date()
+    today_count=sum(
+        dt.datetime.fromisoformat(a["date"].replace("Z","+00:00")).astimezone(madrid).date()==madrid_day
+        for a in fresh
+    )
+    print(f"[EDICIÓN] Madrid: {madrid_day.isoformat()}, noticias de hoy: {today_count}")
     OUT.write_text(json.dumps({
-        "updated":now.isoformat(),"sources_ok":successes,"classification_version":5,
+        "updated":now.isoformat(),"edition_date_madrid":madrid_day.isoformat(),
+        "articles_today_madrid":today_count,
+        "sources_ok":successes,"classification_version":5,
         "feed_count":len(feed_list),
         "sources_status":sorted(statuses,key=lambda x:x["id"]),
         "articles":fresh[:900]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
