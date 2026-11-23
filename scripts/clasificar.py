@@ -51,7 +51,7 @@ SPORT=r"\b(?:tenis|tenista|atp|wta|wimbledon|roland garros|us open|australian op
 TENNIS=r"\b(?:tenis|tenista|atp|wta|wimbledon|roland garros|us open|australian open|open de australia|masters 1000|alcaraz|sinner|djokovic|nadal|zverev|federer|copa davis)\b"
 FOOTBALL=r"\b(?:futbol|futbolista|laliga|premier league|champions league|real madrid|atletico de madrid|fc barcelona|fifa|uefa|balon de oro|copa del rey|sevilla fc|real betis|real sociedad|rayo vallecano)\b"
 MOTOR=r"\b(?:formula 1|formula uno|formula e|f1|f2|motogp|moto gp|motor|piloto de carreras|gran premio|verstappen|marc marquez|moto2|moto3)\b"
-CONFLICT=r"\b(?:guerra|invasion|bombarde|bombas?|drones? (?:militares?|de ataque)|misiles?|ataques? aereos?|ofensiva militar|soldados|ejercito|tropas|rehenes|alto el fuego|armisticio|otan|nato|hamas|hezbola|combates? armados?|ataque militar|conflicto armado|ucran[ai]|gaza)\b"
+CONFLICT=r"\b(?:guerra|invasion|bombarde|bombas?|drones? (?:militares?|de ataque)|misiles?|ataques? aereos?|ofensiva militar|soldados|ejercito|tropas|rehenes|alto el fuego|armisticio|otan|nato|hamas|hezbola|combates? armados?|ataque militar|conflicto armado|ucrania|ucranianos?|ucranianas?|gaza)\b"
 EVENTS=r"\b(?:accidente|atropello|choque mortal|asesinat|homicidio|crimen|detenido|detienen|sucesos|policia|policial|herido|fallec|incendio|desaparecid|secuestro|robo|violacion|juicio|condenan|tribunal|sentencia|juez|jueza)\b"
 HEALTH=r"\b(?:salud|medicina|medico|medica|paciente|enfermedad|terapia|tratamiento|vacuna|cancer|oncolog|alzheimer|hospital|farmaco|diagnostic|cirugia|sindrome|cardiolog|diabetes|enfermer|obesidad|mortalidad|trastorno|genetic|trasplante|inmunolog)\b"
 SCIENCE=r"\b(?:cientific|investigacion cientifica|experimento|laboratorio|fisica cuantica|quimica|astronom|astrofisic|nasa|esa|espacial|exoplaneta|planeta|galaxia|universo|agujero negro|paleontolog|fosil|regolito|misiones? lunar|hallazgo cientifico|investigadores? descubren)\b"
@@ -111,7 +111,7 @@ def classify(title,link,default="Sociedad",tags=(),source=""):
         return "Medio ambiente"
     if has(t,SCIENCE) or default=="Ciencia" or has(p,r"/(?:ciencia|science|astronomia|espacio)(?:/|$)"):
         return "Ciencia"
-    if has(t,NATURE) or (default=="Naturaleza" and not has(t,r"\b(?:amigo|relacion personal|mi relacion|negociaciones politicas|cumbre|compra|venta|precio|inversion)\b")) or has(p,r"/(?:naturaleza|animales|biodiversidad)(?:/|$)"):
+    if (has(t,NATURE) and not has(t,r"\b(?:comercio|comercial|negocios|inversion(?:es)?|mercados? financieros?|politica exterior|acuerdo economico)\b")) or (default=="Naturaleza" and not has(t,r"\b(?:amigo|relacion personal|mi relacion|negociaciones politicas|cumbre|compra|venta|precio|inversion)\b")) or has(p,r"/(?:naturaleza|animales|biodiversidad)(?:/|$)"):
         return "Naturaleza"
     if has(t,EDUCATION) or default=="Educación" or has(p,r"/(?:educacion|universidades)(?:/|$)"):
         return "Educación"
