@@ -51,3 +51,18 @@ body{background:radial-gradient(ellipse at top left,#fffaf3,transparent 45rem),v
 .access-report.is-marked{border-color:#c88769;color:#934a29;background:#f9e9dc}
 .access-report:hover{border-color:#b48a72}
 @media(max-width:760px){.paywall-badge{font-size:10px}.access-legend{font-size:10px}}
+
+/* Selección extraordinaria: noticias relevantes del día anterior, sin contaminar la edición de Hoy. */
+.mustread-panel{margin:10px 0 20px;padding:14px 15px;background:#f7efe2;border:1px solid #ddcdb9;border-radius:14px}
+.mustread-panel[hidden]{display:none}
+.mustread-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:5px 10px;margin-bottom:11px}
+.mustread-head strong{font:bold 21px/1.15 Georgia,serif;color:#403126}
+.mustread-head span{font:500 11px/1.4 ui-sans-serif,-apple-system,system-ui,sans-serif;color:#665747}
+.mustread-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.mustread-item{display:block;min-width:0;padding:12px;background:#fffbf5;border:1px solid #e6d9c9;border-radius:10px;text-decoration:none;color:inherit}
+.mustread-item:hover{border-color:#bd8d71;background:#fff}
+.mustread-topic{display:block;font:850 10px/1.3 ui-sans-serif,-apple-system,system-ui,sans-serif;text-transform:uppercase;color:#9a462e;margin-bottom:6px}
+.mustread-title{display:block;font:bold 16px/1.2 Georgia,serif;overflow-wrap:anywhere}
+.mustread-source{display:block;font:600 11px/1.3 ui-sans-serif,-apple-system,system-ui,sans-serif;color:#74685e;margin-top:7px}
+@media(max-width:900px){.mustread-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:530px){.mustread-grid{grid-template-columns:1fr}.mustread-panel{padding:12px}.mustread-title{font-size:17px}}
