@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "feeds": [
     {
       "id": "elpais-tecnologia",
@@ -308,6 +308,24 @@
       "name": "The Conversation España",
       "category": "Ciencia",
       "url": "https://theconversation.com/es/home-page/articles.atom",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "eldiariodemadrid-sucesos",
+      "name": "El Diario de Madrid",
+      "category": "Sucesos",
+      "place": "Madrid",
+      "url": "https://www.eldiariodemadrid.es/rss/sucesos-en-madrid/",
+      "images_allowed": false,
+      "language": "es"
+    },
+    {
+      "id": "madridiario-sucesos",
+      "name": "Madridiario",
+      "category": "Sucesos",
+      "place": "Madrid",
+      "url": "https://rss.madridiario.es/rss/seccion/642/",
       "images_allowed": false,
       "language": "es"
     }
