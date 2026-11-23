@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f4ef"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<title>Sin Ruido · Prueba móvil</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f4ef;color:#262626;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;line-height:1.5}
+main{max-width:680px;margin:0 auto;padding:26px 18px 56px}h1{font-family:Georgia,serif;font-size:40px;margin:0;color:#a03525}
+p{margin:8px 0 15px}.ok{padding:14px;border-radius:12px;background:#e5f0e2;border:1px solid #bacfb5;margin:18px 0}
+button{background:#a03525;color:white;border:0;padding:12px 18px;border-radius:9px;font-weight:800;font-size:15px}
+article{padding:16px 0;border-bottom:1px solid #d5cfc4}article a{color:#142d40;text-decoration:none;font-weight:750;font-size:18px}
+small{display:block;color:#666;font-size:12px;margin-top:6px}a.back{display:inline-block;margin:14px 0;color:#a03525}
+</style></head><body><main>
+<h1>sin ruido.</h1><p>Edición ligera para comprobar Safari en el móvil.</p>
+<div class="ok"><b>✅ Si lees este recuadro, el servidor y Safari están cargando el HTML.</b><div id="status">Comprobando noticias publicadas…</div></div>
+<button id="refresh" type="button">↻ Comprobar titulares</button>
+<a class="back" href="./">Abrir versión completa →</a>
+<div id="news"></div>
+</main><script>
+(function(){
+var status=document.getElementById("status"),list=document.getElementById("news"),button=document.getElementById("refresh");
+function dateKey(x){var d=new Date(x);if(isNaN(d.getTime()))return "";
+var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);
+var obj={};for(var i=0;i<p.length;i++)obj[p[i].type]=p[i].value;return obj.year+"-"+obj.month+"-"+obj.day;
+}
+function load(){
+button.disabled=true;status.textContent="Consultando la edición…";
+fetch("./noticias.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("Error HTTP "+r.status);return r.json()}).then(function(data){
+var today=dateKey(new Date());var all=(data.articles||[]).filter(function(a){return dateKey(a.date)===today});var seen={};var filtered=[];
+all.forEach(function(a){if(filtered.length>=20)return;if(!a.title||!a.link||!/^https:\/\//.test(a.link)||seen[a.source])return;seen[a.source]=true;filtered.push(a)});
+list.textContent="";
+filtered.forEach(function(a){var art=document.createElement("article");var link=document.createElement("a");link.href=a.link;link.textContent=a.title;link.target="_blank";link.rel="noopener noreferrer";
+var sub=document.createElement("small");sub.textContent=(a.source||"Medio")+" · "+(a.category||"Noticias");art.appendChild(link);art.appendChild(sub);list.appendChild(art)});
+status.textContent="✅ Web accesible. "+all.length+" titulares de hoy, "+filtered.length+" mostrados. Última edición: "+(data.updated||"sin fecha")+".";
+if(!filtered.length)list.textContent="No hay titulares de hoy todavía. La portada funciona, pero el recopilador debe actualizarse.";
+}).catch(function(e){status.textContent="✅ La web carga, pero la lista RSS ha fallado: "+e.message}).then(function(){button.disabled=false});
+}
+button.onclick=load;load();
+})();
+</script></body></html>
