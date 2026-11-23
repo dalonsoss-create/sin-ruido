@@ -26,3 +26,6 @@ Settings → Pages → Deploy from a branch → main → /docs → Save.
 
 ## Legal y comercial
 Este repositorio es una prueba personal, no un negocio en producción. Reproducir titulares e imágenes en un agregador público puede requerir autorización según la Ley de Propiedad Intelectual española y las condiciones de cada feed. Antes de ampliar y comercializar: revisar licencias, privacidad y acuerdos con medios. GitHub Pages tampoco debe utilizarse como alojamiento de un servicio comercial completo.
+
+## ¿No puedes leer un artículo por un muro de pago?
+Los titulares abren el periódico en una pestaña nueva. Sin Ruido **no puede detectar desde otra web** si cada artículo individual está bloqueado ni modificar su página. Para los medios con tarifas verificadas, Sin Ruido muestra debajo del titular el botón **«¿Te pide suscripción? Ver precio»**: al pulsarlo aparece un panel con el precio público consultado, las condiciones relevantes, la fecha de comprobación y enlaces oficiales para contratar y revisar la tarifa. Los datos están en `docs/suscripciones.json`; hay que actualizarlos si cambian los precios. Ningún botón cobra por usar Sin Ruido.
