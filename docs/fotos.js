@@ -7,7 +7,7 @@
 const API="https://commons.wikimedia.org/w/api.php";
 const CACHE="sinruido-commons-fotos-v3-";
 const TTL=6*86400000;
-const DISALLOWED=/\b(?:asesinat\w*|homicid\w*|violaci[oó]n|abusos?\s+sexual|victim\w*|muert\w*|matanza|masacre|accidente|atropell\w*|herid\w*|fallec\w*|suicid\w*|incendio|bombarde\w*|explosion|terroris\w*|guerra|rehenes|genocidio|violencia\s+de\s+g[eé]nero|denuncia|detenid\w*|agresi[oó]n|desaparecid\w*)\b/;
+const DISALLOWED=/\b(?:asesinat\w*|homicid\w*|violaci[oó]n|abusos?\s+sexual\w*|victim\w*|muert\w*|matanza|masacre|accidente|atropell\w*|herid\w*|fallec\w*|suicid\w*|incendio|bombarde\w*|explosion|terroris\w*|guerra|rehenes|genocidio|violencia\s+de\s+g[eé]nero|denuncia|acusad\w*|condena\w*|delitos?|estafas?|fraudes?|prision|trata\s+de\s+personas|migrantes?|detenid\w*|detienen|detiene|agresi[oó]n|desaparecid\w*)\b/;
 const TOPICS=[
 [/\b(?:pozuelo(?:\s+de\s+alarcon)?|monte\s+alina)\b/,"Pozuelo de Alarcon Madrid city photo","Pozuelo de Alarcón"],
 [/\b(?:oso\s+pardo|osos\s+pardos)\b/,"brown bear animal nature photograph","oso pardo"],
@@ -61,8 +61,6 @@ const FALLBACK={
 "Economía":["euro currency coins photograph","monedas de euro"],
 "Empresas":["modern office building photograph","oficina"],
 "Política nacional":["Spanish congress parliament building photograph","Congreso de los Diputados"],
-"Internacional":["planet earth space NASA photograph","planeta Tierra"],
-"Sociedad":["city street urban people photograph","calle de ciudad"],
 "Cultura":["museum gallery art interior photograph","museo"],
 "Historia":["Roman ancient ruins archaeological site photograph","ruinas históricas"],
 "Educación":["school classroom education photo","aula"],
@@ -77,7 +75,7 @@ const FALLBACK={
 function norm(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
 function choice(article){
   const title=norm(article?.title);
-  if(DISALLOWED.test(title))return null;
+  if(DISALLOWED.test(title)||["Sucesos","Conflictos"].includes(article?.category))return null;
   for(const [pattern,query,subject] of TOPICS){if(pattern.test(title))return {query,subject}}
   const fallback=FALLBACK[article?.category];
   return fallback?{query:fallback[0],subject:fallback[1]}:null;
