@@ -6,8 +6,8 @@
 "use strict";
 const MINUTE=60000,MAX_AGE_MIN=180,RECENT_MIN=90;
 function normal(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
-const IMPACT=/\b(?:historico|historica|record|primera vez|nuevo tratamiento|descubrimiento|dimite|dimision|fallece|muere|anuncia|aprueba|acuerdo|suspende|decreta|prohibe|libera|rescata|condena|sentencia|crisis|emergencia|terremoto|se dispara|disparan|desploma|desploman|sube|cae|rebota|sorpresa|victoria|gana|campeon|rompe|logra)\b/;
-const CONSEQUENCE=/\b(?:gobierno|presidente|congreso|union europea|europa|onu|oms|mercados|bolsa|acciones|banca|bancos|economia|empresas|energia|nvidia|apple|google|microsoft|inteligencia artificial|medicina|vacuna|cancer|ciencia|clima|elecciones|tribunal supremo|constitucional)\b/;
+const IMPACT=/\b(?:historico|historica|record|primera vez|nuevo tratamiento|descubrimiento|dimite|dimision|fallece|muere|anuncia|aprueba|aplica|archiva|archivan|cierra|extingue|amnistia|ratifica|revoca|deroga|acuerdo|suspende|decreta|prohibe|libera|rescata|condena|sentencia|crisis|emergencia|terremoto|se dispara|disparan|desploma|desploman|sube|cae|rebota|sorpresa|victoria|gana|campeon|rompe|logra)\b/;
+const CONSEQUENCE=/\b(?:gobierno|presidente|congreso|union europea|europa|onu|oms|mercados|bolsa|acciones|banca|bancos|economia|empresas|energia|nvidia|apple|google|microsoft|inteligencia artificial|medicina|vacuna|cancer|ciencia|clima|elecciones|tribunal supremo|supremo|amnistia|proces|constitucional)\b/;
 function details(a,now){
   if(!a||typeof a.title!=="string"||typeof a.link!=="string"||!/^https:\/\//i.test(a.link))return null;
   const stamp=Date.parse(a.date),age=(now-stamp)/MINUTE;
@@ -20,7 +20,13 @@ function details(a,now){
   const measured=/\b\d+(?:[.,]\d+)?\s*(?:%|por ciento|millones|miles de millones)\b/.test(title);
   // La presencia en el RSS de portada NO es prueba de que estuviera
   // en lo alto de la portada real. Exigimos otra señal para "Última hora".
-  const breaking=(covers>=2)||(cross>=2&&action)||((covers>=1||cross>=1)&&action&&impact);
+  // Dos cabeceras que repiten un titular trivial NO bastan para declararlo urgente.
+  // Se exige un hecho relevante y al menos una señal editorial independiente.
+  const breaking=action&&(
+    (impact&&(covers>=2||cross>=2))||
+    (covers>=1&&cross>=1)||
+    (covers>=1&&impact&&measured)
+  );
   const freshness=1-Math.max(0,age)/MAX_AGE_MIN;
   const score=covers*12+cross*11+(action?8:0)+(impact?5:0)+(measured?3:0)+freshness*12;
   return {article:a,ageMin:Math.max(0,age),score,breaking};
