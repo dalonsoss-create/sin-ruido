@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Sin Ruido">
+<meta name="application-name" content="Sin Ruido">
+<link rel="icon" type="image/svg+xml" href="./icon.svg?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=1">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sin Ruido">
+<meta property="og:title" content="Sin Ruido · Tu periódico personal">
+<meta property="og:description" content="Solo las noticias que te interesan. Personaliza tus fuentes y prioriza las buenas noticias.">
+<meta property="og:url" content="https://dalonsoss-create.github.io/sin-ruido/">
+<meta property="og:image" content="https://dalonsoss-create.github.io/sin-ruido/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="Sin Ruido: tu periódico personal de titulares, sin temas que no te interesan.">
+<title>Sin Ruido — Tu periódico, tus reglas</title>
+<style>
+:root{--paper:#f7f4ed;--white:#fffdfa;--ink:#181c20;--muted:#6b6c6a;--line:#d8d2c6;--red:#a03525;--red-deep:#77291f;--cream:#efe8da;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.45}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d9984d;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}.container{width:min(1240px,calc(100% - 40px));margin:auto}
+.ribbon{background:var(--ink);color:#f4eee2;font-size:11px;letter-spacing:1.8px;text-transform:uppercase}.ribbon .container{display:flex;align-items:center;justify-content:space-between;padding:9px 0;gap:12px}.ribbon button{border:1px solid #756e65;background:transparent;border-radius:3px;color:#fff;padding:5px 10px;font-size:11px;letter-spacing:.5px}
+.masthead{text-align:center;padding:25px 0 17px;border-bottom:5px double var(--ink)}.masthead .overline{color:var(--red);font-weight:800;letter-spacing:4px;text-transform:uppercase;font-size:10px}.logo{font-family:var(--serif);font-weight:800;font-size:clamp(52px,9vw,106px);letter-spacing:-5px;line-height:1.06;margin:3px 0 0}.logo span{color:var(--red)}.tagline{font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-top:8px;color:#5e5d59}.subline{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ink);padding:9px 0;font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:1px}.subline .mid{color:var(--red)}
+.main{display:grid;grid-template-columns:273px minmax(0,1fr);gap:28px;margin-top:24px;align-items:start}.settings{background:var(--white);border:1px solid var(--line);padding:19px 18px 17px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;scrollbar-color:#c4bbb0 transparent}.settings h2,.settings h3{font-family:var(--serif);margin:0}.settings h2{font-size:25px}.settings .side-note{font-size:11px;color:var(--muted);margin:4px 0 14px}.rule{border:0;border-top:1px solid var(--line);margin:15px 0}.section-heading{display:flex;justify-content:space-between;align-items:baseline;margin:16px 0 9px}.section-heading h3{font-size:19px}.section-heading small{font-size:10px;color:var(--muted)}.checkline{display:flex;gap:9px;align-items:center;padding:6px 0;font-size:12px;cursor:pointer}.checkline input{margin:0;accent-color:var(--red);width:16px;height:16px;flex-shrink:0}.checkline .label-text{flex:1}.priority{font-size:10px;color:#8a8277}.chipwrap{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0}.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--cream);padding:6px 8px;border-radius:3px}.chip button{border:0;background:transparent;color:var(--red);font-size:15px;line-height:1;padding:0}.inline-form{display:flex;gap:6px}.inline-form input{width:100%;min-width:0;padding:9px;border:1px solid var(--line);border-radius:3px;background:white;font-size:12px}.smallbtn{border:0;border-radius:3px;padding:9px 10px;background:var(--ink);color:white;font-size:11px;font-weight:750;white-space:nowrap}.muted-note{font-size:11px;line-height:1.55;color:var(--muted)}.sources-list{margin-top:7px}.source-line{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px dashed #ded9d0}.source-line label{flex:1;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px}.source-line input{accent-color:var(--red);width:15px;height:15px;flex-shrink:0}.source-line small{display:block;color:var(--muted);font-size:10px}.source-line .status{font-size:9px;color:#456b4f;white-space:nowrap}.source-line .status.fail{color:#a2513f}
+.publisher-entry{border-bottom:1px solid var(--line);padding:7px 0}
+.publisher-row{display:flex;gap:8px;align-items:center}
+.publisher-row label{display:flex;align-items:center;gap:8px;cursor:pointer;flex:1;min-width:0;font-size:13px;font-weight:750}
+.publisher-row label input{accent-color:var(--red);width:17px;height:17px;flex-shrink:0}
+.publisher-row small{display:block;font-size:10px;color:var(--muted);font-weight:400}
+.publisher-details{padding:4px 0 2px 25px}
+.publisher-details summary{font-size:11px;color:var(--red);cursor:pointer;padding:4px 0}
+.publisher-details .source-line{padding:6px 0}
+.publisher-details .source-line label{font-size:11px}
+.publisher-details .source-line small{font-size:10px}
+.publisher-details .rss-link{white-space:nowrap}
+.publisher-stat{font-size:10px;color:#507c50;white-space:nowrap}
+.publisher-stat.fail{color:#a2513f}.rss-link{font-size:9px;color:var(--red);font-weight:800;white-space:nowrap}.pending{border:1px dashed #cbbda5;padding:8px;margin:7px 0;font-size:11px;overflow-wrap:anywhere}.pending strong{display:block}.pending .actions{display:flex;gap:6px;margin-top:7px}.pending button{font-size:10px;padding:6px 7px;border:1px solid var(--line);background:#fff}.source-add{display:grid;gap:7px}.source-add input{width:100%;padding:9px;border:1px solid var(--line);border-radius:3px;font-size:12px}.source-add button{background:var(--red);color:#fff;border:0;padding:9px;font-weight:800;border-radius:3px;font-size:12px}.toast{min-height:1em;font-size:11px;color:var(--red);margin-top:6px}.reset{font-size:11px;border:1px solid var(--line);padding:8px 10px;background:transparent;color:#5e5d58;border-radius:3px;margin-top:10px}
+.editorial{min-width:0}.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:800}.deskhead{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:3px 0 16px}.deskhead h1{font-family:var(--serif);font-size:clamp(28px,4vw,42px);margin:0;font-weight:800;line-height:1.1}.deskhead p{font-size:12px;color:var(--muted);margin:5px 0 0}.mobile-button{display:none;border:1px solid var(--ink);padding:8px 10px;background:var(--paper);font-size:12px;font-weight:800}.toolbar{display:flex;gap:8px;align-items:center;margin:17px 0 12px}.toolbar input{flex:1;min-width:0;background:var(--white);border:1px solid var(--line);padding:10px 12px;border-radius:3px;font-size:12px}.toolbar select{background:var(--white);border:1px solid var(--line);padding:10px;border-radius:3px;font-size:12px}.positive-switch{display:inline-flex;align-items:center;gap:7px;background:#e7f3e6;color:#24572e;border:1px solid #9fbf9e;border-radius:4px;padding:8px 10px;white-space:nowrap;cursor:pointer;font-weight:800;font-size:12px}.positive-switch input{accent-color:#30763f;width:16px;height:16px;margin:0}.mood-star{font-weight:900;color:#397745;background:#e9f4e8;border-radius:3px;padding:2px 5px;font-size:10px;white-space:nowrap}.positive-explainer{font-size:12px;color:#56644e;background:#edf4e7;border-left:3px solid #7baf78;padding:9px 12px;margin:8px 0 14px}.topics{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 18px}.topic-button{font-size:11px;font-weight:700;letter-spacing:.2px;background:transparent;border:1px solid var(--line);padding:7px 10px;border-radius:2px}.topic-button.active{background:var(--ink);color:white;border-color:var(--ink)}
+.sectionbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 8px;border-top:3px solid var(--ink);border-bottom:1px solid var(--line);margin-bottom:14px}.sectionbar h2{font-family:var(--serif);font-size:21px;margin:0}.sectionbar span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}.feature-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:19px;margin-bottom:24px}.lead{padding-right:18px;border-right:1px solid var(--line)}.visual{position:relative;overflow:hidden;background:linear-gradient(135deg,#d5dfe2,#bccad3);color:#fff;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}.visual.t-technology{background:linear-gradient(145deg,#293c4a,#628b9d)}.visual.t-health{background:linear-gradient(145deg,#49656e,#a6bcbc)}.visual.t-economy{background:linear-gradient(145deg,#565146,#ac9470)}.visual.t-nature{background:linear-gradient(145deg,#37584c,#85aa79)}.visual.t-international{background:linear-gradient(145deg,#344366,#8795b5)}.visual.t-sports{background:linear-gradient(145deg,#555956,#879493)}.visual.t-science{background:linear-gradient(145deg,#263d52,#8297a9)}.visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.visual .symbol{font-family:var(--serif);font-size:clamp(64px,9vw,130px);font-weight:800;opacity:.20;letter-spacing:-8px}.visual .photo-caption{position:absolute;bottom:10px;left:12px;color:#fff;font-size:10px;text-shadow:0 1px 6px #333}.visual.small{aspect-ratio:5/3}.visual.small .symbol{font-size:64px}.kicker{display:flex;align-items:center;gap:7px;margin:13px 0 5px;font-size:10px;color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:1px}.kicker .dot{font-size:9px;color:var(--muted);font-weight:400}.lead h3{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.13;letter-spacing:-.8px;margin:6px 0 10px}.feature-side{display:grid;gap:16px}.secondary{padding-bottom:14px;border-bottom:1px solid var(--line)}.secondary:last-child{border-bottom:0;padding-bottom:0}.secondary h3{font-family:var(--serif);font-size:21px;line-height:1.2;letter-spacing:-.2px;margin:4px 0 9px}.headline-link:hover{text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}.foot-actions{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:9px}.read{font-size:11px;font-weight:800;color:var(--red)}.hide{border:0;background:transparent;padding:2px;color:var(--muted);font-size:11px}.hide:hover{color:var(--red)}.news-list{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}.news-item{display:flex;gap:12px;border-bottom:1px solid var(--line);padding:17px 0;min-width:0}.news-item .list-visual{width:112px;flex-shrink:0;align-self:flex-start}.news-item .copy{min-width:0;flex:1}.news-item h3{font-family:var(--serif);font-size:19px;line-height:1.22;margin:5px 0 8px}.news-item .kicker{margin:0 0 2px;font-size:9px}.notice{border:1px solid #cebba0;background:#fff9ed;padding:11px 12px;color:#785e3f;font-size:12px;margin-bottom:12px}.empty{padding:60px 20px;text-align:center;border:1px solid var(--line);background:var(--white);font-family:var(--serif);font-size:23px}.empty small{display:block;font:12px var(--sans);margin-top:10px;color:var(--muted)}.bottom{border-top:5px double var(--ink);margin:40px auto 0;padding:18px 0 34px;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px}
+@media(max-width:1050px){.news-list{grid-template-columns:1fr}.main{grid-template-columns:246px 1fr;gap:20px}.feature-grid{gap:13px}.lead{padding-right:13px}}
+@media(max-width:760px){.container{width:min(100% - 24px,700px)}.ribbon{font-size:9px;letter-spacing:.6px}.ribbon .container{padding:7px 0}.masthead{padding:16px 0}.logo{font-size:clamp(53px,13vw,84px);letter-spacing:-4px}.subline{font-size:9px;gap:5px}.subline .mid{display:none}.main{display:block;margin-top:18px}.settings{display:none;position:relative;max-height:none;margin-bottom:20px}.settings.show{display:block}.mobile-button{display:inline-block}.feature-grid{grid-template-columns:1fr;gap:10px}.lead{padding:0;border-right:0;border-bottom:1px solid var(--line);padding-bottom:18px}.feature-side{grid-template-columns:1fr 1fr;gap:12px}.feature-side .visual{aspect-ratio:5/3}.secondary h3{font-size:18px}.deskhead h1{font-size:29px}.bottom{display:block}.news-list{grid-template-columns:1fr}.news-item .list-visual{width:100px}}
+@media(max-width:430px){.feature-side{grid-template-columns:1fr}.feature-side .visual{display:none}.news-item .list-visual{width:87px}.news-item h3{font-size:17px}.toolbar{gap:5px;flex-wrap:wrap}.toolbar input[type="search"]{flex-basis:100%}.toolbar select{flex:1;max-width:none;padding:10px 4px}.positive-switch{flex:1;justify-content:center}.logo{font-size:53px}.tagline{font-size:10px}}
+.pay-trigger{font-size:10px;font-weight:800;border:1px solid #c9bba8;background:var(--white);border-radius:3px;color:#6e3b26;padding:5px 7px;text-align:left}.pay-trigger:hover{border-color:var(--red);color:var(--red)}.pay-dialog{border:1px solid #c4b6a3;border-radius:6px;max-width:min(92vw,500px);width:100%;padding:25px 27px;background:var(--white);color:var(--ink);box-shadow:0 20px 90px #0005}.pay-dialog::backdrop{background:#1a1a1a99}.pay-top{font-size:10px;color:var(--red);text-transform:uppercase;font-weight:900;letter-spacing:1.5px}.pay-dialog h2{font-family:var(--serif);font-size:29px;margin:7px 0 4px;line-height:1.2}.pay-price{font-family:var(--serif);font-weight:800;font-size:36px;color:var(--red-deep);margin:13px 0 4px}.pay-notes{font-size:13px;line-height:1.6;margin:9px 0;color:#4d4c49}.pay-caveat{font-size:11px;color:var(--muted);line-height:1.5;margin:13px 0}.pay-links{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px}.pay-subscribe{display:inline-block;background:var(--red);color:white;font-size:13px;font-weight:800;padding:11px 14px;border-radius:3px}.pay-check{font-size:12px;text-decoration:underline;color:var(--muted)}.pay-close{position:absolute;right:12px;top:9px;border:0;background:none;color:var(--muted);font-size:27px;line-height:1}.foot-actions{flex-wrap:wrap}
+.more-wrap{display:grid;justify-items:center;gap:7px;margin:24px 0 12px}.more-wrap[hidden]{display:none}.more-btn{font:800 14px var(--sans);border:1px solid var(--red);background:var(--red);color:#fff;border-radius:999px;padding:12px 24px;box-shadow:0 5px 18px #ab5a392b}.more-btn:hover{background:#8d3726}.more-btn:focus-visible{outline:3px solid #e9a569}.more-counter{font-size:12px;color:var(--muted)}
+.learning-box{background:#f2f7ef;border:1px solid #cbd9c4;border-radius:9px;padding:12px;margin-top:10px}.learning-box p{font-size:12px;color:#50624d;margin:5px 0}.learning-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.learning-tags span{font-size:11px;background:#dcebd7;color:#36583c;border-radius:999px;padding:4px 8px}.learning-erase{border:1px solid #aabbac;background:transparent;color:#36583c;border-radius:6px;padding:7px 9px;margin-top:9px;font-size:11px;font-weight:800}
+
+/* Bienvenida de nuevos lectores y portadas con lectura reconocible */
+.topics{position:sticky;top:0;z-index:5;padding:11px 0;background:var(--paper);border-bottom:1px solid var(--line);scroll-margin-top:15px}
+.topic-button .count{display:inline-block;margin-left:4px;font-size:10px;opacity:.7}
+.story.seen{border-color:#b8bec6}
+.story.seen .headline-link{color:#757a84}
+.story.seen .headline-link:hover{color:var(--red)}
+.seen-pill{display:inline-flex;align-items:center;background:#e1e8e9;color:#465b61;border-radius:20px;padding:3px 8px;font-size:10px;font-weight:800;letter-spacing:.15px;white-space:nowrap}
+.setup-again{display:block;margin:10px 0 12px;border:1px solid var(--red);background:#fff;color:var(--red);border-radius:9px;padding:10px 12px;font-size:12px;font-weight:800;width:100%}
+.welcome-dialog{width:min(760px,94vw);max-height:min(92vh,880px);overflow:auto;padding:0;border:1px solid #e2d1b7;border-radius:19px;background:var(--white);box-shadow:0 28px 110px #1b1d204d;color:var(--ink)}
+.welcome-dialog::backdrop{background:rgba(27,30,32,.65)}
+.welcome-inner{padding:clamp(19px,4vw,34px)}
+.welcome-head{text-align:center;background:linear-gradient(140deg,#fff4db,#f7d8c9);border-radius:14px;padding:17px 17px 19px;margin-bottom:20px}
+.welcome-head .eyebrow{letter-spacing:2px;font-size:11px;font-weight:900;color:#a14c31}
+.welcome-head h2{font:800 clamp(27px,5vw,41px)/1.12 Georgia,serif;margin:7px auto;max-width:570px}
+.welcome-head p{font-size:13px;color:#645b4e;margin:5px auto;max-width:550px}
+.welcome-step{margin:20px 0 10px}
+.welcome-step h3{font:800 20px Georgia,serif;margin:0}
+.welcome-step p{color:var(--muted);font-size:12px;margin:3px 0 10px}
+.welcome-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.welcome-option{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border:1px solid var(--line);background:#fff;border-radius:11px;font-size:13px;line-height:1.3;cursor:pointer}
+.welcome-option:has(input:checked){background:#fff2e7;border-color:#deaa8e}
+.welcome-option input{margin-top:2px;accent-color:var(--red);width:16px;height:16px;flex-shrink:0}
+.welcome-option small{display:block;color:var(--muted);font-size:10px;margin-top:1px}
+.welcome-veto{width:100%;min-height:76px;border:1px solid #d8cab7;border-radius:11px;padding:12px;background:#fff;font:13px var(--sans);resize:vertical}
+.welcome-suggestions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.welcome-suggestions button{border:1px solid #dbbdab;background:#fff5ec;border-radius:20px;padding:6px 10px;font-size:11px;color:#7d412f}
+.welcome-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:23px;padding-top:16px;border-top:1px solid var(--line)}
+.welcome-submit{border:0;border-radius:13px;background:var(--red);color:#fff;font-size:15px;padding:13px 19px;font-weight:850}
+.welcome-skip{border:0;background:transparent;color:#666;font-size:12px;text-decoration:underline;padding:10px}
+.welcome-errors{color:#aa3328;font-size:12px;font-weight:750}
+@media(max-width:520px){.welcome-options{grid-template-columns:1fr}.welcome-inner{padding:15px}.welcome-head{padding:16px 12px}.welcome-head h2{font-size:28px}.topics{margin-top:0}}
+.welcome-group-title{grid-column:1/-1;font-size:11px;letter-spacing:1.1px;text-transform:uppercase;font-weight:900;color:var(--red);margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+.welcome-group-title:first-child{padding-top:0;border-top:0;margin-top:2px}
+.welcome-batch{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.welcome-batch button{background:transparent;border:1px solid #c9bcae;border-radius:20px;padding:6px 10px;font-size:11px;color:#6b574a;font-weight:800}
+.interest-form{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+.interest-form textarea{width:100%;min-height:87px;resize:vertical;background:#fff;border:1px solid #d6c6af;border-radius:10px;padding:10px 12px;font:13px var(--sans);line-height:1.5}
+.interest-apply{border:0;border-radius:9px;padding:9px 12px;background:var(--red);color:#fff;font-size:12px;font-weight:850}
+.interest-clear{border:1px solid #d7cbbb;background:#fff;color:#6c5745;border-radius:9px;padding:9px 11px;font-size:12px}
+.interest-examples{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.interest-examples button{border:1px solid #c4d1dc;border-radius:25px;background:#edf4fa;color:#365771;font-weight:750;font-size:10px;padding:6px 9px}
+.interest-summary{font-size:12px;line-height:1.4;color:#365a42;background:#e8f2e7;padding:9px 11px;border-radius:10px;margin:8px 0}
+.interest-empty{font-size:12px;font-weight:600;color:#9b5831;margin:8px 0}
+
+/* Edición de hoy, actualizar y biblioteca privada */
+.toolbar{flex-wrap:wrap}.toolbar #updated{flex:1;min-width:160px}
+.refresh-btn{background:#fffdf9;border:1px solid #c9957e;color:#903f2b;border-radius:10px;font:800 12px var(--sans);padding:10px 13px;white-space:nowrap}
+.refresh-btn:hover{background:#fff2e9}
+.refresh-btn:disabled{opacity:.55}
+.refresh-btn.is-loading{background:#e8f2e8;color:#296b3b;border-color:#b4d2b9}
+.pull-indicator{border-radius:12px;background:#e6eee6;padding:11px;text-align:center;font-size:12px;font-weight:850;color:#396c4e;margin-bottom:8px}
+.pull-indicator{position:fixed;top:calc(env(safe-area-inset-top) + 18px);left:50%;transform:translateX(-50%);z-index:9999;max-width:92vw;min-width:240px;box-shadow:0 10px 32px #0003}
+.pull-indicator[data-loading="1"]::before{content:"↻";display:inline-block;margin-right:8px;animation:sinruido-spin .8s linear infinite}
+@keyframes sinruido-spin{to{transform:rotate(360deg)}}
+.pull-indicator[hidden]{display:none}.topics[hidden]{display:none}.refresh-status{font-size:11px;color:#366543;font-weight:750;min-height:1em}.refresh-status:empty{display:none}
+.collection-nav{display:flex;gap:10px;margin:13px 0;flex-wrap:wrap}
+.collection-btn{font-weight:800;font-size:13px;border:1px solid var(--line);background:#fff;padding:9px 16px;border-radius:99px}
+.collection-btn.selected{background:var(--ink);color:white;border-color:var(--ink)}
+.story-actions-extras{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.story-whatsapp,.save-toggle{display:inline-flex;align-items:center;justify-content:center;padding:7px 10px;border-radius:99px;font-size:11px;font-weight:800;border:1px solid #c7c9c0;background:#fff;color:#4b554a}
+.story-whatsapp{color:#267849;border-color:#a6c8ae;background:#e9f6ed}
+.save-toggle.is-saved{background:#fff0cc;border-color:#e1c589;color:#7d5615}
+.story-whatsapp:hover,.save-toggle:hover{filter:brightness(.96)}
+#saved-count{display:inline-flex;align-items:center;justify-content:center;background:#f0e1c0;color:#5a4528;padding:2px 6px;border-radius:30px;margin-left:4px;font-size:11px}
+.collection-btn.selected #saved-count{background:#d7b976}
+@media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
+</style>
+<link rel="stylesheet" href="./portada.css?v=iphone-clean-v3">
+<!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
+<style id="sinruido-mobile-header-fix">
+@media(max-width:760px){
+  #app-mobile-version{
+    display:block!important;grid-column:1/-1!important;grid-row:3!important;
+    text-align:center!important;font-size:9px!important;letter-spacing:1px!important;
+    color:#7c6b5e!important;font-weight:750!important;padding-top:2px!important;
+  }
+}
+@media (max-width:760px) {
+  header.masthead {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) max-content!important;
+    grid-template-rows:auto auto!important;
+    column-gap:10px!important;
+    row-gap:12px!important;
+    align-items:center!important;
+    padding-top:16px!important;
+  }
+  header.masthead > .logo {
+    grid-column:1/-1!important;
+    grid-row:1!important;
+    justify-self:center!important;
+    font-size:clamp(42px,12vw,53px)!important;
+    white-space:nowrap!important;
+    max-width:100%!important;
+    margin:0!important;
+    line-height:1.08!important;
+    position:relative!important;
+    z-index:1!important;
+  }
+  header.masthead > .tagline {display:none!important}
+  header.masthead > #search {
+    grid-column:1!important;
+    grid-row:2!important;
+    min-width:0!important;
+    width:100%!important;
+    margin:0!important;
+    font-size:16px!important;
+  }
+  header.masthead > #mobile-settings {
+    grid-column:2!important;
+    grid-row:2!important;
+    justify-self:end!important;
+    align-self:center!important;
+    position:static!important;
+    max-width:145px!important;
+    min-width:0!important;
+    padding:11px 12px!important;
+    font-size:12px!important;
+    line-height:1.2!important;
+    border-radius:11px!important;
+    transform:none!important;
+    white-space:nowrap!important;
+  }
+}
+</style>
+</head>
+<body>
+<header class="container masthead" data-version="cabecera-movil-v3">
+  <span id="app-mobile-version" style="display:none">NUEVA VERSIÓN PARA MÓVIL</span>
+  <div class="logo">sin ruido<span>.</span></div>
+  <div class="tagline">Tu periódico personal: las noticias que te interesan, sin el ruido de siempre.</div>
+  <input type="search" id="search" placeholder="Buscar noticias, temas o fuentes…" aria-label="Buscar noticias, temas o fuentes">
+  <button class="personalizar" id="mobile-settings" aria-controls="settings" type="button">⚙ Personalizar</button>
+</header>
+<div class="container subline"><span id="edition-date">EDICIÓN DIGITAL</span><button id="share">↗ Compartir periódico</button><span id="source-counter">10 FUENTES DISPONIBLES</span></div>
+<main class="container main">
+  <aside class="settings" id="settings" aria-label="Personaliza tus noticias">
+    <span class="coffee" aria-hidden="true">☕</span><h2>Tu periódico,<br>a tu medida</h2><p class="side-note">Elige los temas y periódicos que quieres leer.</p><button id="open-welcome" class="setup-again" type="button">✨ Configurar mi periódico paso a paso</button>
+    <div class="section-heading"><h3>✨ Dime qué noticias quieres</h3></div>
+    <form id="interests-form" class="interest-form">
+      <textarea id="interests-input" maxlength="750" rows="3" placeholder="Solo noticias de política catalana&#10;O: me interesan los avances sobre inteligencia artificial" aria-label="Escribe los temas que te interesan con tus propias palabras"></textarea>
+      <button type="submit" class="interest-apply">Aplicar mis intereses</button>
+      <button type="button" id="interests-clear" class="interest-clear">Quitar frases</button>
+    </form>
+    <div class="interest-examples">
+      <button type="button" data-interest-example="Solo noticias de política catalana">Política catalana</button>
+      <button type="button" data-interest-example="Solo noticias de sucesos en Madrid">Sucesos en Madrid</button>
+      <button type="button" data-interest-example="Me interesan los avances sobre inteligencia artificial">Avances en IA</button>
+    </div>
+    <p class="interest-summary" id="interests-summary" role="status">Escribe lo que te interesa con palabras normales. Una petición por línea.</p>
+    <p class="muted-note">«Solo...» limita los titulares. «Me interesan...» les da prioridad, sin ocultar el resto. Tus frases se guardan únicamente en este navegador.</p>
+    <hr class="rule"><div class="section-heading"><h3>Mis temas</h3><small>Elige qué aparece</small></div><div id="topic-toggles"></div>
+    <hr class="rule"><div class="section-heading"><h3>Asuntos vetados</h3></div>
+    <div class="chipwrap" id="blocked-list"></div>
+    <form id="block-form" class="inline-form"><input id="block-input" maxlength="65" placeholder="Ej. famosos, fútbol…" aria-label="Nueva palabra vetada"><button class="smallbtn" type="submit">+ Vetar</button></form>
+    <p class="muted-note">No volverán a aparecer titulares que contengan esas palabras.</p>
+    <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
+    <p class="muted-note">Selecciona el periódico una sola vez. Si quieres afinar por secciones, despliega sus canales RSS. Tus cambios solo afectan a tu edición.</p>
+    <div class="sources-list" id="sources-list"></div>
+    <div class="section-heading"><h3>Añadir una fuente</h3></div>
+    <form id="source-form" class="source-add"><input type="text" id="source-name" maxlength="60" placeholder="Nombre del medio (ej. BBC)" aria-label="Nombre de la fuente"><input type="url" id="source-url" maxlength="450" placeholder="https://medio.com/rss.xml" aria-label="URL RSS de la nueva fuente" required><button type="submit">+ Proponer fuente RSS</button></form>
+    <p class="muted-note">La nueva fuente quedará como propuesta en este navegador. Para recibir sus titulares tendremos que activarla en el agregador; no se conecta automáticamente.</p>
+    <div id="pending-sources"></div><div class="toast" id="source-feedback" aria-live="polite"></div>
+    <hr class="rule"><div class="section-heading"><h3>Tu perfil de lectura</h3><small>Solo en este dispositivo</small></div>
+<div class="learning-box"><p id="learning-summary">Tu portada aprenderá según los titulares que abras.</p><div id="learning-tags" class="learning-tags"></div><button id="learning-erase" class="learning-erase" type="button">Borrar lo aprendido</button></div>
+<p class="muted-note">Sin cuenta ni seguimiento externo. Abrir un titular cuenta como interés, no significa que hayas leído el artículo entero.</p>
+<hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button> <button class="reset" id="start-fresh">Empezar desde cero</button>
+  </aside>
+  <section class="editorial">
+    <h1 class="sr-only">Tu portada de Sin Ruido</h1>
+    <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
+    <div id="notice" class="notice" hidden></div>
+    <div id="pull-indicator" class="pull-indicator" aria-live="polite" hidden>↻ Suelta para actualizar noticias</div>
+    <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
+    <div class="collection-nav">
+      <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
+      <button id="show-saved" class="collection-btn" type="button">🔖 Guardadas <span id="saved-count">0</span></button>
+    </div>
+    <div class="sectionbar"><h2 id="headline-heading">Noticias de hoy</h2><span id="visible-count"></span></div>
+    <div id="features"></div>
+    <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
+    <div id="news-list" class="news-list"></div>
+<div id="more-wrap" class="more-wrap" hidden>
+<button id="load-more" class="more-btn" type="button">Cargar 20 noticias más ↓</button>
+<span id="more-counter" class="more-counter" aria-live="polite"></span>
+</div>
+  </section>
+</main>
+<footer class="container bottom"><span>© Sin Ruido · Prototipo personal, sin publicidad ni seguimiento</span><span>Las noticias pertenecen a sus respectivos medios. Sin Ruido solo enlaza a los originales.</span></footer>
+<dialog class="pay-dialog" id="pay-dialog" aria-labelledby="pay-title">
+  <button type="button" class="pay-close" id="pay-close" aria-label="Cerrar">×</button>
+  <div class="pay-top">¿No puedes acceder al artículo?</div>
+  <h2 id="pay-title"></h2>
+  <p class="pay-notes">Sin Ruido no puede saber si un artículo concreto está bloqueado. Si el periódico te pide pagar, aquí tienes sus opciones oficiales.</p>
+  <div class="pay-price" id="pay-price"></div>
+  <p class="pay-notes" id="pay-terms"></p>
+  <p class="pay-notes" id="pay-includes"></p>
+  <p class="pay-caveat" id="pay-updated"></p>
+  <div class="pay-links">
+    <a class="pay-subscribe" id="pay-link" target="_blank" rel="noopener noreferrer">Ver suscripción oficial ↗</a>
+    <a class="pay-check" id="pay-reference" target="_blank" rel="noopener noreferrer">Comprobar tarifa ↗</a>
+  </div>
+</dialog>
+
+<dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title">
+  <div class="welcome-inner">
+    <div class="welcome-head">
+      <div class="eyebrow">☀️ Bienvenido a Sin Ruido</div>
+      <h2 id="welcome-title">El periódico que habla de lo que te importa.</h2>
+      <p>Elige tus temas y medios, veta lo que te aburre y recibe una portada de 20 noticias. Gratis, sin cuenta y con prioridad para las buenas noticias.</p>
+    </div>
+    <form id="welcome-form">
+      <div class="welcome-step"><h3>1. ¿Qué temas te interesan?</h3><p>Hemos ampliado el menú siguiendo las secciones de la prensa. En las primeras 20 noticias representaremos cuantos temas sea posible y siempre tendrás acceso a cada sección elegida.</p></div>
+      <div class="welcome-batch"><button type="button" id="welcome-select-topics">Seleccionar todos</button><button type="button" id="welcome-clear-topics">Deseleccionar todos</button></div><div id="welcome-topics" class="welcome-options"></div>
+      <div class="welcome-step"><h3>2. ¿Qué periódicos quieres consultar?</h3><p>Los periódicos aparecen una sola vez, aunque consultemos distintas secciones de cada medio.</p></div>
+      <div class="welcome-batch"><button type="button" id="welcome-select-publishers">Seleccionar todos</button><button type="button" id="welcome-clear-publishers">Deseleccionar todos</button></div><div id="welcome-sources" class="welcome-options"></div>
+      <div class="welcome-step"><h3>3. Cuéntanos qué noticias buscas, con tus palabras</h3><p>Opcional. Puedes escribir «Solo noticias de política catalana» o «Me interesan los sucesos en Madrid». Una petición por línea.</p></div>
+      <textarea id="welcome-interests" class="welcome-veto" maxlength="750" placeholder="Solo noticias de política catalana&#10;Me interesa la inteligencia artificial"></textarea>
+      <p class="muted-note">Si no escribes nada, usaremos únicamente los temas y medios que selecciones. Esta interpretación es automática y puede necesitar ajustes.</p>
+      <div class="welcome-step"><h3>4. ¿Qué personajes o asuntos prefieres evitar?</h3><p>Escribe nombres o palabras separados por comas. Cuando aparezcan en un titular, lo ocultaremos.</p></div>
+      <textarea id="welcome-veto" class="welcome-veto" maxlength="650" placeholder="Por ejemplo: famosos, política, moda, fútbol…"></textarea>
+      <div class="welcome-suggestions" id="welcome-veto-suggestions"></div>
+      <div class="welcome-step"><h3>5. ¿Y el enfoque?</h3></div>
+      <label class="welcome-option"><input type="checkbox" id="welcome-positive"><span>☀️ <b>Solo noticias positivas</b><small>También puedes dejarlo apagado para ver noticias importantes de cualquier tipo, dando prioridad a las constructivas.</small></span></label>
+      <div class="welcome-actions">
+        <button type="submit" class="welcome-submit">Crear mi periódico →</button>
+        <button type="button" class="welcome-skip" id="welcome-skip">Prefiero explorar primero</button>
+        <span id="welcome-error" class="welcome-errors" role="status"></span>
+      </div>
+      <p class="muted-note">Cada lector tendrá su configuración en este navegador. Puedes cambiarla cuando quieras desde «Personalizar».</p>
+    </form>
+  </div>
+</dialog>
+<script src="./ilustraciones.js"></script>
+<script src="./intereses.js?v=2"></script>
+<script>
+(function(){
+"use strict";
+const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
+const EXAMPLES=[
+{title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Una innovación médica mejora el diagnóstico temprano",source:"Medio de ejemplo",category:"Salud",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Cambios en los mercados internacionales y la economía",source:"Medio de ejemplo",category:"Economía",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Una investigación descubre un nuevo hábitat protegido",source:"Medio de ejemplo",category:"Naturaleza",link:"",date:new Date().toISOString()}
+];
+const el=id=>document.getElementById(id), mk=(tag,cls,txt)=>{const o=document.createElement(tag);if(cls)o.className=cls;if(txt!==undefined)o.textContent=txt;return o};
+const normal=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const storyId=a=>a.link||a.title;
+let prefs,feeds=[],articles=[],statuses={},subscriptionPlans={},pricingUpdated="",activeTopic="Todas",demo=false;
+let cachedInterestsText=null,cachedInterestClauses=[];
+function getInterestClauses(){
+  const phrase=String(prefs.interests||"");
+  if(cachedInterestsText!==phrase){
+    cachedInterestsText=phrase;
+    cachedInterestClauses=window.SinRuidoIntereses?window.SinRuidoIntereses.parse(phrase):[];
+  }
+  return cachedInterestClauses;
+}
+function renderInterests(){
+  const input=el("interests-input"),status=el("interests-summary");
+  if(input)input.value=prefs.interests||"";
+  if(status)status.textContent=window.SinRuidoIntereses?window.SinRuidoIntereses.describe(getInterestClauses()):"Intérprete de intereses no disponible.";
+}
+function applyInterests(value){
+  prefs.interests=String(value||"").trim().slice(0,750);
+  const clauses=getInterestClauses();
+  // Las preferencias no exclusivas habilitan automáticamente las categorías sugeridas.
+  for(const clause of clauses.filter(c=>!c.only)){
+    for(const category of clause.categories)prefs.topics[category]=true;
+  }
+  activeTopic="Todas";
+  save();renderControls();renderInterests();render();
+}
+const PAGE_SIZE=20,LEARNING_KEY="sinruido-learning-v1",SEEN_KEY="sinruido-seen-v1";
+function loadOpened(){
+  try{return new Set(JSON.parse(localStorage.getItem(SEEN_KEY)||"[]").filter(x=>typeof x==="string").slice(-800))}catch(e){return new Set()}
+}
+let openedLinks=loadOpened();
+function wasOpened(a){return !!a.link&&openedLinks.has(a.link)}
+function markOpened(a){
+  if(!a.link||!a.link.startsWith("https://"))return;
+  openedLinks.delete(a.link);openedLinks.add(a.link);
+  if(openedLinks.size>800)openedLinks=new Set([...openedLinks].slice(-800));
+  try{localStorage.setItem(SEEN_KEY,JSON.stringify([...openedLinks]))}catch(e){}
+  // Cambiamos la tarjeta al instante, sin recargar ni interrumpir la apertura del enlace.
+  for(const card of document.querySelectorAll(".story")){
+    if(card.dataset.storyLink!==a.link)continue;
+    card.classList.add("seen");
+    const kicker=card.querySelector(".kicker");
+    if(kicker&&!kicker.querySelector(".seen-pill"))kicker.append(mk("span","seen-pill","✓ YA ABIERTO"));
+  }
+}
+let shownCount=PAGE_SIZE,lastFilterSignature="";
+function loadLearning(){
+  try{
+    const data=JSON.parse(localStorage.getItem(LEARNING_KEY)||"[]");
+    return Array.isArray(data)?data.filter(x=>x&&typeof x.category==="string"&&Array.isArray(x.terms)).slice(-100):[];
+  }catch(e){return []}
+}
+let readingHistory=loadLearning();
+function articleTerms(title){
+  const stop=new Set(["para","sobre","desde","entre","cuando","donde","como","hasta","esta","este","estos","estas","unos","unas","pero","porque","tiene","tienen","hacer","hace","tras","ante","mucho","muchos","poco","pocos","nuevo","nueva","nuevos","nuevas","primer","primera","segundo","tercera","aqui","ahora","todos","todas","todo","segun","aquel","esto","podria","habria","dice","dicen","mientras","cada","euros","mundo","espana","anos","sido","solo","tambien","noticia","noticias","medio","sera","seran","estan"]);
+  return [...new Set((normal(title).match(/[a-z]{4,}/g)||[]).filter(w=>!stop.has(w)))].slice(0,14);
+}
+function trackClick(a){
+  if(!a.link||!a.link.startsWith("https://"))return;
+  const firstOpening=!wasOpened(a);
+  markOpened(a);
+  if(!firstOpening)return; // Evita que abrir siempre el mismo enlace distorsione el perfil.
+  readingHistory.push({category:a.category,source_id:a.source_id||a.source||"",terms:articleTerms(a.title),at:Date.now()});
+  readingHistory=readingHistory.slice(-100);
+  try{localStorage.setItem(LEARNING_KEY,JSON.stringify(readingHistory))}catch(e){}
+  renderLearning();
+}
+function learningBonus(a){
+  if(!readingHistory.length)return 0;
+  let cat=0,source=0,word=0;
+  const terms=new Set(articleTerms(a.title)),now=Date.now();
+  for(const rec of readingHistory){
+    const ageDays=Math.max(0,(now-Number(rec.at||now))/86400000);
+    const factor=ageDays<30?1:ageDays<90?0.6:0.3;
+    if(rec.category===a.category)cat+=factor;
+    if(rec.source_id===(a.source_id||a.source||""))source+=factor;
+    const matches=rec.terms.filter(t=>terms.has(t)).length;
+    word+=Math.min(3,matches)*factor;
+  }
+  // Preferencia aprendida importante, pero con techo para no tapar toda la actualidad.
+  return Math.min(10,cat*1.5)+Math.min(4,source*.6)+Math.min(12,word*1.25);
+}
+function renderLearning(){
+  const summary=el("learning-summary"),tags=el("learning-tags"),reset=el("learning-erase");
+  if(!summary||!tags||!reset)return;
+  tags.replaceChildren();
+  summary.textContent=readingHistory.length?("Has abierto "+readingHistory.length+" noticia"+(readingHistory.length===1?"":"s")+". Tu portada se adapta poco a poco."):"Tu portada aprenderá según los titulares que abras.";
+  const counts={};
+  for(const rec of readingHistory)counts[rec.category]=(counts[rec.category]||0)+1;
+  for(const [cat,count] of Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,4))tags.append(mk("span","",cat+" · "+count));
+  reset.hidden=!readingHistory.length;
+}
+function loadPrefs(){
+  try{
+    const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
+    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly,interests:typeof x.interests==="string"?x.interests:""};
+  }catch(e){return JSON.parse(JSON.stringify(DEFAULT))}
+}
+prefs=loadPrefs();
+function save(){try{localStorage.setItem("sinruido-prefs-v1",JSON.stringify(prefs))}catch(e){}}
+function readableDate(date){const d=new Date(date);return Number.isFinite(d.valueOf())?new Intl.DateTimeFormat("es-ES",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(d):""}
+function allowedSource(a){
+  if(!a.source_id){
+    const f=feeds.filter(f=>f.name===a.source);
+    return !f.length||f.some(f=>prefs.sources[f.id]!==false);
+  }
+  return prefs.sources[a.source_id]!==false;
+}
+// Clasificación prudente basada solo en palabras del titular, sin IA ni coste.
+function mood(a){
+  const t=normal(a.title);
+  const negation=/\b(?:no logra|no consigue|no funciona|sin acuerdo|rechaza (?:un |el )?acuerdo|fracasan las negociaciones|sin avances|sin mejoria|sin resultados|fracasa|fracaso|empeora|desmiente|nunca llego|falsa esperanza|resultados decepcionantes)\b/;
+  const bad=/\b(?:muere|mueren|muerte|murieron|asesinato|asesinan|asesinado|asesinados|guerra|bombardeo|ataque|atentado|matanza|masacre|crisis|corrupcion|escandalo|fraude|incendio|accidente|catastrofe|desastre|colaps[ao]|despidos|desempleo|pobreza|hambruna|alerta|amenaza|riesgos?|peligro|denuncia|condena|prision|contaminacion|perdidas|destruccion|recesion|violencia|heridos|invasion|represion|conflicto|recortes|tension|empeora|retrocede|apocalipsis|sospecha|complican|complica|retroceso|subida de precios|escasez|harta|inseguridad|desigualdad|emergencia|epidemia)\b/;
+  const positive=/\b(?:avance|avances|descubrimiento|descubren|descubre|hallazgo|innovacion|innovador|inventan|inventan|crean|desarrollan|logran|consiguen|exito|exitoso|pionero|prometedor|prometedores|mejora|mejoran|mejoria|beneficios|salvan|salva|rescatan|recupera|recuperan|protegen|protegido|reforestan|restauran|conservacion|sostenible|sostenibilidad|record|crecimiento|aumenta|aumentan|crece|sube|reducen|reduce|reducir|disminuye|cae|baja|bajan|acuerdo|paz|vacuna|cura|curacion|solucion|esperanza|inauguran|aprobado|aprobacion|reabre|liberan)\b/;
+  const clearlyGood=/\b(?:alto el fuego|acuerdo de paz|energias renovables|energia limpia|mejora la salud|mejora el tratamiento|baja la inflacion|baja el paro|suben los salarios|caen los delitos|recuperacion de especies|restauracion ecologica)\b/;
+  // Una reducción de daños también es una buena noticia, pese a mencionar el problema.
+  const reduction=/\b(?:reducen|reduce|reducir|disminuye|cae|baja|bajan|frena|frenan)\b.{0,50}\b(?:muertes|mortalidad|contagios|contaminacion|pobreza|paro|desempleo|inflacion|delitos|emisiones|riesgo|cancer|accidentes|violencia)\b/;
+  if(negation.test(t))return "negative";
+  if(/\b(?:pone fin (?:a|al) (?:la guerra|el conflicto)|fin de la guerra|acuerdo de paz|alto el fuego duradero|cese de hostilidades|rescatan a los supervivientes)\b/.test(t)&&!/\b(?:fracasa|roto|rompe|incumple|sin acuerdo|no|temor|tension|intensifica|amenaza|masacre)\b/.test(t))return "positive";
+  if(reduction.test(t))return "positive";
+  if(bad.test(t))return "negative";
+  if(clearlyGood.test(t)||positive.test(t))return "positive";
+  return "neutral";
+}
+function weight(a){
+  const base=GROUPS.find(g=>g[0]===a.category)?.[2]||1;
+  let hours=(Date.now()-new Date(a.date).valueOf())/3600000;
+  if(!Number.isFinite(hours))hours=72;
+  const t=normal(a.title);
+  // Importancia estimada: trascendencia, novedades científicas y actualidad, además del interés elegido.
+  const impact=/\b(?:historico|historia|primera vez|primera|primer|mundial|global|internacional|pionero|cientificos|investigadores|descubrimiento|avance|aprobacion|acuerdo|nueva ley|nuevo tratamiento|nuevo sistema|economia mundial|onu|oms|union europea|record)\b/.test(t)?7:0;
+  const relevance=/\b(?:inteligencia artificial|salud|medicina|investigacion|biotecnologia|energias renovables|medio ambiente|tecnologia|genetica|innovacion|medioambiente)\b/.test(t)?3:0;
+  const sentiment=mood(a);
+  const optimisticBoost=sentiment==="positive"?15:sentiment==="negative"?-3:0;
+  return base*10+impact+relevance+optimisticBoost+learningBonus(a)+(window.SinRuidoIntereses?window.SinRuidoIntereses.boost(a,getInterestClauses()):0)-Math.max(0,Math.min(hours,168))*.22;
+}
+function filtered(){
+  const clauses=getInterestClauses(),strict=clauses.some(c=>c.only);
+  let list=articles.filter(a=>
+    isToday(a)&&
+    (strict||prefs.topics[a.category]!==false)&&
+    allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&
+    !prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&
+    (activeTopic==="Todas"||a.category===activeTopic)&&
+    (!prefs.positiveOnly||mood(a)==="positive")&&
+    (!window.SinRuidoIntereses||window.SinRuidoIntereses.matches(a,clauses))
+  );
+  const q=normal(el("search").value.trim());
+  if(q)list=list.filter(a=>normal(a.title+" "+a.source+" "+a.category).includes(q));
+  if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
+  return list;
+}
+function titleAnchor(a){
+  const anchor=mk("a","headline-link",a.title);
+  if(a.link&&/^https:\/\//i.test(a.link)){anchor.href=a.link;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.title="Leer en "+a.source;anchor.addEventListener("click",()=>trackClick(a))}
+  else anchor.removeAttribute("href");
+  return anchor;
+}
+function visual(a){
+  const box=mk("div","art");
+  box.innerHTML=ilustracionEditorial(a);
+  return box;
+}
+function kicker(a){
+  const k=mk("div","kicker");
+  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Señal positiva"));if(wasOpened(a))k.append(mk("span","seen-pill","✓ YA ABIERTO"));
+  return k;
+}
+function showSubscriptionFor(a){
+  const plan=subscriptionPlans[a.source];
+  if(!plan)return;
+  const d=el("pay-dialog");
+  el("pay-title").textContent=plan.name;
+  el("pay-price").textContent=plan.price;
+  el("pay-terms").textContent=plan.price_note;
+  el("pay-includes").textContent=plan.covers;
+  el("pay-updated").textContent="Tarifa consultada el "+pricingUpdated+". Los precios pueden variar y la oferta definitiva se confirma en la web del medio. Sin Ruido no cobra comisiones.";
+  el("pay-link").href=plan.url;
+  el("pay-reference").href=plan.reference;
+  if(typeof d.showModal==="function"){d.showModal();return}
+  window.open(plan.url,"_blank","noopener");
+}
+el("pay-close").onclick=()=>el("pay-dialog").close();
+el("pay-dialog").addEventListener("click",e=>{if(e.target===el("pay-dialog"))el("pay-dialog").close()});
+const BOOKMARK_KEY="sinruido-bookmarks-v1";
+const MAX_BOOKMARKS=150;
+let collectionMode="feed";
+function loadBookmarks(){
+  try{
+    const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||"[]");
+    return Array.isArray(data)?data.filter(a=>a&&typeof a.title==="string"&&typeof a.link==="string"&&/^https:\/\//.test(a.link)).slice(0,MAX_BOOKMARKS):[];
+  }catch(e){return []}
+}
+let bookmarks=loadBookmarks();
+function updateSavedCount(){el("saved-count").textContent=String(bookmarks.length)}
+function isSaved(a){return !!a.link&&bookmarks.some(x=>x.link===a.link)}
+function toggleSaved(a,button){
+  const saved=isSaved(a);
+  if(saved)bookmarks=bookmarks.filter(x=>x.link!==a.link);
+  else if(/^https:\/\//.test(a.link||"")){
+    bookmarks.unshift({title:a.title,link:a.link,source:a.source,source_id:a.source_id||"",category:a.category,date:a.date,place:a.place||"",saved_at:Date.now()});
+    bookmarks=bookmarks.slice(0,MAX_BOOKMARKS);
+  }
+  try{localStorage.setItem(BOOKMARK_KEY,JSON.stringify(bookmarks))}catch(e){
+    el("notice").hidden=false;
+    el("notice").textContent="Tu navegador no permite almacenar más noticias. Prueba a borrar algunas guardadas.";
+    return;
+  }
+  updateSavedCount();
+  if(collectionMode==="saved"){render();return}
+  if(button){
+    button.classList.toggle("is-saved",!saved);
+    button.textContent=saved?"☆ Guardar":"🔖 Guardada";
+    button.setAttribute("aria-pressed",String(!saved));
+  }
+}
+function shareNewsLink(a){
+  return "https://wa.me/?text="+encodeURIComponent(a.title+"\n"+a.source+"\n"+a.link);
+}
+function switchCollection(mode){
+  collectionMode=mode;
+  shownCount=PAGE_SIZE;lastFilterSignature="";
+  el("show-feed").classList.toggle("selected",mode==="feed");
+  el("show-saved").classList.toggle("selected",mode==="saved");
+  el("topic-tabs").hidden=mode==="saved";
+  el("sort").disabled=mode==="saved";
+  render();
+}
+function todayKey(value){
+  const date=value instanceof Date?value:new Date(value);
+  if(!Number.isFinite(date.getTime()))return "";
+  const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(date);
+  const map=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+  return map.year+"-"+map.month+"-"+map.day;
+}
+function isToday(a){return todayKey(a.date)===todayKey(new Date())}
+function actions(a){
+  const row=mk("div","foot-actions");
+  const read=mk("a","read",a.link?"Leer en "+a.source+" ↗":"Titular de ejemplo");
+  if(a.link&&/^https:\/\//i.test(a.link)){read.href=a.link;read.target="_blank";read.rel="noopener noreferrer";read.addEventListener("click",()=>trackClick(a))}
+  const hide=mk("button","hide","✕ No me interesa");
+  hide.type="button";hide.title="Ocultar este titular";hide.onclick=()=>{prefs.hidden.push(storyId(a));save();render()};
+  row.append(read);
+  if(subscriptionPlans[a.source]){
+    const pay=mk("button","pay-trigger","¿Te pide suscripción? Ver precio");
+    pay.type="button";pay.title="Consulta la tarifa oficial de "+a.source;
+    pay.onclick=()=>showSubscriptionFor(a);
+    row.append(pay);
+  }
+  if(/^https:\/\//i.test(a.link||"")){
+    const extra=mk("div","story-actions-extras");
+    const saved=isSaved(a);
+    const bookmark=mk("button","save-toggle"+(saved?" is-saved":""),saved?"🔖 Guardada":"☆ Guardar");
+    bookmark.type="button";bookmark.title=saved?"Quitar de noticias guardadas":"Guardar noticia para leer más tarde";
+    bookmark.setAttribute("aria-pressed",String(saved));
+    bookmark.onclick=()=>toggleSaved(a,bookmark);
+    const whatsapp=mk("a","story-whatsapp","↗ WhatsApp");
+    whatsapp.href=shareNewsLink(a);whatsapp.target="_blank";whatsapp.rel="noopener noreferrer";
+    whatsapp.title="Compartir este titular por WhatsApp";
+    extra.append(bookmark,whatsapp);row.append(extra);
+  }
+  if(collectionMode!=="saved")row.append(hide);return row;
+}
+function makeCard(a,lead=false){
+  const card=mk("article",lead?"story hero":"story");
+  if(a.link)card.dataset.storyLink=a.link;
+  if(wasOpened(a))card.classList.add("seen");
+  const copy=mk("div","story-copy"),h=mk("h3");
+  h.append(titleAnchor(a));copy.append(kicker(a),h,actions(a));
+  card.append(visual(a),copy);return card;
+}
+function balanceTopics(list){
+  if(list.length<2)return list;
+  // Regla editorial: antes de repetir un periódico, mostramos titulares
+  // de todas las otras cabeceras que tengan artículos permitidos por el usuario.
+  // Así las primeras 20 noticias pueden proceder de 20 medios diferentes.
+  const pools=new Map();
+  for(const a of list){
+    const publisher=a.source||a.source_id||"Otra fuente";
+    if(!pools.has(publisher))pools.set(publisher,[]);
+    pools.get(publisher).push(a);
+  }
+  const output=[],coveredTopics=new Set(),recent=el("sort").value==="recientes";
+  const publishers=[...pools].map(([name,items])=>({name,items}));
+  while(output.length<list.length){
+    let available=publishers.filter(p=>p.items.length);
+    if(!available.length)break;
+    // Una pasada = como máximo una noticia por medio.
+    while(available.length){
+      let best=null,bestScore=-Infinity;
+      for(const pool of available){
+        for(let i=0;i<pool.items.length;i++){
+          const a=pool.items[i];
+          const age=Math.max(0,(Date.now()-new Date(a.date).valueOf())/3600000)||0;
+          const score=(recent?-age:weight(a))
+            +(recent?0:(!coveredTopics.has(a.category)?17:0))
+            -(wasOpened(a)?(recent?0:5):0);
+          if(score>bestScore){
+            bestScore=score;best={pool,index:i,article:a};
+          }
+        }
+      }
+      if(!best)break;
+      output.push(best.article);
+      coveredTopics.add(best.article.category);
+      best.pool.items.splice(best.index,1);
+      available=available.filter(p=>p!==best.pool);
+    }
+  }
+  return output;
+}
+function renderSaved(){
+  const list=bookmarks;
+  const visible=Math.min(shownCount,list.length);
+  el("headline-heading").textContent="Mis noticias guardadas";
+  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" guardadas";
+  el("more-wrap").hidden=visible>=list.length;
+  el("more-counter").textContent="Has visto "+visible+" de "+list.length+" guardadas.";
+  const cover=el("features"),bottom=el("news-list");
+  cover.replaceChildren();bottom.replaceChildren();
+  if(!list.length){
+    const empty=mk("div","empty","Todavía no has guardado ninguna noticia.");
+    empty.append(mk("small","","Pulsa «☆ Guardar» bajo cualquier titular para conservarlo aquí, aunque sea de otro día."));
+    cover.append(empty);el("list-heading").hidden=true;
+    return;
+  }
+  cover.append(makeCard(list[0],true));
+  el("list-heading").hidden=visible<=1;
+  for(const a of list.slice(1,visible))bottom.append(makeCard(a));
+}
+function render(){
+  el("headline-heading").textContent="Noticias de hoy";
+  if(collectionMode==="saved"){renderSaved();return}
+  if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
+  const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
+  if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
+  const list=balanceTopics(filtered());
+  const visible=Math.min(shownCount,list.length);
+  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
+  const more=el("more-wrap");
+  more.hidden=visible>=list.length;
+  el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
+  const tabs=el("topic-tabs");tabs.replaceChildren();
+  const extraTopics=new Set(getInterestClauses().filter(c=>c.only).flatMap(c=>c.categories));
+  for(const name of ["Todas",...GROUPS.filter(g=>prefs.topics[g[0]]!==false||extraTopics.has(g[0])).map(g=>g[0])]){
+    const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name==="Todas"?"Todo":GROUPS.find(g=>g[0]===name)[1]+" "+name);
+    btn.type="button";btn.setAttribute("aria-pressed",String(activeTopic===name));
+    btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
+  }
+  const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
+  if(!list.length){
+    const empty=mk("div","empty",getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros.");
+    empty.append(mk("small","",getInterestClauses().some(c=>c.only)?"Prueba a ampliar la zona, quitar «solo» o activar más fuentes. No añadiremos noticias que no coincidan.":prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
+    cover.append(empty);el("list-heading").hidden=true;return;
+  }
+  cover.append(makeCard(list[0],true));
+  el("list-heading").hidden=visible<=1;
+  for(const a of list.slice(1,visible))bottom.append(makeCard(a));
+}
+function renderControls(){
+  el("positive-only").checked=!!prefs.positiveOnly;
+  renderInterests();
+  const topics=el("topic-toggles");topics.replaceChildren();
+  for(const [name,symbol,w] of GROUPS){
+    const label=mk("label","checkline");const input=mk("input");input.type="checkbox";input.checked=prefs.topics[name]!==false;
+    input.onchange=()=>{prefs.topics[name]=input.checked;save();render()};
+    label.append(input,mk("span","label-text",symbol+" "+name),mk("span","priority",w>=4?"Prioritario":w===2?"Ocasional":"Poco"));topics.append(label);
+  }
+  const chips=el("blocked-list");chips.replaceChildren();
+  for(const word of prefs.blocked){const chip=mk("span","chip",word);const button=mk("button","","×");button.title="Quitar veto "+word;button.type="button";button.onclick=()=>{prefs.blocked=prefs.blocked.filter(w=>w!==word);save();renderControls();render()};chip.append(button);chips.append(chip)}
+  renderSources();
+}
+function groupedPublishers(){
+  const byName=new Map();
+  for(const feed of feeds){
+    if(!byName.has(feed.name))byName.set(feed.name,{name:feed.name,feeds:[]});
+    byName.get(feed.name).feeds.push(feed);
+  }
+  return [...byName.values()];
+}
+const expandedPublishers=new Set();
+function renderSources(){
+  const list=el("sources-list");list.replaceChildren();
+  const groups=groupedPublishers();
+  for(const group of groups){
+    const all=group.feeds.every(f=>prefs.sources[f.id]!==false);
+    const some=group.feeds.some(f=>prefs.sources[f.id]!==false);
+    const entry=mk("div","publisher-entry");
+    const row=mk("div","publisher-row"),label=mk("label"),check=mk("input");
+    check.type="checkbox";check.checked=all;check.indeterminate=some&&!all;
+    check.onchange=()=>{
+      for(const f of group.feeds)prefs.sources[f.id]=check.checked;
+      save();renderSources();render();
+    };
+    const name=mk("span","",group.name);
+    name.append(mk("small","",group.feeds.length===1?group.feeds[0].category:group.feeds.length+" secciones · "+group.feeds.map(f=>f.category).join(", ")));
+    label.append(check,name);row.append(label);
+    const statusList=group.feeds.map(f=>statuses[f.id]).filter(Boolean);
+    const failed=statusList.some(s=>!s.ok);
+    const stat=mk("span","publisher-stat"+(failed?" fail":""),failed?"RSS parcial":(statusList.length?statusList.reduce((sum,s)=>sum+(s.count||0),0)+" notas":""));
+    stat.title=failed?"Hay algún RSS que no ha respondido en la última actualización":"Número de titulares capturados de los RSS de este medio";
+    row.append(stat);entry.append(row);
+    const details=mk("details","publisher-details");
+    details.open=expandedPublishers.has(group.name);
+    details.addEventListener("toggle",()=>{if(details.open)expandedPublishers.add(group.name);else expandedPublishers.delete(group.name)});
+    const summary=mk("summary","",group.feeds.length===1?"Ver el canal RSS":"Ver "+group.feeds.length+" secciones RSS");
+    details.append(summary);
+    for(const feed of group.feeds){
+      const sub=mk("div","source-line"),lab=mk("label"),toggle=mk("input");
+      toggle.type="checkbox";toggle.checked=prefs.sources[feed.id]!==false;
+      toggle.onchange=()=>{prefs.sources[feed.id]=toggle.checked;save();expandedPublishers.add(group.name);renderSources();render()};
+      lab.append(toggle,mk("span","",feed.category));sub.append(lab);
+      const state=statuses[feed.id];
+      const stateEl=mk("span","status"+(state&&!state.ok?" fail":""),state?(state.ok?state.count+" notas":"Sin acceso"):"—");
+      const rss=mk("a","rss-link","RSS ↗");rss.href=feed.url;rss.target="_blank";rss.rel="noopener noreferrer";
+      rss.title="Abrir RSS de "+group.name+" - "+feed.category;
+      sub.append(stateEl,rss);details.append(sub);
+    }
+    entry.append(details);list.append(entry);
+  }
+  const active=groups.filter(g=>g.feeds.some(f=>prefs.sources[f.id]!==false)).length;
+  el("sources-enabled").textContent=active+" de "+groups.length+" medios";
+  el("source-counter").textContent=groups.length+" medios · "+feeds.length+" canales RSS";
+  const pend=el("pending-sources");pend.replaceChildren();
+  for(const item of prefs.proposals){
+    const box=mk("div","pending");
+    box.append(mk("strong","",item.name),mk("span","",item.url),mk("small",""," · Pendiente de incorporar"));
+    const btns=mk("div","actions");
+    const ask=mk("button","","Solicitar activación ↗");ask.type="button";
+    ask.onclick=()=>{
+      const title="Añadir fuente RSS: "+item.name;
+      const body="Propongo añadir esta fuente a Sin Ruido.\n\nMedio: "+item.name+"\nRSS: "+item.url+"\n\nComprobar acceso y condiciones de uso antes de activarla.";
+      window.open("https://github.com/dalonsoss-create/sin-ruido/issues/new?title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body),"_blank","noopener");
+    };
+    const del=mk("button","","Quitar");del.type="button";del.onclick=()=>{prefs.proposals=prefs.proposals.filter(p=>p.url!==item.url);save();renderSources()};
+    btns.append(ask,del);box.append(btns);pend.append(box);
+  }
+}
+
+const WELCOME_KEY="sinruido-welcome-v1";
+function buildWelcome(){
+  const topicsBox=el("welcome-topics"),sourcesBox=el("welcome-sources");
+  topicsBox.replaceChildren();sourcesBox.replaceChildren();
+  const sections=[
+    ["Actualidad",["Política nacional","Internacional","Conflictos","Sucesos","Sociedad"]],
+    ["Economía",["Economía","Empresas"]],
+    ["Ciencia, tecnología y salud",["Ciencia","Tecnología","IA","Salud","Naturaleza","Medio ambiente"]],
+    ["Cultura y vida",["Cultura","Educación","Historia","Viajes","Gastronomía"]],
+    ["Deportes",["Deportes","Fútbol","Tenis","Motor"]]
+  ];
+  for(const [section,names] of sections){
+    topicsBox.append(mk("div","welcome-group-title",section));
+    for(const name of names){
+      const symbol=GROUPS.find(g=>g[0]===name)?.[1]||"•";
+      const label=mk("label","welcome-option"),input=mk("input");
+      input.type="checkbox";input.name="welcome-topic";input.value=name;
+      input.checked=prefs.topics[name]!==false;
+      label.append(input,mk("span","",symbol+" "+name));topicsBox.append(label);
+    }
+  }
+  for(const group of groupedPublishers()){
+    const label=mk("label","welcome-option"),input=mk("input");
+    input.type="checkbox";input.name="welcome-source";input.value=group.name;
+    // Se ofrecen TODOS los medios, independientemente de los gustos del creador.
+    input.checked=group.feeds.some(f=>prefs.sources[f.id]!==false);
+    const copy=mk("span","",group.name);
+    const sections=group.feeds.map(f=>f.category).join(", ");
+    copy.append(mk("small","",group.feeds.length===1?sections:group.feeds.length+" secciones: "+sections));
+    label.append(input,copy);sourcesBox.append(label);
+  }
+  if(!feeds.length)sourcesBox.append(mk("p","muted-note","Las fuentes se cargarán cuando haya conexión. Puedes volver a configurarlas después."));
+  el("welcome-interests").value=prefs.interests||"";
+  el("welcome-veto").value=prefs.blocked.join(", ");
+  el("welcome-positive").checked=!!prefs.positiveOnly;
+  const suggestions=el("welcome-veto-suggestions");suggestions.replaceChildren();
+  for(const term of ["famosos","moda","política","fútbol","sucesos","Sánchez","Feijóo","Abascal","realeza","cotilleos"]){
+    const btn=mk("button","","+ "+term);btn.type="button";
+    btn.onclick=()=>{
+      const input=el("welcome-veto"),current=input.value.split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
+      if(!current.some(s=>normal(s)===normal(term)))current.push(term);
+      input.value=current.join(", ");input.focus();
+    };
+    suggestions.append(btn);
+  }
+  el("welcome-error").textContent="";
+}
+function openWelcome(){
+  buildWelcome();
+  const dialog=el("welcome-dialog");
+  if(!dialog.open){
+    if(typeof dialog.showModal==="function")dialog.showModal();
+    else dialog.setAttribute("open","");
+  }
+}
+function closeWelcome(){
+  const dialog=el("welcome-dialog");
+  if(typeof dialog.close==="function"&&dialog.open)dialog.close();
+  else dialog.removeAttribute("open");
+  try{localStorage.setItem(WELCOME_KEY,"1")}catch(e){}
+}
+for(const [id,name,checked] of [
+  ["welcome-select-topics","welcome-topic",true],
+  ["welcome-clear-topics","welcome-topic",false],
+  ["welcome-select-publishers","welcome-source",true],
+  ["welcome-clear-publishers","welcome-source",false]
+]){
+  el(id).onclick=()=>{for(const input of document.querySelectorAll('input[name="'+name+'"]'))input.checked=checked};
+}
+el("open-welcome").onclick=openWelcome;
+el("welcome-skip").onclick=()=>{
+  // No imponemos los vetos personales del creador a un visitante.
+  if(!localStorage.getItem("sinruido-prefs-v1")){
+    prefs={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
+    save();renderControls();render();
+  }
+  closeWelcome();
+};
+el("welcome-form").onsubmit=e=>{
+  e.preventDefault();
+  const chosen=[...document.querySelectorAll('input[name="welcome-topic"]:checked')].map(x=>x.value);
+  const selectedFeeds=[...document.querySelectorAll('input[name="welcome-source"]:checked')].map(x=>x.value);
+  if(!chosen.length){el("welcome-error").textContent="Elige al menos un tema.";return}
+  if(feeds.length&&!selectedFeeds.length){el("welcome-error").textContent="Elige al menos un medio.";return}
+  const chosenTopics=new Set(chosen),chosenPublishers=new Set(selectedFeeds);
+  prefs.topics=Object.fromEntries(GROUPS.map(g=>[g[0],chosenTopics.has(g[0])]));
+  if(feeds.length)prefs.sources=Object.fromEntries(feeds.map(f=>[f.id,chosenPublishers.has(f.name)]));
+  prefs.blocked=[...new Set(el("welcome-veto").value.split(/[,;\n]/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1&&x.length<66))].slice(0,50);
+  prefs.positiveOnly=el("welcome-positive").checked;
+  prefs.interests=el("welcome-interests").value.trim().slice(0,750);
+  const clauses=getInterestClauses();
+  for(const clause of clauses.filter(c=>!c.only))
+    for(const category of clause.categories)prefs.topics[category]=true;
+  activeTopic="Todas";save();renderControls();render();closeWelcome();
+};
+
+el("interests-form").onsubmit=e=>{
+  e.preventDefault();
+  applyInterests(el("interests-input").value);
+};
+el("interests-clear").onclick=()=>applyInterests("");
+for(const btn of document.querySelectorAll("[data-interest-example]")){
+  btn.onclick=()=>{
+    el("interests-input").value=btn.dataset.interestExample;
+    applyInterests(btn.dataset.interestExample);
+  };
+}
+el("block-form").onsubmit=e=>{
+  e.preventDefault();const input=el("block-input"),word=input.value.trim().toLowerCase();
+  if(word&&!prefs.blocked.includes(word)){prefs.blocked.push(word);save();renderControls();render()}
+  input.value="";
+};
+el("source-form").onsubmit=e=>{
+  e.preventDefault();const name=el("source-name").value.trim(),raw=el("source-url").value.trim(),msg=el("source-feedback");
+  let u;try{u=new URL(raw)}catch(err){msg.textContent="Introduce una URL RSS válida.";return}
+  if(u.protocol!=="https:"||!u.hostname){msg.textContent="Por seguridad, la fuente debe tener una dirección https.";return}
+  const url=u.href;
+  if(feeds.some(f=>f.url===url)||prefs.proposals.some(p=>p.url===url)){msg.textContent="Esta fuente ya está en tu lista.";return}
+  prefs.proposals.push({name:name||u.hostname,url});save();renderSources();
+  el("source-form").reset();
+  msg.textContent="Propuesta guardada. Pulsa «Solicitar activación» para incorporarla a las noticias.";
+};
+el("start-fresh").onclick=()=>{if(!confirm("¿Crear una edición nueva sin vetos y volver a elegir tus temas y medios?"))return;prefs=JSON.parse(JSON.stringify(DEFAULT));activeTopic="Todas";save();renderControls();render();openWelcome()};
+el("reset").onclick=()=>{
+  if(!confirm("¿Borrar tus preferencias, fuentes desactivadas y propuestas?"))return;
+  prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
+};
+el("search").oninput=render;el("sort").onchange=render;
+el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
+el("refresh-news").onclick=()=>refreshPublishedEdition(true);
+el("show-feed").onclick=()=>switchCollection("feed");
+el("show-saved").onclick=()=>switchCollection("saved");
+el("learning-erase").onclick=()=>{
+  if(!confirm("¿Borrar las preferencias que Sin Ruido ha aprendido al abrir noticias? Tus temas, vetos y fuentes seguirán igual."))return;
+  readingHistory=[];try{localStorage.removeItem(LEARNING_KEY)}catch(e){}
+  renderLearning();render();
+};el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
+const mobile=matchMedia("(max-width:760px)");
+const settings=el("settings"),toggle=el("mobile-settings");
+function syncPanel(){
+  toggle.setAttribute("aria-expanded",String(!mobile.matches||settings.classList.contains("show")));
+}
+mobile.addEventListener("change",syncPanel);syncPanel();
+toggle.onclick=()=>{
+  if(mobile.matches)settings.classList.toggle("show");
+  syncPanel();
+  if(!mobile.matches||settings.classList.contains("show")){
+    settings.scrollIntoView({block:"start"});
+    settings.querySelector("input").focus({preventScroll:true});
+  }
+};
+el("share").onclick=async()=>{
+  const url=location.origin+location.pathname+"?bienvenida=1";
+  const data={title:"Sin Ruido",text:"Prueba Sin Ruido y crea tu propio periódico de noticias, con tus temas y fuentes.",url};
+  try{
+    if(navigator.share){await navigator.share(data);return}
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(url);el("share").textContent="✓ Enlace copiado";return}
+  }catch(err){if(err.name==="AbortError")return}
+  window.prompt("Copia esta dirección para compartir el periódico:",url);
+};
+let lastEdition=0;
+function applyEdition(data){
+    articles=data.articles.filter(a=>a&&typeof a.title==="string"&&typeof a.category==="string"&&typeof a.link==="string");
+    statuses=Object.fromEntries((data.sources_status||[]).map(s=>[s.id,s]));
+    const date=new Date(data.updated);
+    el("updated").textContent="Actualizado "+(Number.isFinite(date.valueOf())?new Intl.DateTimeFormat("es-ES",{dateStyle:"medium",timeStyle:"short"}).format(date):"recientemente")+" · "+(data.sources_ok||0)+" fuentes consultadas correctamente";
+    el("notice").hidden=true;
+    lastEdition=Date.parse(data.updated)||0;
+}
+let refreshPending=false;
+async function refreshPublishedEdition(manual=false){
+  if(document.hidden||refreshPending)return false;
+  refreshPending=true;
+  const btn=el("refresh-news"),status=el("refresh-status");
+  if(manual){
+    btn.disabled=true;
+    btn.classList.add("is-loading");
+    btn.textContent="↻ Comprobando…";
+    status.textContent="Consultando la última edición publicada…";
+  }
+  let changed=false;
+  try{
+    const url=location.hostname==="dalonsoss-create.github.io"
+      ?"https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json?t="+Date.now()
+      :"./noticias.json?t="+Date.now();
+    const res=await fetch(url,{cache:"no-store"});
+    if(!res.ok)throw new Error("No se pudo consultar la edición");
+    const data=await res.json();
+    if(Date.parse(data.updated)>lastEdition&&Array.isArray(data.articles)&&data.articles.length){
+      applyEdition(data);renderSources();render();changed=true;
+    }
+    if(manual)status.textContent=changed
+      ?"✓ Se ha descargado una edición más reciente. Tu portada muestra solo titulares de hoy."
+      :"✓ Comprobado. Todavía no hay una edición más reciente. Los RSS se actualizan automáticamente en GitHub.";
+  }catch(err){
+    if(manual)status.textContent="No se ha podido comprobar. Conservamos la edición descargada.";
+  }finally{
+    refreshPending=false;
+    if(manual){
+      btn.disabled=false;btn.classList.remove("is-loading");btn.textContent="↻ Actualizar noticias";
+    }
+  }
+  return changed;
+}
+function enablePullToRefresh(){
+  let startY=null,startX=null,travel=0;
+  const indicator=el("pull-indicator");
+  document.addEventListener("touchstart",e=>{
+    if(e.touches.length!==1||window.scrollY>4||el("welcome-dialog").open||el("pay-dialog").open){
+      startY=null;return;
+    }
+    startY=e.touches[0].clientY;startX=e.touches[0].clientX;travel=0;
+  },{passive:true});
+  document.addEventListener("touchmove",e=>{
+    if(startY===null||e.touches.length!==1)return;
+    const dy=e.touches[0].clientY-startY;
+    const dx=Math.abs(e.touches[0].clientX-startX);
+    if(dx>Math.max(20,dy)){startY=null;indicator.hidden=true;return}
+    if(dy>42&&window.scrollY<=5){
+      travel=dy;indicator.hidden=false;
+      indicator.textContent=dy>100?"Suelta para comprobar titulares nuevos ↻":"↓ Desliza un poco más para actualizar";
+    }else if(dy<20){indicator.hidden=true}
+  },{passive:true});
+  const finish=()=>{
+    const shouldRefresh=startY!==null&&travel>100&&window.scrollY<=5;
+    startY=null;startX=null;travel=0;
+    if(shouldRefresh){
+      indicator.hidden=false;
+      indicator.dataset.loading="1";
+      indicator.textContent="Buscando titulares nuevos…";
+      refreshPublishedEdition(true).then(changed=>{
+        indicator.textContent=changed?"✓ Portada actualizada":"✓ Última edición comprobada";
+      }).finally(()=>{
+        delete indicator.dataset.loading;
+        setTimeout(()=>{indicator.hidden=true},1100);
+      });
+    }else indicator.hidden=true;
+  };
+  document.addEventListener("touchend",finish,{passive:true});
+  document.addEventListener("touchcancel",finish,{passive:true});
+}
+async function init(){
+  try{
+    const res=await fetch("./suscripciones.json?v=1",{cache:"no-store"});
+    if(!res.ok)throw Error("Sin catálogo de suscripciones");
+    const data=await res.json();
+    pricingUpdated=new Intl.DateTimeFormat("es-ES",{day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(data.updated+"T12:00:00Z"));
+    subscriptionPlans=Object.fromEntries((data.plans||[]).filter(p=>p.source&&p.price&&/^https:\/\//.test(p.url)&&/^https:\/\//.test(p.reference)).map(p=>[p.source,p]));
+  }catch(e){
+    subscriptionPlans={};
+  }
+
+  el("edition-date").textContent=new Intl.DateTimeFormat("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date());
+  try{
+    const res=await fetch("./fuentes.json?v=2",{cache:"no-store"});
+    if(!res.ok)throw Error("Sin catálogo");
+    const data=await res.json();feeds=Array.isArray(data.feeds)?data.feeds:[];
+  }catch(e){el("source-feedback").textContent="No se pudo cargar el catálogo de fuentes."}
+  try{
+    const res=await fetch("./noticias.json?ts="+Math.floor(Date.now()/300000),{cache:"no-store"});
+    if(!res.ok)throw Error("Sin noticias");
+    const data=await res.json();if(!Array.isArray(data.articles)||!data.articles.length)throw Error("RSS vacío");
+    applyEdition(data);
+  }catch(e){
+    demo=true;articles=EXAMPLES;el("updated").textContent="Demostración del diseño editorial";
+    el("notice").textContent="VISTA PREVIA: estos titulares son ficticios. Las noticias reales aparecerán al ejecutar la actualización de RSS.";
+    el("notice").hidden=false;
+  }
+  el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();updateSavedCount();render();
+  let storedPrefs=false,alreadyWelcomed=false;
+  try{storedPrefs=localStorage.getItem("sinruido-prefs-v1")!==null;alreadyWelcomed=localStorage.getItem(WELCOME_KEY)==="1"}catch(e){}
+  const invited=new URLSearchParams(location.search).get("bienvenida")==="1";
+  if(!alreadyWelcomed&&(invited||!storedPrefs))openWelcome();
+}
+init().then(()=>{
+  enablePullToRefresh();
+  let shownDate=todayKey(new Date());
+  setInterval(()=>{
+    const current=todayKey(new Date());
+    if(current!==shownDate){shownDate=current;render()}
+  },60000);
+  refreshPublishedEdition();
+  // Cuando se vuelve a la app desde el icono o tras leer una noticia,
+  // solicitamos la última edición publicada, sin tocar los filtros personales.
+  document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden)refreshPublishedEdition();
+  });
+  window.addEventListener("pageshow",event=>{
+    if(event.persisted)refreshPublishedEdition();
+  });
+  window.addEventListener("focus",()=>refreshPublishedEdition());
+  setInterval(refreshPublishedEdition,300000);
+});
+})();
+</script>
+</body>
+</html>
