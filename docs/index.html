@@ -17,6 +17,7 @@
 @media(max-width:1050px){.news-list{grid-template-columns:1fr}.main{grid-template-columns:246px 1fr;gap:20px}.feature-grid{gap:13px}.lead{padding-right:13px}}
 @media(max-width:760px){.container{width:min(100% - 24px,700px)}.ribbon{font-size:9px;letter-spacing:.6px}.ribbon .container{padding:7px 0}.masthead{padding:16px 0}.logo{font-size:clamp(53px,13vw,84px);letter-spacing:-4px}.subline{font-size:9px;gap:5px}.subline .mid{display:none}.main{display:block;margin-top:18px}.settings{display:none;position:relative;max-height:none;margin-bottom:20px}.settings.show{display:block}.mobile-button{display:inline-block}.feature-grid{grid-template-columns:1fr;gap:10px}.lead{padding:0;border-right:0;border-bottom:1px solid var(--line);padding-bottom:18px}.feature-side{grid-template-columns:1fr 1fr;gap:12px}.feature-side .visual{aspect-ratio:5/3}.secondary h3{font-size:18px}.deskhead h1{font-size:29px}.bottom{display:block}.news-list{grid-template-columns:1fr}.news-item .list-visual{width:100px}}
 @media(max-width:430px){.feature-side{grid-template-columns:1fr}.feature-side .visual{display:none}.news-item .list-visual{width:87px}.news-item h3{font-size:17px}.toolbar{gap:5px}.toolbar select{max-width:110px;padding:10px 4px}.logo{font-size:53px}.tagline{font-size:10px}}
+.pay-trigger{font-size:10px;font-weight:800;border:1px solid #c9bba8;background:var(--white);border-radius:3px;color:#6e3b26;padding:5px 7px;text-align:left}.pay-trigger:hover{border-color:var(--red);color:var(--red)}.pay-dialog{border:1px solid #c4b6a3;border-radius:6px;max-width:min(92vw,500px);width:100%;padding:25px 27px;background:var(--white);color:var(--ink);box-shadow:0 20px 90px #0005}.pay-dialog::backdrop{background:#1a1a1a99}.pay-top{font-size:10px;color:var(--red);text-transform:uppercase;font-weight:900;letter-spacing:1.5px}.pay-dialog h2{font-family:var(--serif);font-size:29px;margin:7px 0 4px;line-height:1.2}.pay-price{font-family:var(--serif);font-weight:800;font-size:36px;color:var(--red-deep);margin:13px 0 4px}.pay-notes{font-size:13px;line-height:1.6;margin:9px 0;color:#4d4c49}.pay-caveat{font-size:11px;color:var(--muted);line-height:1.5;margin:13px 0}.pay-links{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px}.pay-subscribe{display:inline-block;background:var(--red);color:white;font-size:13px;font-weight:800;padding:11px 14px;border-radius:3px}.pay-check{font-size:12px;text-decoration:underline;color:var(--muted)}.pay-close{position:absolute;right:12px;top:9px;border:0;background:none;color:var(--muted);font-size:27px;line-height:1}.foot-actions{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -56,6 +57,20 @@
   </section>
 </main>
 <footer class="container bottom"><span>© Sin Ruido · Prototipo personal, sin publicidad ni seguimiento</span><span>Las noticias pertenecen a sus respectivos medios. Sin Ruido solo enlaza a los originales.</span></footer>
+<dialog class="pay-dialog" id="pay-dialog" aria-labelledby="pay-title">
+  <button type="button" class="pay-close" id="pay-close" aria-label="Cerrar">×</button>
+  <div class="pay-top">¿No puedes acceder al artículo?</div>
+  <h2 id="pay-title"></h2>
+  <p class="pay-notes">Sin Ruido no puede saber si un artículo concreto está bloqueado. Si el periódico te pide pagar, aquí tienes sus opciones oficiales.</p>
+  <div class="pay-price" id="pay-price"></div>
+  <p class="pay-notes" id="pay-terms"></p>
+  <p class="pay-notes" id="pay-includes"></p>
+  <p class="pay-caveat" id="pay-updated"></p>
+  <div class="pay-links">
+    <a class="pay-subscribe" id="pay-link" target="_blank" rel="noopener noreferrer">Ver suscripción oficial ↗</a>
+    <a class="pay-check" id="pay-reference" target="_blank" rel="noopener noreferrer">Comprobar tarifa ↗</a>
+  </div>
+</dialog>
 <script>
 (function(){
 "use strict";
@@ -71,7 +86,7 @@ const EXAMPLES=[
 const el=id=>document.getElementById(id), mk=(tag,cls,txt)=>{const o=document.createElement(tag);if(cls)o.className=cls;if(txt!==undefined)o.textContent=txt;return o};
 const normal=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const storyId=a=>a.link||a.title;
-let prefs,feeds=[],articles=[],statuses={},activeTopic="Todas",demo=false;
+let prefs,feeds=[],articles=[],statuses={},subscriptionPlans={},pricingUpdated="",activeTopic="Todas",demo=false;
 function loadPrefs(){
   try{
     const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
@@ -125,13 +140,36 @@ function kicker(a){
   k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));
   return k;
 }
+function showSubscriptionFor(a){
+  const plan=subscriptionPlans[a.source];
+  if(!plan)return;
+  const d=el("pay-dialog");
+  el("pay-title").textContent=plan.name;
+  el("pay-price").textContent=plan.price;
+  el("pay-terms").textContent=plan.price_note;
+  el("pay-includes").textContent=plan.covers;
+  el("pay-updated").textContent="Tarifa consultada el "+pricingUpdated+". Los precios pueden variar y la oferta definitiva se confirma en la web del medio. Sin Ruido no cobra comisiones.";
+  el("pay-link").href=plan.url;
+  el("pay-reference").href=plan.reference;
+  if(typeof d.showModal==="function"){d.showModal();return}
+  window.open(plan.url,"_blank","noopener");
+}
+el("pay-close").onclick=()=>el("pay-dialog").close();
+el("pay-dialog").addEventListener("click",e=>{if(e.target===el("pay-dialog"))el("pay-dialog").close()});
 function actions(a){
   const row=mk("div","foot-actions");
   const read=mk("a","read",a.link?"Leer en "+a.source+" ↗":"Titular de ejemplo");
   if(a.link&&/^https:\/\//i.test(a.link)){read.href=a.link;read.target="_blank";read.rel="noopener noreferrer"}
   const hide=mk("button","hide","✕ No me interesa");
   hide.type="button";hide.title="Ocultar este titular";hide.onclick=()=>{prefs.hidden.push(storyId(a));save();render()};
-  row.append(read,hide);return row;
+  row.append(read);
+  if(subscriptionPlans[a.source]){
+    const pay=mk("button","pay-trigger","¿Te pide suscripción? Ver precio");
+    pay.type="button";pay.title="Consulta la tarifa oficial de "+a.source;
+    pay.onclick=()=>showSubscriptionFor(a);
+    row.append(pay);
+  }
+  row.append(hide);return row;
 }
 function makeLead(a){
   const card=mk("article","lead");card.append(visual(a,false),kicker(a));
@@ -243,6 +281,16 @@ el("share").onclick=async()=>{
   window.prompt("Copia esta dirección para enviársela a Elena:",url);
 };
 async function init(){
+  try{
+    const res=await fetch("./suscripciones.json?v=1",{cache:"no-store"});
+    if(!res.ok)throw Error("Sin catálogo de suscripciones");
+    const data=await res.json();
+    pricingUpdated=new Intl.DateTimeFormat("es-ES",{day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(data.updated+"T12:00:00Z"));
+    subscriptionPlans=Object.fromEntries((data.plans||[]).filter(p=>p.source&&p.price&&/^https:\/\//.test(p.url)&&/^https:\/\//.test(p.reference)).map(p=>[p.source,p]));
+  }catch(e){
+    subscriptionPlans={};
+  }
+
   el("edition-date").textContent=new Intl.DateTimeFormat("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date());
   try{
     const res=await fetch("./fuentes.json?v=2",{cache:"no-store"});
