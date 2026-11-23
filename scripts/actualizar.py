@@ -85,6 +85,7 @@ def collect(feed):
         article={
             "title":title[:260],"link":link,"date":date_iso(published),
             "source":feed["name"],"source_id":feed["id"],"category":category,
+            "place":feed.get("place",""),
             "classification_version":4}
         # La imagen se almacena SOLO si se ha comprobado permiso explícito.
         if feed.get("images_allowed") is True:
