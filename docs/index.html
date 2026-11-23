@@ -83,6 +83,14 @@
 .welcome-group-title:first-child{padding-top:0;border-top:0;margin-top:2px}
 .welcome-batch{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
 .welcome-batch button{background:transparent;border:1px solid #c9bcae;border-radius:20px;padding:6px 10px;font-size:11px;color:#6b574a;font-weight:800}
+.interest-form{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+.interest-form textarea{width:100%;min-height:87px;resize:vertical;background:#fff;border:1px solid #d6c6af;border-radius:10px;padding:10px 12px;font:13px var(--sans);line-height:1.5}
+.interest-apply{border:0;border-radius:9px;padding:9px 12px;background:var(--red);color:#fff;font-size:12px;font-weight:850}
+.interest-clear{border:1px solid #d7cbbb;background:#fff;color:#6c5745;border-radius:9px;padding:9px 11px;font-size:12px}
+.interest-examples{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.interest-examples button{border:1px solid #c4d1dc;border-radius:25px;background:#edf4fa;color:#365771;font-weight:750;font-size:10px;padding:6px 9px}
+.interest-summary{font-size:12px;line-height:1.4;color:#365a42;background:#e8f2e7;padding:9px 11px;border-radius:10px;margin:8px 0}
+.interest-empty{font-size:12px;font-weight:600;color:#9b5831;margin:8px 0}
 </style>
 <link rel="stylesheet" href="./portada.css">
 </head>
@@ -97,7 +105,20 @@
 <main class="container main">
   <aside class="settings" id="settings" aria-label="Personaliza tus noticias">
     <span class="coffee" aria-hidden="true">☕</span><h2>Tu periódico,<br>a tu medida</h2><p class="side-note">Elige los temas y periódicos que quieres leer.</p><button id="open-welcome" class="setup-again" type="button">✨ Configurar mi periódico paso a paso</button>
-    <div class="section-heading"><h3>Mis temas</h3><small>Elige qué aparece</small></div><div id="topic-toggles"></div>
+    <div class="section-heading"><h3>✨ Dime qué noticias quieres</h3></div>
+    <form id="interests-form" class="interest-form">
+      <textarea id="interests-input" maxlength="750" rows="3" placeholder="Solo noticias de política catalana&#10;O: me interesan los avances sobre inteligencia artificial" aria-label="Escribe los temas que te interesan con tus propias palabras"></textarea>
+      <button type="submit" class="interest-apply">Aplicar mis intereses</button>
+      <button type="button" id="interests-clear" class="interest-clear">Quitar frases</button>
+    </form>
+    <div class="interest-examples">
+      <button type="button" data-interest-example="Solo noticias de política catalana">Política catalana</button>
+      <button type="button" data-interest-example="Solo noticias de sucesos en Madrid">Sucesos en Madrid</button>
+      <button type="button" data-interest-example="Me interesan los avances sobre inteligencia artificial">Avances en IA</button>
+    </div>
+    <p class="interest-summary" id="interests-summary" role="status">Escribe lo que te interesa con palabras normales. Una petición por línea.</p>
+    <p class="muted-note">«Solo...» limita los titulares. «Me interesan...» les da prioridad, sin ocultar el resto. Tus frases se guardan únicamente en este navegador.</p>
+    <hr class="rule"><div class="section-heading"><h3>Mis temas</h3><small>Elige qué aparece</small></div><div id="topic-toggles"></div>
     <hr class="rule"><div class="section-heading"><h3>Asuntos vetados</h3></div>
     <div class="chipwrap" id="blocked-list"></div>
     <form id="block-form" class="inline-form"><input id="block-input" maxlength="65" placeholder="Ej. famosos, fútbol…" aria-label="Nueva palabra vetada"><button class="smallbtn" type="submit">+ Vetar</button></form>
@@ -157,10 +178,13 @@
       <div class="welcome-batch"><button type="button" id="welcome-select-topics">Seleccionar todos</button><button type="button" id="welcome-clear-topics">Deseleccionar todos</button></div><div id="welcome-topics" class="welcome-options"></div>
       <div class="welcome-step"><h3>2. ¿Qué periódicos quieres consultar?</h3><p>Los periódicos aparecen una sola vez, aunque consultemos distintas secciones de cada medio.</p></div>
       <div class="welcome-batch"><button type="button" id="welcome-select-publishers">Seleccionar todos</button><button type="button" id="welcome-clear-publishers">Deseleccionar todos</button></div><div id="welcome-sources" class="welcome-options"></div>
-      <div class="welcome-step"><h3>3. ¿Qué personajes o asuntos prefieres evitar?</h3><p>Escribe nombres o palabras separados por comas. Cuando aparezcan en un titular, lo ocultaremos.</p></div>
+      <div class="welcome-step"><h3>3. Cuéntanos qué noticias buscas, con tus palabras</h3><p>Opcional. Puedes escribir «Solo noticias de política catalana» o «Me interesan los sucesos en Madrid». Una petición por línea.</p></div>
+      <textarea id="welcome-interests" class="welcome-veto" maxlength="750" placeholder="Solo noticias de política catalana&#10;Me interesa la inteligencia artificial"></textarea>
+      <p class="muted-note">Si no escribes nada, usaremos únicamente los temas y medios que selecciones. Esta interpretación es automática y puede necesitar ajustes.</p>
+      <div class="welcome-step"><h3>4. ¿Qué personajes o asuntos prefieres evitar?</h3><p>Escribe nombres o palabras separados por comas. Cuando aparezcan en un titular, lo ocultaremos.</p></div>
       <textarea id="welcome-veto" class="welcome-veto" maxlength="650" placeholder="Por ejemplo: famosos, política, moda, fútbol…"></textarea>
       <div class="welcome-suggestions" id="welcome-veto-suggestions"></div>
-      <div class="welcome-step"><h3>4. ¿Y el enfoque?</h3></div>
+      <div class="welcome-step"><h3>5. ¿Y el enfoque?</h3></div>
       <label class="welcome-option"><input type="checkbox" id="welcome-positive"><span>☀️ <b>Solo noticias positivas</b><small>También puedes dejarlo apagado para ver noticias importantes de cualquier tipo, dando prioridad a las constructivas.</small></span></label>
       <div class="welcome-actions">
         <button type="submit" class="welcome-submit">Crear mi periódico →</button>
@@ -172,6 +196,7 @@
   </div>
 </dialog>
 <script src="./ilustraciones.js"></script>
+<script src="./intereses.js?v=1"></script>
 <script>
 (function(){
 "use strict";
