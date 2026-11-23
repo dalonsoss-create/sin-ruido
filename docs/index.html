@@ -99,6 +99,9 @@
 .refresh-btn:disabled{opacity:.55}
 .refresh-btn.is-loading{background:#e8f2e8;color:#296b3b;border-color:#b4d2b9}
 .pull-indicator{border-radius:12px;background:#e6eee6;padding:11px;text-align:center;font-size:12px;font-weight:850;color:#396c4e;margin-bottom:8px}
+.pull-indicator{position:fixed;top:calc(env(safe-area-inset-top) + 18px);left:50%;transform:translateX(-50%);z-index:9999;max-width:92vw;min-width:240px;box-shadow:0 10px 32px #0003}
+.pull-indicator[data-loading="1"]::before{content:"↻";display:inline-block;margin-right:8px;animation:sinruido-spin .8s linear infinite}
+@keyframes sinruido-spin{to{transform:rotate(360deg)}}
 .pull-indicator[hidden]{display:none}.topics[hidden]{display:none}.refresh-status{font-size:11px;color:#366543;font-weight:750;min-height:1em}.refresh-status:empty{display:none}
 .collection-nav{display:flex;gap:10px;margin:13px 0;flex-wrap:wrap}
 .collection-btn{font-weight:800;font-size:13px;border:1px solid var(--line);background:#fff;padding:9px 16px;border-radius:99px}
@@ -901,8 +904,17 @@ function enablePullToRefresh(){
   const finish=()=>{
     const shouldRefresh=startY!==null&&travel>100&&window.scrollY<=5;
     startY=null;startX=null;travel=0;
-    indicator.hidden=true;
-    if(shouldRefresh)refreshPublishedEdition(true);
+    if(shouldRefresh){
+      indicator.hidden=false;
+      indicator.dataset.loading="1";
+      indicator.textContent="Buscando titulares nuevos…";
+      refreshPublishedEdition(true).then(changed=>{
+        indicator.textContent=changed?"✓ Portada actualizada":"✓ Última edición comprobada";
+      }).finally(()=>{
+        delete indicator.dataset.loading;
+        setTimeout(()=>{indicator.hidden=true},1100);
+      });
+    }else indicator.hidden=true;
   };
   document.addEventListener("touchend",finish,{passive:true});
   document.addEventListener("touchcancel",finish,{passive:true});
