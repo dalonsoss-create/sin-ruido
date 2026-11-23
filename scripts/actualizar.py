@@ -137,7 +137,7 @@ def main():
     # Un enlace de tipo premium/suscriptores sigue siendo reconocible, y
     # conservamos las señales RSS ya confirmadas en ediciones anteriores.
     for a in old:
-        if a.get("access_status")!="subscription":
+        if a.get("access_status") not in ("subscription","free"):
             access, evidence=detect_access(a.get("link",""))
             a["access_status"]=access
             if evidence:a["access_evidence"]=evidence
