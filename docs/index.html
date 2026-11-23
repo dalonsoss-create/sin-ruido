@@ -115,7 +115,7 @@
 .collection-btn.selected #saved-count{background:#d7b976}
 @media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
 </style>
-<link rel="stylesheet" href="./portada.css?v=fotos-20261123">
+<link rel="stylesheet" href="./portada.css?v=candado-v1">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
 <style id="sinruido-mobile-header-fix">
 @media (max-width:760px) {
@@ -214,6 +214,7 @@
     <div id="notice" class="notice" hidden></div>
     <div id="pull-indicator" class="pull-indicator" aria-live="polite" hidden>↻ Suelta para actualizar noticias</div>
     <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
+    <p class="access-legend">🔒 El candado indica que tenemos señales de suscripción. Sin candado no significa que sea gratis.</p>
     <div class="collection-nav">
       <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
       <button id="show-saved" class="collection-btn" type="button">🔖 Guardadas <span id="saved-count">0</span></button>
@@ -276,6 +277,7 @@
 <script src="./ilustraciones.js"></script>
 <script src="./intereses.js?v=2"></script>
 <script src="./fotos.js?v=2"></script>
+<script src="./acceso.js?v=1"></script>
 <script>
 (function(){
 "use strict";
@@ -473,7 +475,14 @@ function visual(a,lead=false){
 }
 function kicker(a){
   const k=mk("div","kicker");
-  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Señal positiva"));if(wasOpened(a))k.append(mk("span","seen-pill","✓ YA ABIERTO"));
+  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));
+  if(window.SinRuidoAcceso&&window.SinRuidoAcceso.locked(a)){
+    const lock=mk("span","paywall-badge","🔒 Suscripción");
+    lock.title=window.SinRuidoAcceso.evidence(a)==="tu marca"?"Marcada por ti como noticia de suscripción":"El medio señala acceso exclusivo o de pago";
+    k.append(lock);
+  }
+  if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Señal positiva"));
+  if(wasOpened(a))k.append(mk("span","seen-pill","✓ YA ABIERTO"));
   return k;
 }
 function showSubscriptionFor(a){
@@ -508,7 +517,7 @@ function toggleSaved(a,button){
   const saved=isSaved(a);
   if(saved)bookmarks=bookmarks.filter(x=>x.link!==a.link);
   else if(/^https:\/\//.test(a.link||"")){
-    bookmarks.unshift({title:a.title,link:a.link,source:a.source,source_id:a.source_id||"",category:a.category,date:a.date,place:a.place||"",saved_at:Date.now()});
+    bookmarks.unshift({title:a.title,link:a.link,source:a.source,source_id:a.source_id||"",category:a.category,date:a.date,place:a.place||"",access_status:a.access_status||"unknown",access_evidence:a.access_evidence||"",saved_at:Date.now()});
     bookmarks=bookmarks.slice(0,MAX_BOOKMARKS);
   }
   try{localStorage.setItem(BOOKMARK_KEY,JSON.stringify(bookmarks))}catch(e){
@@ -567,7 +576,16 @@ function actions(a){
     const whatsapp=mk("a","story-whatsapp","↗ WhatsApp");
     whatsapp.href=shareNewsLink(a);whatsapp.target="_blank";whatsapp.rel="noopener noreferrer";
     whatsapp.title="Compartir este titular por WhatsApp";
-    extra.append(bookmark,whatsapp);row.append(extra);
+    extra.append(bookmark,whatsapp);
+    if(window.SinRuidoAcceso&&!window.SinRuidoAcceso.auto(a)){
+      const marked=window.SinRuidoAcceso.user(a);
+      const report=mk("button","access-report"+(marked?" is-marked":""),marked?"Quitar 🔒":"Marcar 🔒");
+      report.type="button";report.setAttribute("aria-pressed",String(marked));
+      report.title=marked?"Quitar tu marca de suscripción":"Si al abrir esta noticia te pide suscripción, márcala para ti";
+      report.onclick=()=>{if(window.SinRuidoAcceso.toggle(a))render()};
+      extra.append(report);
+    }
+    row.append(extra);
   }
   if(collectionMode!=="saved")row.append(hide);return row;
 }
