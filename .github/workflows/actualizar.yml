@@ -1,6 +1,10 @@
 name: Actualizar titulares de Sin Ruido
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/actualizar.py'
+      - 'docs/fuentes.json'
   schedule:
     - cron: '17 6,10,15,20 * * *'
 permissions:
