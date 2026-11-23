@@ -66,7 +66,7 @@ async function read(url){
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),11000);
   try{
-    const r=await fetch(API+encodeURIComponent(url)+"&count=30",{signal:controller.signal,cache:"no-store"});
+    const r=await fetch(API+encodeURIComponent(url),{signal:controller.signal,cache:"no-store"});
     if(!r.ok)throw Error("Servicio RSS temporalmente no disponible");
     const data=await r.json();
     if(data.status!=="ok"||!Array.isArray(data.items)||!data.items.length)throw Error("No hay artículos RSS accesibles");
