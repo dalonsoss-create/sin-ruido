@@ -104,3 +104,15 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - La cobertura de Bolsa y empresas se ha reforzado añadiendo los RSS de **Mercados de Cinco Días** (canal oficial) y **Mercados de Expansión** (canal activo según Feeder). Ambos se podrán activar/desactivar desde **Personalizar → Mis fuentes**. No se asegura que el proveedor publique al minuto ni que las dos fuentes entreguen resultados hasta que lo confirme una ejecución real del recopilador.
 - La etiqueta **«⚡ Última hora»** está limitada a noticias con señales reforzadas de relevancia editorial y hechos importantes (coincidencia entre medios, presencia en RSS de referencia y verbos de acción). El criterio es **heurístico**: la coincidencia de fuentes es una pista, no una verificación independiente ni la jerarquía real de la portada. En otros casos aparece **«Recién publicado»**. Se muestra fuente, categoría, edad del artículo y hora de la última edición publicada.
 - En la franja también aparece **«✓ Ya vista»** para retirarla manualmente, sin perder el historial recuperable del lector. Abrir el enlace no la retira.
+
+## Copia de seguridad portátil de la edición personal
+
+En **⚙ Personalizar → Guardar mi periódico** aparecen **«⬇ Guardar una copia»** y **«↥ Recuperar mi copia»**. La función `docs/copia.js` exporta a un archivo JSON local seis grupos de datos de este navegador:
+
+- Configuración: temas, periódicos activos e inactivos, vetos, filtros e intereses escritos por el lector
+- Noticias **Guardadas**, **Ya vistas** e historial de enlaces abiertos
+- Perfil aprendido de intereses y **medios RSS personales** añadidos por URL
+
+La copia **no se sube automáticamente** a ningún servidor. En iPhone, si está disponible, abre el menú Compartir para elegir **Guardar en Archivos**; de lo contrario inicia la descarga del JSON. Para recuperar: abrir Sin Ruido en el otro navegador o nuevo acceso directo, entrar en Personalizar, elegir Recuperar y seleccionar el archivo mediante Archivos. **La recuperación reemplaza la configuración de ese navegador tras una confirmación explícita.** Importación validada por formato/versión, listas limitadas y enlaces HTTPS, y escritura con rollback en caso de error de almacenamiento. Se recarga la página para aplicar la copia.
+
+**Importante**: el fichero incluye temas elegidos, historial de lectura y artículos guardados; guárdalo como información privada. El almacenamiento automático no se sincroniza entre Safari y el acceso directo instalado. Antes de borrar una instalación antigua, crea allí la copia y **verifica la recuperación en la nueva**. Para millones de usuarios sería preferible sincronización opcional con cuenta y privacidad controlada; esto es un primer sistema sencillo sin registro.
