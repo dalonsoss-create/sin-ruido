@@ -7,14 +7,15 @@ Página: https://dalonsoss-create.github.io/sin-ruido/
 
 1. Selecciona tus **temas** y añade **asuntos vetados**.
 2. En **Mis fuentes**, activa o desactiva individualmente los RSS consultados. La selección de fuentes es personal: no detiene la recopilación general.
-3. Pulsa **⚙ Personalizar → Añadir periódico** y escribe su **nombre o web** (por ejemplo, `Diario de Pozuelo`). Si está en el catálogo, Sin Ruido activa el medio y su tema automáticamente, sin pedir direcciones RSS ni abrir GitHub. Si no está conectado, se indica claramente: por ahora hace falta validar e incorporar su RSS al catálogo del servidor.
+3. Pulsa **⚙ Personalizar → Añadir periódico** y escribe el **nombre** de un medio del catálogo o pega la **web** de uno nuevo (por ejemplo, `elcorreodepozuelo.com`). El lector busca automáticamente un RSS público y, si responde, incorpora esa fuente a su edición personal sin pedirle que busque el RSS ni pasar por GitHub. Si un medio no publica RSS accesible o bloquea la consulta, se explica en la misma pantalla.
 4. **Compartir periódico** envía la URL. Elena puede abrirla en otro móvil o navegador y guardar sus propios filtros, totalmente independientes; la configuración se guarda solo en **localStorage** y no se sincroniza.
 5. Cualquier titular puede ocultarse con «No me interesa».
 
-## Añadir nuevos periódicos sin complicaciones
-- Desde **Personalizar → Añadir periódico**, escribe nombre o dominio. Se proponen las cabeceras **ya conectadas** y se activa la seleccionada con un clic.
-- **Diario de Pozuelo** se ha incorporado con su RSS de Noticias de Pozuelo (`https://www.diariodepozuelo.es/noticias-pozuelo/?format=feed&type=rss`) y localidad Pozuelo de Alarcón. Su recepción real se comprueba en el siguiente ciclo de GitHub Actions.
-- Un periódico completamente nuevo **todavía no puede incorporarse automáticamente** desde el navegador: GitHub Pages es una web estática y recopilar RSS exige validar el canal en el proceso central. El formulario ya no envía a los lectores a GitHub; si no encuentra el medio, explica por qué.
+## Añadir medios propios sin complicaciones
+- Se ha incorporado **El Correo de Pozuelo** (RSS de WordPress `https://elcorreodepozuelo.com/feed/`) y **Diario de Pozuelo** al catálogo común. Cuando hay muchos titulares, `scripts/actualizar.py` reserva hasta cinco noticias recientes por medio antes de rellenar el límite de 900; la página sigue mostrando solo las noticias de hoy.
+- En **Personalizar → Añadir periódico**, basta con escribir el nombre de un medio conocido. Si es nuevo, hay que pegar la dirección de su web, **no** la dirección del RSS. En el navegador se prueban rutas comunes `/feed/`, `/rss/`, etc., con el servicio público `rss2json.com`; se valida la respuesta antes de guardar el medio.
+- Los medios añadidos de esta forma son **personales de ese navegador**, hasta 15 fuentes, se pueden quitar, se actualizan al entrar y luego periódicamente, y sus titulares se incorporan a la portada normal. No pasan a ser fuentes globales ni se comparten entre móviles, porque todavía no existe una cuenta de usuario ni un servicio central para ello.
+- **Limitaciones del prototipo**: no todos los periódicos publican un RSS público; algunos lo bloquean o no responden a `rss2json.com`. La API externa tiene límites de uso y disponibilidad, consulta una dirección pública por petición y puede conocer la IP del lector. Sin un backend propio, **no puede garantizarse el alta de cualquier periódico solamente por su nombre** ni un servicio fiable para millones de lectores. Para producción conviene un backend propio de descubrimiento/cache (por ejemplo, Cloudflare Workers), verificación de dominio y controles de abuso.
 - El panel **Personalizar** se abre como cajón sobre el periódico tanto en escritorio como en móvil.
 
 ## Diseño e imágenes
