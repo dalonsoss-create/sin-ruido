@@ -123,7 +123,8 @@ def main():
         if a.get("classification_version")!=4:
             origin=fmap.get(a.get("source_id"),{})
             a["category"]=classify(a.get("title",""),a.get("link",""),origin.get("category",a.get("category","Sociedad")),(),a.get("source",""))
-            a["classification_version"]=3
+            a["classification_version"]=4
+            a["place"]=origin.get("place",a.get("place",""))
     # Retener noticias recientes si alguna fuente falla temporalmente.
     articles+=old
     active_ids={f["id"] for f in feed_list}
@@ -145,7 +146,8 @@ def main():
         print("[ERROR] Sin noticias recientes; conservamos el fichero anterior",file=sys.stderr)
         sys.exit(1)
     OUT.write_text(json.dumps({
-        "updated":now.isoformat(),"sources_ok":successes,
+        "updated":now.isoformat(),"sources_ok":successes,"classification_version":4,
+        "feed_count":len(feed_list),
         "sources_status":sorted(statuses,key=lambda x:x["id"]),
         "articles":fresh[:900]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"Guardados {min(len(fresh),900)} titulares; {successes} fuentes consultadas.")
