@@ -9,7 +9,11 @@ on:
       - 'scripts/editorial.py'
       - 'docs/fuentes.json'
   schedule:
-    - cron: '17 5-23 * * *'
+    - cron: '7,37 * * * *'
+# Evitar que una ejecución retrasada choque con otra al subir noticias.json.
+concurrency:
+  group: sinruido-rss-edition
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
