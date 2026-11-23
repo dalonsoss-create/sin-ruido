@@ -338,6 +338,16 @@
       "url": "https://www.diariodepozuelo.es/noticias-pozuelo/?format=feed&type=rss",
       "images_allowed": false,
       "language": "es"
+    },
+    {
+      "id": "elcorreodepozuelo-portada",
+      "name": "El Correo de Pozuelo",
+      "category": "Sociedad",
+      "place": "Pozuelo de Alarcón",
+      "homepage": "https://elcorreodepozuelo.com/",
+      "url": "https://elcorreodepozuelo.com/feed/",
+      "images_allowed": false,
+      "language": "es"
     }
   ],
   "image_policy": "Solo activar images_allowed si el medio ha autorizado expresamente el uso de sus miniaturas.",
