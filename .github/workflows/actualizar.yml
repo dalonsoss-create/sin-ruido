@@ -6,6 +6,7 @@ on:
       - 'scripts/actualizar.py'
       - 'scripts/clasificar.py'
       - 'scripts/acceso.py'
+      - 'scripts/editorial.py'
       - 'docs/fuentes.json'
   schedule:
     - cron: '17 5-23 * * *'
@@ -24,6 +25,8 @@ jobs:
         run: python scripts/clasificar.py
       - name: Validar identificación de artículos de pago
         run: python scripts/acceso.py
+      - name: Validar criterio editorial de portadas
+        run: python scripts/editorial.py
       - name: Obtener titulares RSS
         run: python scripts/actualizar.py
       - name: Guardar noticias públicas
