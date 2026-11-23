@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlsplit
 from clasificar import classify
+from editorial import COVER_FEEDS, enrich
 from acceso import detect_access
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -89,7 +90,8 @@ def collect(feed):
             "source":feed["name"],"source_id":feed["id"],"category":category,
             "place":feed.get("place",""),
             "classification_version":5,
-            "access_status":access_status}
+            "access_status":access_status,
+            "editorial_portadas":[COVER_FEEDS[feed["id"]]] if feed["id"] in COVER_FEEDS else []}
         # La imagen se almacena SOLO si se ha comprobado permiso explícito.
         if feed.get("images_allowed") is True:
             img=image_in_rss(item)
@@ -143,7 +145,7 @@ def main():
     articles+=old
     active_ids={f["id"] for f in feed_list}
     fresh=[]
-    seen=set()
+    seen={}
     for a in sorted(articles,key=lambda x:x.get("date",""),reverse=True):
         try:
             when=dt.datetime.fromisoformat(a["date"].replace("Z","+00:00"))
@@ -153,12 +155,25 @@ def main():
         if a.get("source_id") and a["source_id"] not in active_ids:continue
         titlekey=re.sub(r"\W+","",a.get("title","").casefold())
         urlkey=a.get("link","").split("?")[0]
-        if not titlekey or not urlkey or titlekey in seen or urlkey in seen:continue
-        seen.update((titlekey,urlkey))
+        if not titlekey or not urlkey:continue
+        if titlekey in seen or urlkey in seen:
+            original=seen.get(titlekey) or seen.get(urlkey)
+            if original:
+                original["editorial_portadas"]=sorted(set(
+                    original.get("editorial_portadas",[])+
+                    a.get("editorial_portadas",[])+
+                    ([COVER_FEEDS[a["source_id"]]] if a.get("source_id") in COVER_FEEDS else [])
+                ))
+            continue
+        seen[titlekey]=a
+        seen[urlkey]=a
         fresh.append(a)
     if not fresh:
         print("[ERROR] Sin noticias recientes; conservamos el fichero anterior",file=sys.stderr)
         sys.exit(1)
+    # Las cabeceras de referencia y coincidencias ayudan a detectar relevancia.
+    # El resto de noticias se mantiene: no filtramos por apertura ni suscripción.
+    fresh=enrich(fresh[:900])
     OUT.write_text(json.dumps({
         "updated":now.isoformat(),"sources_ok":successes,"classification_version":5,
         "feed_count":len(feed_list),
