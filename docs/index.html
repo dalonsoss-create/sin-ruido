@@ -361,16 +361,44 @@ function makeCard(a,lead=false){
   card.append(visual(a),copy);return card;
 }
 function balanceTopics(list){
-  if(activeTopic!=="Todas"||list.length<2)return list;
-  const featured=[list[0]],used=new Set([storyId(list[0])]),covered=new Set([list[0].category]);
-  for(const [topic] of GROUPS){
-    if(prefs.topics[topic]===false||covered.has(topic))continue;
-    const candidate=list.find(a=>a.category===topic&&!used.has(storyId(a)));
-    if(candidate){featured.push(candidate);used.add(storyId(candidate));covered.add(topic)}
+  if(list.length<2)return list;
+  // Regla editorial: antes de repetir un periódico, mostramos titulares
+  // de todas las otras cabeceras que tengan artículos permitidos por el usuario.
+  // Así las primeras 20 noticias pueden proceder de 20 medios diferentes.
+  const pools=new Map();
+  for(const a of list){
+    const publisher=a.source||a.source_id||"Otra fuente";
+    if(!pools.has(publisher))pools.set(publisher,[]);
+    pools.get(publisher).push(a);
   }
-  const remaining=list.filter(a=>!used.has(storyId(a)));
-  const topUp=remaining.slice(0,Math.max(0,PAGE_SIZE-featured.length));
-  return [...featured,...topUp,...remaining.slice(topUp.length)];
+  const output=[],coveredTopics=new Set(),recent=el("sort").value==="recientes";
+  const publishers=[...pools].map(([name,items])=>({name,items}));
+  while(output.length<list.length){
+    let available=publishers.filter(p=>p.items.length);
+    if(!available.length)break;
+    // Una pasada = como máximo una noticia por medio.
+    while(available.length){
+      let best=null,bestScore=-Infinity;
+      for(const pool of available){
+        for(let i=0;i<pool.items.length;i++){
+          const a=pool.items[i];
+          const age=Math.max(0,(Date.now()-new Date(a.date).valueOf())/3600000)||0;
+          const score=(recent?-age:weight(a))
+            +(recent?0:(!coveredTopics.has(a.category)?17:0))
+            -(wasOpened(a)?(recent?0:5):0);
+          if(score>bestScore){
+            bestScore=score;best={pool,index:i,article:a};
+          }
+        }
+      }
+      if(!best)break;
+      output.push(best.article);
+      coveredTopics.add(best.article.category);
+      best.pool.items.splice(best.index,1);
+      available=available.filter(p=>p!==best.pool);
+    }
+  }
+  return output;
 }
 function render(){
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
