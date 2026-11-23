@@ -1491,8 +1491,8 @@ el("share").onclick=async()=>{
   }
   // En escritorio, compartir directamente en WhatsApp Web con el texto completo.
   const whatsapp="https://wa.me/?text="+encodeURIComponent(message);
-  const popup=window.open(whatsapp,"_blank","noopener,noreferrer");
-  if(popup)return;
+  const popup=window.open(whatsapp,"_blank");
+  if(popup){try{popup.opener=null}catch(e){}return}
   try{
     if(navigator.clipboard&&typeof navigator.clipboard.writeText==="function"){
       await navigator.clipboard.writeText(message);
