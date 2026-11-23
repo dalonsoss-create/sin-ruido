@@ -106,13 +106,14 @@ function allowedSource(a){
 // Clasificación prudente basada solo en palabras del titular, sin IA ni coste.
 function mood(a){
   const t=normal(a.title);
-  const negation=/\b(?:no logra|no consigue|no funciona|sin avances|sin mejoria|sin resultados|fracasa|fracas[oó]|empeora|desmiente|nunca lleg[oó]|falsa esperanza|resultados decepcionantes)\b/;
-  const bad=/\b(?:muere|mueren|muerte|murieron|asesinato|asesinan|asesinado|asesinados|guerra|bombardeo|ataque|atentado|matanza|masacre|crisis|corrupcion|escandalo|fraude|incendio|accidente|catastrofe|desastre|colapso|despidos|desempleo|pobreza|hambruna|alerta|amenaza|riesgos?|peligro|denuncia|condena|prision|contaminacion|perdidas|destruccion|recesion|violencia|heridos|invasion|represion|conflicto|recortes|tension|empeora|retrocede|apocalipsis|sospecha)\b/;
+  const negation=/\b(?:no logra|no consigue|no funciona|sin avances|sin mejoria|sin resultados|fracasa|fracaso|empeora|desmiente|nunca llego|falsa esperanza|resultados decepcionantes)\b/;
+  const bad=/\b(?:muere|mueren|muerte|murieron|asesinato|asesinan|asesinado|asesinados|guerra|bombardeo|ataque|atentado|matanza|masacre|crisis|corrupcion|escandalo|fraude|incendio|accidente|catastrofe|desastre|colapso|despidos|desempleo|pobreza|hambruna|alerta|amenaza|riesgos?|peligro|denuncia|condena|prision|contaminacion|perdidas|destruccion|recesion|violencia|heridos|invasion|represion|conflicto|recortes|tension|empeora|retrocede|apocalipsis|sospecha|complican|complica|retroceso|subida de precios|escasez|harta|inseguridad|desigualdad|emergencia|epidemia)\b/;
   const positive=/\b(?:avance|avances|descubrimiento|descubren|descubre|hallazgo|innovacion|innovador|inventan|inventan|crean|desarrollan|logran|consiguen|exito|exitoso|pionero|prometedor|prometedores|mejora|mejoran|mejoria|beneficios|salvan|salva|rescatan|recupera|recuperan|protegen|protegido|reforestan|restauran|conservacion|sostenible|sostenibilidad|record|crecimiento|aumenta|aumentan|crece|sube|reducen|reduce|reducir|disminuye|cae|baja|bajan|acuerdo|paz|vacuna|cura|curacion|solucion|esperanza|inauguran|aprobado|aprobacion|reabre|liberan)\b/;
   const clearlyGood=/\b(?:alto el fuego|acuerdo de paz|energias renovables|energia limpia|mejora la salud|mejora el tratamiento|baja la inflacion|baja el paro|suben los salarios|caen los delitos|recuperacion de especies|restauracion ecologica)\b/;
   // Una reducción de daños también es una buena noticia, pese a mencionar el problema.
   const reduction=/\b(?:reducen|reduce|reducir|disminuye|cae|baja|bajan|frena|frenan)\b.{0,50}\b(?:muertes|mortalidad|contagios|contaminacion|pobreza|paro|desempleo|inflacion|delitos|emisiones|riesgo|cancer|accidentes|violencia)\b/;
   if(negation.test(t))return "negative";
+  if(/\b(?:pone fin (?:a|al) (?:la guerra|el conflicto)|fin de la guerra|acuerdo de paz|alto el fuego duradero|cese de hostilidades|rescatan a los supervivientes)\b/.test(t)&&!/\b(?:fracasa|roto|rompe|incumple|sin acuerdo|no|temor|tension|intensifica|amenaza|masacre)\b/.test(t))return "positive";
   if(reduction.test(t))return "positive";
   if(bad.test(t))return "negative";
   if(clearlyGood.test(t)||positive.test(t))return "positive";
@@ -157,7 +158,7 @@ function visual(a,small){
 }
 function kicker(a){
   const k=mk("div","kicker");
-  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Avance positivo"));
+  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Señal positiva"));
   return k;
 }
 function showSubscriptionFor(a){
@@ -225,6 +226,7 @@ function render(){
   for(const a of list.slice(3,123))bottom.append(makeListItem(a));
 }
 function renderControls(){
+  el("positive-only").checked=!!prefs.positiveOnly;
   const topics=el("topic-toggles");topics.replaceChildren();
   for(const [name,symbol,w] of GROUPS){
     const label=mk("label","checkline");const input=mk("input");input.type="checkbox";input.checked=prefs.topics[name]!==false;
