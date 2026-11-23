@@ -6,7 +6,8 @@
   const KEY="sinruido-paywall-v1";
   const URL_SECTION=/(?:^|\/)(?:premium|de-pago|contenido-de-pago|contenido-premium|solo-suscriptores|solo-para-suscriptores|para-suscriptores|suscriptores|subscribers-only|members-only|paywall)(?:\/|$)/i;
   function explicitUrl(link){
-    try{return /^https:\/\//.test(link||"")&&URL_SECTION.test(new URL(link).pathname)}catch(e){return false}
+    const match=String(link||"").match(/^https:\/\/[^/]+(\/[^?#]*)?/i);
+    return !!match&&URL_SECTION.test(match[1]||"/");
   }
   function load(){
     try{
