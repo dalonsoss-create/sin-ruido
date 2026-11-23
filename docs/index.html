@@ -169,6 +169,10 @@ body.settings-open{overflow:hidden}
   border-radius:20px;padding:2px 7px;font-size:11px}
 .collection-btn.selected #reviewed-count{background:#d3e6d4;color:#294a37}
 @media(max-width:760px){.review-toggle{top:14px;left:14px;width:46px;height:46px}}
+
+.mustread-wrap{position:relative;min-width:0}
+.mustread-wrap .mustread-item{height:100%;padding-top:49px}
+.mustread-wrap .mustread-review{top:9px;left:10px;width:34px;height:34px;font-size:18px;box-shadow:0 2px 8px #0003}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -571,7 +575,13 @@ function renderEssentials(){
     const access=window.SinRuidoAcceso?window.SinRuidoAcceso.status(a):"unknown";
     const label=access==="subscription"?" · 🔒 Requiere suscripción":access==="free"?" · ✓ Lectura gratuita":"";
     const source=mk("span","mustread-source",a.source+" · "+readableDate(a.date)+label);
-    card.append(topic,title,source);grid.append(card);
+    card.append(topic,title,source);
+    const wrap=mk("div","mustread-wrap"),seen=mk("button","review-toggle mustread-review","✓");
+    seen.type="button";
+    seen.title="Marcar como ya vista y retirar este titular";
+    seen.setAttribute("aria-label",seen.title+": "+a.title);
+    seen.onclick=()=>toggleReviewed(a);
+    wrap.append(card,seen);grid.append(wrap);
   }
 }
 function titleAnchor(a){
