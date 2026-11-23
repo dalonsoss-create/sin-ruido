@@ -63,7 +63,7 @@ ECON=r"\b(?:inflacion|pib|euribor|tipos de interes|tipos del bce|economia|econom
 BIZ=r"\b(?:empresa|empresas|companias|multinacional|ceo|startups?|emprendedor|empresari|plantilla|empleo|trabajadores|contratacion|despidos|fusion|adquisicion|financiacion|facturacion|beneficios empresariales)\b"
 POLITICS=r"\b(?:psoe|partido popular|podemos|sumar|vox|moncloa|feijoo|sanchez|congreso de los diputados|senado espanol|parlamento espanol|elecciones generales|gobierno espanol|gobierno de espana|presidente del gobierno|oposicion parlamentaria|ministros? de espana)\b"
 CULTURE=r"\b(?:cine|pelicula|series? de television|actor|actriz|director de cine|festival de cine|museo|exposicion|teatro|artista|musica|concierto|literatura|novela|escritor|escritora|premios goya)\b"
-HISTORY=r"\b(?:arqueolog|civilizacion|edad media|imperio romano|restos historicos|momia|yacimiento|prehistoria|medieval|dinastia|egipto antiguo)\b"
+HISTORY=r"\b(?:arqueolog\w*|civilizaciones?|edad del hierro|edad del bronce|edad media|imperio romano|restos historicos|momia|yacimientos?|prehistoria|medieval|dinastia|egipto antiguo)\b"
 EDUCATION=r"\b(?:colegio|universidad|estudiantes|educacion|profesores|profesoras|escuela|estudiar|aulas|becas escolares|curriculo escolar)\b"
 FOOD=r"\b(?:receta|cocina|gastronomia|restaurante|chefs?|comida|gastronomic|cocinar|plato tradicional)\b"
 TRAVEL=r"\b(?:turismo|turist|hotel|viajar|destino vacacional|aerolinea|aeropuerto|vacaciones|escapada|crucero|alojamiento|viajes de placer|viajes de negocios)\b"
@@ -144,6 +144,7 @@ if __name__=="__main__":
         ("Un tratamiento contra el cáncer logra nuevos avances", "https://ejemplo.com/tecnologia/medicina", "Tecnología", "Salud"),
         ("Carlos Alcaraz se impone a Sinner en el Masters 1000", "https://ejemplo.com/internacional/tenis", "Internacional", "Tenis"),
         ("Investigadores descubren restos de la antigua Roma", "https://ejemplo.com/tecnologia/arqueologia", "Tecnología", "Historia"),
+        ("Durante las excavaciones arqueológicas en la Duna de Pilat, estos científicos descubrieron restos que datan de la Edad del Hierro", "https://www.genbeta.com/actualidad/durante-excavaciones-arqueologicas-duna-pilat-estos-cientificos-descubrieron-restos-que-datan-edad-hierro", "Tecnología", "Historia"),
         ("Nuevas tendencias de la inteligencia artificial en 2026", "https://ejemplo.com/tecnologia/ia", "Tecnología", "IA"),
         ("El GP de Portugal coronará al campeón de MotoGP", "https://ejemplo.com/motor/motogp", "Deportes", "Motor"),
         ("Muere abatido un ejemplar de oso pardo durante un control de jabalíes en Picos de Europa", "https://www.elmundo.es/ciencia/2026/11/22/6b02c39fe85ece873e8b458c.html", "Ciencia", "Naturaleza"),
