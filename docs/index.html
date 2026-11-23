@@ -419,6 +419,56 @@ function showSubscriptionFor(a){
 }
 el("pay-close").onclick=()=>el("pay-dialog").close();
 el("pay-dialog").addEventListener("click",e=>{if(e.target===el("pay-dialog"))el("pay-dialog").close()});
+const BOOKMARK_KEY="sinruido-bookmarks-v1";
+const MAX_BOOKMARKS=150;
+let collectionMode="feed";
+function loadBookmarks(){
+  try{
+    const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||"[]");
+    return Array.isArray(data)?data.filter(a=>a&&typeof a.title==="string"&&typeof a.link==="string"&&/^https:\/\//.test(a.link)).slice(0,MAX_BOOKMARKS):[];
+  }catch(e){return []}
+}
+let bookmarks=loadBookmarks();
+function updateSavedCount(){el("saved-count").textContent=String(bookmarks.length)}
+function isSaved(a){return !!a.link&&bookmarks.some(x=>x.link===a.link)}
+function toggleSaved(a,button){
+  const saved=isSaved(a);
+  if(saved)bookmarks=bookmarks.filter(x=>x.link!==a.link);
+  else if(/^https:\/\//.test(a.link||"")){
+    bookmarks.unshift({title:a.title,link:a.link,source:a.source,source_id:a.source_id||"",category:a.category,date:a.date,place:a.place||"",saved_at:Date.now()});
+    bookmarks=bookmarks.slice(0,MAX_BOOKMARKS);
+  }
+  try{localStorage.setItem(BOOKMARK_KEY,JSON.stringify(bookmarks))}catch(e){
+    el("notice").hidden=false;
+    el("notice").textContent="Tu navegador no permite almacenar más noticias. Prueba a borrar algunas guardadas.";
+    return;
+  }
+  updateSavedCount();
+  if(collectionMode==="saved"){render();return}
+  if(button){
+    button.classList.toggle("is-saved",!saved);
+    button.textContent=saved?"☆ Guardar":"🔖 Guardada";
+    button.setAttribute("aria-pressed",String(!saved));
+  }
+}
+function shareNewsLink(a){
+  return "https://wa.me/?text="+encodeURIComponent(a.title+"\n"+a.source+"\n"+a.link);
+}
+function switchCollection(mode){
+  collectionMode=mode;
+  shownCount=PAGE_SIZE;lastFilterSignature="";
+  el("show-feed").classList.toggle("selected",mode==="feed");
+  el("show-saved").classList.toggle("selected",mode==="saved");
+  el("topic-tabs").hidden=mode==="saved";
+  el("sort").disabled=mode==="saved";
+  render();
+}
+function todayKey(value){
+  const date=value instanceof Date?value:new Date(value);
+  if(!Number.isFinite(date.getTime()))return "";
+  return new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit"}).format(date);
+}
+function isToday(a){return todayKey(a.date)===todayKey(new Date())}
 function actions(a){
   const row=mk("div","foot-actions");
   const read=mk("a","read",a.link?"Leer en "+a.source+" ↗":"Titular de ejemplo");
@@ -431,6 +481,18 @@ function actions(a){
     pay.type="button";pay.title="Consulta la tarifa oficial de "+a.source;
     pay.onclick=()=>showSubscriptionFor(a);
     row.append(pay);
+  }
+  if(/^https:\/\//i.test(a.link||"")){
+    const extra=mk("div","story-actions-extras");
+    const saved=isSaved(a);
+    const bookmark=mk("button","save-toggle"+(saved?" is-saved":""),saved?"🔖 Guardada":"☆ Guardar");
+    bookmark.type="button";bookmark.title=saved?"Quitar de noticias guardadas":"Guardar noticia para leer más tarde";
+    bookmark.setAttribute("aria-pressed",String(saved));
+    bookmark.onclick=()=>toggleSaved(a,bookmark);
+    const whatsapp=mk("a","story-whatsapp","↗ WhatsApp");
+    whatsapp.href=shareNewsLink(a);whatsapp.target="_blank";whatsapp.rel="noopener noreferrer";
+    whatsapp.title="Compartir este titular por WhatsApp";
+    extra.append(bookmark,whatsapp);row.append(extra);
   }
   row.append(hide);return row;
 }
