@@ -1036,6 +1036,7 @@ function renderLastMinute(){
 }
 function render(){
   el("headline-heading").textContent="Noticias de hoy";
+  el("night-status").hidden=true;
   if(collectionMode==="saved"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;renderSaved();return}
   if(collectionMode==="reviewed"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;renderReviewed();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
