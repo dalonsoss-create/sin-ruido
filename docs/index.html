@@ -99,7 +99,7 @@
     <form id="block-form" class="inline-form"><input id="block-input" maxlength="65" placeholder="Ej. famosos, fútbol…" aria-label="Nueva palabra vetada"><button class="smallbtn" type="submit">+ Vetar</button></form>
     <p class="muted-note">No volverán a aparecer titulares que contengan esas palabras.</p>
     <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
-    <p class="muted-note">Estas son las fuentes RSS que consulta Sin Ruido. Desmarca las que no quieres leer: la selección solo te afecta a ti.</p>
+    <p class="muted-note">Selecciona el periódico una sola vez. Si quieres afinar por secciones, despliega sus canales RSS. Tus cambios solo afectan a tu edición.</p>
     <div class="sources-list" id="sources-list"></div>
     <div class="section-heading"><h3>Añadir una fuente</h3></div>
     <form id="source-form" class="source-add"><input type="text" id="source-name" maxlength="60" placeholder="Nombre del medio (ej. BBC)" aria-label="Nombre de la fuente"><input type="url" id="source-url" maxlength="450" placeholder="https://medio.com/rss.xml" aria-label="URL RSS de la nueva fuente" required><button type="submit">+ Proponer fuente RSS</button></form>
@@ -151,7 +151,7 @@
     <form id="welcome-form">
       <div class="welcome-step"><h3>1. ¿Qué temas te interesan?</h3><p>En portada aparecerá al menos un titular disponible de cada tema elegido.</p></div>
       <div id="welcome-topics" class="welcome-options"></div>
-      <div class="welcome-step"><h3>2. ¿Qué periódicos quieres consultar?</h3><p>Elige tantos como quieras; algunos medios aparecen varias veces porque tienen distintos canales de noticias.</p></div>
+      <div class="welcome-step"><h3>2. ¿Qué periódicos quieres consultar?</h3><p>Los periódicos aparecen una sola vez, aunque consultemos distintas secciones de cada medio.</p></div>
       <div id="welcome-sources" class="welcome-options"></div>
       <div class="welcome-step"><h3>3. ¿Qué personajes o asuntos prefieres evitar?</h3><p>Escribe nombres o palabras separados por comas. Cuando aparezcan en un titular, lo ocultaremos.</p></div>
       <textarea id="welcome-veto" class="welcome-veto" maxlength="650" placeholder="Por ejemplo: famosos, política, moda, fútbol…"></textarea>
@@ -484,12 +484,15 @@ function buildWelcome(){
     const copy=mk("span","",symbol+" "+name);
     label.append(input,copy);topicsBox.append(label);
   }
-  for(const f of feeds){
+  for(const group of groupedPublishers()){
     const label=mk("label","welcome-option"),input=mk("input");
-    input.type="checkbox";input.name="welcome-source";input.value=f.id;
-    input.checked=prefs.sources[f.id]!==false;
-    const copy=mk("span","",f.name),category=mk("small","",f.category);
-    copy.append(category);label.append(input,copy);sourcesBox.append(label);
+    input.type="checkbox";input.name="welcome-source";input.value=group.name;
+    // Se ofrecen TODOS los medios, independientemente de los gustos del creador.
+    input.checked=group.feeds.some(f=>prefs.sources[f.id]!==false);
+    const copy=mk("span","",group.name);
+    const sections=group.feeds.map(f=>f.category).join(", ");
+    copy.append(mk("small","",group.feeds.length===1?sections:group.feeds.length+" secciones: "+sections));
+    label.append(input,copy);sourcesBox.append(label);
   }
   if(!feeds.length)sourcesBox.append(mk("p","muted-note","Las fuentes se cargarán cuando haya conexión. Puedes volver a configurarlas después."));
   el("welcome-veto").value=prefs.blocked.join(", ");
@@ -535,9 +538,9 @@ el("welcome-form").onsubmit=e=>{
   const selectedFeeds=[...document.querySelectorAll('input[name="welcome-source"]:checked')].map(x=>x.value);
   if(!chosen.length){el("welcome-error").textContent="Elige al menos un tema.";return}
   if(feeds.length&&!selectedFeeds.length){el("welcome-error").textContent="Elige al menos un medio.";return}
-  const chosenTopics=new Set(chosen),chosenFeeds=new Set(selectedFeeds);
+  const chosenTopics=new Set(chosen),chosenPublishers=new Set(selectedFeeds);
   prefs.topics=Object.fromEntries(GROUPS.map(g=>[g[0],chosenTopics.has(g[0])]));
-  if(feeds.length)prefs.sources=Object.fromEntries(feeds.map(f=>[f.id,chosenFeeds.has(f.id)]));
+  if(feeds.length)prefs.sources=Object.fromEntries(feeds.map(f=>[f.id,chosenPublishers.has(f.name)]));
   prefs.blocked=[...new Set(el("welcome-veto").value.split(/[,;\n]/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1&&x.length<66))].slice(0,50);
   prefs.positiveOnly=el("welcome-positive").checked;
   activeTopic="Todas";save();renderControls();render();closeWelcome();
