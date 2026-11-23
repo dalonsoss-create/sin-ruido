@@ -70,3 +70,12 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - El campo se ofrece **en la bienvenida** y en el panel permanente; se guarda únicamente en las preferencias locales de ese navegador. No modifica filtros de otros usuarios.
 - Limitación: **NO es comprensión universal del lenguaje natural**. Las reglas se ampliarán a partir de las pruebas; algunas frases ambiguas o complejas pueden fallar. Si no hay noticias recientes que coincidan, se informa y no se rellena con noticias irrelevantes.
 - Para mejorar la cobertura local, se han añadido los canales oficiales de **Sucesos en Madrid** de El Diario de Madrid y Madridiario, pendientes de confirmar que entreguen titulares mediante el actualizador.
+
+
+## Noticias de HOY, actualización y guardados (nueva versión)
+- La portada general muestra **solo noticias publicadas durante el día actual en horario de Madrid**, aunque el recopilador conserve material anterior para recuperar fallos temporales de RSS. No se usan noticias de ayer para rellenar huecos. A medianoche se recalcula la vista.
+- El recopilador ahora comprueba los RSS **cada hora desde las 05:17 hasta las 23:17 UTC** (19 intentos al día). GitHub Actions puede iniciar tareas con retraso, y algún RSS puede fallar; no hay promesa de actualización instantánea.
+- El botón **↻ Actualizar noticias**, y el gesto de tirar hacia abajo desde la parte superior en móvil, descargan **la edición más reciente publicada** (no ejecutan en vivo la recolección de los medios). Se informa si hay cambios o si seguimos con la misma edición.
+- Bajo cada titular hay un enlace **↗ WhatsApp** para compartir el título, la cabecera y el enlace original; no se envían imágenes de terceros.
+- **☆ Guardar** almacena un máximo de 150 enlaces con titular, cabecera, tema y fecha en el navegador (`localStorage: sinruido-bookmarks-v1`). La pestaña **🔖 Guardadas** permite revisarlos otro día, también cuando ya no estén en la portada. El mismo botón permite quitar el guardado. No se sincronizan entre navegadores, móviles, instalaciones PWA o cuentas; no existe servidor de cuentas.
+- El texto libre de intereses acepta varias frases por línea y expresiones de preferencia, exclusión y «solo». Su intérprete gratuito es **heurístico**, no inteligencia semántica universal: para comprender *cualquier* petición con fiabilidad sería necesario un modelo de lenguaje o servicio adicional, sujeto a estudio de coste y privacidad.
