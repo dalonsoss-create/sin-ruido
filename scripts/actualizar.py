@@ -10,6 +10,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlsplit
+from clasificar import classify
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"docs"/"noticias.json"
@@ -77,14 +78,14 @@ def collect(feed):
         if len(title)<16 or BAD.search(title):continue
         link=link.strip()
         if urlsplit(link).scheme!="https" or not urlsplit(link).netloc:continue
-        category=feed["category"]
-        if category in ("Ciencia","Tecnología") and MEDICAL.search(title):
-            category="Salud"
-        elif category=="Tecnología" and NATURE.search(title):
-            category="Naturaleza"
+        rss_tags=[c.text for c in item.findall("category") if c.text]
+        rss_tags.extend(c.get("term") for c in item.findall(ATOM+"category") if c.get("term"))
+        rss_tags.extend(c.text for c in item.findall(DC+"subject") if c.text)
+        category=classify(title,link,feed["category"],rss_tags,feed["name"])
         article={
             "title":title[:260],"link":link,"date":date_iso(published),
-            "source":feed["name"],"source_id":feed["id"],"category":category}
+            "source":feed["name"],"source_id":feed["id"],"category":category,
+            "classification_version":3}
         # La imagen se almacena SOLO si se ha comprobado permiso explícito.
         if feed.get("images_allowed") is True:
             img=image_in_rss(item)
@@ -101,7 +102,7 @@ def main():
     successes=0
     articles=[]
     statuses=[]
-    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
         future_map={pool.submit(collect,f):f for f in feed_list}
         for future in concurrent.futures.as_completed(future_map):
             feed=future_map[future]
@@ -115,7 +116,14 @@ def main():
             except Exception as exc:
                 print(f"[AVISO] {feed['name']}: {exc}",file=sys.stderr)
             statuses.append(status)
-    # Retener noticias de las últimas 72h si alguna fuente falla temporalmente.
+    # Reetiquetar titulares antiguos: también se corrigen las secciones al desplegar.
+    fmap={f["id"]:f for f in feed_list}
+    for a in old:
+        if a.get("classification_version")!=3:
+            origin=fmap.get(a.get("source_id"),{})
+            a["category"]=classify(a.get("title",""),a.get("link",""),origin.get("category",a.get("category","Sociedad")),(),a.get("source",""))
+            a["classification_version"]=3
+    # Retener noticias recientes si alguna fuente falla temporalmente.
     articles+=old
     active_ids={f["id"] for f in feed_list}
     fresh=[]
@@ -138,7 +146,7 @@ def main():
     OUT.write_text(json.dumps({
         "updated":now.isoformat(),"sources_ok":successes,
         "sources_status":sorted(statuses,key=lambda x:x["id"]),
-        "articles":fresh[:500]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(f"Guardados {min(len(fresh),500)} titulares; {successes} fuentes consultadas.")
+        "articles":fresh[:900]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print(f"Guardados {min(len(fresh),900)} titulares; {successes} fuentes consultadas.")
 
 if __name__=="__main__":main()
