@@ -36,7 +36,21 @@ def paid_from_url(url):
     return bool(PAY_SECTION.search(path))
 
 
-def detect_access(url, item=None, tags=()):
+# Fuente cuyo acceso libre declara explícitamente su propia política editorial.
+# No se extiende a noticias republicadas en otros dominios.
+OPEN_SOURCE_DOMAINS = {"The Conversation España": "theconversation.com"}
+
+
+def verified_open_source(source, url):
+    try:
+        host = (urlsplit(str(url)).hostname or "").lower()
+    except ValueError:
+        return False
+    domain = OPEN_SOURCE_DOMAINS.get(source)
+    return bool(domain and host in (domain, "www." + domain))
+
+
+def detect_access(url, item=None, tags=(), source=""):
     """Clasifica el acceso solo con metadatos explícitos del propio medio.
 
     'unknown' no significa gratuito. Sin visitar artículos ni saltar muros.
@@ -73,7 +87,11 @@ def detect_access(url, item=None, tags=()):
             if tagname == "link" and node.attrib.get("rel", "").lower() in ("payment", "subscription"):
                 return "subscription", "rss"
 
-    return ("free", "rss") if free_signal else ("unknown", "")
+    if free_signal:
+        return "free", "rss"
+    if verified_open_source(source, url):
+        return "free", "fuente"
+    return "unknown", ""
 
 if __name__ == "__main__":
     import xml.etree.ElementTree as ET
@@ -90,10 +108,13 @@ if __name__ == "__main__":
     for url, tags, expected in tests:
         got, _ = detect_access(url, tags=tags)
         assert got == expected, f"{url}: {got} en vez de {expected}"
+    assert detect_access("https://theconversation.com/noticia-123", source="The Conversation España")[0] == "free"
+    assert detect_access("https://otro-medio.com/noticia-123", source="The Conversation España")[0] == "unknown"
+    assert detect_access("https://theconversation.com/premium/noticia", source="The Conversation España")[0] == "subscription"
     node = ET.fromstring('<item xmlns:dc="http://purl.org/dc/terms/"><dc:accessRights>paid</dc:accessRights></item>')
     assert detect_access("https://medio.es/normal", node)[0] == "subscription"
     free = ET.fromstring('<item xmlns:s="https://schema.org/"><s:isAccessibleForFree>true</s:isAccessibleForFree></item>')
     assert detect_access("https://medio.es/normal", free)[0] == "free"
     mixed = ET.fromstring('<item><isAccessibleForFree>true</isAccessibleForFree><paywall>paid</paywall></item>')
     assert detect_access("https://medio.es/normal", mixed)[0] == "subscription"
-    print("Detección prudente de acceso verificada:", len(tests) + 3, "pruebas.")
+    print("Detección prudente de acceso verificada:", len(tests) + 6, "pruebas.")
