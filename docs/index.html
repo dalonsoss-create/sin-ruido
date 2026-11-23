@@ -91,6 +91,26 @@
 .interest-examples button{border:1px solid #c4d1dc;border-radius:25px;background:#edf4fa;color:#365771;font-weight:750;font-size:10px;padding:6px 9px}
 .interest-summary{font-size:12px;line-height:1.4;color:#365a42;background:#e8f2e7;padding:9px 11px;border-radius:10px;margin:8px 0}
 .interest-empty{font-size:12px;font-weight:600;color:#9b5831;margin:8px 0}
+
+/* Edición de hoy, actualizar y biblioteca privada */
+.toolbar{flex-wrap:wrap}.toolbar #updated{flex:1;min-width:160px}
+.refresh-btn{background:#fffdf9;border:1px solid #c9957e;color:#903f2b;border-radius:10px;font:800 12px var(--sans);padding:10px 13px;white-space:nowrap}
+.refresh-btn:hover{background:#fff2e9}
+.refresh-btn:disabled{opacity:.55}
+.refresh-btn.is-loading{background:#e8f2e8;color:#296b3b;border-color:#b4d2b9}
+.pull-indicator{border-radius:12px;background:#e6eee6;padding:11px;text-align:center;font-size:12px;font-weight:850;color:#396c4e;margin-bottom:8px}
+.pull-indicator[hidden]{display:none}
+.collection-nav{display:flex;gap:10px;margin:13px 0;flex-wrap:wrap}
+.collection-btn{font-weight:800;font-size:13px;border:1px solid var(--line);background:#fff;padding:9px 16px;border-radius:99px}
+.collection-btn.selected{background:var(--ink);color:white;border-color:var(--ink)}
+.story-actions-extras{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.story-whatsapp,.save-toggle{display:inline-flex;align-items:center;justify-content:center;padding:7px 10px;border-radius:99px;font-size:11px;font-weight:800;border:1px solid #c7c9c0;background:#fff;color:#4b554a}
+.story-whatsapp{color:#267849;border-color:#a6c8ae;background:#e9f6ed}
+.save-toggle.is-saved{background:#fff0cc;border-color:#e1c589;color:#7d5615}
+.story-whatsapp:hover,.save-toggle:hover{filter:brightness(.96)}
+#saved-count{display:inline-flex;align-items:center;justify-content:center;background:#f0e1c0;color:#5a4528;padding:2px 6px;border-radius:30px;margin-left:4px;font-size:11px}
+.collection-btn.selected #saved-count{background:#d7b976}
+@media(max-width:760px){.toolbar #updated{order:4;flex-basis:100%}.refresh-btn{flex:1}.story-actions-extras{width:100%}}
 </style>
 <link rel="stylesheet" href="./portada.css">
 </head>
@@ -139,8 +159,13 @@
     <h1 class="sr-only">Tu portada de Sin Ruido</h1>
     <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
     <div id="notice" class="notice" hidden></div>
-    <div class="toolbar"><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
-    <div class="sectionbar"><h2>En portada</h2><span id="visible-count"></span></div>
+    <div id="pull-indicator" class="pull-indicator" aria-live="polite" hidden>↻ Suelta para actualizar noticias</div>
+    <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
+    <div class="collection-nav">
+      <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
+      <button id="show-saved" class="collection-btn" type="button">🔖 Guardadas <span id="saved-count">0</span></button>
+    </div>
+    <div class="sectionbar"><h2 id="headline-heading">Noticias de hoy</h2><span id="visible-count"></span></div>
     <div id="features"></div>
     <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
     <div id="news-list" class="news-list"></div>
