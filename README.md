@@ -61,3 +61,12 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - El enlace de invitación sigue siendo https://dalonsoss-create.github.io/sin-ruido/?bienvenida=1 .
 - **Noticias:** en cada carga de la web se consulta `noticias.json`; además, se comprueba si hay una edición más reciente en GitHub al volver a la pestaña o a la app, recuperar una página desde caché y cada 5 minutos mientras está abierta. Esto **no descarga RSS en cada clic**: el RSS se actualiza mediante GitHub Actions según su programación de cuatro turnos al día (sujeta a retrasos de GitHub y fallos de feed).
 - **Código y diseño:** las versiones del sitio se actualizan al completarse el despliegue de GitHub Pages. Si una app instalada permanece abierta en segundo plano, puede ser necesario cerrarla y volver a abrirla para aplicar una versión nueva de la interfaz.
+
+
+## Intereses en lenguaje natural (versión experimental)
+- En **«✨ Dime qué noticias quieres»** se puede escribir una petición en español sin conocer nuestros 22 temas: por ejemplo, `Solo noticias de política catalana`, `Solo noticias de sucesos en Madrid`, `Me interesan los avances sobre inteligencia artificial`, `Solo noticias del Real Madrid` o un nombre concreto. Se admite **una petición por línea**.
+- Una frase con **«solo», «solamente» o «exclusivamente»** filtra los titulares de manera estricta; varias frases exclusivas separadas por salto de línea funcionan como alternativas. **«Me interesa...»** concede prioridad a esas noticias y puede activar la categoría implicada sin ocultar todas las demás.
+- La interpretación relaciona texto con **categorías, regiones (Cataluña, Madrid, Andalucía, etc.), clubes, personas y palabras del titular/enlace**, sin llamadas a IA de pago ni servicios externos. Cuando un canal RSS trae una **ubicación declarada**, también se usa para reconocer noticias locales aunque el municipio no aparezca en el titular.
+- El campo se ofrece **en la bienvenida** y en el panel permanente; se guarda únicamente en las preferencias locales de ese navegador. No modifica filtros de otros usuarios.
+- Limitación: **NO es comprensión universal del lenguaje natural**. Las reglas se ampliarán a partir de las pruebas; algunas frases ambiguas o complejas pueden fallar. Si no hay noticias recientes que coincidan, se informa y no se rellena con noticias irrelevantes.
+- Para mejorar la cobertura local, se han añadido los canales oficiales de **Sucesos en Madrid** de El Diario de Madrid y Madridiario, pendientes de confirmar que entreguen titulares mediante el actualizador.
