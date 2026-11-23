@@ -53,3 +53,11 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - En la portada general, **el primer bloque de 20 noticias intenta reservar al menos un titular de cada tema activado**, siempre que exista alguno reciente que no esté excluido por las fuentes, vetos y opciones del lector. Los restantes se ordenan por relevancia, optimismo e intereses aprendidos. Las pestañas por tema permiten abrir una sección directamente.
 - Al abrir el título o pulsar «Leer», se guarda ese enlace en el navegador (`sinruido-seen-v1`, limitado a 800 URL) y aparece **✓ YA ABIERTO** con un cambio de color. Esta marca indica que se abrió el enlace, no que se terminó de leer el artículo.
 - El historial de clics del algoritmo se cuenta una sola vez por URL para evitar reforzar artificialmente un único titular. No se transmiten datos personales ni historiales a GitHub.
+
+
+## Medios sin duplicados y actualización al volver a la app
+- **Todos los lectores nuevos** ven los siete temas disponibles en el formulario de bienvenida y los cuatro medios conectados en este momento: **EL PAÍS, Cinco Días, Xataka y El Mundo**; sus selecciones son personales. No se copian los filtros de otro lector.
+- El formulario y la barra lateral agrupan los RSS por nombre de medio: **EL PAÍS aparece una sola vez aunque agregue 6 secciones**. Al marcar/desmarcar un medio se activan/desactivan sus RSS. En **«Ver secciones RSS»** es posible consultar las secciones, enlaces RSS y estado y afinar por cada sección si se desea.
+- El enlace de invitación sigue siendo https://dalonsoss-create.github.io/sin-ruido/?bienvenida=1 .
+- **Noticias:** en cada carga de la web se consulta `noticias.json`; además, se comprueba si hay una edición más reciente en GitHub al volver a la pestaña o a la app, recuperar una página desde caché y cada 5 minutos mientras está abierta. Esto **no descarga RSS en cada clic**: el RSS se actualiza mediante GitHub Actions según su programación de cuatro turnos al día (sujeta a retrasos de GitHub y fallos de feed).
+- **Código y diseño:** las versiones del sitio se actualizan al completarse el despliegue de GitHub Pages. Si una app instalada permanece abierta en segundo plano, puede ser necesario cerrarla y volver a abrirla para aplicar una versión nueva de la interfaz.
