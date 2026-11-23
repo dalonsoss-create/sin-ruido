@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlsplit
 from clasificar import classify
+from acceso import detect_access
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"docs"/"noticias.json"
@@ -82,17 +83,20 @@ def collect(feed):
         rss_tags.extend(c.get("term") for c in item.findall(ATOM+"category") if c.get("term"))
         rss_tags.extend(c.text for c in item.findall(DC+"subject") if c.text)
         category=classify(title,link,feed["category"],rss_tags,feed["name"])
+        access_status, access_evidence=detect_access(link,item,rss_tags)
         article={
             "title":title[:260],"link":link,"date":date_iso(published),
             "source":feed["name"],"source_id":feed["id"],"category":category,
             "place":feed.get("place",""),
-            "classification_version":5}
+            "classification_version":5,
+            "access_status":access_status}
         # La imagen se almacena SOLO si se ha comprobado permiso explícito.
         if feed.get("images_allowed") is True:
             img=image_in_rss(item)
             if img:
                 article["image"]=img
                 article["image_license_ok"]=True
+        if access_evidence:article["access_evidence"]=access_evidence
         articles.append(article)
     return articles
 
@@ -127,6 +131,14 @@ def main():
             a["category"]=classify(a.get("title",""),a.get("link",""),origin.get("category",a.get("category","Sociedad")),(),a.get("source",""))
             a["classification_version"]=5
             a["place"]=origin.get("place",a.get("place",""))
+    # Verificar acceso de los anteriores sin volver a rastrear los sitios.
+    # Un enlace de tipo premium/suscriptores sigue siendo reconocible, y
+    # conservamos las señales RSS ya confirmadas en ediciones anteriores.
+    for a in old:
+        if a.get("access_status")!="subscription":
+            access, evidence=detect_access(a.get("link",""))
+            a["access_status"]=access
+            if evidence:a["access_evidence"]=evidence
     # Retener noticias recientes si alguna fuente falla temporalmente.
     articles+=old
     active_ids={f["id"] for f in feed_list}
