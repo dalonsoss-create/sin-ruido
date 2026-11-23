@@ -1398,6 +1398,7 @@ el("share").onclick=async()=>{
 };
 let lastEdition=0;
 function applyEdition(data){
+    demo=false;
     publishedArticles=data.articles.filter(a=>a&&typeof a.title==="string"&&typeof a.category==="string"&&typeof a.link==="string");
     syncAllArticles();
     statuses=Object.fromEntries((data.sources_status||[]).map(s=>[s.id,s]));
