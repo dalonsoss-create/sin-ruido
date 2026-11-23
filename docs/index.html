@@ -79,6 +79,10 @@
 .welcome-skip{border:0;background:transparent;color:#666;font-size:12px;text-decoration:underline;padding:10px}
 .welcome-errors{color:#aa3328;font-size:12px;font-weight:750}
 @media(max-width:520px){.welcome-options{grid-template-columns:1fr}.welcome-inner{padding:15px}.welcome-head{padding:16px 12px}.welcome-head h2{font-size:28px}.topics{margin-top:0}}
+.welcome-group-title{grid-column:1/-1;font-size:11px;letter-spacing:1.1px;text-transform:uppercase;font-weight:900;color:var(--red);margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+.welcome-group-title:first-child{padding-top:0;border-top:0;margin-top:2px}
+.welcome-batch{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.welcome-batch button{background:transparent;border:1px solid #c9bcae;border-radius:20px;padding:6px 10px;font-size:11px;color:#6b574a;font-weight:800}
 </style>
 <link rel="stylesheet" href="./portada.css">
 </head>
@@ -149,10 +153,10 @@
       <p>Elige tus temas y medios, veta lo que te aburre y recibe una portada de 20 noticias. Gratis, sin cuenta y con prioridad para las buenas noticias.</p>
     </div>
     <form id="welcome-form">
-      <div class="welcome-step"><h3>1. ¿Qué temas te interesan?</h3><p>En portada aparecerá al menos un titular disponible de cada tema elegido.</p></div>
-      <div id="welcome-topics" class="welcome-options"></div>
+      <div class="welcome-step"><h3>1. ¿Qué temas te interesan?</h3><p>Hemos ampliado el menú siguiendo las secciones de la prensa. En las primeras 20 noticias representaremos cuantos temas sea posible y siempre tendrás acceso a cada sección elegida.</p></div>
+      <div class="welcome-batch"><button type="button" id="welcome-select-topics">Seleccionar todos</button><button type="button" id="welcome-clear-topics">Deseleccionar todos</button></div><div id="welcome-topics" class="welcome-options"></div>
       <div class="welcome-step"><h3>2. ¿Qué periódicos quieres consultar?</h3><p>Los periódicos aparecen una sola vez, aunque consultemos distintas secciones de cada medio.</p></div>
-      <div id="welcome-sources" class="welcome-options"></div>
+      <div class="welcome-batch"><button type="button" id="welcome-select-publishers">Seleccionar todos</button><button type="button" id="welcome-clear-publishers">Deseleccionar todos</button></div><div id="welcome-sources" class="welcome-options"></div>
       <div class="welcome-step"><h3>3. ¿Qué personajes o asuntos prefieres evitar?</h3><p>Escribe nombres o palabras separados por comas. Cuando aparezcan en un titular, lo ocultaremos.</p></div>
       <textarea id="welcome-veto" class="welcome-veto" maxlength="650" placeholder="Por ejemplo: famosos, política, moda, fútbol…"></textarea>
       <div class="welcome-suggestions" id="welcome-veto-suggestions"></div>
@@ -477,12 +481,22 @@ const WELCOME_KEY="sinruido-welcome-v1";
 function buildWelcome(){
   const topicsBox=el("welcome-topics"),sourcesBox=el("welcome-sources");
   topicsBox.replaceChildren();sourcesBox.replaceChildren();
-  for(const [name,symbol] of GROUPS){
-    const label=mk("label","welcome-option"),input=mk("input");
-    input.type="checkbox";input.name="welcome-topic";input.value=name;
-    input.checked=prefs.topics[name]!==false;
-    const copy=mk("span","",symbol+" "+name);
-    label.append(input,copy);topicsBox.append(label);
+  const sections=[
+    ["Actualidad",["Política nacional","Internacional","Conflictos","Sucesos","Sociedad"]],
+    ["Economía",["Economía","Empresas"]],
+    ["Ciencia, tecnología y salud",["Ciencia","Tecnología","IA","Salud","Naturaleza","Medio ambiente"]],
+    ["Cultura y vida",["Cultura","Educación","Historia","Viajes","Gastronomía"]],
+    ["Deportes",["Deportes","Fútbol","Tenis","Motor"]]
+  ];
+  for(const [section,names] of sections){
+    topicsBox.append(mk("div","welcome-group-title",section));
+    for(const name of names){
+      const symbol=GROUPS.find(g=>g[0]===name)?.[1]||"•";
+      const label=mk("label","welcome-option"),input=mk("input");
+      input.type="checkbox";input.name="welcome-topic";input.value=name;
+      input.checked=prefs.topics[name]!==false;
+      label.append(input,mk("span","",symbol+" "+name));topicsBox.append(label);
+    }
   }
   for(const group of groupedPublishers()){
     const label=mk("label","welcome-option"),input=mk("input");
@@ -522,6 +536,14 @@ function closeWelcome(){
   if(typeof dialog.close==="function"&&dialog.open)dialog.close();
   else dialog.removeAttribute("open");
   try{localStorage.setItem(WELCOME_KEY,"1")}catch(e){}
+}
+for(const [id,name,checked] of [
+  ["welcome-select-topics","welcome-topic",true],
+  ["welcome-clear-topics","welcome-topic",false],
+  ["welcome-select-publishers","welcome-source",true],
+  ["welcome-clear-publishers","welcome-source",false]
+]){
+  el(id).onclick=()=>{for(const input of document.querySelectorAll('input[name="'+name+'"]'))input.checked=checked};
 }
 el("open-welcome").onclick=openWelcome;
 el("welcome-skip").onclick=()=>{
