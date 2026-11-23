@@ -146,6 +146,29 @@ body.settings-open{overflow:hidden}
 .photo-license{position:absolute;right:6px;bottom:6px;z-index:4;padding:5px 7px;border-radius:6px;background:#1d1d1dd4;color:#fff!important;font:700 10px/1.2 ui-sans-serif,-apple-system,system-ui,sans-serif}
 .photo-license:hover{background:#111}
 .photo-option{font-weight:750}
+
+/* Un acto voluntario: abrir el enlace nunca retira la noticia. */
+.story{position:relative}
+.review-toggle{position:absolute;z-index:8;top:16px;left:16px;display:flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:50%;border:2px solid #fff;background:#25323bf0;color:#fff;
+  box-shadow:0 3px 13px #0006;font:900 25px/1 ui-sans-serif,system-ui,sans-serif;cursor:pointer;
+  transition:transform .12s ease,background .12s ease}
+.review-toggle:hover,.review-toggle:focus-visible{transform:scale(1.08);background:#267d55}
+.review-toggle:active{transform:scale(.91)}
+.review-toggle.is-reviewed{background:#f4e5c9;color:#59452d;border-color:#765f46}
+.review-toggle::after{content:"Ya vista";position:absolute;top:calc(100% + 5px);left:0;white-space:nowrap;
+  border-radius:7px;font:750 11px ui-sans-serif,system-ui,sans-serif;background:#243039;color:#fff;
+  padding:4px 7px;opacity:0;pointer-events:none;transition:opacity .15s}
+.review-toggle.is-reviewed::after{content:"Recuperar"}
+.review-toggle:hover::after,.review-toggle:focus-visible::after{opacity:1}
+.reviewed-hint{font:500 12px/1.45 ui-sans-serif,system-ui,sans-serif;color:#5b625c;margin:5px 0 12px;padding:0 2px}
+.restore-reviewed-all{border:1px solid #c7baaa;border-radius:9px;padding:9px 13px;background:#fff8ed;color:#7a492b;
+  font:800 12px ui-sans-serif,system-ui,sans-serif;margin:0 0 12px;cursor:pointer}
+.restore-reviewed-all[hidden]{display:none}
+#reviewed-count{display:inline-flex;align-items:center;justify-content:center;background:#e3ebdd;color:#325341;
+  border-radius:20px;padding:2px 7px;font-size:11px}
+.collection-btn.selected #reviewed-count{background:#d3e6d4;color:#294a37}
+@media(max-width:760px){.review-toggle{top:14px;left:14px;width:46px;height:46px}}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -233,9 +256,8 @@ body.settings-open{overflow:hidden}
     <div class="chipwrap" id="blocked-list"></div>
     <form id="block-form" class="inline-form"><input id="block-input" maxlength="65" placeholder="Ej. famosos, fútbol…" aria-label="Nueva palabra vetada"><button class="smallbtn" type="submit">+ Vetar</button></form>
     <p class="muted-note">No volverán a aparecer titulares que contengan esas palabras.</p>
-    <hr class="rule"><div class="section-heading"><h3>Imágenes de portada</h3></div>
-    <label class="checkline photo-option"><input type="checkbox" id="photos-enabled" checked><span class="label-text">📷 Mostrar fotografías libres</span></label>
-    <p class="muted-note">Fotos ilustrativas de Wikimedia Commons con licencia comprobada, autor y enlace. No son las fotografías originales de los artículos. Si las desactivas, verás nuestras ilustraciones propias y evitarás las consultas de imágenes a Wikimedia.</p>
+    <hr class="rule"><div class="section-heading"><h3>Ilustraciones originales</h3></div>
+    <p class="muted-note">Noticias ilustradas con dibujos editoriales propios y variados. No usamos fotografías genéricas que puedan confundirse con imágenes reales del suceso.</p>
     <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
     <p class="muted-note">Selecciona el periódico una sola vez. Si quieres afinar por secciones, despliega sus canales RSS. Tus cambios solo afectan a tu edición.</p>
     <div class="sources-batch" aria-label="Selección rápida de periódicos">
@@ -268,7 +290,10 @@ body.settings-open{overflow:hidden}
     <div class="collection-nav">
       <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
       <button id="show-saved" class="collection-btn" type="button">🔖 Guardadas <span id="saved-count">0</span></button>
+      <button id="show-reviewed" class="collection-btn" type="button">✓ Ya vistas <span id="reviewed-count">0</span></button>
     </div>
+    <p class="reviewed-hint" id="reviewed-hint" role="status" aria-live="polite">Pulsa el ✓ redondo de una noticia para retirarla de «Hoy». Si solo la abres, se queda.</p>
+    <button id="restore-reviewed-all" class="restore-reviewed-all" type="button" hidden>↶ Recuperar todas las vistas</button>
     <section id="mustread-panel" class="mustread-panel" hidden aria-labelledby="mustread-title">
       <div class="mustread-head"><strong id="mustread-title">⭐ Ayer, por si te lo perdiste</strong><span>Hasta 48 horas · destacados en RSS de cinco periódicos de referencia</span></div>
       <div id="mustread-grid" class="mustread-grid"></div>
@@ -330,14 +355,13 @@ body.settings-open{overflow:hidden}
 </dialog>
 <script src="./ilustraciones.js"></script>
 <script src="./intereses.js?v=2"></script>
-<script src="./fotos.js?v=3"></script>
 <script src="./acceso.js?v=2"></script>
 <script src="./fuentes-personales.js?v=1"></script>
 <script>
 (function(){
 "use strict";
 const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
-const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:"",photoEnabled:true};
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
 const EXAMPLES=[
 {title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
 {title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
@@ -447,7 +471,7 @@ function renderLearning(){
 function loadPrefs(){
   try{
     const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
-    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly,interests:typeof x.interests==="string"?x.interests:"",photoEnabled:x.photoEnabled!==false};
+    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly,interests:typeof x.interests==="string"?x.interests:""};
   }catch(e){return JSON.parse(JSON.stringify(DEFAULT))}
 }
 prefs=loadPrefs();
@@ -511,7 +535,7 @@ function matchesReader(a){
     (!q||normal(a.title+" "+a.source+" "+a.category).includes(q));
 }
 function filtered(){
-  let list=articles.filter(a=>isToday(a)&&matchesReader(a));
+  let list=articles.filter(a=>isToday(a)&&!isReviewed(a)&&matchesReader(a));
   if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
   return list;
 }
@@ -522,7 +546,7 @@ function essentialsFromYesterday(){
   const previous=articles.filter(a=>{
     const age=(now-Date.parse(a.date))/3600000;
     return Number.isFinite(age)&&age>=0&&age<=48&&!isToday(a)&&
-      portadasDe(a).length>0&&matchesReader(a);
+      portadasDe(a).length>0&&!isReviewed(a)&&matchesReader(a);
   }).sort((a,b)=>weight(b)-weight(a));
   const out=[],categories=new Set(),publishers=new Set();
   for(const a of previous){
@@ -558,46 +582,7 @@ function titleAnchor(a){
 }
 function visual(a,lead=false){
   const box=mk("div","art");
-  // La ilustración original permanece debajo; jamás dejamos un hueco sin imagen.
   box.innerHTML=ilustracionEditorial(a);
-  if(prefs.photoEnabled===false||!window.SinRuidoFotos?.resolve)return box;
-  function display(){
-    Promise.resolve(window.SinRuidoFotos.resolve(a)).then(photo=>{
-      if(!photo||!box.isConnected||prefs.photoEnabled===false||!/^https:\/\//.test(photo.src||""))return;
-      const layer=mk("div","article-photo"),link=mk("a","article-photo-link"),img=mk("img");
-      link.href=/^https:\/\//.test(a.link||"")?a.link:photo.attribution;
-      link.target="_blank";link.rel="noopener noreferrer";
-      link.title="Abrir noticia original en "+a.source;
-      link.addEventListener("click",()=>trackClick(a));
-      img.alt=photo.alt||"Fotografía de archivo";
-      img.loading=lead?"eager":"lazy";img.decoding="async";img.referrerPolicy="no-referrer";
-      if(lead)img.fetchPriority="high";
-      img.onload=()=>layer.classList.add("ready");
-      img.onerror=()=>layer.remove();
-      link.append(img);layer.append(link);
-      const isArchive=photo.type!=="editorial";
-      const sourceLabel=isArchive
-        ?"📷 Foto ilustrativa · "+String(photo.credit||"Commons").slice(0,40)+" · "+photo.license
-        :"📷 Foto autorizada · "+a.source;
-      const credit=mk("a","photo-credit",sourceLabel);
-      credit.href=photo.attribution;credit.target="_blank";credit.rel="noopener noreferrer";
-      credit.title=(photo.credit||"")+(photo.license?" · "+photo.license:"")+" · Ver autor y archivo original";
-      layer.append(credit);
-      if(isArchive&&/^https:\/\/creativecommons\.org\//.test(photo.licenseUrl||"")){
-        const license=mk("a","photo-license","Licencia");
-        license.href=photo.licenseUrl;license.target="_blank";license.rel="noopener noreferrer";
-        license.title="Consultar las condiciones de "+photo.license;
-        layer.append(license);
-      }
-      box.append(layer);img.src=photo.src;
-    }).catch(()=>{});
-  }
-  if(!lead&&"IntersectionObserver" in window){
-    const observer=new IntersectionObserver(entries=>{
-      if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();display()}
-    },{rootMargin:"350px"});
-    observer.observe(box);
-  }else display();
   return box;
 }
 function kicker(a){
@@ -633,6 +618,47 @@ function showSubscriptionFor(a){
 }
 el("pay-close").onclick=()=>el("pay-dialog").close();
 el("pay-dialog").addEventListener("click",e=>{if(e.target===el("pay-dialog"))el("pay-dialog").close()});
+const REVIEWED_KEY="sinruido-reviewed-v1";
+const MAX_REVIEWED=700;
+function loadReviewed(){
+  try{
+    const items=JSON.parse(localStorage.getItem(REVIEWED_KEY)||"[]");
+    return new Map((Array.isArray(items)?items:[]).filter(a=>a&&typeof a.key==="string"&&
+      typeof a.title==="string"&&typeof a.link==="string"&&/^https:\/\//.test(a.link))
+      .slice(-MAX_REVIEWED).map(a=>[a.key,a]));
+  }catch(e){return new Map()}
+}
+let reviewedStories=loadReviewed();
+function isReviewed(a){return reviewedStories.has(storyId(a))}
+function updateReviewedCount(){el("reviewed-count").textContent=String(reviewedStories.size)}
+function toggleReviewed(a){
+  if(!/^https:\/\//.test(a.link||""))return;
+  const key=storyId(a),restoring=isReviewed(a),updated=new Map(reviewedStories);
+  if(restoring)updated.delete(key);
+  else{
+    updated.set(key,{key,title:a.title,link:a.link,source:a.source,source_id:a.source_id||"",
+      category:a.category,date:a.date,place:a.place||"",access_status:a.access_status||"unknown",
+      access_evidence:a.access_evidence||"",marked_at:Date.now()});
+    while(updated.size>MAX_REVIEWED)updated.delete(updated.keys().next().value);
+  }
+  try{localStorage.setItem(REVIEWED_KEY,JSON.stringify([...updated.values()]))}
+  catch(e){el("reviewed-hint").textContent="No hemos podido guardar el cambio en este navegador.";return}
+  reviewedStories=updated;updateReviewedCount();
+  el("reviewed-hint").textContent=restoring?
+    "↶ Recuperada. Si es una noticia de hoy, vuelve a la portada.":
+    "✓ Retirada de «Hoy». Sigue disponible en «Ya vistas» para recuperarla.";
+  const oldScroll=window.scrollY;
+  render();
+  if(collectionMode==="feed")window.scrollTo(0,oldScroll);
+}
+function restoreAllReviewed(){
+  if(!reviewedStories.size||!confirm("¿Recuperar todas las noticias marcadas como ya vistas? Las que sigan siendo de hoy volverán a la portada."))return;
+  try{localStorage.setItem(REVIEWED_KEY,"[]")}
+  catch(e){el("reviewed-hint").textContent="No hemos podido guardar el cambio.";return}
+  reviewedStories=new Map();updateReviewedCount();
+  el("reviewed-hint").textContent="↶ Todas recuperadas. Las de hoy vuelven a la portada.";
+  render();
+}
 const BOOKMARK_KEY="sinruido-bookmarks-v1";
 const MAX_BOOKMARKS=150;
 let collectionMode="feed";
@@ -671,10 +697,11 @@ function shareNewsLink(a){
 function switchCollection(mode){
   collectionMode=mode;
   shownCount=PAGE_SIZE;lastFilterSignature="";
-  el("show-feed").classList.toggle("selected",mode==="feed");
-  el("show-saved").classList.toggle("selected",mode==="saved");
-  el("topic-tabs").hidden=mode==="saved";
-  el("sort").disabled=mode==="saved";
+  for(const modeName of ["feed","saved","reviewed"])
+    el("show-"+modeName).classList.toggle("selected",mode===modeName);
+  el("topic-tabs").hidden=mode!=="feed";
+  el("sort").disabled=mode!=="feed";
+  el("restore-reviewed-all").hidden=mode!=="reviewed"||!reviewedStories.size;
   render();
 }
 function todayKey(value){
@@ -711,15 +738,22 @@ function actions(a){
     extra.append(bookmark,whatsapp);
     row.append(extra);
   }
-  if(collectionMode!=="saved")row.append(hide);return row;
+  if(collectionMode==="feed")row.append(hide);return row;
 }
 function makeCard(a,lead=false){
   const card=mk("article",lead?"story hero":"story");
   if(a.link)card.dataset.storyLink=a.link;
   if(wasOpened(a))card.classList.add("seen");
+  const reviewed=isReviewed(a);
+  const button=mk("button","review-toggle"+(reviewed?" is-reviewed":""),reviewed?"↶":"✓");
+  button.type="button";
+  button.title=reviewed?"Recuperar esta noticia":"Marcar como ya vista y retirarla de Hoy";
+  button.setAttribute("aria-label",button.title+": "+a.title);
+  button.setAttribute("aria-pressed",String(reviewed));
+  button.onclick=()=>toggleReviewed(a);
   const copy=mk("div","story-copy"),h=mk("h3");
   h.append(titleAnchor(a));copy.append(kicker(a),h,actions(a));
-  card.append(visual(a,lead),copy);return card;
+  card.append(button,visual(a,lead),copy);return card;
 }
 function balanceTopics(list){
   if(list.length<2)return list;
@@ -780,9 +814,29 @@ function renderSaved(){
   el("list-heading").hidden=visible<=1;
   for(const a of list.slice(1,visible))bottom.append(makeCard(a));
 }
+function renderReviewed(){
+  const list=[...reviewedStories.values()].reverse();
+  const visible=Math.min(shownCount,list.length);
+  el("headline-heading").textContent="Noticias marcadas como ya vistas";
+  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" vistas";
+  el("more-wrap").hidden=visible>=list.length;
+  el("more-counter").textContent="Mostrando "+visible+" de "+list.length+" noticias retiradas.";
+  el("restore-reviewed-all").hidden=!list.length;
+  const cover=el("features"),bottom=el("news-list");
+  cover.replaceChildren();bottom.replaceChildren();
+  if(!list.length){
+    const empty=mk("div","empty","Todavía no has marcado ninguna noticia como ya vista.");
+    empty.append(mk("small","","Pulsa el círculo ✓ de cualquier noticia de «Hoy» para apartarla. Aquí podrás recuperarla."));
+    cover.append(empty);el("list-heading").hidden=true;return;
+  }
+  cover.append(makeCard(list[0],true));
+  el("list-heading").hidden=visible<=1;
+  for(const a of list.slice(1,visible))bottom.append(makeCard(a));
+}
 function render(){
   el("headline-heading").textContent="Noticias de hoy";
   if(collectionMode==="saved"){el("mustread-panel").hidden=true;renderSaved();return}
+  if(collectionMode==="reviewed"){el("mustread-panel").hidden=true;renderReviewed();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
@@ -812,7 +866,6 @@ function render(){
 }
 function renderControls(){
   el("positive-only").checked=!!prefs.positiveOnly;
-  el("photos-enabled").checked=prefs.photoEnabled!==false;
   renderInterests();
   const topics=el("topic-toggles");topics.replaceChildren();
   for(const [name,symbol,w] of GROUPS){
@@ -1136,12 +1189,13 @@ el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
 el("refresh-news").onclick=()=>{refreshPublishedEdition(true);refreshOwnFeeds()};
 el("show-feed").onclick=()=>switchCollection("feed");
 el("show-saved").onclick=()=>switchCollection("saved");
+el("show-reviewed").onclick=()=>switchCollection("reviewed");
+el("restore-reviewed-all").onclick=restoreAllReviewed;
 el("learning-erase").onclick=()=>{
   if(!confirm("¿Borrar las preferencias que Sin Ruido ha aprendido al abrir noticias? Tus temas, vetos y fuentes seguirán igual."))return;
   readingHistory=[];try{localStorage.removeItem(LEARNING_KEY)}catch(e){}
   renderLearning();render();
 };el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
-el("photos-enabled").onchange=e=>{prefs.photoEnabled=e.target.checked;save();render()};
 const settings=el("settings"),toggle=el("mobile-settings");
 const backdrop=el("settings-backdrop"),closeSettings=el("settings-close");
 function closePanel(restoreFocus=true){
@@ -1298,7 +1352,7 @@ async function init(){
     el("notice").textContent="VISTA PREVIA: estos titulares son ficticios. Las noticias reales aparecerán al ejecutar la actualización de RSS.";
     el("notice").hidden=false;
   }
-  el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();updateSavedCount();render();
+  el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();updateSavedCount();updateReviewedCount();render();
   // Consultar fuentes propias sin retrasar la portada ni la bienvenida.
   if(ownFeeds.length)refreshOwnFeeds();
   let storedPrefs=false,alreadyWelcomed=false;
