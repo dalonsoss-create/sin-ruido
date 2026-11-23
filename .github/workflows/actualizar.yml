@@ -7,7 +7,7 @@ on:
       - 'scripts/clasificar.py'
       - 'docs/fuentes.json'
   schedule:
-    - cron: '17 6,10,15,20 * * *'
+    - cron: '17 5-23 * * *'
 permissions:
   contents: write
 jobs:
