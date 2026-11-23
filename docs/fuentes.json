@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "feeds": [
+    {
+      "id": "elpais-tecnologia",
+      "name": "EL PAÍS",
+      "category": "Tecnología",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/tecnologia/portada",
+      "images_allowed": false
+    },
+    {
+      "id": "elpais-ciencia",
+      "name": "EL PAÍS",
+      "category": "Ciencia",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/ciencia/portada",
+      "images_allowed": false
+    },
+    {
+      "id": "elpais-economia",
+      "name": "EL PAÍS",
+      "category": "Economía",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada",
+      "images_allowed": false
+    },
+    {
+      "id": "elpais-naturaleza",
+      "name": "EL PAÍS",
+      "category": "Naturaleza",
+      "url": "https://feeds.elpais.com/mrss-s/list/ep/site/elpais.com/section/clima-y-medio-ambiente",
+      "images_allowed": false
+    },
+    {
+      "id": "elpais-internacional",
+      "name": "EL PAÍS",
+      "category": "Internacional",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
+      "images_allowed": false
+    },
+    {
+      "id": "elpais-deportes",
+      "name": "EL PAÍS",
+      "category": "Deportes",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/deportes/portada",
+      "images_allowed": false
+    },
+    {
+      "id": "cincodias-economia",
+      "name": "Cinco Días",
+      "category": "Economía",
+      "url": "https://feeds.elpais.com/mrss-s/list/ep/site/cincodias.elpais.com/section/economia",
+      "images_allowed": false
+    },
+    {
+      "id": "xataka-general",
+      "name": "Xataka",
+      "category": "Tecnología",
+      "url": "https://www.xataka.com/index.xml",
+      "images_allowed": false
+    },
+    {
+      "id": "elmundo-ciencia",
+      "name": "El Mundo",
+      "category": "Ciencia",
+      "url": "https://e00-elmundo.uecdn.es/elmundo/rss/ciencia.xml",
+      "images_allowed": false
+    },
+    {
+      "id": "elmundo-salud",
+      "name": "El Mundo",
+      "category": "Salud",
+      "url": "https://e00-elmundo.uecdn.es/elmundo/rss/salud.xml",
+      "images_allowed": false
+    }
+  ]
+}
