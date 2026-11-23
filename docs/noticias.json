@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-23T13:30:03.882402+00:00",
-  "sources_ok": 40,
+  "updated": "2026-11-23T13:33:11.946912+00:00",
+  "sources_ok": 41,
   "classification_version": 5,
-  "feed_count": 43,
+  "feed_count": 44,
   "sources_status": [
     {
       "id": "20minutos-portada",
@@ -68,6 +68,11 @@
       "id": "elconfidencial-portada",
       "ok": true,
       "count": 4
+    },
+    {
+      "id": "elcorreodepozuelo-portada",
+      "ok": true,
+      "count": 10
     },
     {
       "id": "eldiario-portada",
@@ -222,6 +227,19 @@
   ],
   "articles": [
     {
+      "title": "España - Islas Fiji, en directo: Mundial Sub-17, hoy en vivo",
+      "link": "https://as.com/futbol/seleccion/espana-islas-fiyi-en-directo-mundial-sub-17-hoy-en-vivo-f202611-d/",
+      "date": "2026-11-23T13:29:53+00:00",
+      "source": "AS",
+      "source_id": "as-futbol",
+      "category": "Fútbol",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "EN VIVO| Bloqueos en carreteras, accidentes y manifestaciones 23 de noviembre: afectaciones en la carretera México-Puebla por muerte de persona atropellada",
       "link": "https://www.infobae.com/mexico/2026/11/23/en-vivo-bloqueos-accidentes-y-manifestaciones-hoy-23-de-noviembre/",
       "date": "2026-11-23T13:28:09+00:00",
@@ -254,6 +272,32 @@
       "source": "Infobae",
       "source_id": "infobae-portada",
       "category": "Economía",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Qué es Artex, la herramienta de IA que busca fallos de seguridad sola y que ya preocupa a empresas y gobiernos",
+      "link": "https://www.xataka.com/seguridad/que-artex-herramienta-ia-que-busca-fallos-seguridad-sola-que-preocupa-a-empresas-gobiernos",
+      "date": "2026-11-23T13:27:44+00:00",
+      "source": "Xataka",
+      "source_id": "xataka-general",
+      "category": "Empresas",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Puigdemont recomienda un poema \"a los enemigos\" tras la amnistía: \"Me muero de ganas de daros por el culo\"",
+      "link": "https://www.eldiario.es/catalunya/puigdemont-recomienda-poema-enemigos-amnistia-muero-ganas-daros-culo_1_13686211.html",
+      "date": "2026-11-23T13:25:10+00:00",
+      "source": "elDiario.es",
+      "source_id": "eldiario-portada",
+      "category": "Sociedad",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -304,6 +348,36 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "La 'MasterChef' Marta Sanahuja, 'Delicious Martha', embarazada cinco meses después de sufrir un aborto",
+      "link": "https://www.abc.es/gente/masterchef-marta-sanahuja-delicious-martha-embarazada-cinco-20261123142254-nt.html",
+      "date": "2026-11-23T13:22:55+00:00",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Por qué no soy antimarxista",
+      "link": "https://www.abc.es/economia/antimarxista-20261123142240-nt.html",
+      "date": "2026-11-23T13:22:40+00:00",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Sorteo de la Copa del Rey: cruces y partidos de la segunda ronda",
       "link": "https://elpais.com/deportes/futbol/2026-11-23/sorteo-de-la-copa-del-rey-cruces-y-partidos-de-la-segunda-ronda.html",
       "date": "2026-11-23T13:21:26+00:00",
@@ -315,6 +389,21 @@
       "access_status": "unknown",
       "editorial_portadas": [],
       "editorial_coincidencias": 2
+    },
+    {
+      "title": "Sevilla abre este viernes el parque 'Navidad Mágica' en Los Bermejales: acceso libre, pasacalles y atracciones a 2 euros",
+      "link": "https://www.abc.es/queplan/sevilla/que-hacer/sevilla-abre-viernes-parque-navidad-magica-bermejales-20261123142112-nts.html",
+      "date": "2026-11-23T13:21:12+00:00",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
     },
     {
       "title": "Elecciones generales, en directo | Los sondeos que desmienten al CIS dan una holgada mayoría absoluta a PP y Vox y un batacazo del Frente Amplio",
@@ -390,19 +479,6 @@
       "source": "Infobae",
       "source_id": "infobae-portada",
       "category": "Sociedad",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "España - Islas Fiji, en directo: Mundial Sub-17, hoy en vivo",
-      "link": "https://as.com/futbol/seleccion/espana-islas-fiyi-en-directo-mundial-sub-17-hoy-en-vivo-f202611-d/",
-      "date": "2026-11-23T13:19:30+00:00",
-      "source": "AS",
-      "source_id": "as-futbol",
-      "category": "Fútbol",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -1045,6 +1121,19 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "El PP denuncia al CIS ante la Junta Electoral para exigir que todos los partidos tengan acceso a sus datos demoscópicos",
+      "link": "https://www.20minutos.es/nacional/pp-denuncia-cis-ante-junta-electoral-para-exigir-que-todos-los-partidos-tengan-acceso-sus-datos-demoscopicos_7064598_0.html",
+      "date": "2026-11-23T13:14:45+00:00",
+      "source": "20minutos",
+      "source_id": "20minutos-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Dos hermanos se entregaron después de que su padrastro de 39 años muriera de un disparo en medio de una discusión en un apartamento de Bocagrande, en Cartagena: aseguran que defendían a su mamá de 62 años",
       "link": "https://www.infobae.com/colombia/2026/11/23/dos-hermanos-se-entregaron-despues-de-que-su-padrastro-de-39-anos-muriera-de-un-disparo-en-medio-de-una-discusion-en-un-apartamento-de-bocagrande-en-cartagena-aseguran-que-defendian-a-su-mama-de-62-anos/",
       "date": "2026-11-23T13:14:34+00:00",
@@ -1453,12 +1542,12 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "La cerveza 'sin' es un negocio tan grande que ha activado una nueva carrera: cerveza sin alcohol capaz de emborrachar",
-      "link": "https://www.elblogsalmon.com/emprendedores/cerveza-negocio-grande-que-ha-activado-nueva-carrera-cerveza-alcohol-capaz-emborrachar",
+      "title": "Muffins de avena y plátano sin azúcar: el desayuno de tres ingredientes que te hará dejar la bollería industrial",
+      "link": "https://www.directoalpaladar.com/postres/muffins-avena-platano-azucar-desayuno-tres-ingredientes-que-te-hara-dejar-bolleria-industrial",
       "date": "2026-11-23T13:00:49+00:00",
-      "source": "El Blog Salmón",
-      "source_id": "elblogsalmon-general",
-      "category": "Empresas",
+      "source": "Directo al Paladar",
+      "source_id": "directopaladar-general",
+      "category": "Gastronomía",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -1466,12 +1555,12 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Muffins de avena y plátano sin azúcar: el desayuno de tres ingredientes que te hará dejar la bollería industrial",
-      "link": "https://www.directoalpaladar.com/postres/muffins-avena-platano-azucar-desayuno-tres-ingredientes-que-te-hara-dejar-bolleria-industrial",
+      "title": "La cerveza 'sin' es un negocio tan grande que ha activado una nueva carrera: cerveza sin alcohol capaz de emborrachar",
+      "link": "https://www.elblogsalmon.com/emprendedores/cerveza-negocio-grande-que-ha-activado-nueva-carrera-cerveza-alcohol-capaz-emborrachar",
       "date": "2026-11-23T13:00:49+00:00",
-      "source": "Directo al Paladar",
-      "source_id": "directopaladar-general",
-      "category": "Gastronomía",
+      "source": "El Blog Salmón",
+      "source_id": "elblogsalmon-general",
+      "category": "Empresas",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -1591,7 +1680,7 @@
       "link": "https://www.elmundo.es/internacional/2026/11/23/6b042540e4d4d858798b4580.html",
       "date": "2026-11-23T12:55:25+00:00",
       "source": "El Mundo",
-      "source_id": "elmundo-internacional",
+      "source_id": "elmundo-portada",
       "category": "Internacional",
       "place": "",
       "classification_version": 5,
@@ -2103,7 +2192,7 @@
       "classification_version": 5,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 2
+      "editorial_coincidencias": 3
     },
     {
       "title": "Las mejores 71 fotos de República Folklore: del talento de Abel Pintos a la fortaleza de Cazzu y el cierre épico de La Sole",
@@ -3168,15 +3257,15 @@
       "link": "https://www.elmundo.es/espana/2026/11/23/6b042ed9e4d4d8872c8b4579.html",
       "date": "2026-11-23T12:29:00+00:00",
       "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
       "editorial_portadas": [
         "El Mundo"
       ],
-      "editorial_coincidencias": 2
+      "editorial_coincidencias": 3
     },
     {
       "title": "Científicos de Cambridge simularon 100.000 impactos de cometas y cuestionaron una hipótesis sobre el origen de la vida en la Tierra",
@@ -3480,7 +3569,7 @@
       "classification_version": 5,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 2
+      "editorial_coincidencias": 3
     },
     {
       "title": "Abascal alerta de un posible \"fraude electoral\" de Sánchez y defiende que \"cualquier voto que no vaya a su mafia es útil\"",
@@ -3510,7 +3599,7 @@
       "editorial_portadas": [
         "La Vanguardia"
       ],
-      "editorial_coincidencias": 2
+      "editorial_coincidencias": 1
     },
     {
       "title": "Cruces y partidos del sorteo de Copa del Rey de fútbol: emparejamientos de la segunda eliminatoria",
@@ -3570,7 +3659,7 @@
       "editorial_portadas": [
         "El Confidencial"
       ],
-      "editorial_coincidencias": 4
+      "editorial_coincidencias": 5
     },
     {
       "title": "Cuatro familiares detenidos en Alcalá por disparar presuntamente a un vecino y matar a su perro",
@@ -3820,7 +3909,7 @@
       "classification_version": 5,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 2
+      "editorial_coincidencias": 1
     },
     {
       "title": "Que las iglesias paguen impuestos, planteó el senador Wally: “Les da para comprar multimillonarias mansiones en Estados Unidos”",
@@ -5779,7 +5868,7 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Montero defiende a su candidato por Huesca tras las críticas por su minuto de oro: \"Siempre orgullosa\"",
+      "title": "Irene Montero defiende a su candidato por Huesca tras las críticas por su minuto de oro: \"Siempre orgullosa\"",
       "link": "https://www.20minutos.es/nacional/montero-defiende-su-candidato-por-huesca-tras-las-criticas-por-su-minuto-oro-siempre-orgullosa-un-trabajador_7064554_0.html",
       "date": "2026-11-23T11:27:16+00:00",
       "source": "20minutos",
@@ -6609,7 +6698,7 @@
       "link": "https://www.elmundo.es/internacional/2026/11/23/6b041e10e4d4d8064a8b456e.html",
       "date": "2026-11-23T11:06:46+00:00",
       "source": "El Mundo",
-      "source_id": "elmundo-internacional",
+      "source_id": "elmundo-portada",
       "category": "Conflictos",
       "place": "",
       "classification_version": 5,
@@ -6756,7 +6845,7 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Recorre más de 170 metros en una tirolina con el cuerpo en llamas para batir un récord",
+      "title": "Recorre 170 metros en una tirolina con el cuerpo en llamas",
       "link": "https://www.20minutos.es/gonzoo/blogs/becario/recorre-mas-170-metros-una-tirolina-con-cuerpo-llamas-para-batir-un-record_7064530_0.html",
       "date": "2026-11-23T11:02:50+00:00",
       "source": "20minutos",
@@ -7221,7 +7310,7 @@
       "link": "https://www.elmundo.es/internacional/2026/11/23/6b03ddfde9cf4a5f188b4574.html",
       "date": "2026-11-23T10:54:31+00:00",
       "source": "El Mundo",
-      "source_id": "elmundo-internacional",
+      "source_id": "elmundo-portada",
       "category": "Conflictos",
       "place": "",
       "classification_version": 5,
@@ -10363,12 +10452,12 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Marruecos se la juega a España, deja de comprar este producto clave donde las ventas se desploman un 80% y se pierden 150 millones de euros",
-      "link": "https://www.elblogsalmon.com/economia/marruecos-se-juega-a-espana-deja-comprar-este-producto-clave-donde-ventas-se-desploman-80-se-pierden-150-millones-euros",
+      "title": "Toshisuke Kanazawa culturista japonés de 90 años: “No como carne, pescado, leche ni yogur. Mis tres comidas diarias se basan en arroz integral, natto y sopa de miso”",
+      "link": "https://www.directoalpaladar.com/consumidores/toshisuke-kanazawa-culturista-japones-90-anos-no-como-carne-pescado-leche-yogur-mis-tres-comidas-diarias-se-basan-arroz-integral-natto-sopa-miso",
       "date": "2026-11-23T07:00:24+00:00",
-      "source": "El Blog Salmón",
-      "source_id": "elblogsalmon-general",
-      "category": "Economía",
+      "source": "Directo al Paladar",
+      "source_id": "directopaladar-general",
+      "category": "Gastronomía",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -10376,12 +10465,12 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Toshisuke Kanazawa culturista japonés de 90 años: “No como carne, pescado, leche ni yogur. Mis tres comidas diarias se basan en arroz integral, natto y sopa de miso”",
-      "link": "https://www.directoalpaladar.com/consumidores/toshisuke-kanazawa-culturista-japones-90-anos-no-como-carne-pescado-leche-yogur-mis-tres-comidas-diarias-se-basan-arroz-integral-natto-sopa-miso",
+      "title": "Marruecos se la juega a España, deja de comprar este producto clave donde las ventas se desploman un 80% y se pierden 150 millones de euros",
+      "link": "https://www.elblogsalmon.com/economia/marruecos-se-juega-a-espana-deja-comprar-este-producto-clave-donde-ventas-se-desploman-80-se-pierden-150-millones-euros",
       "date": "2026-11-23T07:00:24+00:00",
-      "source": "Directo al Paladar",
-      "source_id": "directopaladar-general",
-      "category": "Gastronomía",
+      "source": "El Blog Salmón",
+      "source_id": "elblogsalmon-general",
+      "category": "Economía",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -11167,12 +11256,90 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Los jubilados al PSOE y los policías a Vox: la diferencia del voto por ocupación",
+      "link": "https://elpais.com/espana/elecciones-generales/2026-11-23/los-jubilados-al-psoe-y-los-policias-a-vox-la-diferencia-del-voto-por-ocupacion.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Promesas electorales bajo sospecha",
+      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "De la desquiciada de ‘Obsession’ a la ‘sudasangre’ de ‘Sanguine’: la reconquista cultural de la monstrua",
+      "link": "https://elpais.com/cultura/2026-11-23/de-la-desquiciada-de-obsession-a-la-sudasangre-de-sanguine-la-reconquista-cultural-de-la-monstrua.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-cultura",
+      "category": "Cultura",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Luciano Floridi, filósofo: “La teoría del apocalipsis de la IA es la suma de desinformación, propaganda, intereses y codicia”",
       "link": "https://elpais.com/tecnologia/2026-11-23/luciano-floridi-filosofo-la-teoria-del-apocalipsis-de-la-ia-es-la-suma-de-desinformacion-propaganda-intereses-y-codicia.html",
       "date": "2026-11-23T04:30:01+00:00",
       "source": "EL PAÍS",
       "source_id": "elpais-tecnologia",
       "category": "Tecnología",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Netanyahu negocia con Eisenkot seguir en el poder mientras calienta frentes bélicos",
+      "link": "https://elpais.com/internacional/2026-11-23/netanyahu-negocia-con-eisenkot-seguir-en-el-poder-mientras-calienta-frentes-belicos.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-internacional",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El entusiasmo de Burnham por superar el Brexit choca con la realidad política",
+      "link": "https://elpais.com/internacional/2026-11-23/el-entusiasmo-de-burnham-por-superar-el-brexit-choca-con-la-realidad-politica.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-internacional",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 5,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Meloni culmina cuatro años de recortes en sanidad y educación en Italia",
+      "link": "https://elpais.com/internacional/2026-11-23/meloni-culmina-cuatro-anos-de-recortes-en-sanidad-y-educacion-en-italia.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-internacional",
+      "category": "Educación",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -11212,32 +11379,6 @@
       "source": "EL PAÍS",
       "source_id": "elpais-deportes",
       "category": "Fútbol",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Los jubilados al PSOE y los policías a Vox: la diferencia del voto por ocupación",
-      "link": "https://elpais.com/espana/elecciones-generales/2026-11-23/los-jubilados-al-psoe-y-los-policias-a-vox-la-diferencia-del-voto-por-ocupacion.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Promesas electorales bajo sospecha",
-      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Economía",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -11316,58 +11457,6 @@
       "source": "EL PAÍS",
       "source_id": "elpais-espana",
       "category": "Política nacional",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Netanyahu negocia con Eisenkot seguir en el poder mientras calienta frentes bélicos",
-      "link": "https://elpais.com/internacional/2026-11-23/netanyahu-negocia-con-eisenkot-seguir-en-el-poder-mientras-calienta-frentes-belicos.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-internacional",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "El entusiasmo de Burnham por superar el Brexit choca con la realidad política",
-      "link": "https://elpais.com/internacional/2026-11-23/el-entusiasmo-de-burnham-por-superar-el-brexit-choca-con-la-realidad-politica.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-internacional",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Meloni culmina cuatro años de recortes en sanidad y educación en Italia",
-      "link": "https://elpais.com/internacional/2026-11-23/meloni-culmina-cuatro-anos-de-recortes-en-sanidad-y-educacion-en-italia.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-internacional",
-      "category": "Educación",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "De la desquiciada de ‘Obsession’ a la ‘sudasangre’ de ‘Sanguine’: la reconquista cultural de la monstrua",
-      "link": "https://elpais.com/cultura/2026-11-23/de-la-desquiciada-de-obsession-a-la-sudasangre-de-sanguine-la-reconquista-cultural-de-la-monstrua.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-cultura",
-      "category": "Cultura",
       "place": "",
       "classification_version": 5,
       "access_status": "unknown",
@@ -12298,92 +12387,6 @@
       "editorial_portadas": [
         "El Español"
       ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Zapatero, en la sombra de la campaña de Sánchez y la inspiración de 2008: \"Es un activo\", \"aconseja\" y \"ayuda\"",
-      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/23/6b032b07fc6c83e4458b456d.html",
-      "date": "2026-11-23T00:24:32+00:00",
-      "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La batalla soterrada detrás de las papeletas del Senado: el control del Tribunal Constitucional",
-      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/23/6b030760e85ece7a058b457b.html",
-      "date": "2026-11-22T23:58:46+00:00",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sucesos",
-      "place": "",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Así trabajó Hernández de Cos la presidencia del BCE con Sánchez y Feijóo: \"No hay que decir nada aún\"",
-      "link": "https://www.elmundo.es/economia/2026/11/23/6b032cffe9cf4ac8208b4576.html",
-      "date": "2026-11-22T23:58:45+00:00",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Política nacional",
-      "classification_version": 5,
-      "place": "",
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Del rechazo al flechazo: siete vinos dulces para cambiar de opinión",
-      "link": "https://www.elmundo.es/metropoli/elmundovino/2026/11/23/6b0041d6fdddffaa378b45a8.html",
-      "date": "2026-11-22T23:33:51+00:00",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "classification_version": 5,
-      "place": "",
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Aspiraciones y temores del deporte ante el 29-N: Tebas ante la pinza PSOE-Florentino, los apetitos de Vox y el temerario órdago de Feijóo al Mundial",
-      "link": "https://www.elmundo.es/deportes/2026/11/23/6b03285dfc6c83724e8b457a.html",
-      "date": "2026-11-22T23:32:12+00:00",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Deportes",
-      "classification_version": 5,
-      "place": "",
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Pozuelo llena el Teatro MIRA en su Gala de la Discapacidad",
-      "link": "https://www.diariodepozuelo.es/114492-pozuelo-llena-el-teatro-mira-en-su-gala-de-la-discapacidad",
-      "date": "2026-11-22T23:30:31+00:00",
-      "source": "Diario de Pozuelo",
-      "source_id": "diariodepozuelo-local",
-      "category": "Cultura",
-      "place": "Pozuelo de Alarcón",
-      "classification_version": 5,
-      "access_status": "unknown",
-      "editorial_portadas": [],
       "editorial_coincidencias": 0
     }
   ]
