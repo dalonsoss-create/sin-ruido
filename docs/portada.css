@@ -28,3 +28,7 @@ body{background:radial-gradient(ellipse at top left,#fffaf3,transparent 45rem),v
 .container{width:calc(100% - 24px)}.masthead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:17px 0 12px}.logo{justify-self:start;font-size:53px}.tagline{display:none}.personalizar{grid-column:2;grid-row:1}.masthead input{grid-column:1/-1;width:100%;font-size:16px}.main{display:block;margin-top:5px}.settings{position:static;max-height:none}.topics{flex-wrap:nowrap;overflow-x:auto;padding:3px 1px 9px}.topic-button{flex:none}.toolbar p{width:100%;margin-bottom:3px}.toolbar select,.positive-switch{flex:0 1 auto}.story.hero{grid-template-columns:1fr;gap:2px}.hero .art{min-height:0;aspect-ratio:2/1}.hero h3{font-size:30px}.subline{flex-wrap:wrap}.subline #source-counter{display:none}
 }
 @media(max-width:530px){.news-list{grid-template-columns:1fr}.story h3{font-size:24px}.story.hero h3{font-size:29px}.art{aspect-ratio:2.35/1}}
+
+/* Menú de secciones: navegación horizontal compacta incluso con 22 temas */
+.topics{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;scrollbar-width:thin;scroll-behavior:smooth;overscroll-behavior-inline:contain;padding:8px 1px 11px;position:sticky;top:0;z-index:4;background:var(--paper)}
+.topic-button{flex:0 0 auto;white-space:nowrap}
