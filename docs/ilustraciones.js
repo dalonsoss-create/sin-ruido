@@ -27,9 +27,20 @@ function ilustracionEditorial(article) {
     boat:path("M-52 13h105L32 35h-62z",coral,ink)+path("M-8-45v52h-35z",milk,ink)+path("M0-35l31 40H0z",gold),
     building:path("M-50-14L0-43l50 29z",coral,ink)+rect(-45,30,90,10,2,ink)+[-33,-11,11,33].map(x=>rect(x-4,-11,8,40,1,milk)).join(''),
     lens:circle(-8,-8,30,ink)+circle(-8,-8,24,blue)+path("M14 15l27 29","none",ink,11)+path("M-23-12q0-13 13-14","none",milk,4),
+    racket:circle(-6,-18,31,milk)+path("M-6-48v60 M-36-18h60 M-29-35q22 27 46 0 M-29-3q22-27 46 0","none",blue,3)+path("M11 6l40 53","none",ink,12)+path("M11 6l40 53","none",coral,5),
+    car:path("M-48 15l12-26h67l14 26v21h-93z",coral,ink)+rect(-27,-5,44,17,4,blue)+circle(-27,36,11,ink)+circle(27,36,11,ink)+rect(-41,17,12,7,3,milk)+rect(29,17,12,7,3,milk),
+    plate:circle(0,0,39,milk)+circle(0,0,30,"#f0b34d")+circle(0,0,24,milk)+path("M-55-45v90 M-63-45v25q8 12 16 0v-25 M55-45q-18 25-8 48h8v42","none",ink,6),
+    briefcase:rect(-42,-26,84,68,9,gold)+path("M-19-29v-12h38v12 M-42 0q42 22 84 0 M-8 6h16","none",ink,6),
+    shield:path("M0-52l45 18v40q-8 30-45 47-37-17-45-47v-40z",blue,ink)+path("M-22 0l16 18 30-38","none",milk,8),
+    scroll:path("M-34-47h65v81q-16 20-33 8-16 12-32-4z",milk,ink)+path("M-23-21h43M-23-8h43M-23 5h31M-23 18h36","none",coral,4),
     trophy:path("M-28-35h56v18q0 30-25 36v12l17 4v6h-40v-6l17-4V19q-25-6-25-36z",gold,ink)+path("M-28-26h-16q0 29 22 27 M28-26h16q0 29-22 27","none",ink,4)
   };
   const themes = [
+    [/\b(tenis|tenista|alcaraz|sinner|djokovic|wimbledon|roland garros|atp|wta)\b/,"racket"],
+    [/\b(formula 1|f1|motogp|verstappen|marc marquez|motociclismo|circuito)\b/,"car"],
+    [/\b(sucesos|policia|crimen|detenido|asesinato|robo|tribunal)\b/,"lens"],
+    [/\b(guerra|conflicto armado|tropas|misil|bombardeo)\b/,"shield"],
+    [/\b(gastronomia|restaurante|receta|cocina|chef)\b/,"plate"],
     [/\b(ia|chips?|algoritmos?|inteligencia artificial|computacion)\b/,"chip"],
     [/movil|whatsapp|iphone|android|telefon|redes sociales/,"phone"],
     [/vacuna|farmac|medicamento|terapia/,"pill"], [/salud|enfermedad|sanidad|cancer|hospital/,"heart"],
@@ -42,10 +53,17 @@ function ilustracionEditorial(article) {
     [/laboratorio|quimic|experimento/,"flask"]
   ];
   const groups = {
-    "Tecnología":["chip","phone","#d8d7ed"], "Ciencia":["lens","flask","#c8dfe9"],
-    "Economía":["coins","chart","#f9dfac"], "Salud":["heart","pill","#f5d1c3"],
-    "Naturaleza":["tree","fish","#c2ddcd"], "Internacional":["globe","building","#c9dfeb"],
-    "Deportes":["trophy","ball","#dce4b9"]
+    "Política nacional":["building","scroll","#d8dee8"],"Internacional":["globe","building","#c9dfeb"],
+    "Conflictos":["shield","globe","#d9dbdb"],"Sucesos":["lens","shield","#dbdfdf"],
+    "Economía":["coins","chart","#f9dfac"],"Empresas":["briefcase","chart","#f2dfb6"],
+    "Ciencia":["lens","flask","#c8dfe9"],"Tecnología":["chip","phone","#d8d7ed"],
+    "IA":["chip","lens","#d9d0ed"],"Salud":["heart","pill","#f5d1c3"],
+    "Naturaleza":["tree","fish","#c2ddcd"],"Medio ambiente":["turbine","tree","#c7e5c9"],
+    "Sociedad":["globe","books","#e7dad3"],"Cultura":["books","scroll","#e7d4e2"],
+    "Educación":["books","flask","#e2e1b9"],"Historia":["scroll","building","#eddac1"],
+    "Viajes":["plane","boat","#c7e8df"],"Gastronomía":["plate","coins","#f9e1bc"],
+    "Deportes":["trophy","ball","#dce4b9"],"Fútbol":["ball","trophy","#e1e9c7"],
+    "Tenis":["racket","trophy","#e8e2bc"],"Motor":["car","trophy","#f6dbc1"]
   };
   const [first,second,paper]=groups[article.category] || groups.Ciencia;
   const matches=themes.filter(([rx])=>rx.test(title)).map(([,key])=>key);
