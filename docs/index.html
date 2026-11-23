@@ -1,48 +1,271 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101827">
-<title>Sin Ruido · Las noticias que tú eliges</title>
-<meta name="description" content="Titulares de noticias sin ruido: tú eliges qué temas ver y cuáles vetar.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f4ef">
+<meta name="description" content="Sin Ruido: tu periódico personal de titulares, sin temas que no te interesan.">
+<title>Sin Ruido — Tu periódico, tus reglas</title>
 <style>
-:root{color-scheme:light;--bg:#f4f6fa;--ink:#14223a;--sub:#66748b;--line:#e3e9f0;--accent:#3d66e9;--card:#fff;--soft:#edf2ff}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #92a9ff;outline-offset:2px}.shell{max-width:1190px;margin:auto;padding:0 24px}.hero{background:linear-gradient(125deg,#101829,#182d59 70%,#213e80);color:#fff;padding:31px 0 37px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:800;font-size:27px;letter-spacing:-1.2px}.brand .dot{color:#8bf3d0}.tagline{color:#b3c6e6;font-size:13px}.hero h1{font-size:clamp(29px,4.8vw,49px);line-height:1.07;letter-spacing:-1.5px;margin:31px 0 11px;max-width:650px}.hero p{color:#d0dcf1;margin:0;max-width:650px}.hero strong{color:#9cf2d6}.hero-row{display:flex;justify-content:space-between;gap:22px;align-items:end}.stat{background:#ffffff14;border:1px solid #ffffff28;border-radius:15px;padding:14px 17px;text-align:right;min-width:146px}.stat b{display:block;font-size:25px}.stat span{color:#c2d2e9;font-size:12px}main.layout{display:grid;grid-template-columns:278px minmax(0,1fr);align-items:start;gap:24px;margin-top:26px;margin-bottom:45px}.panel,.news-card,.empty,.notice{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:0 5px 25px #10244708}.panel{padding:20px;position:sticky;top:18px}.panel h2{font-size:15px;margin:0 0 7px}.panel p{font-size:12px;color:var(--sub);margin:0 0 16px}.setting-title{margin:18px 0 9px;font-weight:750;font-size:13px}.toggle{display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13px;cursor:pointer}.toggle input{accent-color:var(--accent);width:17px;height:17px}.toggle small{margin-left:auto;color:var(--sub)}.chip-box{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}.chip{display:inline-flex;align-items:center;gap:6px;background:#f0f2f5;color:#53627b;padding:6px 8px;border-radius:999px;font-size:11px;border:0}.chip button{border:0;background:none;color:#6c7482;font-weight:900;padding:0 2px}.add{display:flex;gap:6px}.add input{width:100%;min-width:0;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px;font-size:12px}.add button,.primary{border:0;border-radius:9px;background:var(--accent);color:#fff;padding:8px 12px;font-weight:700}.fine{font-size:11px;color:var(--sub)}.nav-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.nav-head h2{font-size:21px;letter-spacing:-.5px;margin:0}.nav-head p{margin:3px 0 0;color:var(--sub);font-size:12px}.searchline{display:flex;gap:8px;margin-bottom:15px}.searchline input{flex:1;min-width:0;border:1px solid var(--line);border-radius:11px;background:#fff;padding:11px 13px}.seg{border-radius:11px;border:1px solid var(--line);background:#fff;padding:9px 10px;color:#3e536e}.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:17px}.pill{background:#e8ecf3;border:1px solid transparent;color:#53637d;padding:8px 11px;font-size:12px;border-radius:11px;font-weight:700}.pill.active{background:var(--accent);color:#fff}.news-grid{display:grid;gap:11px}.news-card{padding:19px 20px;transition:transform .15s,border-color .15s}.news-card:hover{transform:translateY(-1px);border-color:#bfd0ff}.micro{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--sub);font-size:11px;margin-bottom:9px}.news-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.topic{border-radius:6px;background:#edf2ff;color:#345ebd;padding:4px 7px;font-weight:800;font-size:10px;letter-spacing:.2px}.source{color:#8290a5;font-weight:700}.date{color:#7e8ba0}.news-card h3{font-size:17px;font-weight:730;line-height:1.35;letter-spacing:-.25px;margin:0 0 12px}.news-card h3 a:hover{color:var(--accent);text-decoration:underline}.news-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #f0f2f6;padding-top:11px}.news-foot a{font-size:12px;color:var(--accent);font-weight:750}.hide-btn{border:0;background:transparent;color:#8c99ad;padding:4px 0;font-size:11px}.hide-btn:hover{color:#bf4251}.empty{padding:42px 22px;text-align:center;color:var(--sub)}.empty strong{display:block;color:var(--ink);font-size:18px;margin:9px}.notice{padding:13px 15px;background:#fff9e9;color:#8a6627;border-color:#f1e6c5;font-size:12px;margin-bottom:15px}.top-meta{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--sub)}.status-dot{width:8px;height:8px;background:#41a98b;display:inline-block;border-radius:50%}.reset{border:0;color:#67758a;background:#f0f3f7;border-radius:8px;padding:8px 9px;margin-top:14px;font-size:11px}.mobile-panel{display:none}footer{text-align:center;font-size:11px;color:#99a5b5;padding:0 15px 29px}@media(max-width:780px){.shell{padding:0 15px}.hero{padding:20px 0 28px}.hero h1{margin-top:25px}.stat{display:none}main.layout{grid-template-columns:1fr;margin-top:16px;gap:14px}.panel{position:static;display:none}.panel.show{display:block}.mobile-panel{display:block}.nav-head{margin-top:2px}.nav-head h2{font-size:19px}.news-card{padding:15px}.news-card h3{font-size:16px}.searchline{gap:6px}.tagline{display:none}}@media(max-width:430px){.seg{padding:9px 7px}.searchline input{font-size:13px}}
+:root{--paper:#f7f4ed;--white:#fffdfa;--ink:#181c20;--muted:#6b6c6a;--line:#d8d2c6;--red:#a03525;--red-deep:#77291f;--cream:#efe8da;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--serif:Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.45}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d9984d;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}.container{width:min(1240px,calc(100% - 40px));margin:auto}
+.ribbon{background:var(--ink);color:#f4eee2;font-size:11px;letter-spacing:1.8px;text-transform:uppercase}.ribbon .container{display:flex;align-items:center;justify-content:space-between;padding:9px 0;gap:12px}.ribbon button{border:1px solid #756e65;background:transparent;border-radius:3px;color:#fff;padding:5px 10px;font-size:11px;letter-spacing:.5px}
+.masthead{text-align:center;padding:25px 0 17px;border-bottom:5px double var(--ink)}.masthead .overline{color:var(--red);font-weight:800;letter-spacing:4px;text-transform:uppercase;font-size:10px}.logo{font-family:var(--serif);font-weight:800;font-size:clamp(52px,9vw,106px);letter-spacing:-5px;line-height:1.06;margin:3px 0 0}.logo span{color:var(--red)}.tagline{font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-top:8px;color:#5e5d59}.subline{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ink);padding:9px 0;font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:1px}.subline .mid{color:var(--red)}
+.main{display:grid;grid-template-columns:273px minmax(0,1fr);gap:28px;margin-top:24px;align-items:start}.settings{background:var(--white);border:1px solid var(--line);padding:19px 18px 17px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;scrollbar-color:#c4bbb0 transparent}.settings h2,.settings h3{font-family:var(--serif);margin:0}.settings h2{font-size:25px}.settings .side-note{font-size:11px;color:var(--muted);margin:4px 0 14px}.rule{border:0;border-top:1px solid var(--line);margin:15px 0}.section-heading{display:flex;justify-content:space-between;align-items:baseline;margin:16px 0 9px}.section-heading h3{font-size:19px}.section-heading small{font-size:10px;color:var(--muted)}.checkline{display:flex;gap:9px;align-items:center;padding:6px 0;font-size:12px;cursor:pointer}.checkline input{margin:0;accent-color:var(--red);width:16px;height:16px;flex-shrink:0}.checkline .label-text{flex:1}.priority{font-size:10px;color:#8a8277}.chipwrap{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0}.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--cream);padding:6px 8px;border-radius:3px}.chip button{border:0;background:transparent;color:var(--red);font-size:15px;line-height:1;padding:0}.inline-form{display:flex;gap:6px}.inline-form input{width:100%;min-width:0;padding:9px;border:1px solid var(--line);border-radius:3px;background:white;font-size:12px}.smallbtn{border:0;border-radius:3px;padding:9px 10px;background:var(--ink);color:white;font-size:11px;font-weight:750;white-space:nowrap}.muted-note{font-size:11px;line-height:1.55;color:var(--muted)}.sources-list{margin-top:7px}.source-line{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px dashed #ded9d0}.source-line label{flex:1;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px}.source-line input{accent-color:var(--red);width:15px;height:15px;flex-shrink:0}.source-line small{display:block;color:var(--muted);font-size:10px}.source-line .status{font-size:9px;color:#456b4f;white-space:nowrap}.source-line .status.fail{color:#a2513f}.pending{border:1px dashed #cbbda5;padding:8px;margin:7px 0;font-size:11px;overflow-wrap:anywhere}.pending strong{display:block}.pending .actions{display:flex;gap:6px;margin-top:7px}.pending button{font-size:10px;padding:6px 7px;border:1px solid var(--line);background:#fff}.source-add{display:grid;gap:7px}.source-add input{width:100%;padding:9px;border:1px solid var(--line);border-radius:3px;font-size:12px}.source-add button{background:var(--red);color:#fff;border:0;padding:9px;font-weight:800;border-radius:3px;font-size:12px}.toast{min-height:1em;font-size:11px;color:var(--red);margin-top:6px}.reset{font-size:11px;border:1px solid var(--line);padding:8px 10px;background:transparent;color:#5e5d58;border-radius:3px;margin-top:10px}
+.editorial{min-width:0}.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:800}.deskhead{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:3px 0 16px}.deskhead h1{font-family:var(--serif);font-size:clamp(28px,4vw,42px);margin:0;font-weight:800;line-height:1.1}.deskhead p{font-size:12px;color:var(--muted);margin:5px 0 0}.mobile-button{display:none;border:1px solid var(--ink);padding:8px 10px;background:var(--paper);font-size:12px;font-weight:800}.toolbar{display:flex;gap:8px;align-items:center;margin:17px 0 12px}.toolbar input{flex:1;min-width:0;background:var(--white);border:1px solid var(--line);padding:10px 12px;border-radius:3px;font-size:12px}.toolbar select{background:var(--white);border:1px solid var(--line);padding:10px;border-radius:3px;font-size:12px}.topics{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 18px}.topic-button{font-size:11px;font-weight:700;letter-spacing:.2px;background:transparent;border:1px solid var(--line);padding:7px 10px;border-radius:2px}.topic-button.active{background:var(--ink);color:white;border-color:var(--ink)}
+.sectionbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 8px;border-top:3px solid var(--ink);border-bottom:1px solid var(--line);margin-bottom:14px}.sectionbar h2{font-family:var(--serif);font-size:21px;margin:0}.sectionbar span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}.feature-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:19px;margin-bottom:24px}.lead{padding-right:18px;border-right:1px solid var(--line)}.visual{position:relative;overflow:hidden;background:linear-gradient(135deg,#d5dfe2,#bccad3);color:#fff;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}.visual.t-technology{background:linear-gradient(145deg,#293c4a,#628b9d)}.visual.t-health{background:linear-gradient(145deg,#49656e,#a6bcbc)}.visual.t-economy{background:linear-gradient(145deg,#565146,#ac9470)}.visual.t-nature{background:linear-gradient(145deg,#37584c,#85aa79)}.visual.t-international{background:linear-gradient(145deg,#344366,#8795b5)}.visual.t-sports{background:linear-gradient(145deg,#555956,#879493)}.visual.t-science{background:linear-gradient(145deg,#263d52,#8297a9)}.visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.visual .symbol{font-family:var(--serif);font-size:clamp(64px,9vw,130px);font-weight:800;opacity:.20;letter-spacing:-8px}.visual .photo-caption{position:absolute;bottom:10px;left:12px;color:#fff;font-size:10px;text-shadow:0 1px 6px #333}.visual.small{aspect-ratio:5/3}.visual.small .symbol{font-size:64px}.kicker{display:flex;align-items:center;gap:7px;margin:13px 0 5px;font-size:10px;color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:1px}.kicker .dot{font-size:9px;color:var(--muted);font-weight:400}.lead h3{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.13;letter-spacing:-.8px;margin:6px 0 10px}.feature-side{display:grid;gap:16px}.secondary{padding-bottom:14px;border-bottom:1px solid var(--line)}.secondary:last-child{border-bottom:0;padding-bottom:0}.secondary h3{font-family:var(--serif);font-size:21px;line-height:1.2;letter-spacing:-.2px;margin:4px 0 9px}.headline-link:hover{text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}.foot-actions{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:9px}.read{font-size:11px;font-weight:800;color:var(--red)}.hide{border:0;background:transparent;padding:2px;color:var(--muted);font-size:11px}.hide:hover{color:var(--red)}.news-list{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}.news-item{display:flex;gap:12px;border-bottom:1px solid var(--line);padding:17px 0;min-width:0}.news-item .list-visual{width:112px;flex-shrink:0;align-self:flex-start}.news-item .copy{min-width:0;flex:1}.news-item h3{font-family:var(--serif);font-size:19px;line-height:1.22;margin:5px 0 8px}.news-item .kicker{margin:0 0 2px;font-size:9px}.notice{border:1px solid #cebba0;background:#fff9ed;padding:11px 12px;color:#785e3f;font-size:12px;margin-bottom:12px}.empty{padding:60px 20px;text-align:center;border:1px solid var(--line);background:var(--white);font-family:var(--serif);font-size:23px}.empty small{display:block;font:12px var(--sans);margin-top:10px;color:var(--muted)}.bottom{border-top:5px double var(--ink);margin:40px auto 0;padding:18px 0 34px;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px}
+@media(max-width:1050px){.news-list{grid-template-columns:1fr}.main{grid-template-columns:246px 1fr;gap:20px}.feature-grid{gap:13px}.lead{padding-right:13px}}
+@media(max-width:760px){.container{width:min(100% - 24px,700px)}.ribbon{font-size:9px;letter-spacing:.6px}.ribbon .container{padding:7px 0}.masthead{padding:16px 0}.logo{font-size:clamp(53px,13vw,84px);letter-spacing:-4px}.subline{font-size:9px;gap:5px}.subline .mid{display:none}.main{display:block;margin-top:18px}.settings{display:none;position:relative;max-height:none;margin-bottom:20px}.settings.show{display:block}.mobile-button{display:inline-block}.feature-grid{grid-template-columns:1fr;gap:10px}.lead{padding:0;border-right:0;border-bottom:1px solid var(--line);padding-bottom:18px}.feature-side{grid-template-columns:1fr 1fr;gap:12px}.feature-side .visual{aspect-ratio:5/3}.secondary h3{font-size:18px}.deskhead h1{font-size:29px}.bottom{display:block}.news-list{grid-template-columns:1fr}.news-item .list-visual{width:100px}}
+@media(max-width:430px){.feature-side{grid-template-columns:1fr}.feature-side .visual{display:none}.news-item .list-visual{width:87px}.news-item h3{font-size:17px}.toolbar{gap:5px}.toolbar select{max-width:110px;padding:10px 4px}.logo{font-size:53px}.tagline{font-size:10px}}
 </style>
 </head>
 <body>
-<header class="hero"><div class="shell"><div class="top"><div class="brand">sin ruido<span class="dot">.</span></div><div class="tagline">INFORMADO SIN ESTAR SATURADO</div></div><div class="hero-row"><div><h1>Las noticias que <strong>sí</strong> te importan.</h1><p>Tú decides qué entra. Vetamos lo que te aburre. Y te llevamos directamente al periódico original.</p></div><div class="stat"><b id="stat-count">—</b><span>titulares seleccionados</span></div></div></div></header>
-<main class="shell layout">
-<aside id="panel" class="panel"><h2>Tu filtro personal</h2><p>Los cambios se guardan únicamente en este navegador.</p><div class="setting-title">Qué te interesa</div><div id="topic-toggles"></div><div class="setting-title">Palabras o asuntos vetados</div><div class="chip-box" id="blocked-list"></div><form class="add" id="add-form"><input id="add-input" maxlength="65" placeholder="Ej. fútbol, influencers…" aria-label="Añadir tema vetado"><button type="submit">+ Vetar</button></form><div class="fine" style="margin-top:9px">Si una palabra aparece en el titular, lo ocultamos.</div><button id="reset" class="reset">Restablecer mis filtros</button></aside>
-<section>
-<div class="nav-head"><div><h2>Tu actualidad</h2><p id="updated">Preparando titulares...</p></div><button class="seg mobile-panel" id="mobile-settings">⚙ Filtros</button></div>
-<div id="notice" class="notice" hidden></div>
-<div class="searchline"><input id="search" type="search" placeholder="Buscar entre tus titulares…" aria-label="Buscar titulares"><select class="seg" id="sort" aria-label="Ordenar titulares"><option value="relevancia">Para mí</option><option value="recientes">Más recientes</option></select></div>
-<div class="pills" id="topic-pills"></div><div class="news-grid" id="articles"></div>
-</section></main><footer>Sin Ruido · Experimento personal · Solo titulares y enlaces a las fuentes · Sin publicidad ni seguimiento</footer>
+<div class="ribbon"><div class="container"><span>Edición personal · Noticias sin ruido</span><button id="share">↗ Compartir periódico</button></div></div>
+<header class="container masthead">
+  <div class="overline">Tu información · Tus reglas</div>
+  <div class="logo">sin ruido<span>.</span></div>
+  <div class="tagline">Todo lo que importa. Nada de lo que sobra.</div>
+</header>
+<div class="container subline"><span id="edition-date">EDICIÓN DIGITAL</span><span class="mid">Titulares seleccionados para ti</span><span id="source-counter">10 FUENTES DISPONIBLES</span></div>
+<main class="container main">
+  <aside class="settings" id="settings" aria-label="Personaliza tus noticias">
+    <h2>Tu edición</h2><p class="side-note">Cada persona tiene sus propios filtros en su navegador.</p>
+    <div class="section-heading"><h3>Mis temas</h3><small>Elige qué aparece</small></div><div id="topic-toggles"></div>
+    <hr class="rule"><div class="section-heading"><h3>Asuntos vetados</h3></div>
+    <div class="chipwrap" id="blocked-list"></div>
+    <form id="block-form" class="inline-form"><input id="block-input" maxlength="65" placeholder="Ej. famosos, fútbol…" aria-label="Nueva palabra vetada"><button class="smallbtn" type="submit">+ Vetar</button></form>
+    <p class="muted-note">No volverán a aparecer titulares que contengan esas palabras.</p>
+    <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
+    <p class="muted-note">Estas son las fuentes RSS que consulta Sin Ruido. Desmarca las que no quieres leer: la selección solo te afecta a ti.</p>
+    <div class="sources-list" id="sources-list"></div>
+    <div class="section-heading"><h3>Añadir una fuente</h3></div>
+    <form id="source-form" class="source-add"><input type="text" id="source-name" maxlength="60" placeholder="Nombre del medio (ej. BBC)" aria-label="Nombre de la fuente"><input type="url" id="source-url" maxlength="450" placeholder="https://medio.com/rss.xml" aria-label="URL RSS de la nueva fuente" required><button type="submit">+ Proponer fuente RSS</button></form>
+    <p class="muted-note">La nueva fuente quedará como propuesta en este navegador. Para recibir sus titulares tendremos que activarla en el agregador; no se conecta automáticamente.</p>
+    <div id="pending-sources"></div><div class="toast" id="source-feedback" aria-live="polite"></div>
+    <hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button>
+  </aside>
+  <section class="editorial">
+    <div class="deskhead"><div><div class="eyebrow">Portada a tu medida</div><h1>La actualidad que eliges.</h1><p id="updated">Cargando titulares...</p></div><button class="mobile-button" id="mobile-settings">☰ Personalizar</button></div>
+    <div id="notice" class="notice" hidden></div>
+    <div class="toolbar"><input type="search" id="search" placeholder="Buscar en tus noticias…" aria-label="Buscar titulares"><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Relevancia</option><option value="recientes">Más recientes</option></select></div>
+    <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
+    <div class="sectionbar"><h2>En portada</h2><span id="visible-count"></span></div>
+    <div id="features"></div>
+    <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
+    <div id="news-list" class="news-list"></div>
+  </section>
+</main>
+<footer class="container bottom"><span>© Sin Ruido · Prototipo personal, sin publicidad ni seguimiento</span><span>Las noticias pertenecen a sus respectivos medios. Sin Ruido solo enlaza a los originales.</span></footer>
 <script>
-(()=>{'use strict';
-const GROUPS=[['Tecnología','💡',5],['Ciencia','🔬',5],['Economía','📈',4],['Salud','❤️',4],['Naturaleza','🌿',4],['Internacional','🌍',2],['Deportes','🏁',1]];
-const DEFAULT={topics:Object.fromEntries(GROUPS.map(([n])=>[n,true])),blocked:['moda','corazón','famosos','vida social','cotilleo','alfombra roja','sánchez','feijóo','abascal','psoe','sumar','moncloa','elecciones generales'],hidden:[]};
+(function(){
+"use strict";
+const GROUPS=[["Tecnología","✦",5],["Ciencia","◈",5],["Economía","↗",4],["Salud","♥",4],["Naturaleza","❀",4],["Internacional","◎",2],["Deportes","◉",1]];
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:["moda","corazón","famosos","vida social","cotilleo","alfombra roja","sánchez","feijóo","abascal","psoe","sumar","moncloa","elecciones generales"],hidden:[],sources:{},proposals:[]};
 const EXAMPLES=[
-{title:'[Ejemplo] Un nuevo sistema de inteligencia artificial abre posibilidades en investigación',source:'Medio de ejemplo',category:'Tecnología',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo] Una investigación científica presenta un descubrimiento prometedor',source:'Medio de ejemplo',category:'Ciencia',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo] Nuevas tendencias de inversión y crecimiento económico',source:'Medio de ejemplo',category:'Economía',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo] Avances médicos en el tratamiento de enfermedades complejas',source:'Medio de ejemplo',category:'Salud',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo] Un proyecto de restauración forestal mejora un ecosistema',source:'Medio de ejemplo',category:'Naturaleza',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo] Un acuerdo internacional puede cambiar la situación geopolítica',source:'Medio de ejemplo',category:'Internacional',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo] Resultados de un campeonato deportivo',source:'Medio de ejemplo',category:'Deportes',link:'',date:new Date().toISOString()},
-{title:'[Ejemplo vetado] La última moda que arrasa en la alfombra roja',source:'Medio de ejemplo',category:'Tecnología',link:'',date:new Date().toISOString()}];
-const byId=id=>document.getElementById(id);const clean=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const idFor=a=>a.id||a.link||a.title;
-function loadSettings(){try{const data=JSON.parse(localStorage.getItem('sinruido-prefs-v1'));return data?{topics:{...DEFAULT.topics,...data.topics},blocked:Array.isArray(data.blocked)?data.blocked:DEFAULT.blocked,hidden:Array.isArray(data.hidden)?data.hidden:[]}:structuredClone(DEFAULT)}catch{return structuredClone(DEFAULT)}}
-let prefs=loadSettings(),all=[],demo=false,tab='Todas';const save=()=>localStorage.setItem('sinruido-prefs-v1',JSON.stringify(prefs));
-function make(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el}
-function renderControls(){const box=byId('topic-toggles');box.replaceChildren();for(const [name,emoji,w] of GROUPS){const label=make('label','toggle');const input=make('input');input.type='checkbox';input.checked=prefs.topics[name]!==false;input.onchange=()=>{prefs.topics[name]=input.checked;save();render()};label.append(input,document.createTextNode(' '+emoji+' '+name));const small=make('small','',w>=4?'Prioridad alta':w===2?'Ocasional':'Poco');label.append(small);box.append(label)}const chips=byId('blocked-list');chips.replaceChildren();for(const item of prefs.blocked){const chip=make('span','chip',item+' ');const remove=make('button','','×');remove.setAttribute('aria-label','Quitar veto: '+item);remove.onclick=()=>{prefs.blocked=prefs.blocked.filter(x=>x!==item);save();renderControls();render()};chip.append(remove);chips.append(chip)}}
-function score(a){let w=GROUPS.find(g=>g[0]===a.category)?.[2]||1;let age=Math.max(0,(Date.now()-new Date(a.date).getTime())/3600000);if(!Number.isFinite(age))age=72;const boost=/avance|descubr|investigaci[oó]n|invento|nueva tecnolog|inteligencia artificial|innovaci[oó]n|tratamiento|hallazgo|cura|vacuna/i.test(a.title)?6:0;return w*9+boost-Math.min(age,168)*0.27}
-function blocked(a){const c=clean(a.title);return prefs.blocked.some(term=>term.trim()&&c.includes(clean(term.trim())))}
-function dateLabel(a){const d=new Date(a.date);if(!Number.isFinite(d.getTime()))return '';return new Intl.DateTimeFormat('es-ES',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(d)}
-function render(){let items=all.filter(a=>prefs.topics[a.category]!==false&&!blocked(a)&&!prefs.hidden.includes(idFor(a))&&(tab==='Todas'||a.category===tab));const q=clean(byId('search').value.trim());if(q)items=items.filter(a=>clean(a.title+' '+a.source).includes(q));if(byId('sort').value==='recientes')items.sort((a,b)=>new Date(b.date)-new Date(a.date));else items.sort((a,b)=>score(b)-score(a));byId('stat-count').textContent=String(items.length);const pills=byId('topic-pills');pills.replaceChildren();for(const t of ['Todas',...GROUPS.map(g=>g[0])]){const b=make('button','pill'+(tab===t?' active':''),t);b.onclick=()=>{tab=t;render()};pills.append(b)}const outlet=byId('articles');outlet.replaceChildren();if(items.length===0){const empty=make('div','empty');empty.append(make('strong','','Nada que no te interese.'),make('div','','Prueba a activar más temas o eliminar algún veto.'));outlet.append(empty);return}for(const a of items.slice(0,180)){const card=make('article','news-card');const micro=make('div','micro');const tl=make('div','news-top');tl.append(make('span','topic',a.category),make('span','source',a.source));micro.append(tl,make('span','date',dateLabel(a)));card.append(micro);const h=make('h3');if(a.link&&/^https:\/\//i.test(a.link)){const link=make('a','',a.title);link.href=a.link;link.rel='noopener noreferrer';link.target='_blank';link.title='Abrir noticia en '+a.source;h.append(link)}else h.textContent=a.title;card.append(h);const bottom=make('div','news-foot');if(a.link&&/^https:\/\//i.test(a.link)){const link=make('a','','Leer en '+a.source+' ↗');link.href=a.link;link.rel='noopener noreferrer';link.target='_blank';bottom.append(link)}else bottom.append(make('span','fine','Vista de demostración · Sin enlace'));const hide=make('button','hide-btn','✕ No me interesa');hide.onclick=()=>{prefs.hidden.push(idFor(a));save();render()};bottom.append(hide);card.append(bottom);outlet.append(card)}}
-byId('add-form').onsubmit=e=>{e.preventDefault();const inp=byId('add-input');const word=inp.value.trim().toLowerCase();if(word&&!prefs.blocked.includes(word)){prefs.blocked.push(word);save();renderControls();render()}inp.value=''};
-byId('search').oninput=render;byId('sort').onchange=render;byId('reset').onclick=()=>{if(confirm('¿Borrar tus vetos y volver a la configuración inicial?')){prefs=structuredClone(DEFAULT);save();renderControls();render()}};byId('mobile-settings').onclick=()=>{const p=byId('panel');p.classList.toggle('show');byId('mobile-settings').textContent=p.classList.contains('show')?'✕ Cerrar filtros':'⚙ Filtros'};
-async function init(){try{const response=await fetch('./noticias.json?ts='+Math.floor(Date.now()/300000),{cache:'no-store'});if(!response.ok)throw Error('noticias.json sin cargar');const data=await response.json();if(!Array.isArray(data.articles)||data.articles.length===0)throw Error('Sin noticias todavía');all=data.articles.filter(a=>a&&typeof a.title==='string'&&typeof a.category==='string'&&typeof a.link==='string');demo=false;const updated=new Date(data.updated);byId('updated').textContent='Actualizado: '+(Number.isFinite(updated.getTime())?new Intl.DateTimeFormat('es-ES',{dateStyle:'medium',timeStyle:'short'}).format(updated):'recientemente')+' · '+(data.sources_ok||'?')+' fuentes';byId('notice').hidden=true}catch(e){demo=true;all=EXAMPLES;byId('updated').textContent='Vista previa del diseño';byId('notice').textContent='MODO DEMOSTRACIÓN: estos titulares son ficticios y no enlazan a artículos. Al publicar en GitHub y ejecutar el actualizador aparecerán noticias reales de los RSS.';byId('notice').hidden=false}renderControls();render()}init();
+{title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Una innovación médica mejora el diagnóstico temprano",source:"Medio de ejemplo",category:"Salud",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Cambios en los mercados internacionales y la economía",source:"Medio de ejemplo",category:"Economía",link:"",date:new Date().toISOString()},
+{title:"[Ejemplo] Una investigación descubre un nuevo hábitat protegido",source:"Medio de ejemplo",category:"Naturaleza",link:"",date:new Date().toISOString()}
+];
+const el=id=>document.getElementById(id), mk=(tag,cls,txt)=>{const o=document.createElement(tag);if(cls)o.className=cls;if(txt!==undefined)o.textContent=txt;return o};
+const normal=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const storyId=a=>a.link||a.title;
+let prefs,feeds=[],articles=[],statuses={},activeTopic="Todas",demo=false;
+function loadPrefs(){
+  try{
+    const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
+    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[]};
+  }catch(e){return JSON.parse(JSON.stringify(DEFAULT))}
+}
+prefs=loadPrefs();
+function save(){try{localStorage.setItem("sinruido-prefs-v1",JSON.stringify(prefs))}catch(e){}}
+function readableDate(date){const d=new Date(date);return Number.isFinite(d.valueOf())?new Intl.DateTimeFormat("es-ES",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(d):""}
+function allowedSource(a){
+  if(!a.source_id){
+    const f=feeds.filter(f=>f.name===a.source);
+    return !f.length||f.some(f=>prefs.sources[f.id]!==false);
+  }
+  return prefs.sources[a.source_id]!==false;
+}
+function weight(a){
+  const base=GROUPS.find(g=>g[0]===a.category)?.[2]||1;
+  let hours=(Date.now()-new Date(a.date).valueOf())/3600000;
+  if(!Number.isFinite(hours))hours=72;
+  const advances=/avance|descubr|investigaci[oó]n|invento|nueva tecnolog|inteligencia artificial|innovaci[oó]n|tratamiento|hallazgo|cura|vacuna|cient[ií]fic/i.test(a.title)?6:0;
+  return base*9+advances-Math.max(0,Math.min(hours,168))*.29;
+}
+function filtered(){
+  let list=articles.filter(a=>prefs.topics[a.category]!==false&&allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&!prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&(activeTopic==="Todas"||a.category===activeTopic));
+  const q=normal(el("search").value.trim());
+  if(q)list=list.filter(a=>normal(a.title+" "+a.source).includes(q));
+  if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
+  return list;
+}
+function titleAnchor(a){
+  const anchor=mk("a","headline-link",a.title);
+  if(a.link&&/^https:\/\//i.test(a.link)){anchor.href=a.link;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.title="Leer en "+a.source}
+  else anchor.removeAttribute("href");
+  return anchor;
+}
+function visual(a,small){
+  const map={"Tecnología":["t-technology","✦"],"Ciencia":["t-science","◈"],"Economía":["t-economy","↗"],"Salud":["t-health","♥"],"Naturaleza":["t-nature","❀"],"Internacional":["t-international","◎"],"Deportes":["t-sports","◉"]};
+  const v=map[a.category]||["t-science","✦"];
+  const box=mk("div","visual "+v[0]+(small?" small":""));
+  box.append(mk("span","symbol",v[1]));
+  if(a.image&&/^https:\/\//i.test(a.image)){
+    const img=mk("img");img.loading="lazy";img.alt="Imagen proporcionada por "+a.source;img.referrerPolicy="no-referrer";img.src=a.image;img.onerror=()=>img.remove();
+    box.append(img);
+    box.append(mk("span","photo-caption","Imagen: "+a.source));
+  }
+  return box;
+}
+function kicker(a){
+  const k=mk("div","kicker");
+  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));
+  return k;
+}
+function actions(a){
+  const row=mk("div","foot-actions");
+  const read=mk("a","read",a.link?"Leer en "+a.source+" ↗":"Titular de ejemplo");
+  if(a.link&&/^https:\/\//i.test(a.link)){read.href=a.link;read.target="_blank";read.rel="noopener noreferrer"}
+  const hide=mk("button","hide","✕ No me interesa");
+  hide.type="button";hide.title="Ocultar este titular";hide.onclick=()=>{prefs.hidden.push(storyId(a));save();render()};
+  row.append(read,hide);return row;
+}
+function makeLead(a){
+  const card=mk("article","lead");card.append(visual(a,false),kicker(a));
+  const h=mk("h3");h.append(titleAnchor(a));card.append(h,actions(a));return card;
+}
+function makeSecondary(a){
+  const card=mk("article","secondary");card.append(visual(a,true),kicker(a));
+  const h=mk("h3");h.append(titleAnchor(a));card.append(h,actions(a));return card;
+}
+function makeListItem(a){
+  const card=mk("article","news-item");const thumb=mk("div","list-visual");thumb.append(visual(a,true));
+  const copy=mk("div","copy");copy.append(kicker(a));
+  const h=mk("h3");h.append(titleAnchor(a));copy.append(h,actions(a));card.append(thumb,copy);return card;
+}
+function render(){
+  const list=filtered();el("visible-count").textContent=list.length+" titulares visibles";
+  const tabs=el("topic-tabs");tabs.replaceChildren();
+  for(const name of ["Todas",...GROUPS.map(g=>g[0])]){
+    const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name);
+    btn.type="button";btn.setAttribute("aria-pressed",String(activeTopic===name));
+    btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
+  }
+  const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
+  if(!list.length){
+    const empty=mk("div","empty","No hay noticias que pasen tus filtros.");
+    empty.append(mk("small","","Prueba a activar alguna fuente, tema o eliminar un veto."));
+    cover.append(empty);el("list-heading").hidden=true;return;
+  }
+  const featured=mk("div","feature-grid"),sides=mk("div","feature-side");
+  featured.append(makeLead(list[0]));for(const a of list.slice(1,3))sides.append(makeSecondary(a));
+  if(sides.childElementCount)featured.append(sides);
+  cover.append(featured);el("list-heading").hidden=list.length<=3;
+  for(const a of list.slice(3,123))bottom.append(makeListItem(a));
+}
+function renderControls(){
+  const topics=el("topic-toggles");topics.replaceChildren();
+  for(const [name,symbol,w] of GROUPS){
+    const label=mk("label","checkline");const input=mk("input");input.type="checkbox";input.checked=prefs.topics[name]!==false;
+    input.onchange=()=>{prefs.topics[name]=input.checked;save();render()};
+    label.append(input,mk("span","label-text",symbol+" "+name),mk("span","priority",w>=4?"Prioritario":w===2?"Ocasional":"Poco"));topics.append(label);
+  }
+  const chips=el("blocked-list");chips.replaceChildren();
+  for(const word of prefs.blocked){const chip=mk("span","chip",word);const button=mk("button","","×");button.title="Quitar veto "+word;button.type="button";button.onclick=()=>{prefs.blocked=prefs.blocked.filter(w=>w!==word);save();renderControls();render()};chip.append(button);chips.append(chip)}
+  renderSources();
+}
+function renderSources(){
+  const list=el("sources-list");list.replaceChildren();
+  for(const f of feeds){
+    const row=mk("div","source-line"),label=mk("label"),check=mk("input");
+    check.type="checkbox";check.checked=prefs.sources[f.id]!==false;
+    check.onchange=()=>{prefs.sources[f.id]=check.checked;save();renderSources();render()};
+    const text=mk("span");text.append(mk("span","",f.name),mk("small","",f.category));
+    label.append(check,text);row.append(label);
+    const status=statuses[f.id];const statusEl=mk("span","status"+(status&&!status.ok?" fail":""),
+      status?(status.ok?status.count+" notas":"Sin acceso"):"—");
+    statusEl.title=status?(status.ok?"Titulares obtenidos de este RSS":"No se pudo consultar este RSS"):"Sin estado todavía";
+    row.append(statusEl);list.append(row);
+  }
+  const on=feeds.filter(f=>prefs.sources[f.id]!==false).length;
+  el("sources-enabled").textContent=on+" de "+feeds.length+" activas";
+  el("source-counter").textContent=feeds.length+" fuentes RSS";
+  const pend=el("pending-sources");pend.replaceChildren();
+  for(const item of prefs.proposals){
+    const box=mk("div","pending");
+    box.append(mk("strong","",item.name),mk("span","",item.url),mk("small",""," · Pendiente de incorporar"));
+    const btns=mk("div","actions");
+    const ask=mk("button","","Solicitar activación ↗");ask.type="button";
+    ask.onclick=()=>{
+      const title="Añadir fuente RSS: "+item.name;
+      const body="Propongo añadir esta fuente a Sin Ruido.\n\nMedio: "+item.name+"\nRSS: "+item.url+"\n\nComprobar acceso y condiciones de uso antes de activarla.";
+      window.open("https://github.com/dalonsoss-create/sin-ruido/issues/new?title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body),"_blank","noopener");
+    };
+    const del=mk("button","","Quitar");del.type="button";del.onclick=()=>{prefs.proposals=prefs.proposals.filter(p=>p.url!==item.url);save();renderSources()};
+    btns.append(ask,del);box.append(btns);pend.append(box);
+  }
+}
+el("block-form").onsubmit=e=>{
+  e.preventDefault();const input=el("block-input"),word=input.value.trim().toLowerCase();
+  if(word&&!prefs.blocked.includes(word)){prefs.blocked.push(word);save();renderControls();render()}
+  input.value="";
+};
+el("source-form").onsubmit=e=>{
+  e.preventDefault();const name=el("source-name").value.trim(),raw=el("source-url").value.trim(),msg=el("source-feedback");
+  let u;try{u=new URL(raw)}catch(err){msg.textContent="Introduce una URL RSS válida.";return}
+  if(u.protocol!=="https:"||!u.hostname){msg.textContent="Por seguridad, la fuente debe tener una dirección https.";return}
+  const url=u.href;
+  if(feeds.some(f=>f.url===url)||prefs.proposals.some(p=>p.url===url)){msg.textContent="Esta fuente ya está en tu lista.";return}
+  prefs.proposals.push({name:name||u.hostname,url});save();renderSources();
+  el("source-form").reset();
+  msg.textContent="Propuesta guardada. Pulsa «Solicitar activación» para incorporarla a las noticias.";
+};
+el("reset").onclick=()=>{
+  if(!confirm("¿Borrar tus preferencias, fuentes desactivadas y propuestas?"))return;
+  prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
+};
+el("search").oninput=render;el("sort").onchange=render;
+el("mobile-settings").onclick=()=>{
+  const settings=el("settings");settings.classList.toggle("show");
+  el("mobile-settings").textContent=settings.classList.contains("show")?"✕ Cerrar":"☰ Personalizar";
+};
+el("share").onclick=async()=>{
+  const url=location.origin+location.pathname;
+  const data={title:"Sin Ruido",text:"Prueba Sin Ruido y crea tu propio periódico de noticias, con tus temas y fuentes.",url};
+  try{
+    if(navigator.share){await navigator.share(data);return}
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(url);el("share").textContent="✓ Enlace copiado";return}
+  }catch(err){if(err.name==="AbortError")return}
+  window.prompt("Copia esta dirección para enviársela a Elena:",url);
+};
+async function init(){
+  el("edition-date").textContent=new Intl.DateTimeFormat("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date());
+  try{
+    const res=await fetch("./fuentes.json?v=2",{cache:"no-store"});
+    if(!res.ok)throw Error("Sin catálogo");
+    const data=await res.json();feeds=Array.isArray(data.feeds)?data.feeds:[];
+  }catch(e){el("source-feedback").textContent="No se pudo cargar el catálogo de fuentes."}
+  try{
+    const res=await fetch("./noticias.json?ts="+Math.floor(Date.now()/300000),{cache:"no-store"});
+    if(!res.ok)throw Error("Sin noticias");
+    const data=await res.json();if(!Array.isArray(data.articles)||!data.articles.length)throw Error("RSS vacío");
+    articles=data.articles.filter(a=>a&&typeof a.title==="string"&&typeof a.category==="string"&&typeof a.link==="string");
+    statuses=Object.fromEntries((data.sources_status||[]).map(s=>[s.id,s]));
+    const date=new Date(data.updated);
+    el("updated").textContent="Actualizado "+(Number.isFinite(date.valueOf())?new Intl.DateTimeFormat("es-ES",{dateStyle:"medium",timeStyle:"short"}).format(date):"recientemente")+" · "+(data.sources_ok||0)+" fuentes consultadas correctamente";
+    el("notice").hidden=true;
+  }catch(e){
+    demo=true;articles=EXAMPLES;el("updated").textContent="Demostración del diseño editorial";
+    el("notice").textContent="VISTA PREVIA: estos titulares son ficticios. Las noticias reales aparecerán al ejecutar la actualización de RSS.";
+    el("notice").hidden=false;
+  }
+  renderControls();render();
+}
+init();
 })();
 </script>
-</body></html>
+</body>
+</html>
