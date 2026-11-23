@@ -215,6 +215,11 @@ body.settings-open{overflow:hidden}
 .backup-buttons button:first-child{background:#222a31;color:#fff;border-color:#222a31}
 .backup-buttons button:hover{filter:brightness(.95)}
 .backup-feedback{min-height:20px;font-weight:650;margin-top:9px}
+
+.night-status{padding:13px 16px;margin:12px 0;border:1px solid #b4c6d4;border-left:4px solid #667d92;border-radius:10px;
+  background:#f0f5f8;color:#283744;font:600 13px/1.55 ui-sans-serif,system-ui,sans-serif}
+.night-status[hidden]{display:none}
+@media(max-width:760px){.night-status{padding:12px;font-size:12px}}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -419,6 +424,7 @@ body.settings-open{overflow:hidden}
     </section>
     <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
     <div id="notice" class="notice" hidden></div>
+    <div id="night-status" class="night-status" role="status" hidden></div>
     <div id="pull-indicator" class="pull-indicator" aria-live="polite" hidden>↻ Suelta para actualizar noticias</div>
     <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
     <p class="access-legend">🔒 Requiere suscripción · ✓ Lectura gratuita. Sin etiqueta significa que aún no hemos confirmado el acceso.</p>
@@ -671,8 +677,22 @@ function matchesReader(a){
     (!window.SinRuidoIntereses||window.SinRuidoIntereses.matches(a,clauses))&&
     (!q||normal(a.title+" "+a.source+" "+a.category).includes(q));
 }
-function filtered(){
-  let list=articles.filter(a=>isToday(a)&&!isReviewed(a)&&matchesReader(a));
+// Al cambiar de día, un RSS tardío no debe dejar una portada vacía ni
+// hacer pasar noticias de ayer por noticias publicadas hoy.
+function waitingForToday(){
+  return !articles.some(a=>isToday(a)&&matchesReader(a));
+}
+function recentFromYesterday(){
+  if(!waitingForToday())return [];
+  const now=Date.now(),yesterdayKey=todayKey(now-86400000);
+  return articles.filter(a=>{
+    const age=now-Date.parse(a.date);
+    return todayKey(a.date)===yesterdayKey&&age>=0&&age<=8*3600000&&
+      !isReviewed(a)&&matchesReader(a);
+  });
+}
+function filtered(usePrevious=false){
+  let list=usePrevious?recentFromYesterday():articles.filter(a=>isToday(a)&&!isReviewed(a)&&matchesReader(a));
   if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
   return list;
 }
@@ -1021,9 +1041,24 @@ function render(){
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
-  const highlightedId=renderLastMinute();
-  const list=balanceTopics(filtered().filter(a=>!highlightedId||storyId(a)!==highlightedId));
-  renderEssentials();
+  const waiting=waitingForToday(),fallback=waiting&&recentFromYesterday().length>0;
+  const highlightedId=fallback?null:renderLastMinute();
+  if(fallback)el("last-minute-panel").hidden=true;
+  const list=balanceTopics(filtered(fallback).filter(a=>!highlightedId||storyId(a)!==highlightedId));
+  if(fallback){
+    el("headline-heading").textContent="Últimas noticias de ayer";
+    el("night-status").hidden=false;
+    const edition=lastEdition&&Number.isFinite(lastEdition)
+      ?new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}).format(new Date(lastEdition))
+      :"sin fecha disponible";
+    el("night-status").textContent="🌙 Ya es "+new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",day:"numeric",month:"long"}).format(new Date())+
+      ". Los titulares que ves son del día anterior (última edición: "+edition+"). "+
+      "Sin Ruido mostrará automáticamente las noticias de hoy en cuanto las publiquen los medios seleccionados y llegue la siguiente actualización.";
+    el("mustread-panel").hidden=true;
+  }else{
+    el("night-status").hidden=true;
+    renderEssentials();
+  }
   const visible=Math.min(shownCount,list.length);
   el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
   const more=el("more-wrap");
@@ -1640,7 +1675,7 @@ init().then(()=>{
   let shownDate=todayKey(new Date());
   setInterval(()=>{
     const current=todayKey(new Date());
-    if(current!==shownDate){shownDate=current;render()}
+    if(current!==shownDate){shownDate=current;render();refreshPublishedEdition()}
   },60000);
   refreshPublishedEdition();
   // Cuando se vuelve a la app desde el icono o tras leer una noticia,
