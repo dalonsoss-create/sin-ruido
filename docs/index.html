@@ -19,18 +19,19 @@
 @media(max-width:430px){.feature-side{grid-template-columns:1fr}.feature-side .visual{display:none}.news-item .list-visual{width:87px}.news-item h3{font-size:17px}.toolbar{gap:5px;flex-wrap:wrap}.toolbar input[type="search"]{flex-basis:100%}.toolbar select{flex:1;max-width:none;padding:10px 4px}.positive-switch{flex:1;justify-content:center}.logo{font-size:53px}.tagline{font-size:10px}}
 .pay-trigger{font-size:10px;font-weight:800;border:1px solid #c9bba8;background:var(--white);border-radius:3px;color:#6e3b26;padding:5px 7px;text-align:left}.pay-trigger:hover{border-color:var(--red);color:var(--red)}.pay-dialog{border:1px solid #c4b6a3;border-radius:6px;max-width:min(92vw,500px);width:100%;padding:25px 27px;background:var(--white);color:var(--ink);box-shadow:0 20px 90px #0005}.pay-dialog::backdrop{background:#1a1a1a99}.pay-top{font-size:10px;color:var(--red);text-transform:uppercase;font-weight:900;letter-spacing:1.5px}.pay-dialog h2{font-family:var(--serif);font-size:29px;margin:7px 0 4px;line-height:1.2}.pay-price{font-family:var(--serif);font-weight:800;font-size:36px;color:var(--red-deep);margin:13px 0 4px}.pay-notes{font-size:13px;line-height:1.6;margin:9px 0;color:#4d4c49}.pay-caveat{font-size:11px;color:var(--muted);line-height:1.5;margin:13px 0}.pay-links{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px}.pay-subscribe{display:inline-block;background:var(--red);color:white;font-size:13px;font-weight:800;padding:11px 14px;border-radius:3px}.pay-check{font-size:12px;text-decoration:underline;color:var(--muted)}.pay-close{position:absolute;right:12px;top:9px;border:0;background:none;color:var(--muted);font-size:27px;line-height:1}.foot-actions{flex-wrap:wrap}
 </style>
+<link rel="stylesheet" href="./portada.css">
 </head>
 <body>
-<div class="ribbon"><div class="container"><span>Edición personal · Noticias sin ruido</span><button id="share">↗ Compartir periódico</button></div></div>
 <header class="container masthead">
-  <div class="overline">Tu información · Tus reglas</div>
   <div class="logo">sin ruido<span>.</span></div>
-  <div class="tagline">Todo lo que importa. Nada de lo que sobra.</div>
+  <div class="tagline">Tu periódico personal: las noticias que te interesan, sin el ruido de siempre.</div>
+  <input type="search" id="search" placeholder="Buscar noticias, temas o fuentes…" aria-label="Buscar noticias, temas o fuentes">
+  <button class="personalizar" id="mobile-settings" aria-controls="settings">⚙ Personalizar</button>
 </header>
-<div class="container subline"><span id="edition-date">EDICIÓN DIGITAL</span><span class="mid">Titulares seleccionados para ti</span><span id="source-counter">10 FUENTES DISPONIBLES</span></div>
+<div class="container subline"><span id="edition-date">EDICIÓN DIGITAL</span><button id="share">↗ Compartir periódico</button><span id="source-counter">10 FUENTES DISPONIBLES</span></div>
 <main class="container main">
   <aside class="settings" id="settings" aria-label="Personaliza tus noticias">
-    <h2>Tu edición</h2><p class="side-note">Cada persona tiene sus propios filtros en su navegador.</p>
+    <span class="coffee" aria-hidden="true">☕</span><h2>Tu periódico,<br>a tu medida</h2><p class="side-note">Elige los temas y periódicos que quieres leer.</p>
     <div class="section-heading"><h3>Mis temas</h3><small>Elige qué aparece</small></div><div id="topic-toggles"></div>
     <hr class="rule"><div class="section-heading"><h3>Asuntos vetados</h3></div>
     <div class="chipwrap" id="blocked-list"></div>
@@ -46,10 +47,10 @@
     <hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button> <button class="reset" id="start-fresh">Empezar desde cero</button>
   </aside>
   <section class="editorial">
-    <div class="deskhead"><div><div class="eyebrow">Portada a tu medida</div><h1>La actualidad que eliges.</h1><p id="updated">Cargando titulares...</p></div><button class="mobile-button" id="mobile-settings">☰ Personalizar</button></div>
-    <div id="notice" class="notice" hidden></div>
-    <div class="positive-explainer">☀️ <strong>Una portada que también da buenas noticias:</strong> primero valoramos qué es importante para ti y destacamos los avances y las soluciones. Para leer exclusivamente noticias constructivas, activa el filtro.</div><div class="toolbar"><input type="search" id="search" placeholder="Buscar en tus noticias…" aria-label="Buscar titulares"><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
+    <h1 class="sr-only">Tu portada de Sin Ruido</h1>
     <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
+    <div id="notice" class="notice" hidden></div>
+    <div class="toolbar"><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
     <div class="sectionbar"><h2>En portada</h2><span id="visible-count"></span></div>
     <div id="features"></div>
     <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
@@ -71,6 +72,7 @@
     <a class="pay-check" id="pay-reference" target="_blank" rel="noopener noreferrer">Comprobar tarifa ↗</a>
   </div>
 </dialog>
+<script src="./ilustraciones.js"></script>
 <script>
 (function(){
 "use strict";
@@ -134,7 +136,7 @@ function weight(a){
 function filtered(){
   let list=articles.filter(a=>prefs.topics[a.category]!==false&&allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&!prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&(activeTopic==="Todas"||a.category===activeTopic)&&(!prefs.positiveOnly||mood(a)==="positive"));
   const q=normal(el("search").value.trim());
-  if(q)list=list.filter(a=>normal(a.title+" "+a.source).includes(q));
+  if(q)list=list.filter(a=>normal(a.title+" "+a.source+" "+a.category).includes(q));
   if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
   return list;
 }
@@ -144,16 +146,9 @@ function titleAnchor(a){
   else anchor.removeAttribute("href");
   return anchor;
 }
-function visual(a,small){
-  const map={"Tecnología":["t-technology","✦"],"Ciencia":["t-science","◈"],"Economía":["t-economy","↗"],"Salud":["t-health","♥"],"Naturaleza":["t-nature","❀"],"Internacional":["t-international","◎"],"Deportes":["t-sports","◉"]};
-  const v=map[a.category]||["t-science","✦"];
-  const box=mk("div","visual "+v[0]+(small?" small":""));
-  box.append(mk("span","symbol",v[1]));
-  if(a.image&&/^https:\/\//i.test(a.image)){
-    const img=mk("img");img.loading="lazy";img.alt="Imagen proporcionada por "+a.source;img.referrerPolicy="no-referrer";img.src=a.image;img.onerror=()=>img.remove();
-    box.append(img);
-    box.append(mk("span","photo-caption","Imagen: "+a.source));
-  }
+function visual(a){
+  const box=mk("div","art");
+  box.innerHTML=ilustracionEditorial(a);
   return box;
 }
 function kicker(a){
@@ -192,24 +187,17 @@ function actions(a){
   }
   row.append(hide);return row;
 }
-function makeLead(a){
-  const card=mk("article","lead");card.append(visual(a,false),kicker(a));
-  const h=mk("h3");h.append(titleAnchor(a));card.append(h,actions(a));return card;
-}
-function makeSecondary(a){
-  const card=mk("article","secondary");card.append(visual(a,true),kicker(a));
-  const h=mk("h3");h.append(titleAnchor(a));card.append(h,actions(a));return card;
-}
-function makeListItem(a){
-  const card=mk("article","news-item");const thumb=mk("div","list-visual");thumb.append(visual(a,true));
-  const copy=mk("div","copy");copy.append(kicker(a));
-  const h=mk("h3");h.append(titleAnchor(a));copy.append(h,actions(a));card.append(thumb,copy);return card;
+function makeCard(a,lead=false){
+  const card=mk("article",lead?"story hero":"story");
+  const copy=mk("div","story-copy"),h=mk("h3");
+  h.append(titleAnchor(a));copy.append(kicker(a),h,actions(a));
+  card.append(visual(a),copy);return card;
 }
 function render(){
   const list=filtered();el("visible-count").textContent=list.length+" titulares visibles";
   const tabs=el("topic-tabs");tabs.replaceChildren();
   for(const name of ["Todas",...GROUPS.map(g=>g[0])]){
-    const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name);
+    const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name==="Todas"?"Todo":GROUPS.find(g=>g[0]===name)[1]+" "+name);
     btn.type="button";btn.setAttribute("aria-pressed",String(activeTopic===name));
     btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
   }
@@ -219,11 +207,9 @@ function render(){
     empty.append(mk("small","",prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
     cover.append(empty);el("list-heading").hidden=true;return;
   }
-  const featured=mk("div","feature-grid"),sides=mk("div","feature-side");
-  featured.append(makeLead(list[0]));for(const a of list.slice(1,3))sides.append(makeSecondary(a));
-  if(sides.childElementCount)featured.append(sides);
-  cover.append(featured);el("list-heading").hidden=list.length<=3;
-  for(const a of list.slice(3,123))bottom.append(makeListItem(a));
+  cover.append(makeCard(list[0],true));
+  el("list-heading").hidden=list.length<=1;
+  for(const a of list.slice(1))bottom.append(makeCard(a));
 }
 function renderControls(){
   el("positive-only").checked=!!prefs.positiveOnly;
@@ -289,9 +275,19 @@ el("reset").onclick=()=>{
   prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
 };
 el("search").oninput=render;el("sort").onchange=render;el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
-el("mobile-settings").onclick=()=>{
-  const settings=el("settings");settings.classList.toggle("show");
-  el("mobile-settings").textContent=settings.classList.contains("show")?"✕ Cerrar":"☰ Personalizar";
+const mobile=matchMedia("(max-width:760px)");
+const settings=el("settings"),toggle=el("mobile-settings");
+function syncPanel(){
+  toggle.setAttribute("aria-expanded",String(!mobile.matches||settings.classList.contains("show")));
+}
+mobile.addEventListener("change",syncPanel);syncPanel();
+toggle.onclick=()=>{
+  if(mobile.matches)settings.classList.toggle("show");
+  syncPanel();
+  if(!mobile.matches||settings.classList.contains("show")){
+    settings.scrollIntoView({block:"start"});
+    settings.querySelector("input").focus({preventScroll:true});
+  }
 };
 el("share").onclick=async()=>{
   const url=location.origin+location.pathname;
@@ -300,8 +296,29 @@ el("share").onclick=async()=>{
     if(navigator.share){await navigator.share(data);return}
     if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(url);el("share").textContent="✓ Enlace copiado";return}
   }catch(err){if(err.name==="AbortError")return}
-  window.prompt("Copia esta dirección para enviársela a Elena:",url);
+  window.prompt("Copia esta dirección para compartir el periódico:",url);
 };
+let lastEdition=0;
+function applyEdition(data){
+    articles=data.articles.filter(a=>a&&typeof a.title==="string"&&typeof a.category==="string"&&typeof a.link==="string");
+    statuses=Object.fromEntries((data.sources_status||[]).map(s=>[s.id,s]));
+    const date=new Date(data.updated);
+    el("updated").textContent="Actualizado "+(Number.isFinite(date.valueOf())?new Intl.DateTimeFormat("es-ES",{dateStyle:"medium",timeStyle:"short"}).format(date):"recientemente")+" · "+(data.sources_ok||0)+" fuentes consultadas correctamente";
+    el("notice").hidden=true;
+    lastEdition=Date.parse(data.updated)||0;
+}
+async function refreshPublishedEdition(){
+  // Pages puede seguir sirviendo la edición anterior tras un commit del bot RSS.
+  if(location.hostname!=="dalonsoss-create.github.io"||document.hidden)return;
+  try{
+    const res=await fetch("https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json",{cache:"no-cache"});
+    if(!res.ok)return;
+    const data=await res.json();
+    if(Date.parse(data.updated)>lastEdition && Array.isArray(data.articles) && data.articles.length){
+      applyEdition(data);renderSources();render();
+    }
+  }catch(e){/* La edición ya publicada sigue disponible. */}
+}
 async function init(){
   try{
     const res=await fetch("./suscripciones.json?v=1",{cache:"no-store"});
@@ -323,11 +340,7 @@ async function init(){
     const res=await fetch("./noticias.json?ts="+Math.floor(Date.now()/300000),{cache:"no-store"});
     if(!res.ok)throw Error("Sin noticias");
     const data=await res.json();if(!Array.isArray(data.articles)||!data.articles.length)throw Error("RSS vacío");
-    articles=data.articles.filter(a=>a&&typeof a.title==="string"&&typeof a.category==="string"&&typeof a.link==="string");
-    statuses=Object.fromEntries((data.sources_status||[]).map(s=>[s.id,s]));
-    const date=new Date(data.updated);
-    el("updated").textContent="Actualizado "+(Number.isFinite(date.valueOf())?new Intl.DateTimeFormat("es-ES",{dateStyle:"medium",timeStyle:"short"}).format(date):"recientemente")+" · "+(data.sources_ok||0)+" fuentes consultadas correctamente";
-    el("notice").hidden=true;
+    applyEdition(data);
   }catch(e){
     demo=true;articles=EXAMPLES;el("updated").textContent="Demostración del diseño editorial";
     el("notice").textContent="VISTA PREVIA: estos titulares son ficticios. Las noticias reales aparecerán al ejecutar la actualización de RSS.";
@@ -335,7 +348,10 @@ async function init(){
   }
   el("positive-only").checked=!!prefs.positiveOnly;renderControls();render();
 }
-init();
+init().then(()=>{
+  refreshPublishedEdition();
+  setInterval(refreshPublishedEdition,300000);
+});
 })();
 </script>
 </body>
