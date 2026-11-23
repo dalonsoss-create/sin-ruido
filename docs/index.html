@@ -42,7 +42,7 @@
     <form id="source-form" class="source-add"><input type="text" id="source-name" maxlength="60" placeholder="Nombre del medio (ej. BBC)" aria-label="Nombre de la fuente"><input type="url" id="source-url" maxlength="450" placeholder="https://medio.com/rss.xml" aria-label="URL RSS de la nueva fuente" required><button type="submit">+ Proponer fuente RSS</button></form>
     <p class="muted-note">La nueva fuente quedará como propuesta en este navegador. Para recibir sus titulares tendremos que activarla en el agregador; no se conecta automáticamente.</p>
     <div id="pending-sources"></div><div class="toast" id="source-feedback" aria-live="polite"></div>
-    <hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button>
+    <hr class="rule"><button class="reset" id="reset">Restablecer mi configuración</button> <button class="reset" id="start-fresh">Empezar desde cero</button>
   </aside>
   <section class="editorial">
     <div class="deskhead"><div><div class="eyebrow">Portada a tu medida</div><h1>La actualidad que eliges.</h1><p id="updated">Cargando titulares...</p></div><button class="mobile-button" id="mobile-settings">☰ Personalizar</button></div>
@@ -223,6 +223,7 @@ el("source-form").onsubmit=e=>{
   el("source-form").reset();
   msg.textContent="Propuesta guardada. Pulsa «Solicitar activación» para incorporarla a las noticias.";
 };
+el("start-fresh").onclick=()=>{if(!confirm("¿Crear una edición nueva sin vetos, con todos los temas y fuentes disponibles?"))return;prefs={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[]};activeTopic="Todas";save();renderControls();render()};
 el("reset").onclick=()=>{
   if(!confirm("¿Borrar tus preferencias, fuentes desactivadas y propuestas?"))return;
   prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
