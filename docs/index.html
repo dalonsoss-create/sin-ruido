@@ -199,7 +199,7 @@ function weight(a){
   const relevance=/\b(?:inteligencia artificial|salud|medicina|investigacion|biotecnologia|energias renovables|medio ambiente|tecnologia|genetica|innovacion|medioambiente)\b/.test(t)?3:0;
   const sentiment=mood(a);
   const optimisticBoost=sentiment==="positive"?15:sentiment==="negative"?-3:0;
-  return base*10+impact+relevance+optimisticBoost-Math.max(0,Math.min(hours,168))*.22;
+  return base*10+impact+relevance+optimisticBoost+learningBonus(a)-Math.max(0,Math.min(hours,168))*.22;
 }
 function filtered(){
   let list=articles.filter(a=>prefs.topics[a.category]!==false&&allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&!prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&(activeTopic==="Todas"||a.category===activeTopic)&&(!prefs.positiveOnly||mood(a)==="positive"));
@@ -210,7 +210,7 @@ function filtered(){
 }
 function titleAnchor(a){
   const anchor=mk("a","headline-link",a.title);
-  if(a.link&&/^https:\/\//i.test(a.link)){anchor.href=a.link;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.title="Leer en "+a.source}
+  if(a.link&&/^https:\/\//i.test(a.link)){anchor.href=a.link;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.title="Leer en "+a.source;anchor.addEventListener("click",()=>trackClick(a))}
   else anchor.removeAttribute("href");
   return anchor;
 }
@@ -243,7 +243,7 @@ el("pay-dialog").addEventListener("click",e=>{if(e.target===el("pay-dialog"))el(
 function actions(a){
   const row=mk("div","foot-actions");
   const read=mk("a","read",a.link?"Leer en "+a.source+" ↗":"Titular de ejemplo");
-  if(a.link&&/^https:\/\//i.test(a.link)){read.href=a.link;read.target="_blank";read.rel="noopener noreferrer"}
+  if(a.link&&/^https:\/\//i.test(a.link)){read.href=a.link;read.target="_blank";read.rel="noopener noreferrer";read.addEventListener("click",()=>trackClick(a))}
   const hide=mk("button","hide","✕ No me interesa");
   hide.type="button";hide.title="Ocultar este titular";hide.onclick=()=>{prefs.hidden.push(storyId(a));save();render()};
   row.append(read);
@@ -262,7 +262,14 @@ function makeCard(a,lead=false){
   card.append(visual(a),copy);return card;
 }
 function render(){
-  const list=filtered();el("visible-count").textContent=list.length+" titulares visibles";
+  const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden]);
+  if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
+  const list=filtered();
+  const visible=Math.min(shownCount,list.length);
+  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
+  const more=el("more-wrap");
+  more.hidden=visible>=list.length;
+  el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
   const tabs=el("topic-tabs");tabs.replaceChildren();
   for(const name of ["Todas",...GROUPS.map(g=>g[0])]){
     const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name==="Todas"?"Todo":GROUPS.find(g=>g[0]===name)[1]+" "+name);
@@ -276,8 +283,8 @@ function render(){
     cover.append(empty);el("list-heading").hidden=true;return;
   }
   cover.append(makeCard(list[0],true));
-  el("list-heading").hidden=list.length<=1;
-  for(const a of list.slice(1))bottom.append(makeCard(a));
+  el("list-heading").hidden=visible<=1;
+  for(const a of list.slice(1,visible))bottom.append(makeCard(a));
 }
 function renderControls(){
   el("positive-only").checked=!!prefs.positiveOnly;
@@ -342,7 +349,13 @@ el("reset").onclick=()=>{
   if(!confirm("¿Borrar tus preferencias, fuentes desactivadas y propuestas?"))return;
   prefs=JSON.parse(JSON.stringify(DEFAULT));save();renderControls();render();
 };
-el("search").oninput=render;el("sort").onchange=render;el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
+el("search").oninput=render;el("sort").onchange=render;
+el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
+el("learning-erase").onclick=()=>{
+  if(!confirm("¿Borrar las preferencias que Sin Ruido ha aprendido al abrir noticias? Tus temas, vetos y fuentes seguirán igual."))return;
+  readingHistory=[];try{localStorage.removeItem(LEARNING_KEY)}catch(e){}
+  renderLearning();render();
+};el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
 const mobile=matchMedia("(max-width:760px)");
 const settings=el("settings"),toggle=el("mobile-settings");
 function syncPanel(){
@@ -414,7 +427,7 @@ async function init(){
     el("notice").textContent="VISTA PREVIA: estos titulares son ficticios. Las noticias reales aparecerán al ejecutar la actualización de RSS.";
     el("notice").hidden=false;
   }
-  el("positive-only").checked=!!prefs.positiveOnly;renderControls();render();
+  el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();render();
 }
 init().then(()=>{
   refreshPublishedEdition();
