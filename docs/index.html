@@ -596,6 +596,7 @@ function buildWelcome(){
     label.append(input,copy);sourcesBox.append(label);
   }
   if(!feeds.length)sourcesBox.append(mk("p","muted-note","Las fuentes se cargarán cuando haya conexión. Puedes volver a configurarlas después."));
+  el("welcome-interests").value=prefs.interests||"";
   el("welcome-veto").value=prefs.blocked.join(", ");
   el("welcome-positive").checked=!!prefs.positiveOnly;
   const suggestions=el("welcome-veto-suggestions");suggestions.replaceChildren();
@@ -636,7 +637,7 @@ el("open-welcome").onclick=openWelcome;
 el("welcome-skip").onclick=()=>{
   // No imponemos los vetos personales del creador a un visitante.
   if(!localStorage.getItem("sinruido-prefs-v1")){
-    prefs={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false};
+    prefs={topics:Object.fromEntries(GROUPS.map(g=>[g[0],true])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
     save();renderControls();render();
   }
   closeWelcome();
@@ -652,9 +653,24 @@ el("welcome-form").onsubmit=e=>{
   if(feeds.length)prefs.sources=Object.fromEntries(feeds.map(f=>[f.id,chosenPublishers.has(f.name)]));
   prefs.blocked=[...new Set(el("welcome-veto").value.split(/[,;\n]/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1&&x.length<66))].slice(0,50);
   prefs.positiveOnly=el("welcome-positive").checked;
+  prefs.interests=el("welcome-interests").value.trim().slice(0,750);
+  const clauses=getInterestClauses();
+  for(const clause of clauses.filter(c=>!c.only))
+    for(const category of clause.categories)prefs.topics[category]=true;
   activeTopic="Todas";save();renderControls();render();closeWelcome();
 };
 
+el("interests-form").onsubmit=e=>{
+  e.preventDefault();
+  applyInterests(el("interests-input").value);
+};
+el("interests-clear").onclick=()=>applyInterests("");
+for(const btn of document.querySelectorAll("[data-interest-example]")){
+  btn.onclick=()=>{
+    el("interests-input").value=btn.dataset.interestExample;
+    applyInterests(btn.dataset.interestExample);
+  };
+}
 el("block-form").onsubmit=e=>{
   e.preventDefault();const input=el("block-input"),word=input.value.trim().toLowerCase();
   if(word&&!prefs.blocked.includes(word)){prefs.blocked.push(word);save();renderControls();render()}
