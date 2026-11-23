@@ -375,6 +375,7 @@ function weight(a){
 function filtered(){
   const clauses=getInterestClauses(),strict=clauses.some(c=>c.only);
   let list=articles.filter(a=>
+    isToday(a)&&
     (strict||prefs.topics[a.category]!==false)&&
     allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&
     !prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&
@@ -494,7 +495,7 @@ function actions(a){
     whatsapp.title="Compartir este titular por WhatsApp";
     extra.append(bookmark,whatsapp);row.append(extra);
   }
-  row.append(hide);return row;
+  if(collectionMode!=="saved")row.append(hide);return row;
 }
 function makeCard(a,lead=false){
   const card=mk("article",lead?"story hero":"story");
@@ -544,7 +545,28 @@ function balanceTopics(list){
   }
   return output;
 }
+function renderSaved(){
+  const list=bookmarks;
+  const visible=Math.min(shownCount,list.length);
+  el("headline-heading").textContent="Mis noticias guardadas";
+  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" guardadas";
+  el("more-wrap").hidden=visible>=list.length;
+  el("more-counter").textContent="Has visto "+visible+" de "+list.length+" guardadas.";
+  const cover=el("features"),bottom=el("news-list");
+  cover.replaceChildren();bottom.replaceChildren();
+  if(!list.length){
+    const empty=mk("div","empty","Todavía no has guardado ninguna noticia.");
+    empty.append(mk("small","","Pulsa «☆ Guardar» bajo cualquier titular para conservarlo aquí, aunque sea de otro día."));
+    cover.append(empty);el("list-heading").hidden=true;
+    return;
+  }
+  cover.append(makeCard(list[0],true));
+  el("list-heading").hidden=visible<=1;
+  for(const a of list.slice(1,visible))bottom.append(makeCard(a));
+}
 function render(){
+  el("headline-heading").textContent="Noticias de hoy";
+  if(collectionMode==="saved"){renderSaved();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
@@ -563,7 +585,7 @@ function render(){
   }
   const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
   if(!list.length){
-    const empty=mk("div","empty",getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"No hay noticias que pasen tus filtros.");
+    const empty=mk("div","empty",getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros.");
     empty.append(mk("small","",getInterestClauses().some(c=>c.only)?"Prueba a ampliar la zona, quitar «solo» o activar más fuentes. No añadiremos noticias que no coincidan.":prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
     cover.append(empty);el("list-heading").hidden=true;return;
   }
@@ -780,6 +802,8 @@ el("reset").onclick=()=>{
 };
 el("search").oninput=render;el("sort").onchange=render;
 el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
+el("show-feed").onclick=()=>switchCollection("feed");
+el("show-saved").onclick=()=>switchCollection("saved");
 el("learning-erase").onclick=()=>{
   if(!confirm("¿Borrar las preferencias que Sin Ruido ha aprendido al abrir noticias? Tus temas, vetos y fuentes seguirán igual."))return;
   readingHistory=[];try{localStorage.removeItem(LEARNING_KEY)}catch(e){}
@@ -856,7 +880,7 @@ async function init(){
     el("notice").textContent="VISTA PREVIA: estos titulares son ficticios. Las noticias reales aparecerán al ejecutar la actualización de RSS.";
     el("notice").hidden=false;
   }
-  el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();render();
+  el("positive-only").checked=!!prefs.positiveOnly;renderControls();renderLearning();updateSavedCount();render();
   let storedPrefs=false,alreadyWelcomed=false;
   try{storedPrefs=localStorage.getItem("sinruido-prefs-v1")!==null;alreadyWelcomed=localStorage.getItem(WELCOME_KEY)==="1"}catch(e){}
   const invited=new URLSearchParams(location.search).get("bienvenida")==="1";
