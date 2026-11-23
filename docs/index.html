@@ -149,14 +149,14 @@ body.settings-open{overflow:hidden}
 
 /* Un acto voluntario: abrir el enlace nunca retira la noticia. */
 .story{position:relative}
-.review-toggle{position:absolute;z-index:8;top:16px;left:16px;display:flex;align-items:center;justify-content:center;
+.review-toggle{position:absolute;z-index:18;top:16px;right:16px;left:auto;display:flex;align-items:center;justify-content:center;
   width:46px;height:46px;border-radius:50%;border:2px solid #fff;background:#25323bf0;color:#fff;
   box-shadow:0 3px 13px #0006;font:900 25px/1 ui-sans-serif,system-ui,sans-serif;cursor:pointer;
   transition:transform .12s ease,background .12s ease}
 .review-toggle:hover,.review-toggle:focus-visible{transform:scale(1.08);background:#267d55}
 .review-toggle:active{transform:scale(.91)}
 .review-toggle.is-reviewed{background:#f4e5c9;color:#59452d;border-color:#765f46}
-.review-toggle::after{content:"Ya vista";position:absolute;top:calc(100% + 5px);left:0;white-space:nowrap;
+.review-toggle::after{content:"Ya vista";position:absolute;top:calc(100% + 5px);right:0;left:auto;white-space:nowrap;
   border-radius:7px;font:750 11px ui-sans-serif,system-ui,sans-serif;background:#243039;color:#fff;
   padding:4px 7px;opacity:0;pointer-events:none;transition:opacity .15s}
 .review-toggle.is-reviewed::after{content:"Recuperar"}
@@ -168,11 +168,11 @@ body.settings-open{overflow:hidden}
 #reviewed-count{display:inline-flex;align-items:center;justify-content:center;background:#e3ebdd;color:#325341;
   border-radius:20px;padding:2px 7px;font-size:11px}
 .collection-btn.selected #reviewed-count{background:#d3e6d4;color:#294a37}
-@media(max-width:760px){.review-toggle{top:14px;left:14px;width:46px;height:46px}}
+@media(max-width:760px){.review-toggle{top:14px;right:14px;left:auto;width:46px;height:46px}}
 
 .mustread-wrap{position:relative;min-width:0}
 .mustread-wrap .mustread-item{height:100%;padding-top:49px}
-.mustread-wrap .mustread-review{top:9px;left:10px;width:34px;height:34px;font-size:18px;box-shadow:0 2px 8px #0003}
+.mustread-wrap .mustread-review{top:9px;right:10px;left:auto;width:34px;height:34px;font-size:18px;box-shadow:0 2px 8px #0003}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -228,6 +228,43 @@ body.settings-open{overflow:hidden}
 <!-- Cloudflare Web Analytics -->
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d8aa2eb1e8e54201813200ca04d34642"}'></script>
 <!-- End Cloudflare Web Analytics -->
+
+<style id="sinruido-review-right-top-v2">
+/* Accesible también en Safari móvil, con zona táctil de 46 px. */
+.story{position:relative}
+.story > button.review-toggle,
+.mustread-wrap > button.review-toggle{
+  position:absolute!important;
+  top:14px!important;
+  right:14px!important;
+  left:auto!important;
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  z-index:25!important;
+  min-width:46px;
+  min-height:46px;
+  border-radius:50%;
+  -webkit-appearance:none;
+  appearance:none;
+  touch-action:manipulation;
+}
+.mustread-wrap > button.review-toggle{top:9px!important;right:9px!important;min-width:44px;min-height:44px}
+.review-toggle::after{right:0;left:auto}
+@media(max-width:760px){
+  .story > button.review-toggle{
+    width:46px!important;height:46px!important;
+    top:14px!important;right:14px!important;left:auto!important;
+  }
+  .mustread-wrap > button.review-toggle{
+    width:44px!important;height:44px!important;
+    top:9px!important;right:9px!important;left:auto!important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="container masthead">
@@ -580,7 +617,7 @@ function renderEssentials(){
     seen.type="button";
     seen.title="Marcar como ya vista y retirar este titular";
     seen.setAttribute("aria-label",seen.title+": "+a.title);
-    seen.onclick=()=>toggleReviewed(a);
+    seen.onclick=()=>toggleReviewed(a,seen);
     wrap.append(card,seen);grid.append(wrap);
   }
 }
@@ -641,8 +678,12 @@ function loadReviewed(){
 let reviewedStories=loadReviewed();
 function isReviewed(a){return reviewedStories.has(storyId(a))}
 function updateReviewedCount(){el("reviewed-count").textContent=String(reviewedStories.size)}
-function toggleReviewed(a){
+function toggleReviewed(a,button){
   if(!/^https:\/\//.test(a.link||""))return;
+  const card=button?.closest(".story")||null;
+  const displayed=card?[...document.querySelectorAll("#features .story, #news-list .story")]:[];
+  const position=displayed.indexOf(card);
+  const topOnScreen=card?card.getBoundingClientRect().top:null;
   const key=storyId(a),restoring=isReviewed(a),updated=new Map(reviewedStories);
   if(restoring)updated.delete(key);
   else{
@@ -659,7 +700,13 @@ function toggleReviewed(a){
     "✓ Retirada de «Hoy». Sigue disponible en «Ya vistas» para recuperarla.";
   const oldScroll=window.scrollY;
   render();
-  if(collectionMode==="feed")window.scrollTo(0,oldScroll);
+  if(position>=0&&topOnScreen!==null){
+    // El titular siguiente ocupa el lugar del retirado, sin saltarse noticias.
+    const after=[...document.querySelectorAll("#features .story, #news-list .story")];
+    const next=after[Math.min(position,after.length-1)];
+    if(next)window.scrollTo(0,Math.max(0,window.scrollY+next.getBoundingClientRect().top-topOnScreen));
+    else window.scrollTo(0,oldScroll);
+  }else if(collectionMode==="feed")window.scrollTo(0,oldScroll);
 }
 function restoreAllReviewed(){
   if(!reviewedStories.size||!confirm("¿Recuperar todas las noticias marcadas como ya vistas? Las que sigan siendo de hoy volverán a la portada."))return;
@@ -760,7 +807,7 @@ function makeCard(a,lead=false){
   button.title=reviewed?"Recuperar esta noticia":"Marcar como ya vista y retirarla de Hoy";
   button.setAttribute("aria-label",button.title+": "+a.title);
   button.setAttribute("aria-pressed",String(reviewed));
-  button.onclick=()=>toggleReviewed(a);
+  button.onclick=()=>toggleReviewed(a,button);
   const copy=mk("div","story-copy"),h=mk("h3");
   h.append(titleAnchor(a));copy.append(kicker(a),h,actions(a));
   card.append(button,visual(a,lead),copy);return card;
