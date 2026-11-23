@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-23T09:00:49.181158+00:00",
-  "sources_ok": 9,
+  "updated": "2026-11-23T09:33:03.653453+00:00",
+  "sources_ok": 10,
   "sources_status": [
     {
       "id": "cincodias-economia",
@@ -14,8 +14,8 @@
     },
     {
       "id": "elmundo-salud",
-      "ok": false,
-      "count": 0
+      "ok": true,
+      "count": 55
     },
     {
       "id": "elpais-ciencia",
@@ -55,12 +55,60 @@
   ],
   "articles": [
     {
-      "title": "Ucrania asume la autoría del ataque con drones que hundió en Libia un barco de guerra ruso",
-      "link": "https://elpais.com/internacional/2026-11-23/ucrania-asume-la-autoria-del-ataque-con-drones-que-hundio-en-libia-un-barco-de-guerra-ruso.html",
-      "date": "2026-11-23T08:31:54+00:00",
+      "title": "Rescatan con vida a un niño de siete años tras pasar 14 horas bajo los escombros de un edificio bombardeado por Rusia",
+      "link": "https://elpais.com/internacional/2026-11-23/rescatan-con-vida-a-un-nino-de-siete-anos-tras-pasar-14-horas-bajo-los-escombros-de-un-edificio-bombardeado-por-rusia.html",
+      "date": "2026-11-23T09:17:26+00:00",
       "source": "EL PAÍS",
       "source_id": "elpais-internacional",
       "category": "Internacional"
+    },
+    {
+      "title": "Las mejores ofertas en Amazon (antes del Black Friday) hoy, 23 de noviembre: chollos con hasta un 71 % de descuento",
+      "link": "https://www.xataka.com/seleccion/mejores-ofertas-amazon-antes-black-friday-hoy-23-noviembre-chollos-71-descuento",
+      "date": "2026-11-23T09:16:48+00:00",
+      "source": "Xataka",
+      "source_id": "xataka-general",
+      "category": "Tecnología"
+    },
+    {
+      "title": "Ucrania asume la autoría del ataque con drones que hundió en Libia un barco de guerra ruso",
+      "link": "https://elpais.com/internacional/2026-11-23/ucrania-asume-la-autoria-del-ataque-con-drones-que-hundio-en-libia-un-barco-de-guerra-ruso.html",
+      "date": "2026-11-23T09:14:36+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-internacional",
+      "category": "Internacional"
+    },
+    {
+      "title": "El tiempo de la semana: bajan las temperaturas y nuevos frentes regarán norte y oeste de la Península",
+      "link": "https://elpais.com/el-tiempo/2026-11-23/el-tiempo-de-la-semana-bajan-las-temperaturas-y-nuevos-frentes-regaran-norte-y-oeste-de-la-peninsula.html",
+      "date": "2026-11-23T09:09:27+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-naturaleza",
+      "category": "Naturaleza"
+    },
+    {
+      "title": "Las patatas cultivadas en regolito lunar son nutricionalmente similares a las de la Tierra",
+      "link": "https://www.xataka.com/espacio/patatas-cultivadas-regolito-lunar-nutricionalmente-similares-a-tierra",
+      "date": "2026-11-23T09:01:33+00:00",
+      "source": "Xataka",
+      "source_id": "xataka-general",
+      "category": "Tecnología"
+    },
+    {
+      "title": "El diablo está en los cojones",
+      "link": "https://www.xataka.com/videojuegos/diablo-esta-cojones",
+      "date": "2026-11-23T09:00:28+00:00",
+      "source": "Xataka",
+      "source_id": "xataka-general",
+      "category": "Tecnología"
+    },
+    {
+      "title": "El adaptador inalámbrico más vendido para usar Android Auto y CarPlay sin cables, tiene un 70% de descuento en el Black Friday",
+      "link": "https://www.xataka.com/seleccion/adaptador-inalambrico-vendido-para-usar-android-auto-carplay-cables-tiene-70-descuento-black-friday",
+      "date": "2026-11-23T09:00:00+00:00",
+      "source": "Xataka",
+      "source_id": "xataka-general",
+      "category": "Tecnología"
     },
     {
       "title": "En 1977, EEUU le cambió el nombre a un pez feísimo que vio en Sudamérica. La idea fue tan buena que casi acabamos con la lubina que no era lubina",
@@ -111,6 +159,22 @@
       "category": "Economía"
     },
     {
+      "title": "Los jubilados al PSOE y los policías a Vox: la diferencia del voto por ocupación",
+      "link": "https://elpais.com/espana/elecciones-generales/2026-11-23/los-jubilados-al-psoe-y-los-policias-a-vox-la-diferencia-del-voto-por-ocupacion.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía"
+    },
+    {
+      "title": "Promesas electorales bajo sospecha",
+      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía"
+    },
+    {
       "title": "Netanyahu negocia con Eisenkot seguir en el poder mientras calienta frentes bélicos",
       "link": "https://elpais.com/internacional/2026-11-23/netanyahu-negocia-con-eisenkot-seguir-en-el-poder-mientras-calienta-frentes-belicos.html",
       "date": "2026-11-23T04:30:01+00:00",
@@ -141,22 +205,6 @@
       "source": "EL PAÍS",
       "source_id": "elpais-tecnologia",
       "category": "Tecnología"
-    },
-    {
-      "title": "Los jubilados al PSOE y los policías a Vox: la diferencia del voto por ocupación",
-      "link": "https://elpais.com/espana/elecciones-generales/2026-11-23/los-jubilados-al-psoe-y-los-policias-a-vox-la-diferencia-del-voto-por-ocupacion.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Economía"
-    },
-    {
-      "title": "Promesas electorales bajo sospecha",
-      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Economía"
     },
     {
       "title": "Una ciudad, dos equipos, dos libros",
@@ -518,6 +566,14 @@
       "category": "Salud"
     },
     {
+      "title": "Cuatro casos de salmonelosis en el País Vasco por el consumo de huevos",
+      "link": "https://www.elmundo.es/salud/2026/11/22/6b02d94de85ece402c8b4571.html",
+      "date": "2026-11-22T12:07:25+00:00",
+      "source": "El Mundo",
+      "source_id": "elmundo-salud",
+      "category": "Salud"
+    },
+    {
       "title": "Durante años el mundo se obsesionó con los rascacielos XL. Ahora gana fuerza otra idea: los \"rascacielos horizontales\"",
       "link": "https://www.xataka.com/magnet/durante-anos-mundo-se-obsesiono-rascacielos-xl-ahora-gana-fuerza-otra-idea-rascacielos-horizontales",
       "date": "2026-11-22T12:00:24+00:00",
@@ -694,14 +750,6 @@
       "category": "Internacional"
     },
     {
-      "title": "El fallo del Tribunal Internacional de Justicia sobre el genocidio rohinyá influirá en el caso de Gaza",
-      "link": "https://elpais.com/internacional/2026-11-22/el-fallo-del-tribunal-internacional-de-justicia-sobre-el-genocidio-rohinya-influira-en-el-caso-de-gaza.html",
-      "date": "2026-11-22T04:30:01+00:00",
-      "source": "EL PAÍS",
-      "source_id": "elpais-internacional",
-      "category": "Internacional"
-    },
-    {
       "title": "La derrota republicana abre la puerta a una nueva era en el Supremo de Estados Unidos",
       "link": "https://elpais.com/us/2026-11-22/la-derrota-republicana-abre-la-puerta-a-una-nueva-era-en-el-supremo-de-estados-unidos.html",
       "date": "2026-11-22T04:30:01+00:00",
@@ -732,6 +780,14 @@
       "source": "EL PAÍS",
       "source_id": "elpais-deportes",
       "category": "Deportes"
+    },
+    {
+      "title": "El fallo del Tribunal Internacional de Justicia sobre el genocidio rohinyá influirá en el caso de Gaza",
+      "link": "https://elpais.com/internacional/2026-11-22/el-fallo-del-tribunal-internacional-de-justicia-sobre-el-genocidio-rohinya-influira-en-el-caso-de-gaza.html",
+      "date": "2026-11-22T04:30:01+00:00",
+      "source": "EL PAÍS",
+      "source_id": "elpais-internacional",
+      "category": "Internacional"
     },
     {
       "title": "El caso Weil: así se desmantela un despacho de abogados",
@@ -1030,6 +1086,14 @@
       "category": "Economía"
     },
     {
+      "title": "Evitar hospitalizaciones por complicaciones graves y proteger a los abuelos, razones para vacunar a tus hijos contra la gripe",
+      "link": "https://www.elmundo.es/salud/2026/11/21/6afdf5a0e9cf4a275e8b4590.html",
+      "date": "2026-11-20T23:37:22+00:00",
+      "source": "El Mundo",
+      "source_id": "elmundo-salud",
+      "category": "Salud"
+    },
+    {
       "title": "Marte no está muerto: su cloruro de hidrógeno sugiere actividad volcánica",
       "link": "https://www.elmundo.es/ciencia/2026/11/21/6aff0f26e4d4d875568b45b1.html",
       "date": "2026-11-20T23:15:46+00:00",
@@ -1054,6 +1118,14 @@
       "category": "Naturaleza"
     },
     {
+      "title": "Consumo activa una alerta por huevos con posible salmonella distribuidos en ocho autonomías",
+      "link": "https://www.elmundo.es/salud/2026/11/20/6b007c53fc6c83ae3e8b4572.html",
+      "date": "2026-11-20T16:59:04+00:00",
+      "source": "El Mundo",
+      "source_id": "elmundo-salud",
+      "category": "Salud"
+    },
+    {
       "title": "España se une a Francia y Panamá en el bloque de países que presiona para incluir los combustibles fósiles en el acuerdo de la COP31",
       "link": "https://www.elmundo.es/ciencia/2026/11/20/6b002a41fdddff30348b45b5.html",
       "date": "2026-11-20T16:46:00+00:00",
@@ -1068,6 +1140,14 @@
       "source": "EL PAÍS",
       "source_id": "elpais-ciencia",
       "category": "Ciencia"
+    },
+    {
+      "title": "Marc Liesa Roig y Mercedes Sotos-Prieto, galardonados en los Premios a la Investigación Jesús Serra de la Fundación Occident",
+      "link": "https://www.elmundo.es/salud/2026/11/20/6b003889e4d4d87c3b8b45b3.html",
+      "date": "2026-11-20T12:19:35+00:00",
+      "source": "El Mundo",
+      "source_id": "elmundo-salud",
+      "category": "Salud"
     },
     {
       "title": "La cumbre del clima llega a su recta final entre el bloqueo y las críticas a sus propias reglas: “Son una receta para el fracaso”",
