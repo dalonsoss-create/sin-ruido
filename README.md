@@ -40,3 +40,16 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - Se guarda un **perfil de lectura solo en el navegador** (`localStorage: sinruido-learning-v1`), independiente de las preferencias manuales. Cada clic en el titular o el enlace «Leer» suma una muestra de intereses por categoría, fuente y palabras relevantes del titular, con un historial máximo de 100 clics. No se registran tiempos de lectura ni datos identificativos, ni se envían estos clics a GitHub.
 - El algoritmo prioriza temas y expresiones similares, pero el aumento está limitado para no ocultar noticias importantes ni anular el criterio positivo. La ordenación «Más recientes» mantiene estrictamente la fecha.
 - En **Tu perfil de lectura** se muestran los temas abiertos con más frecuencia; **Borrar lo aprendido** elimina ese historial sin borrar filtros ni fuentes. Las preferencias no se comparten entre Safari, navegadores distintos o un acceso directo que tenga almacenamiento separado.
+
+
+## Bienvenida para Elena, amigos y nuevos lectores
+- Enlace normal, para lectores que ya han configurado el periódico: https://dalonsoss-create.github.io/sin-ruido/
+- Enlace de invitación: https://dalonsoss-create.github.io/sin-ruido/?bienvenida=1
+- Un lector nuevo recibe una presentación y elige sus **temas, fuentes RSS disponibles, personajes/asuntos vetados** y si quiere **solo noticias positivas**. No necesita cuenta ni registros de pago.
+- El inicio es deliberadamente **neutral**: ya no aplicamos por defecto los vetos personales del creador a los nuevos lectores. Quien ya tenía preferencias guardadas las mantiene. La bienvenida también se puede volver a abrir desde **«Configurar mi periódico paso a paso»**.
+- El botón «Compartir periódico» genera el enlace de bienvenida para nuevos lectores.
+
+## Portada equilibrada y estado de lectura
+- En la portada general, **el primer bloque de 20 noticias intenta reservar al menos un titular de cada tema activado**, siempre que exista alguno reciente que no esté excluido por las fuentes, vetos y opciones del lector. Los restantes se ordenan por relevancia, optimismo e intereses aprendidos. Las pestañas por tema permiten abrir una sección directamente.
+- Al abrir el título o pulsar «Leer», se guarda ese enlace en el navegador (`sinruido-seen-v1`, limitado a 800 URL) y aparece **✓ YA ABIERTO** con un cambio de color. Esta marca indica que se abrió el enlace, no que se terminó de leer el artículo.
+- El historial de clics del algoritmo se cuenta una sola vez por URL para evitar reforzar artificialmente un único titular. No se transmiten datos personales ni historiales a GitHub.
