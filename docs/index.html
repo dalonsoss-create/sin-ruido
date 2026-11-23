@@ -171,7 +171,25 @@ const el=id=>document.getElementById(id), mk=(tag,cls,txt)=>{const o=document.cr
 const normal=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const storyId=a=>a.link||a.title;
 let prefs,feeds=[],articles=[],statuses={},subscriptionPlans={},pricingUpdated="",activeTopic="Todas",demo=false;
-const PAGE_SIZE=20,LEARNING_KEY="sinruido-learning-v1";
+const PAGE_SIZE=20,LEARNING_KEY="sinruido-learning-v1",SEEN_KEY="sinruido-seen-v1";
+function loadOpened(){
+  try{return new Set(JSON.parse(localStorage.getItem(SEEN_KEY)||"[]").filter(x=>typeof x==="string").slice(-800))}catch(e){return new Set()}
+}
+let openedLinks=loadOpened();
+function wasOpened(a){return !!a.link&&openedLinks.has(a.link)}
+function markOpened(a){
+  if(!a.link||!a.link.startsWith("https://"))return;
+  openedLinks.delete(a.link);openedLinks.add(a.link);
+  if(openedLinks.size>800)openedLinks=new Set([...openedLinks].slice(-800));
+  try{localStorage.setItem(SEEN_KEY,JSON.stringify([...openedLinks]))}catch(e){}
+  // Cambiamos la tarjeta al instante, sin recargar ni interrumpir la apertura del enlace.
+  for(const card of document.querySelectorAll(".story")){
+    if(card.dataset.storyLink!==a.link)continue;
+    card.classList.add("seen");
+    const kicker=card.querySelector(".kicker");
+    if(kicker&&!kicker.querySelector(".seen-pill"))kicker.append(mk("span","seen-pill","✓ YA ABIERTO"));
+  }
+}
 let shownCount=PAGE_SIZE,lastFilterSignature="";
 function loadLearning(){
   try{
@@ -186,6 +204,9 @@ function articleTerms(title){
 }
 function trackClick(a){
   if(!a.link||!a.link.startsWith("https://"))return;
+  const firstOpening=!wasOpened(a);
+  markOpened(a);
+  if(!firstOpening)return; // Evita que abrir siempre el mismo enlace distorsione el perfil.
   readingHistory.push({category:a.category,source_id:a.source_id||a.source||"",terms:articleTerms(a.title),at:Date.now()});
   readingHistory=readingHistory.slice(-100);
   try{localStorage.setItem(LEARNING_KEY,JSON.stringify(readingHistory))}catch(e){}
@@ -280,7 +301,7 @@ function visual(a){
 }
 function kicker(a){
   const k=mk("div","kicker");
-  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Señal positiva"));
+  k.append(mk("span","",a.category),mk("span","dot","· "+a.source+" · "+readableDate(a.date)));if(mood(a)==="positive")k.append(mk("span","mood-star","☀️ Señal positiva"));if(wasOpened(a))k.append(mk("span","seen-pill","✓ YA ABIERTO"));
   return k;
 }
 function showSubscriptionFor(a){
@@ -316,21 +337,36 @@ function actions(a){
 }
 function makeCard(a,lead=false){
   const card=mk("article",lead?"story hero":"story");
+  if(a.link)card.dataset.storyLink=a.link;
+  if(wasOpened(a))card.classList.add("seen");
   const copy=mk("div","story-copy"),h=mk("h3");
   h.append(titleAnchor(a));copy.append(kicker(a),h,actions(a));
   card.append(visual(a),copy);return card;
 }
+function balanceTopics(list){
+  if(activeTopic!=="Todas"||list.length<2)return list;
+  const featured=[list[0]],used=new Set([storyId(list[0])]),covered=new Set([list[0].category]);
+  for(const [topic] of GROUPS){
+    if(prefs.topics[topic]===false||covered.has(topic))continue;
+    const candidate=list.find(a=>a.category===topic&&!used.has(storyId(a)));
+    if(candidate){featured.push(candidate);used.add(storyId(candidate));covered.add(topic)}
+  }
+  const remaining=list.filter(a=>!used.has(storyId(a)));
+  const topUp=remaining.slice(0,Math.max(0,PAGE_SIZE-featured.length));
+  return [...featured,...topUp,...remaining.slice(topUp.length)];
+}
 function render(){
+  if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
-  const list=filtered();
+  const list=balanceTopics(filtered());
   const visible=Math.min(shownCount,list.length);
   el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
   const more=el("more-wrap");
   more.hidden=visible>=list.length;
   el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
   const tabs=el("topic-tabs");tabs.replaceChildren();
-  for(const name of ["Todas",...GROUPS.map(g=>g[0])]){
+  for(const name of ["Todas",...GROUPS.filter(g=>prefs.topics[g[0]]!==false).map(g=>g[0])]){
     const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name==="Todas"?"Todo":GROUPS.find(g=>g[0]===name)[1]+" "+name);
     btn.type="button";btn.setAttribute("aria-pressed",String(activeTopic===name));
     btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
