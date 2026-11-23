@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/actualizar.py'
       - 'scripts/clasificar.py'
+      - 'scripts/acceso.py'
       - 'docs/fuentes.json'
   schedule:
     - cron: '17 5-23 * * *'
@@ -21,6 +22,8 @@ jobs:
           python-version: '3.12'
       - name: Validar reglas de clasificación
         run: python scripts/clasificar.py
+      - name: Validar identificación de artículos de pago
+        run: python scripts/acceso.py
       - name: Obtener titulares RSS
         run: python scripts/actualizar.py
       - name: Guardar noticias públicas
