@@ -42,12 +42,13 @@
     "Cataluña":/\b(?:fc barcelona|barca|liga espanola)\b/,
     "Madrid":/\b(?:real madrid|atletico de madrid|real madrid cf)\b/
   };
-  const filler=new Set(["solo","solamente","exclusivamente","unicamente","quiero","queremos","ver","leer","recibir","busco","buscar","noticia","noticias","titulares","informacion","actualidad","sobre","acerca","del","de","el","la","las","los","un","una","unos","unas","para","por","en","que","me","interesa","interesan","interes","interesado","interesada","actuales","recientes","todas","todos","y","o","favor","sean","sea","relacionadas","relacionado","relacionada","politica","politicos","politicas","nacional","local","regional"]);
+  const filler=new Set(["solo","solamente","exclusivamente","unicamente","quiero","queremos","ver","leer","recibir","busco","buscar","noticia","noticias","titulares","informacion","actualidad","sobre","acerca","del","de","el","la","las","los","un","una","unos","unas","para","por","en","que","me","interesa","interesan","interes","interesado","interesada","actuales","recientes","todas","todos","hoy","ayer","ultimas","ultimos","reciente","ciudad","localidad","provincia","region","comunidad","espanola","espanol","sin","evita","evitar","excluye","quitar","quita","descarta","mostrar","no","nada","mas","pero","ademas","dame","ponme","filtra","y","o","favor","sean","sea","relacionadas","relacionado","relacionada","politica","politicos","politicas","nacional","local","regional"]);
   function parseLine(raw){
     const line=String(raw||"").trim().slice(0,260);
     if(!line)return null;
     const t=normalize(line);
-    const only=/(?:^|\s)(?:solo|solamente|unicamente|exclusivamente)(?:\s|$)/.test(t)||/\bno quiero ver nada mas\b/.test(t);
+    const exclude=/(?:^|\s)(?:no quiero|no me interesan|no deseo|sin noticias de|sin noticias sobre|sin informacion sobre|evita|evitar|excluye|quita|quitar|descarta|bloquea|no mostrar|no me muestres)(?:\s|$)/.test(t);
+    const only=!exclude&&(/(?:^|\s)(?:solo|solamente|unicamente|exclusivamente)(?:\s|$)/.test(t)||/\bno quiero ver nada mas\b/.test(t));
     let foundCats=groups.filter(([,rx])=>rx.test(t)).map(([name])=>name);
     // 'Política catalana' es política nacional/regional; no una sección de deportes.
     if(/\bpolitic[ao]s?\b/.test(t)&&!foundCats.includes("Política nacional")&&!foundCats.includes("Internacional"))foundCats.unshift("Política nacional");
@@ -60,10 +61,10 @@
     for(const entity of ["real madrid","fc barcelona","atletico de madrid","pedro sanchez","salvador illa","marc marquez"]){
       if(t.includes(entity)&&!terms.includes(entity))terms.unshift(entity);
     }
-    return {raw:line,only,categories:foundCats,places:foundPlaces,terms,recognized:!!(foundCats.length||foundPlaces.length||terms.length)};
+    return {raw:line,only,exclude,categories:foundCats,places:foundPlaces,terms,recognized:!!(foundCats.length||foundPlaces.length||terms.length)};
   }
   function parse(raw){
-    return String(raw||"").split(/[\n;]+/).map(parseLine).filter(Boolean).slice(0,8);
+    return String(raw||"").replace(/,\s*(?:pero\s+)?sin\s+/gi,"\nsin ").split(/[\n;]+/).map(parseLine).filter(Boolean).slice(0,8);
   }
   function matchClause(a,clause){
     const cat=String(a.category||"");
@@ -87,12 +88,13 @@
     return clause.recognized;
   }
   function matches(a,clauses){
+    if(clauses.some(c=>c.exclude&&matchClause(a,c)))return false;
     const strict=clauses.filter(c=>c.only);
     if(!strict.length)return true;
     return strict.some(c=>matchClause(a,c));
   }
   function boost(a,clauses){
-    const soft=clauses.filter(c=>!c.only);
+    const soft=clauses.filter(c=>!c.only&&!c.exclude);
     if(!soft.length)return 0;
     return soft.some(c=>matchClause(a,c))?20:0;
   }
@@ -101,7 +103,7 @@
     return clauses.map(c=>{
       const parts=[...c.categories,...c.places];
       if(c.terms.length)parts.push('palabras: '+c.terms.join(", "));
-      return (c.only?"Solo: ":"Priorizar: ")+(parts.join(" · ")||"Sin coincidencias claras");
+      return (c.exclude?"Excluir: ":c.only?"Solo: ":"Priorizar: ")+(parts.join(" · ")||"Sin coincidencias claras");
     }).join(" | ");
   }
   window.SinRuidoIntereses={parse,matches,boost,describe,matchClause};
