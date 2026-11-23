@@ -138,6 +138,14 @@ body.settings-open{overflow:hidden}
 .sources-batch button{border:1px solid var(--line);border-radius:8px;background:var(--cream);color:var(--ink);font-size:12px;font-weight:800;padding:9px 12px}
 .sources-batch button:hover:not(:disabled){border-color:var(--red);color:var(--red)}
 .sources-batch button:disabled{opacity:.45;cursor:default}
+
+/* Fotos licenciadas: SVG de respaldo visible hasta que termine la carga. */
+.article-photo{opacity:0;transition:opacity .22s ease}
+.article-photo.ready{opacity:1}
+.photo-credit{left:6px;right:auto;bottom:6px;max-width:calc(100% - 85px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.photo-license{position:absolute;right:6px;bottom:6px;z-index:4;padding:5px 7px;border-radius:6px;background:#1d1d1dd4;color:#fff!important;font:700 10px/1.2 ui-sans-serif,-apple-system,system-ui,sans-serif}
+.photo-license:hover{background:#111}
+.photo-option{font-weight:750}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -225,6 +233,9 @@ body.settings-open{overflow:hidden}
     <div class="chipwrap" id="blocked-list"></div>
     <form id="block-form" class="inline-form"><input id="block-input" maxlength="65" placeholder="Ej. famosos, fútbol…" aria-label="Nueva palabra vetada"><button class="smallbtn" type="submit">+ Vetar</button></form>
     <p class="muted-note">No volverán a aparecer titulares que contengan esas palabras.</p>
+    <hr class="rule"><div class="section-heading"><h3>Imágenes de portada</h3></div>
+    <label class="checkline photo-option"><input type="checkbox" id="photos-enabled" checked><span class="label-text">📷 Mostrar fotografías libres</span></label>
+    <p class="muted-note">Fotos ilustrativas de Wikimedia Commons con licencia comprobada, autor y enlace. No son las fotografías originales de los artículos. Si las desactivas, verás nuestras ilustraciones propias y evitarás las consultas de imágenes a Wikimedia.</p>
     <hr class="rule"><div class="section-heading"><h3>Mis fuentes</h3><small id="sources-enabled"></small></div>
     <p class="muted-note">Selecciona el periódico una sola vez. Si quieres afinar por secciones, despliega sus canales RSS. Tus cambios solo afectan a tu edición.</p>
     <div class="sources-batch" aria-label="Selección rápida de periódicos">
@@ -319,14 +330,14 @@ body.settings-open{overflow:hidden}
 </dialog>
 <script src="./ilustraciones.js"></script>
 <script src="./intereses.js?v=2"></script>
-<script src="./fotos.js?v=2"></script>
+<script src="./fotos.js?v=3"></script>
 <script src="./acceso.js?v=2"></script>
 <script src="./fuentes-personales.js?v=1"></script>
 <script>
 (function(){
 "use strict";
 const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
-const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
+const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:"",photoEnabled:true};
 const EXAMPLES=[
 {title:"[Ejemplo] Nuevos avances en inteligencia artificial aplicada a la investigación",source:"Medio de ejemplo",category:"Tecnología",link:"",date:new Date().toISOString()},
 {title:"[Ejemplo] Un descubrimiento científico abre nuevas líneas de investigación",source:"Medio de ejemplo",category:"Ciencia",link:"",date:new Date().toISOString()},
@@ -436,7 +447,7 @@ function renderLearning(){
 function loadPrefs(){
   try{
     const x=JSON.parse(localStorage.getItem("sinruido-prefs-v1")||"null")||{};
-    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly,interests:typeof x.interests==="string"?x.interests:""};
+    return {topics:{...DEFAULT.topics,...(x.topics||{})},blocked:Array.isArray(x.blocked)?x.blocked:DEFAULT.blocked.slice(),hidden:Array.isArray(x.hidden)?x.hidden:[],sources:x.sources&&typeof x.sources==="object"?x.sources:{},proposals:Array.isArray(x.proposals)?x.proposals:[],positiveOnly:!!x.positiveOnly,interests:typeof x.interests==="string"?x.interests:"",photoEnabled:x.photoEnabled!==false};
   }catch(e){return JSON.parse(JSON.stringify(DEFAULT))}
 }
 prefs=loadPrefs();
@@ -547,25 +558,46 @@ function titleAnchor(a){
 }
 function visual(a,lead=false){
   const box=mk("div","art");
-  // El SVG propio permanece de respaldo si Wikimedia está bloqueado o falla.
+  // La ilustración original permanece debajo; jamás dejamos un hueco sin imagen.
   box.innerHTML=ilustracionEditorial(a);
-  const photo=window.SinRuidoFotos&&window.SinRuidoFotos.select(a);
-  if(photo&&/^https:\/\//.test(photo.src)){
-    const layer=mk("div","article-photo"),link=mk("a","article-photo-link"),img=mk("img");
-    link.href=/^https:\/\//.test(a.link||"")?a.link:photo.attribution;
-    link.target="_blank";link.rel="noopener noreferrer";
-    link.title="Abrir noticia original en "+a.source;
-    link.addEventListener("click",()=>trackClick(a));
-    img.src=photo.src;img.alt=photo.alt;img.loading=lead?"eager":"lazy";
-    img.decoding="async";img.referrerPolicy="no-referrer";
-    if(lead)img.fetchPriority="high";
-    img.onerror=()=>{layer.remove()};
-    link.append(img);layer.append(link);
-    const credit=mk("a","photo-credit",photo.type==="illustrative"?"📷 Foto ilustrativa · CC0":"📷 Foto del medio");
-    credit.href=photo.attribution;credit.target="_blank";credit.rel="noopener noreferrer";
-    credit.title=(photo.credit||"Wikimedia Commons")+" · "+photo.license+" · Ver licencia y autoría";
-    layer.append(credit);box.append(layer);
+  if(prefs.photoEnabled===false||!window.SinRuidoFotos?.resolve)return box;
+  function display(){
+    Promise.resolve(window.SinRuidoFotos.resolve(a)).then(photo=>{
+      if(!photo||!box.isConnected||prefs.photoEnabled===false||!/^https:\/\//.test(photo.src||""))return;
+      const layer=mk("div","article-photo"),link=mk("a","article-photo-link"),img=mk("img");
+      link.href=/^https:\/\//.test(a.link||"")?a.link:photo.attribution;
+      link.target="_blank";link.rel="noopener noreferrer";
+      link.title="Abrir noticia original en "+a.source;
+      link.addEventListener("click",()=>trackClick(a));
+      img.alt=photo.alt||"Fotografía de archivo";
+      img.loading=lead?"eager":"lazy";img.decoding="async";img.referrerPolicy="no-referrer";
+      if(lead)img.fetchPriority="high";
+      img.onload=()=>layer.classList.add("ready");
+      img.onerror=()=>layer.remove();
+      link.append(img);layer.append(link);
+      const isArchive=photo.type!=="editorial";
+      const sourceLabel=isArchive
+        ?"📷 Foto ilustrativa · "+String(photo.credit||"Commons").slice(0,40)+" · "+photo.license
+        :"📷 Foto autorizada · "+a.source;
+      const credit=mk("a","photo-credit",sourceLabel);
+      credit.href=photo.attribution;credit.target="_blank";credit.rel="noopener noreferrer";
+      credit.title=(photo.credit||"")+(photo.license?" · "+photo.license:"")+" · Ver autor y archivo original";
+      layer.append(credit);
+      if(isArchive&&/^https:\/\/creativecommons\.org\//.test(photo.licenseUrl||"")){
+        const license=mk("a","photo-license","Licencia");
+        license.href=photo.licenseUrl;license.target="_blank";license.rel="noopener noreferrer";
+        license.title="Consultar las condiciones de "+photo.license;
+        layer.append(license);
+      }
+      box.append(layer);img.src=photo.src;
+    }).catch(()=>{});
   }
+  if(!lead&&"IntersectionObserver" in window){
+    const observer=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();display()}
+    },{rootMargin:"350px"});
+    observer.observe(box);
+  }else display();
   return box;
 }
 function kicker(a){
@@ -780,6 +812,7 @@ function render(){
 }
 function renderControls(){
   el("positive-only").checked=!!prefs.positiveOnly;
+  el("photos-enabled").checked=prefs.photoEnabled!==false;
   renderInterests();
   const topics=el("topic-toggles");topics.replaceChildren();
   for(const [name,symbol,w] of GROUPS){
@@ -1108,6 +1141,7 @@ el("learning-erase").onclick=()=>{
   readingHistory=[];try{localStorage.removeItem(LEARNING_KEY)}catch(e){}
   renderLearning();render();
 };el("positive-only").onchange=e=>{prefs.positiveOnly=e.target.checked;save();render()};
+el("photos-enabled").onchange=e=>{prefs.photoEnabled=e.target.checked;save();render()};
 const settings=el("settings"),toggle=el("mobile-settings");
 const backdrop=el("settings-backdrop"),closeSettings=el("settings-close");
 function closePanel(restoreFocus=true){
