@@ -220,6 +220,29 @@ body.settings-open{overflow:hidden}
   background:#f0f5f8;color:#283744;font:600 13px/1.55 ui-sans-serif,system-ui,sans-serif}
 .night-status[hidden]{display:none}
 @media(max-width:760px){.night-status{padding:12px;font-size:12px}}
+
+.latest-panel{margin:13px 0 20px;padding:13px 15px;background:#fffdfa;border:1px solid #d7d2c6;
+  border-top:4px solid #1e2930;border-radius:11px;box-shadow:0 2px 10px #302c2410}
+.latest-panel[hidden]{display:none}
+.latest-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding-bottom:8px}
+.latest-head h2{font:800 clamp(19px,2.5vw,26px)/1.15 Georgia,serif;letter-spacing:-.025em;margin:0}
+.latest-head span{font:600 11px ui-sans-serif,system-ui,sans-serif;color:#6a655d}
+.latest-list{display:flex;flex-direction:column}
+.latest-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #e8e2da;padding:11px 0}
+.latest-item-text{min-width:0}
+.latest-item-meta{display:block;font:650 11px ui-sans-serif,system-ui,sans-serif;color:#796d60;margin:0 0 3px}
+.latest-item-link{display:block;font:800 clamp(15px,1.8vw,18px)/1.27 Georgia,serif;color:#252725;text-decoration:none}
+.latest-item-link:hover{text-decoration:underline;color:#9a3c29}
+.latest-item-reviewed{flex:none;width:44px;height:44px;min-width:44px;border-radius:50%;border:2px solid #fdfaf3;
+  background:#26333b;color:white;box-shadow:0 1px 7px #0003;font:900 24px/1 ui-sans-serif,system-ui,sans-serif;
+  touch-action:manipulation;cursor:pointer}
+.latest-item-reviewed:hover,.latest-item-reviewed:focus-visible{background:#267d55}
+@media(max-width:760px){
+  .latest-panel{margin:9px 0 16px;padding:10px 12px}
+  .latest-item{gap:9px;padding:11px 0}
+  .latest-item-meta{font-size:10px}
+  .latest-item-link{font-size:16px}
+}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -435,6 +458,13 @@ body.settings-open{overflow:hidden}
     </div>
     <p class="reviewed-hint" id="reviewed-hint" role="status" aria-live="polite">Pulsa el ✓ redondo, abajo a la derecha de la ilustración, para retirarla de «Hoy». Si solo la abres, se queda.</p>
     <button id="restore-reviewed-all" class="restore-reviewed-all" type="button" hidden>↶ Recuperar todas las vistas</button>
+    <section id="latest-panel" class="latest-panel" hidden aria-labelledby="latest-heading">
+      <div class="latest-head">
+        <h2 id="latest-heading">🕒 Lo último para ti</h2>
+        <span id="latest-description">Publicadas más recientemente · tus medios y temas</span>
+      </div>
+      <div id="latest-list" class="latest-list"></div>
+    </section>
     <section id="mustread-panel" class="mustread-panel" hidden aria-labelledby="mustread-title">
       <div class="mustread-head"><strong id="mustread-title">⭐ Ayer, por si te lo perdiste</strong><span>Hasta 48 horas · destacados en RSS de cinco periódicos de referencia</span></div>
       <div id="mustread-grid" class="mustread-grid"></div>
@@ -1034,18 +1064,54 @@ function renderLastMinute(){
   button.setAttribute("aria-label","Marcar como ya vista: "+a.title);
   return storyId(a);
 }
+// La sección "Lo último" NO usa la puntuación editorial. Siempre fecha descendente,
+// dentro de los temas, periódicos, vetos y filtros del lector; nunca muestra "Ya vistas".
+function renderLatest(allowed,highlightedId,previousDay=false){
+  const panel=el("latest-panel"),list=el("latest-list");
+  list.replaceChildren();
+  if(collectionMode!=="feed"||demo){
+    panel.hidden=true;return new Set();
+  }
+  const picked=[...allowed].filter(a=>!highlightedId||storyId(a)!==highlightedId)
+    .filter(a=>a&&Number.isFinite(Date.parse(a.date)))
+    .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date))
+    .slice(0,5);
+  panel.hidden=!picked.length;
+  el("latest-heading").textContent=previousDay?"🕒 Lo último de ayer":"🕒 Lo último para ti";
+  el("latest-description").textContent=previousDay
+    ?"Todavía sin titulares de hoy · fechas reales de publicación"
+    :"Los 5 titulares más recientes de tus medios y temas";
+  const taken=new Set();
+  for(const a of picked){
+    taken.add(storyId(a));
+    const item=mk("article","latest-item"),text=mk("div","latest-item-text");
+    const stamp=mk("span","latest-item-meta",a.source+" · "+readableDate(a.date)+" · "+a.category);
+    const headline=titleAnchor(a);
+    headline.classList.add("latest-item-link");
+    const mark=mk("button","latest-item-reviewed","✓");
+    mark.type="button";
+    mark.title="Ya vista · Quitar de las últimas noticias";
+    mark.setAttribute("aria-label","Marcar como ya vista: "+a.title);
+    mark.onclick=()=>toggleReviewed(a,mark);
+    text.append(stamp,headline);item.append(text,mark);list.append(item);
+  }
+  return taken;
+}
 function render(){
-  el("headline-heading").textContent="Noticias de hoy";
+  el("headline-heading").textContent="Noticias de hoy · Más destacados";
   el("night-status").hidden=true;
-  if(collectionMode==="saved"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;renderSaved();return}
-  if(collectionMode==="reviewed"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;renderReviewed();return}
+  if(collectionMode==="saved"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderSaved();return}
+  if(collectionMode==="reviewed"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderReviewed();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
   const waiting=waitingForToday(),fallback=waiting&&recentFromYesterday().length>0;
   const highlightedId=fallback?null:renderLastMinute();
   if(fallback)el("last-minute-panel").hidden=true;
-  const list=balanceTopics(filtered(fallback).filter(a=>!highlightedId||storyId(a)!==highlightedId));
+  const candidates=filtered(fallback);
+  const latestIDs=renderLatest(candidates,highlightedId,fallback);
+  const list=balanceTopics(candidates.filter(a=>
+    (!highlightedId||storyId(a)!==highlightedId)&&!latestIDs.has(storyId(a))));
   if(fallback){
     el("headline-heading").textContent="Últimas noticias de ayer";
     el("night-status").hidden=false;
