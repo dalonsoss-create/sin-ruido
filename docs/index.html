@@ -534,7 +534,8 @@ async function applyPendingAppUpdate(){
   appReloadChecking=true;
   const {version,scriptHash}=appUpdatePending;
   try{
-    const last=JSON.parse(sessionStorage.getItem(APP_RELOAD_GUARD)||"null");
+    let last=null;
+    try{last=JSON.parse(sessionStorage.getItem(APP_RELOAD_GUARD)||"null")}catch(e){}
     if(last?.version===version&&Date.now()-last.at<300000)return;
     // GitHub publica la edición de noticias y la web por vías distintas.
     // No recargar hasta que GitHub Pages sirva ya el HTML correcto.
@@ -543,7 +544,7 @@ async function applyPendingAppUpdate(){
     const page=new DOMParser().parseFromString(await res.text(),"text/html");
     const inline=[...page.scripts].filter(s=>!s.src).at(-1)?.textContent;
     if(!inline||(await appHash(inline))!==scriptHash)return;
-    sessionStorage.setItem(APP_RELOAD_GUARD,JSON.stringify({version,at:Date.now()}));
+    try{sessionStorage.setItem(APP_RELOAD_GUARD,JSON.stringify({version,at:Date.now()}))}catch(e){}
     const url=new URL(location.href);
     url.searchParams.set("app_version",version);
     location.replace(url.href);
