@@ -178,34 +178,6 @@ body.settings-open{overflow:hidden}
 .mustread-wrap .mustread-item{height:100%;padding-top:49px}
 .mustread-wrap .mustread-review{top:9px;right:10px;left:auto;width:34px;height:34px;font-size:18px;box-shadow:0 2px 8px #0003}
 
-/* Franja editorial: ninguna urgencia inventada; una noticia real de fuentes elegidas. */
-.last-minute-panel{margin:0 0 15px;padding:13px 16px 14px;border:1px solid #e3c7aa;
-  border-left:5px solid #aa4934;border-radius:12px;background:linear-gradient(100deg,#fff9ef,#fff4e4);
-  box-shadow:0 3px 12px #36241b0b}
-.last-minute-panel[hidden]{display:none}
-.last-minute-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;margin-bottom:7px}
-.last-minute-label{display:flex;align-items:center;gap:8px;font:900 12px/1.2 ui-sans-serif,system-ui,sans-serif;color:#7b3c28;text-transform:uppercase;letter-spacing:.4px}
-.last-minute-label strong{font-size:13px;color:#69341e}
-.last-minute-pulse{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:#b44e38}
-#last-minute-kind{font-size:10px;font-weight:850;background:#efdfcb;padding:4px 7px;border-radius:20px}
-.last-minute-edition{font:600 10px ui-sans-serif,system-ui,sans-serif;color:#7b685b}
-.last-minute-body{display:flex;align-items:center;gap:12px;justify-content:space-between}
-.last-minute-copy{min-width:0;flex:1}
-.last-minute-link{display:block;font:bold clamp(17px,2.1vw,24px)/1.2 Georgia,serif;letter-spacing:-.02em;color:#28201d;text-decoration:none}
-.last-minute-link:hover{text-decoration:underline;color:#9d3d2a}
-.last-minute-source{display:block;margin-top:6px;font:600 11px ui-sans-serif,system-ui,sans-serif;color:#77675b}
-.last-minute-reviewed{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;
-  border:1px solid #cbac8b;border-radius:24px;background:#fffaf2;color:#70482e;padding:10px 13px;
-  font:800 12px ui-sans-serif,system-ui,sans-serif;white-space:nowrap}
-.last-minute-reviewed:hover{background:#eef2e8;color:#2b6941}
-@media(max-width:760px){
-  .last-minute-panel{padding:12px;margin-bottom:12px}
-  .last-minute-body{gap:8px;align-items:flex-end}
-  .last-minute-link{font-size:18px}
-  .last-minute-reviewed{min-height:46px;padding:9px 11px;font-size:11px}
-  .last-minute-edition{font-size:10px}
-}
-
 /* Copia portátil y privada de preferencias: accesible desde el móvil. */
 .backup-section h3{font-family:var(--serif);font-size:19px;margin:0 0 5px}
 .backup-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -221,23 +193,6 @@ body.settings-open{overflow:hidden}
 .night-status[hidden]{display:none}
 @media(max-width:760px){.night-status{padding:12px;font-size:12px}}
 
-/* Misma tarjeta editorial e ilustración para Lo último, Última hora y el resto. */
-.latest-panel{margin:0 0 18px;padding:0;border:0;background:transparent;box-shadow:none}
-.latest-panel[hidden]{display:none}
-.latest-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
-  margin:0 0 10px;padding:0 0 9px;border-bottom:2px solid #252a2c}
-.latest-head h2{font:800 clamp(20px,2.5vw,27px)/1.15 Georgia,serif;letter-spacing:-.025em;margin:0}
-.latest-head span{font:600 11px ui-sans-serif,system-ui,sans-serif;color:#6a655d}
-.latest-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
-.latest-list .story.hero{grid-column:1 / -1;margin:0}
-.last-minute-body{display:block}
-.last-minute-body .story{width:100%;margin:0}
-@media(max-width:760px){
- .latest-panel{margin:0 0 15px}
- .latest-list{grid-template-columns:minmax(0,1fr)}
- .latest-list .story.hero{grid-column:auto}
- .latest-head h2{font-size:23px}
-}
 .order-info{font:750 12px ui-sans-serif,system-ui,sans-serif;color:#53646a;white-space:nowrap}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
@@ -428,20 +383,6 @@ body.settings-open{overflow:hidden}
   </aside>
   <section class="editorial">
     <h1 class="sr-only">Tu portada de Sin Ruido</h1>
-    <section id="latest-panel" class="latest-panel" hidden aria-labelledby="latest-heading">
-      <div class="latest-head">
-        <h2 id="latest-heading">🕒 Lo último para ti</h2>
-        <span id="latest-description">Publicadas más recientemente · tus medios y temas</span>
-      </div>
-      <div id="latest-list" class="latest-list"></div>
-    </section>
-    <section id="last-minute-panel" class="last-minute-panel" aria-labelledby="last-minute-heading" hidden>
-      <div class="last-minute-head">
-        <div class="last-minute-label"><span class="last-minute-pulse" aria-hidden="true"></span><strong id="last-minute-heading">Últimas noticias</strong><span id="last-minute-kind"></span></div>
-        <span id="last-minute-edition" class="last-minute-edition"></span>
-      </div>
-      <div class="last-minute-body" id="last-minute-body"></div>
-    </section>
     <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
     <div id="notice" class="notice" hidden></div>
     <div id="night-status" class="night-status" role="status" hidden></div>
@@ -767,7 +708,7 @@ function updateReviewedCount(){el("reviewed-count").textContent=String(reviewedS
 function toggleReviewed(a,button){
   if(!/^https:\/\//.test(a.link||""))return;
   const card=button?.closest(".story")||null;
-  const displayed=card?[...document.querySelectorAll("#latest-list .story, #last-minute-body .story, #features .story, #news-list .story")]:[];
+  const displayed=card?[...document.querySelectorAll("#features .story, #news-list .story")]:[];
   const position=displayed.indexOf(card);
   const topOnScreen=card?card.getBoundingClientRect().top:null;
   const key=storyId(a),restoring=isReviewed(a),updated=new Map(reviewedStories);
@@ -788,7 +729,7 @@ function toggleReviewed(a,button){
   render();
   if(position>=0&&topOnScreen!==null){
     // El titular siguiente ocupa el lugar del retirado, sin saltarse noticias.
-    const after=[...document.querySelectorAll("#latest-list .story, #last-minute-body .story, #features .story, #news-list .story")];
+    const after=[...document.querySelectorAll("#features .story, #news-list .story")];
     const next=after[Math.min(position,after.length-1)];
     if(next)window.scrollTo(0,Math.max(0,window.scrollY+next.getBoundingClientRect().top-topOnScreen));
     else window.scrollTo(0,oldScroll);
@@ -937,64 +878,18 @@ function renderReviewed(){
   el("list-heading").hidden=visible<=1;
   for(const a of list.slice(1,visible))bottom.append(makeCard(a));
 }
-function renderLastMinute(excludeIds=new Set()){
-  const panel=el("last-minute-panel"),selector=window.SinRuidoUltimaHora;
-  if(collectionMode!=="feed"||demo||!selector){
-    panel.hidden=true;return null;
-  }
-  const chosen=selector.choose(eligibleToday().filter(a=>!excludeIds.has(storyId(a))));
-  if(!chosen){panel.hidden=true;return null}
-  const a=chosen.article;
-  panel.hidden=false;
-  el("last-minute-kind").textContent=chosen.kind==="breaking"?"⚡ Última hora":"Recién publicado";
-  const editionDate=new Date(lastEdition);
-  const fmt=new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",hour:"2-digit",minute:"2-digit"});
-  const hours=Math.floor(chosen.ageMin/60),minutes=Math.floor(chosen.ageMin%60);
-  const ageLabel=hours>0?"hace "+hours+" h "+minutes+" min":"hace "+minutes+" min";
-  el("last-minute-edition").textContent=lastEdition&&Number.isFinite(editionDate.valueOf())
-    ?"Edición comprobada: "+fmt.format(editionDate):"Edición sin hora confirmada";
-  // Exactamente la misma tarjeta que en el resto del periódico:
-  // imagen, titular, enlace, Guardar, WhatsApp y ✓ Ya vista.
-  el("last-minute-body").replaceChildren(makeCard(a));
-  return storyId(a);
-}
-// La sección "Lo último" NO usa la puntuación editorial. Siempre fecha descendente,
-// dentro de los temas, periódicos, vetos y filtros del lector; nunca muestra "Ya vistas".
-function renderLatest(allowed,highlightedId){
-  const panel=el("latest-panel"),list=el("latest-list");
-  list.replaceChildren();
-  if(collectionMode!=="feed"||demo){
-    panel.hidden=true;return new Set();
-  }
-  const picked=[...allowed].filter(a=>!highlightedId||storyId(a)!==highlightedId)
-    .filter(a=>a&&Number.isFinite(Date.parse(a.date)))
-    .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date))
-    .slice(0,5);
-  panel.hidden=!picked.length;
-  el("latest-heading").textContent="🕒 Lo último para ti";
-  el("latest-description").textContent="Los 5 titulares más recientes de tus medios y temas";
-  const taken=new Set();
-  picked.forEach((a,index)=>{
-    taken.add(storyId(a));
-    list.append(makeCard(a,index===0));
-  });
-  return taken;
-}
 function render(){
-  el("headline-heading").textContent="Noticias de hoy · Más recientes";
+  el("headline-heading").textContent="Noticias de hoy · Más recientes primero";
   el("night-status").hidden=true;
-  if(collectionMode==="saved"){el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderSaved();return}
-  if(collectionMode==="reviewed"){el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderReviewed();return}
+  if(collectionMode==="saved"){renderSaved();return}
+  if(collectionMode==="reviewed"){renderReviewed();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
-  const candidates=eligibleToday();
-  const latestIDs=renderLatest(candidates,null);
-  const highlightedId=renderLastMinute(latestIDs);
-  // Siempre orden cronológico: no reordenar el resto por diversidad o importancia.
-  const list=candidates.filter(a=>
-    (!highlightedId||storyId(a)!==highlightedId)&&!latestIDs.has(storyId(a)));
-  el("night-status").hidden=true;
+  // Estructura editorial original: una tarjeta principal y a continuación
+  // la cuadrícula compacta de siempre. Solo cambia qué noticias aparecen:
+  // filtradas y ordenadas por fecha de publicación, sin duplicados ni ayer.
+  const list=eligibleToday();
   const visible=Math.min(shownCount,list.length);
   el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
   const more=el("more-wrap");
@@ -1007,14 +902,6 @@ function render(){
     btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
   }
   const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
-  if(!list.length&&latestIDs.size){
-    // Todas las disponibles están en «Lo último». No añadir un mensaje de
-    // «sin noticias» ni repetirlas solo para rellenar la sección principal.
-    el("list-heading").hidden=true;
-    el("more-wrap").hidden=true;
-    el("visible-count").textContent="Todas las demás noticias están mostradas arriba";
-    return;
-  }
   if(!list.length){
     const allReviewed=reviewedStories.size>0&&articles.some(a=>isToday(a)&&matchesReader(a));
     const empty=mk("div","empty",allReviewed?"¡Estás al día! Ya has marcado como vistas las noticias de tu selección.":getInterestClauses().some(c=>c.only)?"No hay titulares de hoy que encajen con tus intereses y temas activados.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros. No mostraremos los de ayer.");
