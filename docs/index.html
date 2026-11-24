@@ -1139,6 +1139,14 @@ function render(){
     btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
   }
   const cover=el("features"),bottom=el("news-list");cover.replaceChildren();bottom.replaceChildren();
+  if(!list.length&&latestIDs.size){
+    // Todas las disponibles están en «Lo último». No añadir un mensaje de
+    // «sin noticias» ni repetirlas solo para rellenar la sección principal.
+    el("list-heading").hidden=true;
+    el("more-wrap").hidden=true;
+    el("visible-count").textContent="Todas las demás noticias están mostradas arriba";
+    return;
+  }
   if(!list.length){
     const allReviewed=reviewedStories.size>0&&articles.some(a=>isToday(a)&&matchesReader(a));
     const empty=mk("div","empty",allReviewed?"¡Estás al día! Ya has marcado como vistas las noticias de tu selección.":getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros.");
