@@ -92,7 +92,7 @@ def collect(feed):
             "title":title[:260],"link":link,"date":article_date,
             "source":feed["name"],"source_id":feed["id"],"category":category,
             "place":feed.get("place",""),
-            "classification_version":5,
+            "classification_version":6,
             "access_status":access_status,
             "editorial_portadas":[COVER_FEEDS[feed["id"]]] if feed["id"] in COVER_FEEDS else []}
         # La imagen se almacena SOLO si se ha comprobado permiso explícito.
@@ -156,10 +156,10 @@ def main():
     # Reetiquetar titulares antiguos: también se corrigen las secciones al desplegar.
     fmap={f["id"]:f for f in feed_list}
     for a in old:
-        if a.get("classification_version")!=5:
+        if a.get("classification_version")!=6:
             origin=fmap.get(a.get("source_id"),{})
             a["category"]=classify(a.get("title",""),a.get("link",""),origin.get("category",a.get("category","Sociedad")),(),a.get("source",""))
-            a["classification_version"]=5
+            a["classification_version"]=6
             a["place"]=origin.get("place",a.get("place",""))
     # Verificar acceso de los anteriores sin volver a rastrear los sitios.
     # Un enlace de tipo premium/suscriptores sigue siendo reconocible, y
@@ -214,7 +214,7 @@ def main():
     OUT.write_text(json.dumps({
         "updated":now.isoformat(),"edition_date_madrid":madrid_day.isoformat(),
         "articles_today_madrid":today_count,
-        "sources_ok":successes,"classification_version":5,
+        "sources_ok":successes,"classification_version":6,
         "feed_count":len(feed_list),
         "sources_status":sorted(statuses,key=lambda x:x["id"]),
         "articles":fresh[:900]},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
