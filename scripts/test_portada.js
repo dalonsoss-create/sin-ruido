@@ -68,13 +68,15 @@ assert.equal(sorted[0].title,moreRecent.title,"La noticia más reciente debe ir 
 assert.equal(sorted[1].title,science.title,"Las demás deben conservar el orden de publicación");
 assert(!html.includes('id="mustread-panel"'),"No debe quedar un bloque de noticias de ayer");
 assert(!html.includes('id="sort"'),"No debe quedar un selector que contradiga el orden cronológico");
-assert(html.indexOf('id="latest-panel"')<html.indexOf('id="last-minute-panel"'),"Lo último debe estar arriba");
-assert(html.includes('list.append(makeCard(a,index===0))'),"Lo último debe usar las tarjetas ilustradas originales");
-assert(html.includes('el("last-minute-body").replaceChildren(makeCard(a))'),"Última hora debe usar la misma tarjeta ilustrada");
-assert(html.includes('const latestIDs=renderLatest(candidates,null);'),"Lo último debe conservar la prioridad cronológica");
-assert(!html.includes('mk("article","latest-item"'),"Nunca volver a mostrar titulares en formato lista de texto");
-assert(html.includes('.latest-list .story.hero'),"El primer titular reciente debe conservar el diseño de tarjeta principal");
-assert(html.includes('class="last-minute-body" id="last-minute-body"></div>'),"Contenedor de Última hora debe estar vacío para insertar la tarjeta");
-assert(!html.includes('id="last-minute-reviewed"'),"No debe quedar un botón viejo fuera de la tarjeta de Última hora");
-
+// El diseño original no debe cambiar al actualizar criterios de actualidad.
+assert(!html.includes('id="latest-panel"'),"Prohibido añadir un segundo bloque de tarjetas gigantes");
+assert(!html.includes('id="last-minute-panel"'),"Prohibido insertar otra tarjeta enorme sobre la portada");
+assert(html.includes('cover.append(makeCard(list[0],true))'),"Conservar tarjeta principal original");
+assert(html.includes('for(const a of list.slice(1,visible))bottom.append(makeCard(a))'),"Conservar tarjetas compactas originales");
+assert(html.includes('const list=eligibleToday()'),"Los titulares recientes deben alimentar la portada original");
+assert(html.includes('function makeCard(a,lead=false)'),"No modificar componente original de tarjetas");
+assert(html.includes('const illustration=visual(a,lead)'),"Conservar ilustraciones de tarjetas");
+const css=fs.readFileSync("docs/portada.css","utf8");
+assert(css.includes('.news-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))'),"Conservar cuadrícula de tres columnas en escritorio");
+assert(css.includes('.story.hero{display:grid;'),"Conservar tarjeta destacada original");
 console.log("OK: filtros de usuario, fuentes, vetos, noticias de hoy y orden cronológico verificados.");
