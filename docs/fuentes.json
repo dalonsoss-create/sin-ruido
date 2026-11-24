@@ -34,7 +34,8 @@
       "name": "EL PAÍS",
       "category": "Internacional",
       "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
-      "images_allowed": false
+      "images_allowed": false,
+      "sitemap_base": "https://elpais.com"
     },
     {
       "id": "elpais-deportes",
@@ -62,7 +63,10 @@
       "name": "El Mundo",
       "category": "Ciencia",
       "url": "https://e00-elmundo.uecdn.es/elmundo/rss/ciencia.xml",
-      "images_allowed": false
+      "images_allowed": false,
+      "extra_urls": [
+        "https://e00-elmundo.uecdn.es/rss/ciencia-y-salud.xml"
+      ]
     },
     {
       "id": "elmundo-salud",
@@ -93,7 +97,8 @@
       "category": "Sociedad",
       "url": "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml",
       "images_allowed": false,
-      "language": "es"
+      "language": "es",
+      "sitemap_base": "https://www.elmundo.es"
     },
     {
       "id": "elmundo-espana",
