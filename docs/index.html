@@ -178,6 +178,34 @@ body.settings-open{overflow:hidden}
 .mustread-wrap .mustread-item{height:100%;padding-top:49px}
 .mustread-wrap .mustread-review{top:9px;right:10px;left:auto;width:34px;height:34px;font-size:18px;box-shadow:0 2px 8px #0003}
 
+/* Franja editorial: ninguna urgencia inventada; una noticia real de fuentes elegidas. */
+.last-minute-panel{margin:0 0 15px;padding:13px 16px 14px;border:1px solid #e3c7aa;
+  border-left:5px solid #aa4934;border-radius:12px;background:linear-gradient(100deg,#fff9ef,#fff4e4);
+  box-shadow:0 3px 12px #36241b0b}
+.last-minute-panel[hidden]{display:none}
+.last-minute-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;margin-bottom:7px}
+.last-minute-label{display:flex;align-items:center;gap:8px;font:900 12px/1.2 ui-sans-serif,system-ui,sans-serif;color:#7b3c28;text-transform:uppercase;letter-spacing:.4px}
+.last-minute-label strong{font-size:13px;color:#69341e}
+.last-minute-pulse{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:#b44e38}
+#last-minute-kind{font-size:10px;font-weight:850;background:#efdfcb;padding:4px 7px;border-radius:20px}
+.last-minute-edition{font:600 10px ui-sans-serif,system-ui,sans-serif;color:#7b685b}
+.last-minute-body{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.last-minute-copy{min-width:0;flex:1}
+.last-minute-link{display:block;font:bold clamp(17px,2.1vw,24px)/1.2 Georgia,serif;letter-spacing:-.02em;color:#28201d;text-decoration:none}
+.last-minute-link:hover{text-decoration:underline;color:#9d3d2a}
+.last-minute-source{display:block;margin-top:6px;font:600 11px ui-sans-serif,system-ui,sans-serif;color:#77675b}
+.last-minute-reviewed{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;
+  border:1px solid #cbac8b;border-radius:24px;background:#fffaf2;color:#70482e;padding:10px 13px;
+  font:800 12px ui-sans-serif,system-ui,sans-serif;white-space:nowrap}
+.last-minute-reviewed:hover{background:#eef2e8;color:#2b6941}
+@media(max-width:760px){
+  .last-minute-panel{padding:12px;margin-bottom:12px}
+  .last-minute-body{gap:8px;align-items:flex-end}
+  .last-minute-link{font-size:18px}
+  .last-minute-reviewed{min-height:46px;padding:9px 11px;font-size:11px}
+  .last-minute-edition{font-size:10px}
+}
+
 /* Copia portátil y privada de preferencias: accesible desde el móvil. */
 .backup-section h3{font-family:var(--serif);font-size:19px;margin:0 0 5px}
 .backup-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -383,6 +411,19 @@ body.settings-open{overflow:hidden}
   </aside>
   <section class="editorial">
     <h1 class="sr-only">Tu portada de Sin Ruido</h1>
+    <section id="last-minute-panel" class="last-minute-panel" aria-labelledby="last-minute-heading" hidden>
+      <div class="last-minute-head">
+        <div class="last-minute-label"><span class="last-minute-pulse" aria-hidden="true"></span><strong id="last-minute-heading">Últimas noticias</strong><span id="last-minute-kind"></span></div>
+        <span id="last-minute-edition" class="last-minute-edition"></span>
+      </div>
+      <div class="last-minute-body">
+        <div class="last-minute-copy">
+          <a id="last-minute-link" class="last-minute-link" target="_blank" rel="noopener noreferrer"></a>
+          <span id="last-minute-source" class="last-minute-source"></span>
+        </div>
+        <button id="last-minute-reviewed" class="last-minute-reviewed" type="button" title="Marcar como ya vista y retirarla" aria-label="Marcar la última noticia como ya vista">✓ Ya vista</button>
+      </div>
+    </section>
     <nav class="topics" id="topic-tabs" aria-label="Filtrar por tema"></nav>
     <div id="notice" class="notice" hidden></div>
     <div id="night-status" class="night-status" role="status" hidden></div>
@@ -878,18 +919,45 @@ function renderReviewed(){
   el("list-heading").hidden=visible<=1;
   for(const a of list.slice(1,visible))bottom.append(makeCard(a));
 }
+function renderLastMinute(){
+  const panel=el("last-minute-panel"),selector=window.SinRuidoUltimaHora;
+  if(collectionMode!=="feed"||demo||!selector){
+    panel.hidden=true;return null;
+  }
+  const eligible=eligibleToday();
+  const chosen=selector.choose(eligible);
+  if(!chosen){panel.hidden=true;return null}
+  const a=chosen.article;
+  panel.hidden=false;
+  el("last-minute-kind").textContent=chosen.kind==="breaking"?"⚡ Última hora":"Recién publicado";
+  const editionDate=new Date(lastEdition);
+  const fmt=new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",hour:"2-digit",minute:"2-digit"});
+  const hours=Math.floor(chosen.ageMin/60),minutes=Math.floor(chosen.ageMin%60);
+  const ageLabel=hours>0?"hace "+hours+" h "+minutes+" min":"hace "+minutes+" min";
+  el("last-minute-edition").textContent=lastEdition&&Number.isFinite(editionDate.valueOf())
+    ?"Edición comprobada: "+fmt.format(editionDate):"Edición sin hora confirmada";
+  const anchor=el("last-minute-link");
+  anchor.textContent=a.title;anchor.href=a.link;
+  anchor.onclick=()=>trackClick(a);
+  el("last-minute-source").textContent=a.source+" · "+a.category+" · Publicada "+ageLabel;
+  const button=el("last-minute-reviewed");
+  button.onclick=()=>toggleReviewed(a,button);
+  button.setAttribute("aria-label","Marcar como ya vista: "+a.title);
+  return storyId(a);
+}
 function render(){
   el("headline-heading").textContent="Noticias de hoy · Más recientes primero";
   el("night-status").hidden=true;
-  if(collectionMode==="saved"){renderSaved();return}
-  if(collectionMode==="reviewed"){renderReviewed();return}
+  if(collectionMode==="saved"){el("last-minute-panel").hidden=true;renderSaved();return}
+  if(collectionMode==="reviewed"){el("last-minute-panel").hidden=true;renderReviewed();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
   // Estructura editorial original: una tarjeta principal y a continuación
   // la cuadrícula compacta de siempre. Solo cambia qué noticias aparecen:
   // filtradas y ordenadas por fecha de publicación, sin duplicados ni ayer.
-  const list=eligibleToday();
+  const highlightedId=renderLastMinute();
+  const list=eligibleToday().filter(a=>!highlightedId||storyId(a)!==highlightedId);
   const visible=Math.min(shownCount,list.length);
   el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
   const more=el("more-wrap");
