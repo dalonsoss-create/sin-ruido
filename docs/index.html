@@ -527,6 +527,7 @@ body.settings-open{overflow:hidden}
 <script src="./ilustraciones.js?v=3"></script>
 <script src="./ultima-hora.js?v=2"></script>
 <script src="./intereses.js?v=2"></script>
+<script src="./politica.js?v=1"></script>
 <script src="./acceso.js?v=2"></script>
 <script src="./fuentes-personales.js?v=1"></script>
 <script src="./copia.js?v=1"></script>
@@ -568,10 +569,8 @@ function renderInterests(){
 function applyInterests(value){
   prefs.interests=String(value||"").trim().slice(0,750);
   const clauses=getInterestClauses();
-  // Las preferencias no exclusivas habilitan automáticamente las categorías sugeridas.
-  for(const clause of clauses.filter(c=>!c.only)){
-    for(const category of clause.categories)prefs.topics[category]=true;
-  }
+  // Solo las casillas de «Mis temas» pueden activar categorías.
+  // Escribir intereses nunca vuelve a activar las desmarcadas.
   activeTopic="Todas";
   save();renderControls();renderInterests();render();
 }
@@ -697,9 +696,13 @@ function weight(a){
   return base*10+impact+relevance+coverBoost+corroboration+optimism+learningBonus(a)+(window.SinRuidoIntereses?window.SinRuidoIntereses.boost(a,getInterestClauses()):0)-Math.max(0,Math.min(hours,168))*.18;
 }
 function matchesReader(a){
-  const clauses=getInterestClauses(),strict=clauses.some(c=>c.only);
+  const clauses=getInterestClauses();
   const q=normal(el("search").value.trim());
-  return (strict||prefs.topics[a.category]!==false)&&
+  // Los temas desmarcados son exclusiones duras, incluso con «Solo...».
+  // Detectar política española aunque la noticia figure como Sociedad, etc.
+  return prefs.topics[a.category]!==false&&
+    (prefs.topics["Política nacional"]!==false||
+      !window.SinRuidoPolitica?.isSpanishPolitical(a))&&
     allowedSource(a)&&!prefs.hidden.includes(storyId(a))&&
     !prefs.blocked.some(w=>w.trim()&&normal(a.title).includes(normal(w.trim())))&&
     (activeTopic==="Todas"||a.category===activeTopic)&&
@@ -1102,7 +1105,7 @@ function render(){
   el("night-status").hidden=true;
   if(collectionMode==="saved"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderSaved();return}
   if(collectionMode==="reviewed"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderReviewed();return}
-  if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false&&!getInterestClauses().some(c=>c.only&&c.categories.includes(activeTopic)))activeTopic="Todas";
+  if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
   const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
   const waiting=waitingForToday(),fallback=waiting&&recentFromYesterday().length>0;
@@ -1132,8 +1135,7 @@ function render(){
   more.hidden=visible>=list.length;
   el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
   const tabs=el("topic-tabs");tabs.replaceChildren();
-  const extraTopics=new Set(getInterestClauses().filter(c=>c.only).flatMap(c=>c.categories));
-  for(const name of ["Todas",...GROUPS.filter(g=>prefs.topics[g[0]]!==false||extraTopics.has(g[0])).map(g=>g[0])]){
+  for(const name of ["Todas",...GROUPS.filter(g=>prefs.topics[g[0]]!==false).map(g=>g[0])]){
     const btn=mk("button","topic-button"+(activeTopic===name?" active":""),name==="Todas"?"Todo":GROUPS.find(g=>g[0]===name)[1]+" "+name);
     btn.type="button";btn.setAttribute("aria-pressed",String(activeTopic===name));
     btn.onclick=()=>{activeTopic=name;render()};tabs.append(btn);
@@ -1355,9 +1357,7 @@ el("welcome-form").onsubmit=e=>{
   prefs.blocked=[...new Set(el("welcome-veto").value.split(/[,;\n]/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1&&x.length<66))].slice(0,50);
   prefs.positiveOnly=el("welcome-positive").checked;
   prefs.interests=el("welcome-interests").value.trim().slice(0,750);
-  const clauses=getInterestClauses();
-  for(const clause of clauses.filter(c=>!c.only))
-    for(const category of clause.categories)prefs.topics[category]=true;
+  // Respetar exactamente las casillas que el usuario ha elegido.
   activeTopic="Todas";save();renderControls();render();closeWelcome();
 };
 
