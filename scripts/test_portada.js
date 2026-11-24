@@ -70,10 +70,12 @@ assert(!html.includes('id="mustread-panel"'),"No debe quedar un bloque de notici
 assert(!html.includes('id="sort"'),"No debe quedar un selector que contradiga el orden cronológico");
 // El diseño original no debe cambiar al actualizar criterios de actualidad.
 assert(!html.includes('id="latest-panel"'),"Prohibido añadir un segundo bloque de tarjetas gigantes");
-assert(!html.includes('id="last-minute-panel"'),"Prohibido insertar otra tarjeta enorme sobre la portada");
+assert(html.includes('id="last-minute-panel"'),"Conservar la franja compacta de Última hora original");
+assert(html.includes('id="last-minute-link"'),"La franja original no se convierte en tarjeta gigante");
+assert(!html.includes('id="last-minute-body"'),"No usar el contenedor gigante que sustituyó al diseño original");
 assert(html.includes('cover.append(makeCard(list[0],true))'),"Conservar tarjeta principal original");
 assert(html.includes('for(const a of list.slice(1,visible))bottom.append(makeCard(a))'),"Conservar tarjetas compactas originales");
-assert(html.includes('const list=eligibleToday()'),"Los titulares recientes deben alimentar la portada original");
+assert(html.includes('const list=eligibleToday().filter('),"La portada debe ordenar hoy sin duplicar Última hora");
 assert(html.includes('function makeCard(a,lead=false)'),"No modificar componente original de tarjetas");
 assert(html.includes('const illustration=visual(a,lead)'),"Conservar ilustraciones de tarjetas");
 const css=fs.readFileSync("docs/portada.css","utf8");
