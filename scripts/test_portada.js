@@ -81,4 +81,10 @@ assert(html.includes('const illustration=visual(a,lead)'),"Conservar ilustracion
 const css=fs.readFileSync("docs/portada.css","utf8");
 assert(css.includes('.news-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))'),"Conservar cuadrícula de tres columnas en escritorio");
 assert(css.includes('.story.hero{display:grid;'),"Conservar tarjeta destacada original");
+// La propia app debe actualizar su código, no solamente el JSON de titulares.
+assert(html.includes('const runningAppHash=appHash(APP_SOURCE)'),"Falta huella del código cargado");
+assert(html.includes('checkAppVersion(data);'),"Al recibir noticias debe comprobar también versión de la app");
+assert(html.includes('function appIsBeingEdited()'),"No interrumpir personalización en curso");
+assert(html.includes('url.searchParams.set("app_version",version)'),"Recargar HTML sin conservar caché antiguo");
+assert(html.includes('setInterval(applyPendingAppUpdate,20000)'),"Reintentar cambio de versión pendiente");
 console.log("OK: filtros de usuario, fuentes, vetos, noticias de hoy y orden cronológico verificados.");
