@@ -123,3 +123,11 @@ La copia **no se sube automáticamente** a ningún servidor. En iPhone, si está
 - El botón superior **«↗ Compartir periódico»** comparte ahora una invitación completa, no solo una URL: qué es Sin Ruido, enlace con `?bienvenida=1&compartir=1`, pasos de instalación en la pantalla de inicio desde **Safari en iPhone** o **Chrome en Android**, y descripción del icono negro con las letras blancas «SR.».
 - En móviles utiliza **Compartir** del sistema para elegir WhatsApp, Mensajes u otra aplicación. En escritorio intenta abrir WhatsApp Web con el mensaje precargado; si el navegador bloquea la ventana, copia el texto al portapapeles o muestra la invitación para copiarla manualmente.
 - La vista previa del enlace utiliza la etiqueta Open Graph `og:image` apuntando al icono **`icon-512.png`**, y añade dimensiones/descripcion. La miniatura final depende de la caché del servicio de mensajería: no se puede garantizar que actualice al instante. El texto compartido no contiene la configuración privada de quien lo envía.
+
+## Cambio de día y protección contra ediciones desfasadas (24 de noviembre de 2026)
+
+- La zona horaria editorial es `Europe/Madrid` (no UTC). Un artículo fechado el 23/11 a las 23:51 UTC corresponde al **24/11 a las 00:51 en Madrid**.
+- Si a medianoche los periódicos elegidos aún no han publicado noticias nuevas, durante las siguientes horas la portada enseña los titulares recientes del día anterior, señalizados claramente como **«Últimas noticias de ayer»** y acompañados por la hora real de la última edición. **Nunca se etiquetan como noticias del día actual**.
+- En cuanto la edición contiene noticias de hoy de las fuentes elegidas, pasa automáticamente a **«Noticias de hoy»**, sin cambiar las preferencias del usuario. Al cambiar de día con la página abierta, solicita otra actualización.
+- El recopilador añade `edition_date_madrid` y `articles_today_madrid` al JSON para diagnosticar el cambio de día y ya no inventa la hora de publicación cuando un RSS no trae fecha fiable.
+- GitHub Actions puede retrasar ejecuciones programadas. El workflow realiza `git fetch` + `git rebase` antes del `git push` y reintenta hasta tres veces si el repositorio cambia durante la recogida de RSS; así no falla por modificaciones simultáneas en la web.
