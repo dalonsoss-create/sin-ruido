@@ -38,14 +38,14 @@ Este repositorio es una prueba personal, no un negocio en producción. Reproduci
 Los titulares abren el periódico en una pestaña nueva. Sin Ruido **no puede detectar desde otra web** si cada artículo individual está bloqueado ni modificar su página. Para los medios con tarifas verificadas, Sin Ruido muestra debajo del titular el botón **«¿Te pide suscripción? Ver precio»**: al pulsarlo aparece un panel con el precio público consultado, las condiciones relevantes, la fecha de comprobación y enlaces oficiales para contratar y revisar la tarifa. Los datos están en `docs/suscripciones.json`; hay que actualizarlos si cambian los precios. Ningún botón cobra por usar Sin Ruido.
 
 ## Importancia y enfoque positivo
-La ordenación por defecto **«Importancia + optimismo»** tiene en cuenta las prioridades de temas del usuario, palabras indicativas de impacto, actualidad y un bonus moderado a noticias constructivas. Las noticias graves siguen apareciendo si son relevantes; no se altera el contenido del titular.
+**La ordenación de portada es cronológica por fecha de publicación de los titulares del día actual en Madrid.** No se reordena por optimismo, medio o importancia. La franja de «Última hora» es una sección adicional y no se inventan titulares.
 
-El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusivamente titulares que las reglas automáticas identifican como probablemente positivos. Se guarda en el navegador y funciona de forma independiente para cada usuario. Si hay cero coincidencias, la portada lo indica. **Advertencia:** es un filtro heurístico y puede equivocarse o dejar fuera alguna noticia buena; no hace lectura semántica completa de los artículos ni requiere API de pago. El orden «Más recientes» sigue disponible para quien lo prefiera.
+El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusivamente titulares que las reglas automáticas identifican como probablemente positivos. Se guarda en el navegador y funciona de forma independiente para cada usuario. Si hay cero coincidencias, la portada lo indica. **Advertencia:** es un filtro heurístico y puede equivocarse o dejar fuera alguna noticia buena; no hace lectura semántica completa de los artículos ni requiere API de pago. La ordenación «Más recientes» se aplica siempre.
 
 ## Portada breve y aprendizaje de intereses (v2)
-- La portada muestra **20 noticias** por defecto (1 destacada y hasta 19 adicionales); el botón **Cargar 20 noticias más** añade otro bloque de 20. Cambiar de categoría, filtro, fuente u orden reinicia la vista a 20.
+- La portada muestra **20 noticias** por defecto (1 destacada y hasta 19 adicionales); el botón **Cargar 20 noticias más** añade otro bloque de 20. Cambiar de categoría, filtro o fuente reinicia la vista a 20.
 - Se guarda un **perfil de lectura solo en el navegador** (`localStorage: sinruido-learning-v1`), independiente de las preferencias manuales. Cada clic en el titular o el enlace «Leer» suma una muestra de intereses por categoría, fuente y palabras relevantes del titular, con un historial máximo de 100 clics. No se registran tiempos de lectura ni datos identificativos, ni se envían estos clics a GitHub.
-- El algoritmo prioriza temas y expresiones similares, pero el aumento está limitado para no ocultar noticias importantes ni anular el criterio positivo. La ordenación «Más recientes» mantiene estrictamente la fecha.
+- El algoritmo prioriza temas y expresiones similares, pero el aumento está limitado para no ocultar noticias importantes ni anular el criterio positivo. El orden cronológico prevalece sobre el aprendizaje de intereses.
 - En **Tu perfil de lectura** se muestran los temas abiertos con más frecuencia; **Borrar lo aprendido** elimina ese historial sin borrar filtros ni fuentes. Las preferencias no se comparten entre Safari, navegadores distintos o un acceso directo que tenga almacenamiento separado.
 
 
@@ -57,7 +57,7 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 - El botón «Compartir periódico» genera el enlace de bienvenida para nuevos lectores.
 
 ## Portada equilibrada y estado de lectura
-- En la portada general, **el primer bloque de 20 noticias intenta reservar al menos un titular de cada tema activado**, siempre que exista alguno reciente que no esté excluido por las fuentes, vetos y opciones del lector. Los restantes se ordenan por relevancia, optimismo e intereses aprendidos. Las pestañas por tema permiten abrir una sección directamente.
+- La portada muestra exclusivamente noticias del día actual y todos los bloques mantienen el orden descendente por hora de publicación, filtrando antes por fuentes, temas, vetos, intereses y «Ya vista». Las pestañas por tema permiten abrir una sección directamente.
 - Al abrir el título o pulsar «Leer», se guarda ese enlace en el navegador (`sinruido-seen-v1`, limitado a 800 URL) y aparece **✓ YA ABIERTO** con un cambio de color. Esta marca indica que se abrió el enlace, no que se terminó de leer el artículo.
 - El historial de clics del algoritmo se cuenta una sola vez por URL para evitar reforzar artificialmente un único titular. No se transmiten datos personales ni historiales a GitHub.
 
@@ -91,7 +91,7 @@ El control **☀️ Solo positivas**, visible incluso en móvil, muestra exclusi
 ## Ilustraciones exclusivas y lectura con «Ya vista» (noviembre 2026)
 
 - La portada vuelve a usar **exclusivamente ilustraciones SVG propias**. La función que consultaba fotografías externas está desactivada y el interruptor de fotos se ha retirado. El antiguo fichero `docs/fotos.js` se conserva sin cargar para archivo, pero no se ejecuta. Los dibujos se generan en `docs/ilustraciones.js` con nuevos símbolos (18 motivos añadidos), seis composiciones, paletas y variaciones por titular: no se repite exactamente el mismo SVG en 20 titulares distintos.
-- Cada tarjeta de portada dispone de un botón **redondo ✓ abajo a la derecha, dentro de la ilustración**. Es una acción voluntaria: pulsarlo marca el titular como **Ya vista** y lo retira de la portada de hoy y de los destacados de ayer. **Abrir el enlace no activa este botón**, no retira nada; el indicador previo «YA ABIERTO» sigue siendo independiente.
+- Cada tarjeta de portada dispone de un botón **redondo ✓ abajo a la derecha, dentro de la ilustración**. Es una acción voluntaria: pulsarlo marca el titular como **Ya vista** y lo retira de la portada de hoy. **Abrir el enlace no activa este botón**, no retira nada; el indicador previo «YA ABIERTO» sigue siendo independiente.
 - Las noticias retiradas se conservan en una nueva sección **✓ Ya vistas**, desde donde el mismo botón permite **↶ Recuperar** individualmente, o recuperar todas con confirmación. Si la noticia sigue siendo de hoy volverá a la portada; si ya es antigua, permanece disponible en este historial hasta que el usuario la recupere.
 - El historial separado se conserva **solo en ese navegador** (`localStorage: sinruido-reviewed-v1`, máximo 700 entradas). No se sincroniza entre dispositivos; **no es lo mismo que «☆ Guardar»**.
 - Marcar varias permite avanzar por la edición; el espacio que dejan se rellena con otros titulares de los medios seleccionados si los hay. Si ya no quedan titulares nuevos, la portada muestra un estado de «¡Estás al día!». La lectura no se rastrea ni se comparte con el servidor.
@@ -127,16 +127,18 @@ La copia **no se sube automáticamente** a ningún servidor. En iPhone, si está
 ## Cambio de día y protección contra ediciones desfasadas (24 de noviembre de 2026)
 
 - La zona horaria editorial es `Europe/Madrid` (no UTC). Un artículo fechado el 23/11 a las 23:51 UTC corresponde al **24/11 a las 00:51 en Madrid**.
-- Si a medianoche los periódicos elegidos aún no han publicado noticias nuevas, durante las siguientes horas la portada enseña los titulares recientes del día anterior, señalizados claramente como **«Últimas noticias de ayer»** y acompañados por la hora real de la última edición. **Nunca se etiquetan como noticias del día actual**.
-- En cuanto la edición contiene noticias de hoy de las fuentes elegidas, pasa automáticamente a **«Noticias de hoy»**, sin cambiar las preferencias del usuario. Al cambiar de día con la página abierta, solicita otra actualización.
+- Si a medianoche los periódicos elegidos aún no han publicado noticias nuevas, la portada se muestra sin noticias y lo indica expresamente. **Jamás se rellena con titulares de ayer.**
+- Cuando lleguen nuevos titulares del día actual de las fuentes elegidas, se verán al comprobar la edición actualizada, sin alterar las preferencias. Al cambiar de día con la página abierta, solicita otra actualización.
 - El recopilador añade `edition_date_madrid` y `articles_today_madrid` al JSON para diagnosticar el cambio de día y ya no inventa la hora de publicación cuando un RSS no trae fecha fiable.
 - GitHub Actions puede retrasar ejecuciones programadas. El workflow realiza `git fetch` + `git rebase` antes del `git push` y reintenta hasta tres veces si el repositorio cambia durante la recogida de RSS; así no falla por modificaciones simultáneas en la web.
 
 
-## Cinco titulares más recientes al entrar (24 de noviembre de 2026)
 
-La portada muestra una nueva sección **«🕒 Lo último para ti»**, antes de los titulares destacados editorialmente. Son los **cinco artículos con fecha de publicación más reciente** entre las fuentes y categorías activadas por el lector. En esta sección no se aplica la puntuación de importancia, optimismo, variedad de medios ni aprendizaje: prevalece siempre la **hora real de publicación**. Sí se respetan los vetos, búsquedas, restricciones voluntarias de «Solo positivas», fechas y la marca «✓ Ya vista». No se repiten titulares en la franja «Última hora» ni en la sección principal.
+## Regla de producto: filtros estrictos y actualidad (24 de noviembre de 2026)
 
-Debajo continúa la portada ordenada con el criterio editorial de importancia y diversidad, sin mezclar los cinco artículos de la sección superior. Si solamente hay unos pocos artículos hoy, no se finge que falta contenido: quedan arriba. Al cambio de día, si aún no hay noticias de hoy, la sección cambia el título a **«Lo último de ayer»** y muestra claramente sus fechas.
-
-**Límite de actualización:** «Lo último» se alimenta del RSS que haya publicado GitHub; pulsar «Actualizar noticias» todavía verifica si hay una edición nueva, pero no ordena a un backend consultar instantáneamente cada periódico. Para esa función hará falta servicio de refresco compartido con caché, límites por fuente y controles de concurrencia.
+- **Todas las secciones de la portada** se alimentan de una lista común de artículos permitidos. Se comprueban periódicos habilitados, temas activados, vetos por palabras, frases de intereses, búsqueda, «Solo positivas» y «Ya vista» **antes de ordenar**.
+- Las casillas «Mis temas» son **exclusiones obligatorias** para cualquier lector. Una frase escrita en «Mis intereses», incluso «Solo...», nunca puede saltarse o reactivar un tema desmarcado. Para volver a verlo hay que marcar su casilla.
+- Si se desmarca «Política nacional», un segundo clasificador local de respaldo bloquea también titulares políticos españoles publicados incorrectamente bajo Sociedad, Economía, Salud, etc. La clasificación automática tiene límites; se revisa y se amplía con casos reales, especialmente para evitar falsos positivos con homónimos.
+- **No se muestran noticias del día anterior en la portada**, ni siquiera tras medianoche. Se mantienen únicamente en las secciones voluntarias «Guardadas» y «Ya vistas», cuando corresponda. La fecha de hoy usa Europe/Madrid.
+- **«Lo último para ti» aparece al inicio** con los cinco titulares más recientes del usuario; después puede aparecer «Última hora» si procede, y continúa la lista general en **orden cronológico de publicación**. Sin duplicados en las tres secciones.
+- Antes de publicar RSS, GitHub Actions ejecuta `node scripts/test_portada.js` para comprobar filtros, desactivación de fuentes, política mal categorizada, vetos, fecha de hoy y orden cronológico. Esta regresión forma parte del proceso periódico, no es una prueba manual de un solo usuario.
