@@ -33,11 +33,11 @@ def text(node,*tags):
     return ""
 
 def date_iso(raw):
-    if not raw:return dt.datetime.now(dt.timezone.utc).isoformat()
+    if not raw:return None  # No inventamos la fecha de una noticia sin pubDate
     try:d=email.utils.parsedate_to_datetime(raw)
     except (ValueError,TypeError):
         try:d=dt.datetime.fromisoformat(raw.replace("Z","+00:00"))
-        except ValueError:return dt.datetime.now(dt.timezone.utc).isoformat()
+        except ValueError:return None  # No publicamos como nueva una noticia mal fechada
     if d.tzinfo is None:d=d.replace(tzinfo=dt.timezone.utc)
     return d.astimezone(dt.timezone.utc).isoformat()
 
@@ -77,6 +77,8 @@ def collect(feed):
             title=text(item,"title")
             link=text(item,"link")
             published=text(item,"pubDate",DC+"date")
+        article_date=date_iso(published)
+        if not article_date:continue
         title=re.sub(r"\s+"," ",title).strip()
         if len(title)<16 or BAD.search(title):continue
         link=link.strip()
@@ -87,7 +89,7 @@ def collect(feed):
         category=classify(title,link,feed["category"],rss_tags,feed["name"])
         access_status, access_evidence=detect_access(link,item,rss_tags,feed["name"])
         article={
-            "title":title[:260],"link":link,"date":date_iso(published),
+            "title":title[:260],"link":link,"date":article_date,
             "source":feed["name"],"source_id":feed["id"],"category":category,
             "place":feed.get("place",""),
             "classification_version":5,
