@@ -62,6 +62,12 @@ CLIMATE=r"\b(?:cambio climatico|cumbre del clima|el tiempo de la semana|pronosti
 ECON=r"\b(?:inflacion|pib|euribor|tipos de interes|tipos del bce|economia|economico|economica|mercado bursatil|bolsa de|cotizacion|salarios?|hipotecas?|fiscalidad|recaudacion|presupuestos?|inversiones?|crisis financiera|subida de precios|deuda publica)\b"
 BIZ=r"\b(?:empresa|empresas|companias|multinacional|ceo|startups?|emprendedor|empresari|plantilla|empleo|trabajadores|contratacion|despidos|fusion|adquisicion|financiacion|facturacion|beneficios empresariales)\b"
 POLITICS=r"\b(?:psoe|partido popular|podemos|sumar|vox|moncloa|feijoo|sanchez|congreso de los diputados|senado espanol|parlamento espanol|elecciones generales|gobierno espanol|gobierno de espana|presidente del gobierno|oposicion parlamentaria|ministros? de espana)\b"
+# Evidencias inequívocas de política española. Tienen precedencia sobre
+# palabras como «médico», «tenis», «universidad» o «vivienda» usadas en una
+# noticia cuyo protagonista es un partido o representante político.
+# No se incluye «Sánchez» o «Nadal» solos para evitar homónimos.
+POLITICAL_ACTORS=r"\\b(?:psoe|pp|partido popular|vox|podemos|sumar|junts|erc|esquerra republicana|bildu|pnv|ciudadanos|coalicion canaria|bng|moncloa|pedro sanchez|feijoo|abascal|puigdemont|rufian|ayuso|miriam nogueras|ester munoz|salvador illa|juanma moreno|patxi lopez|irene montero|yolanda diaz|felix bolanos|oscar puente|urtasun|albiol)\\b"
+POLITICAL_INSTITUTIONS=r"\\b(?:gobierno de espana|gobierno espanol|presidente del gobierno|consejo de ministros|congreso de los diputados|senado espanol|parlament de cataluna|parlamento de cataluna|asamblea de madrid|elecciones generales|debate electoral|investidura|mocion de censura)\\b"
 CULTURE=r"\b(?:cine|pelicula|series? de television|actor|actriz|director de cine|festival de cine|museo|exposicion|teatro|artista|musica|concierto|literatura|novela|escritor|escritora|premios goya)\b"
 HISTORY=r"\b(?:arqueolog\w*|civilizaciones?|edad del hierro|edad del bronce|edad media|imperio romano|restos historicos|momia|yacimientos?|prehistoria|medieval|dinastia|egipto antiguo)\b"
 EDUCATION=r"\b(?:colegio|universidad|estudiantes|educacion|profesores|profesoras|escuela|estudiar|aulas|becas escolares|curriculo escolar)\b"
@@ -74,6 +80,10 @@ def classify(title,link,default="Sociedad",tags=(),source=""):
     labels=" ".join(norm(v) for v in tags if v)[:900]
     src=norm(source)
     default=default if default in CATEGORIES else "Sociedad"
+    # Una noticia de declaraciones políticas sigue siendo política aunque hable
+    # de salud o economía, o el RSS generalista la llame «Sociedad».
+    if has(t,POLITICAL_ACTORS) or has(t,POLITICAL_INSTITUTIONS):
+        return "Política nacional"
     # Categorías estructurales: dominio deportivo y sección dedicada tienen preferencia.
     sport_source=src in ("as","marca","mundo deportivo","sport")
     if has(t,TENNIS) or has(p,r"/tenis(?:/|$)") or has(labels,r"\btenis\b"):
@@ -150,7 +160,12 @@ if __name__=="__main__":
         ("Muere abatido un ejemplar de oso pardo durante un control de jabalíes en Picos de Europa", "https://www.elmundo.es/ciencia/2026/11/22/6b02c39fe85ece873e8b458c.html", "Ciencia", "Naturaleza"),
         ("Un lobo es avistado en los Picos de Europa", "https://ejemplo.com/ciencia/lobo", "Ciencia", "Naturaleza"),
         ("La biodiversidad de los océanos preocupa a los científicos", "https://ejemplo.com/ciencia/fauna", "Ciencia", "Naturaleza"),
-        ("De osos panda a hospitales inteligentes: Sheinbaum quiere diversificar el comercio y la inversión", "https://elpais.com/mexico/economia/2026/11/21/osos-panda-hospitales.html", "Economía", "Economía")
+        ("De osos panda a hospitales inteligentes: Sheinbaum quiere diversificar el comercio y la inversión", "https://elpais.com/mexico/economia/2026/11/21/osos-panda-hospitales.html", "Economía", "Economía"),
+        ("Nadal (PP) pide elecciones en Albacete", "https://example.com/sociedad/politica-espana", "Sociedad", "Política nacional"),
+        ("Rufián contesta al PP y cita a su médico", "https://example.com/salud/medicina", "Salud", "Política nacional"),
+        ("Sánchez Vicario entra en el salón de la fama del tenis", "https://example.com/tenis/hall-fame", "Tenis", "Tenis"),
+        ("El Parlament de Cataluña recibe a Puigdemont tras la amnistía", "https://example.com/sociedad/politica", "Sociedad", "Política nacional"),
+        ("La bolsa registra una nueva subida del 5%", "https://example.com/economia/bolsa", "Economía", "Economía")
     ]
     errors=[]
     for title,url,default,expected in examples:
