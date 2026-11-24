@@ -465,10 +465,6 @@ body.settings-open{overflow:hidden}
       </div>
       <div id="latest-list" class="latest-list"></div>
     </section>
-    <section id="mustread-panel" class="mustread-panel" hidden aria-labelledby="mustread-title">
-      <div class="mustread-head"><strong id="mustread-title">⭐ Ayer, por si te lo perdiste</strong><span>Hasta 48 horas · destacados en RSS de cinco periódicos de referencia</span></div>
-      <div id="mustread-grid" class="mustread-grid"></div>
-    </section>
     <div class="sectionbar"><h2 id="headline-heading">Noticias de hoy</h2><span id="visible-count"></span></div>
     <div id="features"></div>
     <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
@@ -712,64 +708,14 @@ function matchesReader(a){
 }
 // Al cambiar de día, un RSS tardío no debe dejar una portada vacía ni
 // hacer pasar noticias de ayer por noticias publicadas hoy.
-function waitingForToday(){
-  return !articles.some(a=>isToday(a)&&matchesReader(a));
+// Todos los componentes de portada usan exactamente los mismos filtros.
+// Las noticias de ayer nunca rellenan una edición sin novedades.
+function eligibleToday(){
+  return articles.filter(a=>isToday(a)&&!isReviewed(a)&&matchesReader(a))
+    .filter(a=>Number.isFinite(Date.parse(a.date)))
+    .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
 }
-function recentFromYesterday(){
-  if(!waitingForToday())return [];
-  const now=Date.now(),yesterdayKey=todayKey(now-86400000);
-  return articles.filter(a=>{
-    const age=now-Date.parse(a.date);
-    return todayKey(a.date)===yesterdayKey&&age>=0&&age<=8*3600000&&
-      !isReviewed(a)&&matchesReader(a);
-  });
-}
-function filtered(usePrevious=false){
-  let list=usePrevious?recentFromYesterday():articles.filter(a=>isToday(a)&&!isReviewed(a)&&matchesReader(a));
-  if(el("sort").value==="recientes")list.sort((a,b)=>new Date(b.date)-new Date(a.date));else list.sort((a,b)=>weight(b)-weight(a));
-  return list;
-}
-function essentialsFromYesterday(){
-  // Excepción editorial explícita: hasta 48 h y solamente lo recogido
-  // en al menos una de las cinco fuentes RSS de portada.
-  const now=Date.now();
-  const previous=articles.filter(a=>{
-    const age=(now-Date.parse(a.date))/3600000;
-    return Number.isFinite(age)&&age>=0&&age<=48&&!isToday(a)&&
-      portadasDe(a).length>0&&!isReviewed(a)&&matchesReader(a);
-  }).sort((a,b)=>weight(b)-weight(a));
-  const out=[],categories=new Set(),publishers=new Set();
-  for(const a of previous){
-    if(out.length>=6)break;
-    if(categories.has(a.category)||publishers.has(a.source))continue;
-    out.push(a);categories.add(a.category);publishers.add(a.source);
-  }
-  return out;
-}
-function renderEssentials(){
-  const panel=el("mustread-panel");
-  if(collectionMode!=="feed"){panel.hidden=true;return}
-  const stories=essentialsFromYesterday();
-  panel.hidden=!stories.length;
-  const grid=el("mustread-grid");grid.replaceChildren();
-  for(const a of stories){
-    const card=mk("a","mustread-item");
-    card.href=a.link;card.target="_blank";card.rel="noopener noreferrer";
-    card.addEventListener("click",()=>trackClick(a));
-    const topic=mk("span","mustread-topic","⭐ "+a.category+" · RSS de portada");
-    const title=mk("span","mustread-title",a.title);
-    const access=window.SinRuidoAcceso?window.SinRuidoAcceso.status(a):"unknown";
-    const label=access==="subscription"?" · 🔒 Requiere suscripción":access==="free"?" · ✓ Lectura gratuita":"";
-    const source=mk("span","mustread-source",a.source+" · "+readableDate(a.date)+label);
-    card.append(topic,title,source);
-    const wrap=mk("div","mustread-wrap"),seen=mk("button","review-toggle mustread-review","✓");
-    seen.type="button";
-    seen.title="Marcar como ya vista y retirar este titular";
-    seen.setAttribute("aria-label",seen.title+": "+a.title);
-    seen.onclick=()=>toggleReviewed(a,seen);
-    wrap.append(card,seen);grid.append(wrap);
-  }
-}
+function filtered(){return eligibleToday()}
 function titleAnchor(a){
   const anchor=mk("a","headline-link",a.title);
   if(a.link&&/^https:\/\//i.test(a.link)){anchor.href=a.link;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.title="Leer en "+a.source;anchor.addEventListener("click",()=>trackClick(a))}
@@ -963,46 +909,6 @@ function makeCard(a,lead=false){
   illustration.append(button);
   card.append(illustration,copy);return card;
 }
-function balanceTopics(list){
-  if(list.length<2)return list;
-  // Regla editorial: antes de repetir un periódico, mostramos titulares
-  // de todas las otras cabeceras que tengan artículos permitidos por el usuario.
-  // Así las primeras 20 noticias pueden proceder de 20 medios diferentes.
-  const pools=new Map();
-  for(const a of list){
-    const publisher=a.source||a.source_id||"Otra fuente";
-    if(!pools.has(publisher))pools.set(publisher,[]);
-    pools.get(publisher).push(a);
-  }
-  const output=[],coveredTopics=new Set(),recent=el("sort").value==="recientes";
-  const publishers=[...pools].map(([name,items])=>({name,items}));
-  while(output.length<list.length){
-    let available=publishers.filter(p=>p.items.length);
-    if(!available.length)break;
-    // Una pasada = como máximo una noticia por medio.
-    while(available.length){
-      let best=null,bestScore=-Infinity;
-      for(const pool of available){
-        for(let i=0;i<pool.items.length;i++){
-          const a=pool.items[i];
-          const age=Math.max(0,(Date.now()-new Date(a.date).valueOf())/3600000)||0;
-          const score=(recent?-age:weight(a))
-            +(recent?0:(!coveredTopics.has(a.category)?17:0))
-            -(wasOpened(a)?(recent?0:5):0);
-          if(score>bestScore){
-            bestScore=score;best={pool,index:i,article:a};
-          }
-        }
-      }
-      if(!best)break;
-      output.push(best.article);
-      coveredTopics.add(best.article.category);
-      best.pool.items.splice(best.index,1);
-      available=available.filter(p=>p!==best.pool);
-    }
-  }
-  return output;
-}
 function renderSaved(){
   const list=bookmarks;
   const visible=Math.min(shownCount,list.length);
@@ -1046,8 +952,7 @@ function renderLastMinute(){
   if(collectionMode!=="feed"||demo||!selector){
     panel.hidden=true;return null;
   }
-  const eligible=articles.filter(a=>isToday(a)&&!isReviewed(a)&&matchesReader(a));
-  const chosen=selector.choose(eligible);
+  const chosen=selector.choose(eligibleToday());
   if(!chosen){panel.hidden=true;return null}
   const a=chosen.article;
   panel.hidden=false;
@@ -1069,7 +974,7 @@ function renderLastMinute(){
 }
 // La sección "Lo último" NO usa la puntuación editorial. Siempre fecha descendente,
 // dentro de los temas, periódicos, vetos y filtros del lector; nunca muestra "Ya vistas".
-function renderLatest(allowed,highlightedId,previousDay=false){
+function renderLatest(allowed,highlightedId){
   const panel=el("latest-panel"),list=el("latest-list");
   list.replaceChildren();
   if(collectionMode!=="feed"||demo){
@@ -1080,10 +985,8 @@ function renderLatest(allowed,highlightedId,previousDay=false){
     .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date))
     .slice(0,5);
   panel.hidden=!picked.length;
-  el("latest-heading").textContent=previousDay?"🕒 Lo último de ayer":"🕒 Lo último para ti";
-  el("latest-description").textContent=previousDay
-    ?"Todavía sin titulares de hoy · fechas reales de publicación"
-    :"Los 5 titulares más recientes de tus medios y temas";
+  el("latest-heading").textContent="🕒 Lo último para ti";
+  el("latest-description").textContent="Los 5 titulares más recientes de tus medios y temas";
   const taken=new Set();
   for(const a of picked){
     taken.add(storyId(a));
@@ -1101,34 +1004,20 @@ function renderLatest(allowed,highlightedId,previousDay=false){
   return taken;
 }
 function render(){
-  el("headline-heading").textContent="Noticias de hoy · Más destacados";
+  el("headline-heading").textContent="Noticias de hoy · Más recientes";
   el("night-status").hidden=true;
-  if(collectionMode==="saved"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderSaved();return}
-  if(collectionMode==="reviewed"){el("mustread-panel").hidden=true;el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderReviewed();return}
+  if(collectionMode==="saved"){el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderSaved();return}
+  if(collectionMode==="reviewed"){el("last-minute-panel").hidden=true;el("latest-panel").hidden=true;renderReviewed();return}
   if(activeTopic!=="Todas"&&prefs.topics[activeTopic]===false)activeTopic="Todas";
-  const signature=JSON.stringify([activeTopic,el("sort").value,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
+  const signature=JSON.stringify([activeTopic,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
-  const waiting=waitingForToday(),fallback=waiting&&recentFromYesterday().length>0;
-  const highlightedId=fallback?null:renderLastMinute();
-  if(fallback)el("last-minute-panel").hidden=true;
-  const candidates=filtered(fallback);
-  const latestIDs=renderLatest(candidates,highlightedId,fallback);
-  const list=balanceTopics(candidates.filter(a=>
-    (!highlightedId||storyId(a)!==highlightedId)&&!latestIDs.has(storyId(a))));
-  if(fallback){
-    el("headline-heading").textContent="Últimas noticias de ayer";
-    el("night-status").hidden=false;
-    const edition=lastEdition&&Number.isFinite(lastEdition)
-      ?new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}).format(new Date(lastEdition))
-      :"sin fecha disponible";
-    el("night-status").textContent="🌙 Ya es "+new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",day:"numeric",month:"long"}).format(new Date())+
-      ". Los titulares que ves son del día anterior (última edición: "+edition+"). "+
-      "Sin Ruido mostrará automáticamente las noticias de hoy en cuanto las publiquen los medios seleccionados y llegue la siguiente actualización.";
-    el("mustread-panel").hidden=true;
-  }else{
-    el("night-status").hidden=true;
-    renderEssentials();
-  }
+  const candidates=eligibleToday();
+  const highlightedId=renderLastMinute();
+  const latestIDs=renderLatest(candidates,highlightedId);
+  // Siempre orden cronológico: no reordenar el resto por diversidad o importancia.
+  const list=candidates.filter(a=>
+    (!highlightedId||storyId(a)!==highlightedId)&&!latestIDs.has(storyId(a)));
+  el("night-status").hidden=true;
   const visible=Math.min(shownCount,list.length);
   el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
   const more=el("more-wrap");
