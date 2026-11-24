@@ -69,4 +69,4 @@ assert.equal(sorted[1].title,science.title,"Las demás deben conservar el orden 
 assert(!html.includes('id="mustread-panel"'),"No debe quedar un bloque de noticias de ayer");
 assert(!html.includes('id="sort"'),"No debe quedar un selector que contradiga el orden cronológico");
 assert(html.indexOf('id="latest-panel"')<html.indexOf('id="last-minute-panel"'),"Lo último debe estar arriba");
-console.log("OK: 16 comprobaciones de filtros, fecha y orden cronológico.");
+console.log("OK: filtros de usuario, fuentes, vetos, noticias de hoy y orden cronológico verificados.");
