@@ -503,6 +503,67 @@ body.settings-open{overflow:hidden}
 <script>
 (function(){
 "use strict";
+// La edición de noticias y la versión del programa son cosas distintas.
+// Conservamos toda la personalización local; solo recargamos código cuando
+// GitHub publica una versión diferente y la página nueva está disponible.
+const APP_RELOAD_GUARD="sinruido-app-reload-attempt-v1";
+const APP_SOURCE=document.currentScript?.textContent||"";
+async function appHash(content){
+  if(!globalThis.crypto?.subtle||!globalThis.TextEncoder)return null;
+  const bytes=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(content));
+  return [...new Uint8Array(bytes)].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+const runningAppHash=appHash(APP_SOURCE).catch(()=>null);
+let runningAppVersion=null,appUpdatePending=null,appReloadChecking=false;
+function appIsBeingEdited(){
+  const active=document.activeElement;
+  const editing=active&&active.matches?.("input,textarea,select,[contenteditable='true']");
+  const settingsOpen=document.getElementById("settings")?.classList.contains("show");
+  const dialogOpen=!!document.querySelector("dialog[open]");
+  const draft=document.getElementById("interests-input");
+  return editing||settingsOpen||dialogOpen||
+    (draft&&typeof prefs!=="undefined"&&draft.value!==(prefs.interests||""));
+}
+async function applyPendingAppUpdate(){
+  if(!appUpdatePending||appReloadChecking||document.hidden)return;
+  if(appIsBeingEdited()){
+    const status=document.getElementById("refresh-status");
+    if(status)status.textContent="Nueva versión disponible: se actualizará cuando termines de editar.";
+    return;
+  }
+  appReloadChecking=true;
+  const {version,scriptHash}=appUpdatePending;
+  try{
+    const last=JSON.parse(sessionStorage.getItem(APP_RELOAD_GUARD)||"null");
+    if(last?.version===version&&Date.now()-last.at<300000)return;
+    // GitHub publica la edición de noticias y la web por vías distintas.
+    // No recargar hasta que GitHub Pages sirva ya el HTML correcto.
+    const res=await fetch("./index.html?comprobar-app="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw Error("No disponible todavía");
+    const page=new DOMParser().parseFromString(await res.text(),"text/html");
+    const inline=[...page.scripts].filter(s=>!s.src).at(-1)?.textContent;
+    if(!inline||(await appHash(inline))!==scriptHash)return;
+    sessionStorage.setItem(APP_RELOAD_GUARD,JSON.stringify({version,at:Date.now()}));
+    const url=new URL(location.href);
+    url.searchParams.set("app_version",version);
+    location.replace(url.href);
+  }catch(e){
+    // Conservamos la edición funcional hasta que se pueda verificar la nueva.
+  }finally{appReloadChecking=false}
+}
+function checkAppVersion(data){
+  if(!data||typeof data.app_version!=="string"||
+    typeof data.app_script_sha256!=="string")return;
+  const latest=data.app_version,scriptHash=data.app_script_sha256;
+  runningAppHash.then(currentHash=>{
+    if(!currentHash)return;
+    if(runningAppVersion===null)runningAppVersion=latest;
+    if(currentHash!==scriptHash||runningAppVersion!==latest){
+      appUpdatePending={version:latest,scriptHash};
+      applyPendingAppUpdate();
+    }else appUpdatePending=null;
+  });
+}
 const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
 const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
 const EXAMPLES=[
@@ -1444,6 +1505,7 @@ function applyEdition(data){
     el("updated").textContent="Actualizado "+(Number.isFinite(date.valueOf())?new Intl.DateTimeFormat("es-ES",{dateStyle:"medium",timeStyle:"short"}).format(date):"recientemente")+" · "+(data.sources_ok||0)+" fuentes consultadas correctamente";
     el("notice").hidden=true;
     lastEdition=Date.parse(data.updated)||0;
+    checkAppVersion(data);
 }
 let refreshPending=false;
 async function refreshPublishedEdition(manual=false){
@@ -1582,8 +1644,12 @@ init().then(()=>{
   window.addEventListener("pageshow",event=>{
     if(event.persisted)refreshPublishedEdition();
   });
-  window.addEventListener("focus",()=>refreshPublishedEdition());
+  window.addEventListener("focus",()=>{refreshPublishedEdition();applyPendingAppUpdate()});
+  // Noticias cada cinco minutos; cambios de código se comprueban en esas
+  // mismas respuestas JSON, sin peticiones adicionales por lector.
   setInterval(refreshPublishedEdition,300000);
+  setInterval(applyPendingAppUpdate,20000);
+  document.addEventListener("focusout",()=>setTimeout(applyPendingAppUpdate,350));
   setInterval(refreshOwnFeeds,900000);
 });
 })();
