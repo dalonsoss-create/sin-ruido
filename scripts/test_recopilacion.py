@@ -4,6 +4,7 @@ import datetime as dt
 from zoneinfo import ZoneInfo
 import actualizar
 from mapas_publicos import news_entries, sitemap_children, same_host
+from version_app import app_version
 
 UTC=dt.timezone.utc
 madrid=ZoneInfo("Europe/Madrid")
@@ -100,4 +101,11 @@ try:
           "Conservar fecha real, no fecha de recogida ni lastmod")
 finally:
     actualizar.discover_sitemaps=original
+v1=app_version()
+v2=app_version()
+check(v1==v2,"La versión no debe variar sin editar archivos de programa")
+check(len(v1["app_version"])==24,"La versión de la aplicación debe ser corta y estable")
+check(len(v1["app_script_sha256"])==64,"La huella del script permite detectar HTML antiguo")
+check(v1["app_version"]!=v1["app_script_sha256"][:24],
+      "La versión debe incluir los recursos externos y no solo el código inline")
 print("OK: equilibrio entre cabeceras, RSS, fechas de Madrid, sitemaps y filtros de fuentes.")
