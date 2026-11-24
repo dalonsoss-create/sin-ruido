@@ -74,5 +74,7 @@ assert(html.includes('el("last-minute-body").replaceChildren(makeCard(a))'),"Úl
 assert(html.includes('const latestIDs=renderLatest(candidates,null);'),"Lo último debe conservar la prioridad cronológica");
 assert(!html.includes('mk("article","latest-item"'),"Nunca volver a mostrar titulares en formato lista de texto");
 assert(html.includes('.latest-list .story.hero'),"El primer titular reciente debe conservar el diseño de tarjeta principal");
+assert(html.includes('class="last-minute-body" id="last-minute-body"></div>'),"Contenedor de Última hora debe estar vacío para insertar la tarjeta");
+assert(!html.includes('id="last-minute-reviewed"'),"No debe quedar un botón viejo fuera de la tarjeta de Última hora");
 
 console.log("OK: filtros de usuario, fuentes, vetos, noticias de hoy y orden cronológico verificados.");
