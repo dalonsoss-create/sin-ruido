@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'scripts/actualizar.py'
+      - 'scripts/mapas_publicos.py'
+      - 'scripts/test_recopilacion.py'
       - 'scripts/clasificar.py'
       - 'scripts/acceso.py'
       - 'scripts/editorial.py'
@@ -35,6 +37,8 @@ jobs:
         run: python scripts/editorial.py
       - name: Comprobar filtros de todos los lectores y orden de hoy
         run: node scripts/test_portada.js
+      - name: Probar equilibrio de cabeceras y sitemaps sin red
+        run: python scripts/test_recopilacion.py
       - name: Obtener titulares RSS
         run: python scripts/actualizar.py
       - name: Guardar noticias públicas
