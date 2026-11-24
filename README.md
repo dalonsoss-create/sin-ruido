@@ -131,3 +131,12 @@ La copia **no se sube automáticamente** a ningún servidor. En iPhone, si está
 - En cuanto la edición contiene noticias de hoy de las fuentes elegidas, pasa automáticamente a **«Noticias de hoy»**, sin cambiar las preferencias del usuario. Al cambiar de día con la página abierta, solicita otra actualización.
 - El recopilador añade `edition_date_madrid` y `articles_today_madrid` al JSON para diagnosticar el cambio de día y ya no inventa la hora de publicación cuando un RSS no trae fecha fiable.
 - GitHub Actions puede retrasar ejecuciones programadas. El workflow realiza `git fetch` + `git rebase` antes del `git push` y reintenta hasta tres veces si el repositorio cambia durante la recogida de RSS; así no falla por modificaciones simultáneas en la web.
+
+
+## Cinco titulares más recientes al entrar (24 de noviembre de 2026)
+
+La portada muestra una nueva sección **«🕒 Lo último para ti»**, antes de los titulares destacados editorialmente. Son los **cinco artículos con fecha de publicación más reciente** entre las fuentes y categorías activadas por el lector. En esta sección no se aplica la puntuación de importancia, optimismo, variedad de medios ni aprendizaje: prevalece siempre la **hora real de publicación**. Sí se respetan los vetos, búsquedas, restricciones voluntarias de «Solo positivas», fechas y la marca «✓ Ya vista». No se repiten titulares en la franja «Última hora» ni en la sección principal.
+
+Debajo continúa la portada ordenada con el criterio editorial de importancia y diversidad, sin mezclar los cinco artículos de la sección superior. Si solamente hay unos pocos artículos hoy, no se finge que falta contenido: quedan arriba. Al cambio de día, si aún no hay noticias de hoy, la sección cambia el título a **«Lo último de ayer»** y muestra claramente sus fechas.
+
+**Límite de actualización:** «Lo último» se alimenta del RSS que haya publicado GitHub; pulsar «Actualizar noticias» todavía verifica si hay una edición nueva, pero no ordena a un backend consultar instantáneamente cada periódico. Para esa función hará falta servicio de refresco compartido con caché, límites por fuente y controles de concurrencia.
