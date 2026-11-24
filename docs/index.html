@@ -433,6 +433,13 @@ body.settings-open{overflow:hidden}
   </aside>
   <section class="editorial">
     <h1 class="sr-only">Tu portada de Sin Ruido</h1>
+    <section id="latest-panel" class="latest-panel" hidden aria-labelledby="latest-heading">
+      <div class="latest-head">
+        <h2 id="latest-heading">🕒 Lo último para ti</h2>
+        <span id="latest-description">Publicadas más recientemente · tus medios y temas</span>
+      </div>
+      <div id="latest-list" class="latest-list"></div>
+    </section>
     <section id="last-minute-panel" class="last-minute-panel" aria-labelledby="last-minute-heading" hidden>
       <div class="last-minute-head">
         <div class="last-minute-label"><span class="last-minute-pulse" aria-hidden="true"></span><strong id="last-minute-heading">Últimas noticias</strong><span id="last-minute-kind"></span></div>
@@ -459,13 +466,7 @@ body.settings-open{overflow:hidden}
     </div>
     <p class="reviewed-hint" id="reviewed-hint" role="status" aria-live="polite">Pulsa el ✓ redondo, abajo a la derecha de la ilustración, para retirarla de «Hoy». Si solo la abres, se queda.</p>
     <button id="restore-reviewed-all" class="restore-reviewed-all" type="button" hidden>↶ Recuperar todas las vistas</button>
-    <section id="latest-panel" class="latest-panel" hidden aria-labelledby="latest-heading">
-      <div class="latest-head">
-        <h2 id="latest-heading">🕒 Lo último para ti</h2>
-        <span id="latest-description">Publicadas más recientemente · tus medios y temas</span>
-      </div>
-      <div id="latest-list" class="latest-list"></div>
-    </section>
+    
     <div class="sectionbar"><h2 id="headline-heading">Noticias de hoy</h2><span id="visible-count"></span></div>
     <div id="features"></div>
     <div class="sectionbar" id="list-heading"><h2>Más titulares</h2><span>Accede al medio original</span></div>
@@ -947,12 +948,12 @@ function renderReviewed(){
   el("list-heading").hidden=visible<=1;
   for(const a of list.slice(1,visible))bottom.append(makeCard(a));
 }
-function renderLastMinute(){
+function renderLastMinute(excludeIds=new Set()){
   const panel=el("last-minute-panel"),selector=window.SinRuidoUltimaHora;
   if(collectionMode!=="feed"||demo||!selector){
     panel.hidden=true;return null;
   }
-  const chosen=selector.choose(eligibleToday());
+  const chosen=selector.choose(eligibleToday().filter(a=>!excludeIds.has(storyId(a))));
   if(!chosen){panel.hidden=true;return null}
   const a=chosen.article;
   panel.hidden=false;
@@ -1012,8 +1013,8 @@ function render(){
   const signature=JSON.stringify([activeTopic,el("search").value,prefs.positiveOnly,prefs.topics,prefs.blocked,prefs.sources,prefs.hidden,prefs.interests]);
   if(signature!==lastFilterSignature){shownCount=PAGE_SIZE;lastFilterSignature=signature}
   const candidates=eligibleToday();
-  const highlightedId=renderLastMinute();
-  const latestIDs=renderLatest(candidates,highlightedId);
+  const latestIDs=renderLatest(candidates,null);
+  const highlightedId=renderLastMinute(latestIDs);
   // Siempre orden cronológico: no reordenar el resto por diversidad o importancia.
   const list=candidates.filter(a=>
     (!highlightedId||storyId(a)!==highlightedId)&&!latestIDs.has(storyId(a)));
