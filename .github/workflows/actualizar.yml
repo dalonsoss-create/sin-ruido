@@ -7,6 +7,8 @@ on:
       - 'scripts/clasificar.py'
       - 'scripts/acceso.py'
       - 'scripts/editorial.py'
+      - 'scripts/test_portada.js'
+      - 'docs/politica.js'
       - 'docs/fuentes.json'
   schedule:
     - cron: '7,37 * * * *'
@@ -31,6 +33,8 @@ jobs:
         run: python scripts/acceso.py
       - name: Validar criterio editorial de portadas
         run: python scripts/editorial.py
+      - name: Comprobar filtros de todos los lectores y orden de hoy
+        run: node scripts/test_portada.js
       - name: Obtener titulares RSS
         run: python scripts/actualizar.py
       - name: Guardar noticias públicas
