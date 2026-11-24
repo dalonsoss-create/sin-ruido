@@ -181,46 +181,6 @@
       "language": "es"
     },
     {
-      "id": "infobae-portada",
-      "name": "Infobae",
-      "category": "Sociedad",
-      "url": "https://www.infobae.com/arc/outboundfeeds/rss/",
-      "images_allowed": false,
-      "language": "es"
-    },
-    {
-      "id": "bbc-mundo",
-      "name": "BBC Mundo",
-      "category": "Internacional",
-      "url": "https://feeds.bbci.co.uk/mundo/rss.xml",
-      "images_allowed": false,
-      "language": "es"
-    },
-    {
-      "id": "dw-espanol",
-      "name": "DW Español",
-      "category": "Internacional",
-      "url": "https://rss.dw.com/rdf/rss-sp-top",
-      "images_allowed": false,
-      "language": "es"
-    },
-    {
-      "id": "france24-es",
-      "name": "France 24 Español",
-      "category": "Internacional",
-      "url": "https://www.france24.com/es/rss",
-      "images_allowed": false,
-      "language": "es"
-    },
-    {
-      "id": "euronews-mundo",
-      "name": "Euronews Español",
-      "category": "Internacional",
-      "url": "https://es.euronews.com/rss?format=mrss&level=theme&name=news",
-      "images_allowed": false,
-      "language": "es"
-    },
-    {
       "id": "as-futbol",
       "name": "AS",
       "category": "Fútbol",
@@ -396,5 +356,5 @@
     "Tenis",
     "Motor"
   ],
-  "description": "Las marcas agrupan uno o más RSS. Las fuentes pueden fallar o tardar en responder; el estado de cada canal se publica en noticias.json. Sin imágenes de medios sin licencia."
+  "description": "Las marcas agrupan uno o más RSS. Las fuentes pueden fallar o tardar en responder; el estado de cada canal se publica en noticias.json. Sin imágenes de medios sin licencia. Primera fase: únicamente medios publicados en España; cobertura internacional por sus corresponsales y secciones españolas."
 }
