@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-24T02:37:50.409038+00:00",
+  "updated": "2026-11-24T04:02:54.253675+00:00",
   "edition_date_madrid": "2026-11-24",
-  "articles_today_madrid": 109,
-  "collected_before_balance": 994,
+  "articles_today_madrid": 111,
+  "collected_before_balance": 996,
   "balance_max_per_publisher": 95,
   "publisher_counts": {
     "20minutos": 95,
@@ -13,7 +13,7 @@
     "Directo al Paladar": 20,
     "EL PAÍS": 95,
     "El Blog Salmón": 12,
-    "El Confidencial": 10,
+    "El Confidencial": 11,
     "El Correo de Pozuelo": 10,
     "El Diario de Madrid": 4,
     "El Español": 32,
@@ -101,7 +101,7 @@
     {
       "id": "elconfidencial-portada",
       "ok": true,
-      "count": 6
+      "count": 2
     },
     {
       "id": "elcorreodepozuelo-portada",
@@ -250,6 +250,38 @@
     }
   ],
   "articles": [
+    {
+      "title": "Ayuso: \"Hablo todos los días con Feijóo. Estamos totalmente compenetrados, pero no me llamará para ser ministra\"",
+      "link": "https://www.elconfidencial.com/espana/2026-11-24/entrevista-ayuso-contraluz-feijoo-cbtrntrv_4470929/",
+      "date": "2026-11-24T04:00:00+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Confidencial",
+      "source_id": "elconfidencial-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Confidencial"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Un incendio en una vivienda en Asturias deja dos heridos, uno de ellos grave",
+      "link": "https://www.20minutos.es/asturias/un-incendio-una-vivienda-puente-los-fierros-deja-dos-heridos-uno-ellos-grave_7064863_0.html",
+      "date": "2026-11-24T03:12:32+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "20minutos",
+      "source_id": "20minutos-portada",
+      "category": "Sucesos",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
     {
       "title": "COP31: un baño de realidad",
       "link": "https://www.abc.es/opinion/editorial-cop31-bano-realidad-20261123030235-nt.html",
@@ -10848,21 +10880,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Alumnos de un colegio de educación especial de Madrid dan vida a una menina elaborada con materiales ecológicos",
-      "link": "https://www.20minutos.es/capaces/alumnos-un-colegio-educacion-especial-madrid-dan-vida-una-menina-elaborada-con-materiales-ecologicos_7064366_0.html",
-      "date": "2026-11-23T06:31:05+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "Educación",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El primer ministro Mark Carney recurre a un falso Trump para bromear en la cena anual de prensa de Canadá",
       "link": "https://www.elmundo.es/internacional/2026/11/23/6b03dc37fc6c83271c8b457a.html",
       "date": "2026-11-23T06:25:27+00:00",
@@ -13234,21 +13251,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Si hubiéramos tenido Presupuestos Generales",
-      "link": "https://cincodias.elpais.com/opinion/2026-11-22/si-hubieramos-tenido-presupuestos-generales.html",
-      "date": "2026-11-22T04:40:00+00:00",
-      "publication_date_madrid": "2026-11-22",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Christian Sewing, el aficionado al tenis que pelea otro revés para su banco",
       "link": "https://cincodias.elpais.com/opinion/2026-11-22/christian-sewing-el-aficionado-al-tenis-que-pelea-otro-reves-para-su-banco.html",
       "date": "2026-11-22T04:40:00+00:00",
@@ -13266,6 +13268,21 @@
     {
       "title": "Las claves: el largo corte del trayecto en tren Madrid-Sevilla es motivo para la reflexión",
       "link": "https://cincodias.elpais.com/opinion/2026-11-22/las-claves-el-largo-corte-del-trayecto-en-tren-madrid-sevilla-es-motivo-para-la-reflexion.html",
+      "date": "2026-11-22T04:40:00+00:00",
+      "publication_date_madrid": "2026-11-22",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Si hubiéramos tenido Presupuestos Generales",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-22/si-hubieramos-tenido-presupuestos-generales.html",
       "date": "2026-11-22T04:40:00+00:00",
       "publication_date_madrid": "2026-11-22",
       "date_source": "rss_published",
