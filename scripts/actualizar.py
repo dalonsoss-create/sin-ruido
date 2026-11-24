@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from clasificar import classify
 from editorial import COVER_FEEDS, enrich
 from acceso import detect_access
+from mapas_publicos import discover as discover_sitemaps
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"docs"/"noticias.json"
@@ -55,19 +56,19 @@ def image_in_rss(node):
                 return url
     return None
 
-def collect(feed):
-    url=feed["url"]
-    req=urllib.request.Request(url,headers={
-        "User-Agent":"SinRuidoPersonalRSSReader/0.2 (noncommercial)",
-        "Accept":"application/rss+xml, application/atom+xml, application/xml, text/xml, */*"})
-    with urllib.request.urlopen(req,timeout=20) as resp:
-        raw=resp.read(1700000)
-    root=ET.fromstring(raw)
+def local_day(iso, tz=ZoneInfo("Europe/Madrid")):
+    d=dt.datetime.fromisoformat(iso.replace("Z","+00:00"))
+    if d.tzinfo is None:d=d.replace(tzinfo=dt.timezone.utc)
+    return d.astimezone(tz).date().isoformat()
+
+def parse_feed(payload, feed):
+    """Usar exclusivamente fechas de publicación RSS, nunca la hora de recogida."""
+    root=ET.fromstring(payload)
     channel=root.find("channel")
     atom=channel is None
     nodes=root.findall(ATOM+"entry") if atom else channel.findall("item")
     articles=[]
-    for item in nodes[:60]:
+    for item in nodes[:110]:
         if atom:
             title=text(item,ATOM+"title")
             link=next((n.get("href") for n in item.findall(ATOM+"link")
@@ -90,12 +91,13 @@ def collect(feed):
         access_status, access_evidence=detect_access(link,item,rss_tags,feed["name"])
         article={
             "title":title[:260],"link":link,"date":article_date,
+            "publication_date_madrid":local_day(article_date),
+            "date_source":"rss_published",
             "source":feed["name"],"source_id":feed["id"],"category":category,
             "place":feed.get("place",""),
             "classification_version":6,
             "access_status":access_status,
             "editorial_portadas":[COVER_FEEDS[feed["id"]]] if feed["id"] in COVER_FEEDS else []}
-        # La imagen se almacena SOLO si se ha comprobado permiso explícito.
         if feed.get("images_allowed") is True:
             img=image_in_rss(item)
             if img:
@@ -105,30 +107,113 @@ def collect(feed):
         articles.append(article)
     return articles
 
-def select_balanced(items, limit=900, minimum_per_source=5):
-    """Reserva titulares recientes de cada medio, luego llena por actualidad.
+def collect(feed):
+    """RSS principal y suplementos públicos con el MISMO ID de fuente del lector."""
+    urls=[feed["url"]]+[
+        u for u in feed.get("extra_urls",[])[:3]
+        if isinstance(u,str) and urlsplit(u).scheme=="https"]
+    articles=[]
+    failures=[]
+    succeeded=False
+    for url in urls:
+        try:
+            req=urllib.request.Request(url,headers={
+                "User-Agent":"SinRuidoPersonalRSSReader/0.3 (noncommercial)",
+                "Accept":"application/rss+xml, application/atom+xml, application/xml, text/xml, */*"})
+            with urllib.request.urlopen(req,timeout=18) as resp:
+                raw=resp.read(2200000)
+            batch=parse_feed(raw,feed)
+            articles.extend(batch)
+            succeeded=True
+        except Exception as exc:
+            failures.append(f"{url}: {exc}")
+    if not succeeded:raise RuntimeError("No responde ningún RSS: "+"; ".join(failures)[:300])
+    if failures:print("[AVISO RSS adicional] "+"; ".join(failures)[:300],file=sys.stderr)
+    # Duplicaciones entre canales del mismo periódico no se publican.
+    unique={}
+    for article in articles:
+        unique.setdefault(article["link"].split("?")[0],article)
+    return list(unique.values())
 
-    Sin esta reserva, medios locales con pocos titulares desaparecen al
-    superar el corte global de 900 artículos de periódicos grandes.
-    Los artículos ya están depurados y limitados a las últimas 72 horas.
+def collect_sitemap(feed, all_feeds):
+    """No visita artículos, no usa API privada, no inventa fechas de edición.
+
+    Los sitemaps de noticias solamente se leen si están listados en robots.txt
+    y el lector tiene permitido acceder a su XML. Si no se valida, devuelve [].
     """
-    if len(items) <= limit:
-        return items
-    quotas={}
-    chosen=set()
-    for index, article in enumerate(items):
-        source=article.get("source_id") or article.get("source") or ""
-        if quotas.get(source, 0) < minimum_per_source:
-            chosen.add(index)
-            quotas[source]=quotas.get(source, 0)+1
-    if len(chosen)>limit:
-        chosen=set(sorted(chosen)[:limit])
-    for index in range(len(items)):
-        if len(chosen)>=limit:
-            break
-        chosen.add(index)
-    return [a for index,a in enumerate(items) if index in chosen]
+    base=feed.get("sitemap_base","")
+    if not base:return []
+    news=discover_sitemaps(base,limit=130)
+    publisher_feeds=[f for f in all_feeds if f["name"]==feed["name"]]
+    by_category={f["category"]:f for f in publisher_feeds}
+    articles=[]
+    for title,link,published in news:
+        date=date_iso(published)
+        if not date:continue
+        title=re.sub(r"\s+"," ",title).strip()
+        if BAD.search(title):continue
+        category=classify(title,link,"Sociedad",(),feed["name"])
+        # Se respeta el mismo selector de fuentes ya guardado en cada navegador.
+        # Si no hay RSS asociado a esta sección, NO se inventa otro source_id.
+        origin=by_category.get(category)
+        if origin is None:continue
+        access_status,access_evidence=detect_access(link,source=feed["name"])
+        article={
+            "title":title[:260],"link":link,"date":date,
+            "publication_date_madrid":local_day(date),
+            "date_source":"news_sitemap_publication_date",
+            "source":origin["name"],"source_id":origin["id"],
+            "category":category,"place":origin.get("place",""),
+            "classification_version":6,"access_status":access_status,
+            "editorial_portadas":[COVER_FEEDS[origin["id"]]] if origin["id"] in COVER_FEEDS else []}
+        if access_evidence:article["access_evidence"]=access_evidence
+        articles.append(article)
+    return articles
 
+def select_balanced(items, limit=900, minimum_per_source=5, max_per_publisher=95, now=None):
+    """Priorizar las noticias de HOY y equilibrar cabeceras y RSS de cada una.
+
+    Antes, Infobae podía ocupar >50 % de 900 plazas. Ningún periódico podrá
+    superar max_per_publisher, aunque tenga muchas secciones o RSS.
+    No cambia el orden mostrado al lector: solo conserva mejor el inventario.
+    """
+    now=now or dt.datetime.now(dt.timezone.utc)
+    today=now.astimezone(ZoneInfo("Europe/Madrid")).date().isoformat()
+    ordered=sorted(items,key=lambda a:a.get("date",""),reverse=True)
+    current=[a for a in ordered if local_day(a["date"])==today]
+    history=[a for a in ordered if local_day(a["date"])!=today]
+    count_per_publisher={}
+    selected=[]
+    from collections import defaultdict, deque
+    for cohort in (current,history):
+        # Un turno por cabecera, alternando sus secciones para que las portadas
+        # generales no desplacen a Ciencia, Tecnología o Internacional.
+        groups={}
+        for a in cohort:
+            publisher=a.get("source") or a.get("source_id") or "Otro"
+            feed=a.get("source_id") or publisher
+            groups.setdefault(publisher,defaultdict(deque))[feed].append(a)
+        names=list(groups)
+        turn=0
+        while names and len(selected)<limit:
+            next_names=[]
+            for publisher in names:
+                count=count_per_publisher.get(publisher,0)
+                if count>=max_per_publisher:continue
+                feeds=groups[publisher]
+                available=[name for name,queue in feeds.items() if queue]
+                if not available:continue
+                feed_name=available[turn%len(available)]
+                selected.append(feeds[feed_name].popleft())
+                count_per_publisher[publisher]=count+1
+                if any(feeds.values()) and count+1<max_per_publisher:
+                    next_names.append(publisher)
+                if len(selected)>=limit:break
+            names=next_names
+            turn+=1
+        if len(selected)>=limit:break
+    selected.sort(key=lambda a:a.get("date",""),reverse=True)
+    return selected
 
 def main():
     now=dt.datetime.now(dt.timezone.utc)
@@ -139,20 +224,27 @@ def main():
     successes=0
     articles=[]
     statuses=[]
+    sitemap_stats=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
-        future_map={pool.submit(collect,f):f for f in feed_list}
+        future_map={pool.submit(collect,f):("rss",f) for f in feed_list}
+        future_map.update({
+            pool.submit(collect_sitemap,f,feed_list):("sitemap",f)
+            for f in feed_list if f.get("sitemap_base")
+        })
         for future in concurrent.futures.as_completed(future_map):
-            feed=future_map[future]
+            kind,feed=future_map[future]
             status={"id":feed["id"],"ok":False,"count":0}
             try:
                 batch=future.result()
                 articles.extend(batch)
                 status.update({"ok":True,"count":len(batch)})
-                successes+=1
-                print(f"[OK] {feed['name']} / {feed['category']}: {len(batch)}")
+                if kind=="rss":
+                    successes+=1
+                print(f"[OK {kind.upper()}] {feed['name']} / {feed['category']}: {len(batch)}")
             except Exception as exc:
-                print(f"[AVISO] {feed['name']}: {exc}",file=sys.stderr)
-            statuses.append(status)
+                print(f"[AVISO {kind.upper()}] {feed['name']}: {exc}",file=sys.stderr)
+            if kind=="rss":statuses.append(status)
+            else:sitemap_stats.append(status)
     # Reetiquetar titulares antiguos: también se corrigen las secciones al desplegar.
     fmap={f["id"]:f for f in feed_list}
     for a in old:
@@ -201,7 +293,13 @@ def main():
         sys.exit(1)
     # Las cabeceras de referencia y coincidencias ayudan a detectar relevancia.
     # El resto de noticias se mantiene: no filtramos por apertura ni suscripción.
-    fresh=enrich(select_balanced(fresh, limit=900, minimum_per_source=5))
+    available_before_balance=len(fresh)
+    fresh=enrich(select_balanced(fresh, limit=900, max_per_publisher=95, now=now))
+    kept_by_publisher={}
+    for a in fresh:
+        name=a.get("source","?")
+        kept_by_publisher[name]=kept_by_publisher.get(name,0)+1
+    print("[BALANCE] "+str(sorted(kept_by_publisher.items(),key=lambda x:-x[1])[:12]))
     # Métrica real en la zona del lector, para detectar ediciones sin noticias
     # del día después de medianoche (la programación de GitHub puede retrasarse).
     madrid=ZoneInfo("Europe/Madrid")
@@ -214,6 +312,10 @@ def main():
     OUT.write_text(json.dumps({
         "updated":now.isoformat(),"edition_date_madrid":madrid_day.isoformat(),
         "articles_today_madrid":today_count,
+        "collected_before_balance":available_before_balance,
+        "balance_max_per_publisher":95,
+        "publisher_counts":dict(sorted(kept_by_publisher.items())),
+        "public_sitemaps_status":sorted(sitemap_stats,key=lambda x:x["id"]),
         "sources_ok":successes,"classification_version":6,
         "feed_count":len(feed_list),
         "sources_status":sorted(statuses,key=lambda x:x["id"]),
