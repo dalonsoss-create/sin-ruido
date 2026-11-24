@@ -69,4 +69,10 @@ assert.equal(sorted[1].title,science.title,"Las demás deben conservar el orden 
 assert(!html.includes('id="mustread-panel"'),"No debe quedar un bloque de noticias de ayer");
 assert(!html.includes('id="sort"'),"No debe quedar un selector que contradiga el orden cronológico");
 assert(html.indexOf('id="latest-panel"')<html.indexOf('id="last-minute-panel"'),"Lo último debe estar arriba");
+assert(html.includes('list.append(makeCard(a,index===0))'),"Lo último debe usar las tarjetas ilustradas originales");
+assert(html.includes('el("last-minute-body").replaceChildren(makeCard(a))'),"Última hora debe usar la misma tarjeta ilustrada");
+assert(html.includes('const latestIDs=renderLatest(candidates,null);'),"Lo último debe conservar la prioridad cronológica");
+assert(!html.includes('mk("article","latest-item"'),"Nunca volver a mostrar titulares en formato lista de texto");
+assert(html.includes('.latest-list .story.hero'),"El primer titular reciente debe conservar el diseño de tarjeta principal");
+
 console.log("OK: filtros de usuario, fuentes, vetos, noticias de hoy y orden cronológico verificados.");
