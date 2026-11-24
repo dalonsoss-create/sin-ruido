@@ -52,23 +52,51 @@ jobs:
         run: python scripts/actualizar.py
       - name: Guardar noticias públicas
         run: |
+          set -e
           git config user.name "Sin Ruido Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/noticias.json
-          if ! git diff --cached --quiet; then
+          # Mantener la edición ya generada, aunque main cambie mientras
+          # recogemos RSS. No rebasar un commit que contiene otro noticias.json.
+          candidate="$(mktemp)"
+          cp docs/noticias.json "$candidate"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            # Nunca sobrescribir una edición más nueva ni regresar a otra
+            # versión de la aplicación si una ejecución previa se adelantó.
+            if python - "$candidate" docs/noticias.json <<'PY'
+          import datetime as dt, json, sys
+          def read(path):
+              try:
+                  with open(path,encoding="utf-8") as f:return json.load(f)
+              except (OSError,ValueError):return {}
+          new,old=read(sys.argv[1]),read(sys.argv[2])
+          try:
+              new_date=dt.datetime.fromisoformat(new["updated"])
+              old_date=dt.datetime.fromisoformat(old["updated"])
+          except (KeyError,ValueError,TypeError):
+              sys.exit(0)
+          if old_date >= new_date:
+              print("Ya existe una edición más reciente. No se sobrescribe.")
+              sys.exit(1)
+          PY
+            then
+              cp "$candidate" docs/noticias.json
+            else
+              exit 0
+            fi
+            git add docs/noticias.json
+            if git diff --cached --quiet; then
+              echo "La edición pública ya está actualizada."
+              exit 0
+            fi
             git commit -m "Actualización automática de titulares"
-            # Mientras se recogen RSS puede cambiar index.html u otro archivo
-            # en main. Rebasar primero evita rechazos por referencia desfasada.
-            for attempt in 1 2 3; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                echo "Edición RSS publicada correctamente"
-                exit 0
-              fi
-              echo "El repositorio avanzó durante el envío. Reintento $attempt/3."
-              sleep 2
-            done
-            echo "No se ha podido publicar la edición tras tres intentos." >&2
-            exit 1
-          fi
+            if git push origin HEAD:main; then
+              echo "Edición RSS publicada correctamente"
+              exit 0
+            fi
+            echo "Main cambió durante el envío; reintento $attempt/3."
+            sleep 2
+          done
+          echo "No se pudo publicar la edición tras tres intentos." >&2
+          exit 1
