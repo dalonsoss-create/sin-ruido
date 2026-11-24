@@ -15,6 +15,7 @@ from clasificar import classify
 from editorial import COVER_FEEDS, enrich
 from acceso import detect_access
 from mapas_publicos import discover as discover_sitemaps
+from version_app import app_version
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"docs"/"noticias.json"
@@ -312,6 +313,7 @@ def main():
     OUT.write_text(json.dumps({
         "updated":now.isoformat(),"edition_date_madrid":madrid_day.isoformat(),
         "articles_today_madrid":today_count,
+        **app_version(),
         "collected_before_balance":available_before_balance,
         "balance_max_per_publisher":95,
         "publisher_counts":dict(sorted(kept_by_publisher.items())),
