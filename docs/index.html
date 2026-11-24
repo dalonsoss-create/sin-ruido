@@ -243,6 +243,7 @@ body.settings-open{overflow:hidden}
   .latest-item-meta{font-size:10px}
   .latest-item-link{font-size:16px}
 }
+.order-info{font:750 12px ui-sans-serif,system-ui,sans-serif;color:#53646a;white-space:nowrap}
 </style>
 <link rel="stylesheet" href="./portada.css?v=panel-personalizar-20261123">
 <!-- Corrección móvil crítica incluida en HTML para evitar CSS anterior guardado en Safari/PWA. -->
@@ -449,7 +450,7 @@ body.settings-open{overflow:hidden}
     <div id="notice" class="notice" hidden></div>
     <div id="night-status" class="night-status" role="status" hidden></div>
     <div id="pull-indicator" class="pull-indicator" aria-live="polite" hidden>↻ Suelta para actualizar noticias</div>
-    <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span><p id="updated" role="status">Cargando titulares…</p><select id="sort" aria-label="Ordenar noticias"><option value="relevancia">Importancia + optimismo</option><option value="recientes">Más recientes</option></select><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
+    <div class="toolbar"><button id="refresh-news" class="refresh-btn" type="button" aria-label="Comprobar noticias nuevas">↻ Actualizar noticias</button><span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span><p id="updated" role="status">Cargando titulares…</p><span class="order-info" title="La portada siempre se ordena por la fecha de publicación de las noticias">🕒 Más recientes primero</span><label class="positive-switch" title="Mostrar solo noticias cuyo titular parece claramente positivo"><input id="positive-only" type="checkbox"><span>☀️ Solo positivas</span></label></div>
     <p class="access-legend">🔒 Requiere suscripción · ✓ Lectura gratuita. Sin etiqueta significa que aún no hemos confirmado el acceso.</p>
     <div class="collection-nav">
       <button id="show-feed" class="collection-btn selected" type="button">📰 Hoy</button>
@@ -644,7 +645,7 @@ function loadPrefs(){
 }
 prefs=loadPrefs();
 function save(){try{localStorage.setItem("sinruido-prefs-v1",JSON.stringify(prefs))}catch(e){}}
-function readableDate(date){const d=new Date(date);return Number.isFinite(d.valueOf())?new Intl.DateTimeFormat("es-ES",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(d):""}
+function readableDate(date){const d=new Date(date);return Number.isFinite(d.valueOf())?new Intl.DateTimeFormat("es-ES",{timeZone:"Europe/Madrid",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(d):""}
 function allowedSource(a){
   if(!a.source_id){
     const f=feeds.filter(f=>f.name===a.source);
@@ -852,7 +853,6 @@ function switchCollection(mode){
   for(const modeName of ["feed","saved","reviewed"])
     el("show-"+modeName).classList.toggle("selected",mode===modeName);
   el("topic-tabs").hidden=mode!=="feed";
-  el("sort").disabled=mode!=="feed";
   el("restore-reviewed-all").hidden=mode!=="reviewed"||!reviewedStories.size;
   render();
 }
@@ -863,7 +863,7 @@ function todayKey(value){
   const map=Object.fromEntries(parts.map(p=>[p.type,p.value]));
   return map.year+"-"+map.month+"-"+map.day;
 }
-function isToday(a){return todayKey(a.date)===todayKey(new Date())}
+function isToday(a){return !!todayKey(a.date)&&todayKey(a.date)===todayKey(new Date())}
 function actions(a){
   const row=mk("div","foot-actions");
   const read=mk("a","read",a.link?"Leer en "+a.source+" ↗":"Titular de ejemplo");
@@ -1040,7 +1040,7 @@ function render(){
   }
   if(!list.length){
     const allReviewed=reviewedStories.size>0&&articles.some(a=>isToday(a)&&matchesReader(a));
-    const empty=mk("div","empty",allReviewed?"¡Estás al día! Ya has marcado como vistas las noticias de tu selección.":getInterestClauses().some(c=>c.only)?"No hemos encontrado titulares que encajen con tu petición.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros.");
+    const empty=mk("div","empty",allReviewed?"¡Estás al día! Ya has marcado como vistas las noticias de tu selección.":getInterestClauses().some(c=>c.only)?"No hay titulares de hoy que encajen con tus intereses y temas activados.":prefs.positiveOnly?"Hoy no hay titulares claramente positivos con tus filtros.":"Todavía no hay titulares de hoy que pasen tus filtros. No mostraremos los de ayer.");
     empty.append(mk("small","",allReviewed?"Cuando se publiquen titulares nuevos aparecerán aquí. Puedes recuperar cualquiera desde «Ya vistas».":getInterestClauses().some(c=>c.only)?"Prueba a ampliar la zona, quitar «solo» o activar más fuentes. No añadiremos noticias que no coincidan.":prefs.positiveOnly?"Desactiva «Solo positivas» para ver el resto de noticias.":"Prueba a activar alguna fuente, tema o eliminar un veto."));
     cover.append(empty);el("list-heading").hidden=true;return;
   }
@@ -1413,7 +1413,7 @@ el("backup-file").onchange=async()=>{
   }catch(e){backupFeedback("No se pudo recuperar la copia: "+String(e?.message||"archivo incompatible"))}
   finally{input.value=""}
 };
-el("search").oninput=render;el("sort").onchange=render;
+el("search").oninput=render;
 el("load-more").onclick=()=>{shownCount+=PAGE_SIZE;render()};
 el("refresh-news").onclick=()=>{refreshPublishedEdition(true);refreshOwnFeeds()};
 el("show-feed").onclick=()=>switchCollection("feed");
