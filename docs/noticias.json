@@ -1,12 +1,12 @@
 {
-  "updated": "2026-11-24T01:12:39.467440+00:00",
+  "updated": "2026-11-24T02:37:50.409038+00:00",
   "edition_date_madrid": "2026-11-24",
-  "articles_today_madrid": 88,
-  "collected_before_balance": 974,
+  "articles_today_madrid": 109,
+  "collected_before_balance": 994,
   "balance_max_per_publisher": 95,
   "publisher_counts": {
     "20minutos": 95,
-    "ABC": 69,
+    "ABC": 89,
     "AS": 86,
     "Cinco Días": 32,
     "Diario de Pozuelo": 3,
@@ -51,7 +51,7 @@
     {
       "id": "abc-portada",
       "ok": true,
-      "count": 19
+      "count": 20
     },
     {
       "id": "agenciasinc-ciencia",
@@ -136,7 +136,7 @@
     {
       "id": "elmundo-internacional",
       "ok": true,
-      "count": 53
+      "count": 54
     },
     {
       "id": "elmundo-portada",
@@ -216,7 +216,7 @@
     {
       "id": "lavanguardia-portada",
       "ok": true,
-      "count": 107
+      "count": 108
     },
     {
       "id": "madridiario-sucesos",
@@ -250,6 +250,363 @@
     }
   ],
   "articles": [
+    {
+      "title": "COP31: un baño de realidad",
+      "link": "https://www.abc.es/opinion/editorial-cop31-bano-realidad-20261123030235-nt.html",
+      "date": "2026-11-24T02:02:35+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Medio ambiente",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Horóscopo de hoy, martes 24 de noviembre de 2026: acuerdos laborales y calma para ordenar tus prioridades",
+      "link": "https://www.abc.es/horoscopo/hoy/horoscopo-martes-24-noviembre-rlt_hord-20261124021132-nt.html",
+      "date": "2026-11-24T02:01:51+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El sector de las ambulancias reclama cambios en sus contratos para no desaparecer",
+      "link": "https://www.abc.es/sociedad/sector-ambulancias-reclama-cambios-contratos-desaparecer-20261124030132-nt.html",
+      "date": "2026-11-24T02:01:32+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "¿Por qué Trump tiene una extraordinaria capacidad para rodearse de gentuza?",
+      "link": "https://www.abc.es/internacional/pedro-rodriguez-trump-extraordinaria-capacidad-rodearse-gentuza-20261123025911-nt.html",
+      "date": "2026-11-24T01:59:11+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La patronal de los 'data center' busca apoyos en su cruzada judicial contra el decreto del Gobierno",
+      "link": "https://www.abc.es/economia/patronal-data-center-busca-apoyos-cruzada-judicial-20261123025601-nt.html",
+      "date": "2026-11-24T01:56:01+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La banca cuestiona la legalidad de la prórroga por decreto de un impuesto que ya está en los tribunales",
+      "link": "https://www.abc.es/economia/banca-cuestiona-legalidad-prorroga-decreto-impuesto-tribunales-20261124025540-nt.html",
+      "date": "2026-11-24T01:55:40+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Dana White, aprueba el Topuria vs Pimblett: «Tiene sentido, puede y debe suceder»",
+      "link": "https://www.abc.es/deportes/mma/dana-white-aprueba-topuria-pimbett-sentido-puede-20261116025509-nt.html",
+      "date": "2026-11-24T01:55:09+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Deportes",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "No se puede votar «No» a Nadal",
+      "link": "https://www.abc.es/deportes/real-madrid/puede-votar-nadal-20261123025454-nt.html",
+      "date": "2026-11-24T01:54:54+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Tenis",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Paddy Pimblett, lo tiene claro: «Ilia Topuria usó mi nombre para hacerse más grande»",
+      "link": "https://www.abc.es/deportes/mma/paddy-pimblett-claro-ilia-topuria-uso-nombre-20261120025439-nt.html",
+      "date": "2026-11-24T01:54:39+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Deportes",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Caída y auge de Jensen Huang: cómo y por qué Trump impuso el rescate del CEO de Nvidia",
+      "link": "https://www.abc.es/economia/caida-auge-jensen-huang-trump-impuso-rescate-20261124024940-nt.html",
+      "date": "2026-11-24T01:49:40+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Empresas",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El 98,3% de las empresas tiene problemas para encontrar trabajadores, pese a los 2,4 millones de parados",
+      "link": "https://www.abc.es/economia/983-empresas-problemas-encontrar-trabajadores-pese-millones-20261124024725-nt.html",
+      "date": "2026-11-24T01:47:25+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Empresas",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Maduro cumple 64 años en su celda de Nueva York y con mínima repercusión en Caracas",
+      "link": "https://www.elmundo.es/internacional/2026/11/24/6b04e450e9cf4a60608b458e.html",
+      "date": "2026-11-24T01:46:35+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Tarjetas censales para muertos, inmigrantes desconocidos y papeletas inexistentes en el voto por correo",
+      "link": "https://www.abc.es/espana/anomalias-papeletas-voto-correo-20261124022300-nt.html",
+      "date": "2026-11-24T01:23:00+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Caos en el voto de nacionalizados y residentes en el extranjero tras la instrucción del Supremo",
+      "link": "https://www.abc.es/espana/caos-voto-nacionalizados-residentes-extranjero-tras-instruccion-20261124022251-nt.html",
+      "date": "2026-11-24T01:22:51+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Mi top rojo de Zara es facha",
+      "link": "https://www.abc.es/opinion/maria-jose-fuentealamo-top-rojo-zara-facha-20261123021834-nt.html",
+      "date": "2026-11-24T01:18:34+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El PP eleva a Bruselas las denuncias de fallos de pulseras antimaltrato adelantados por ABC",
+      "link": "https://www.abc.es/espana/pp-eleva-bruselas-denuncias-fallos-pulseras-antimaltrato-20261124021818-nt.html",
+      "date": "2026-11-24T01:18:18+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El voto antiinmigración transforma Cataluña: «Mi padre es separatista. Nunca me había votado. Ahora lo hará por Vox»",
+      "link": "https://www.abc.es/espana/cataluna/voto-antiinmigracion-transforma-cataluna-padre-separatista-nunca-20261124021723-nt.html",
+      "date": "2026-11-24T01:17:23+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Ofensiva del PP por el voto femenino en la recta final de la campaña",
+      "link": "https://www.abc.es/espana/ofensiva-pp-voto-femenino-recta-final-campana-20261123021712-nt.html",
+      "date": "2026-11-24T01:17:12+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "María José Catalá: «Sánchez alimenta el odio por interés electoral, con Feijóo volverá la concordia»",
+      "link": "https://www.abc.es/espana/comunidad-valenciana/maria-jose-catala-sanchez-alimenta-odio-interes-20261124021702-nt.html",
+      "date": "2026-11-24T01:17:02+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Las actas de la SEPI revelan que una carta de un ministro venezolano cerró el plan de pagos de Plus Ultra con PDVSA",
+      "link": "https://www.abc.es/espana/actas-sepi-revelan-carta-ministro-venezolano-cerro-20261124021316-nt.html",
+      "date": "2026-11-24T01:13:16+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "EE.UU. desplaza a China en la explotación del petróleo de Venezuela",
+      "link": "https://www.abc.es/internacional/eeuu-desplaza-china-explotacion-petroleo-venezuela-20261123021310-nt.html",
+      "date": "2026-11-24T01:13:10+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
     {
       "title": "Brindar por un puesto destacado",
       "link": "https://www.elmundo.es/loc/famosos/2026/11/24/6b0034aafc6c83fa4d8b4578.html",
@@ -1909,8 +2266,8 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Un líder de opinión cumple con su cometido (V)",
-      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/23/6b04585ffdddff47398b458a.html",
+      "title": "No seas tonto, Felipe",
+      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/23/6b04ad5ae85ece61328b456d.html",
       "date": "2026-11-23T22:25:50+00:00",
       "publication_date_madrid": "2026-11-23",
       "date_source": "news_sitemap_publication_date",
@@ -1926,8 +2283,8 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "No seas tonto, Felipe",
-      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/23/6b04ad5ae85ece61328b456d.html",
+      "title": "Un líder de opinión cumple con su cometido (V)",
+      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/23/6b04585ffdddff47398b458a.html",
       "date": "2026-11-23T22:25:50+00:00",
       "publication_date_madrid": "2026-11-23",
       "date_source": "news_sitemap_publication_date",
@@ -2293,23 +2650,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Guerras interconectadas y costes al alza: la guerra de Ucrania agita el Mediterráneo",
-      "link": "https://www.elmundo.es/internacional/2026/11/23/6b04850bfdddffd4538b457f.html",
-      "date": "2026-11-23T21:47:49+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Conflictos",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Demasiado Varela para la Fiorentina",
       "link": "https://as.com/futbol/internacional/demasiado-varela-para-la-fiorentina-f202611-n/",
       "date": "2026-11-23T21:47:36+00:00",
@@ -2579,6 +2919,23 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "‘El barquer’ y ‘L’amor venia amb taxi’, ganadoras de los premios Butaca",
+      "link": "https://www.lavanguardia.com/cultura/20261123/11691533/barquer-i-l-amor-venia-amb-taxi-ganadores-premios-butaca.html",
+      "date": "2026-11-23T21:00:00+00:00",
+      "publication_date_madrid": "2026-11-23",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Cultura",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
       ],
       "editorial_coincidencias": 0
     },
@@ -10798,23 +11155,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Hollande se plantea ser candidato ante la crisis francesa y mundial",
-      "link": "https://www.lavanguardia.com/internacional/20261123/11690545/hollande-plantea-candidato-crisis-francesa-mundial.html",
-      "date": "2026-11-23T05:00:00+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Las aerolíneas anticipan una subida de precios y un recorte de plazas para el próximo verano",
       "link": "https://elpais.com/economia/2026-11-23/las-aerolineas-anticipan-una-subida-de-precios-y-un-recorte-de-plazas-para-el-proximo-verano.html",
       "date": "2026-11-23T04:45:01+00:00",
@@ -12894,6 +13234,21 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Si hubiéramos tenido Presupuestos Generales",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-22/si-hubieramos-tenido-presupuestos-generales.html",
+      "date": "2026-11-22T04:40:00+00:00",
+      "publication_date_madrid": "2026-11-22",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Christian Sewing, el aficionado al tenis que pelea otro revés para su banco",
       "link": "https://cincodias.elpais.com/opinion/2026-11-22/christian-sewing-el-aficionado-al-tenis-que-pelea-otro-reves-para-su-banco.html",
       "date": "2026-11-22T04:40:00+00:00",
@@ -12911,21 +13266,6 @@
     {
       "title": "Las claves: el largo corte del trayecto en tren Madrid-Sevilla es motivo para la reflexión",
       "link": "https://cincodias.elpais.com/opinion/2026-11-22/las-claves-el-largo-corte-del-trayecto-en-tren-madrid-sevilla-es-motivo-para-la-reflexion.html",
-      "date": "2026-11-22T04:40:00+00:00",
-      "publication_date_madrid": "2026-11-22",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Si hubiéramos tenido Presupuestos Generales",
-      "link": "https://cincodias.elpais.com/opinion/2026-11-22/si-hubieramos-tenido-presupuestos-generales.html",
       "date": "2026-11-22T04:40:00+00:00",
       "publication_date_madrid": "2026-11-22",
       "date_source": "rss_published",
