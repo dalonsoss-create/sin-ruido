@@ -69,7 +69,7 @@ xml=b'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
  <url><loc>https://www.elmundo.es/ciencia/2026/11/24/abc.html</loc>
- <news:news><news:title>Descubren un nuevo laboratorio para tratar el cancer</news:title>
+ <news:news><news:title>Científicos descubren un nuevo exoplaneta en el universo</news:title>
  <news:publication_date>2026-11-24T08:00:00+01:00</news:publication_date>
  </news:news></url>
  <url><loc>https://www.elmundo.es/ciencia/2026/11/24/falsa.html</loc>
