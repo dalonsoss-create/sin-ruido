@@ -4,6 +4,15 @@ on:
   push:
     paths:
       - 'scripts/actualizar.py'
+      - 'scripts/version_app.py'
+      - 'docs/index.html'
+      - 'docs/*.css'
+      - 'docs/*.js'
+      - 'docs/*.webmanifest'
+      - 'docs/*.png'
+      - 'docs/*.svg'
+      - 'docs/suscripciones.json'
+      - '.github/workflows/actualizar.yml'
       - 'scripts/mapas_publicos.py'
       - 'scripts/test_recopilacion.py'
       - 'scripts/clasificar.py'
