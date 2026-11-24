@@ -66,8 +66,8 @@ POLITICS=r"\b(?:psoe|partido popular|podemos|sumar|vox|moncloa|feijoo|sanchez|co
 # palabras como «médico», «tenis», «universidad» o «vivienda» usadas en una
 # noticia cuyo protagonista es un partido o representante político.
 # No se incluye «Sánchez» o «Nadal» solos para evitar homónimos.
-POLITICAL_ACTORS=r"\\b(?:psoe|pp|partido popular|vox|podemos|sumar|junts|erc|esquerra republicana|bildu|pnv|ciudadanos|coalicion canaria|bng|moncloa|pedro sanchez|feijoo|abascal|puigdemont|rufian|ayuso|miriam nogueras|ester munoz|salvador illa|juanma moreno|patxi lopez|irene montero|yolanda diaz|felix bolanos|oscar puente|urtasun|albiol)\\b"
-POLITICAL_INSTITUTIONS=r"\\b(?:gobierno de espana|gobierno espanol|presidente del gobierno|consejo de ministros|congreso de los diputados|senado espanol|parlament de cataluna|parlamento de cataluna|asamblea de madrid|elecciones generales|debate electoral|investidura|mocion de censura)\\b"
+POLITICAL_ACTORS=r"\b(?:psoe|pp|partido popular|vox|podemos|sumar|junts|erc|esquerra republicana|bildu|pnv|ciudadanos|coalicion canaria|bng|moncloa|pedro sanchez|feijoo|abascal|puigdemont|rufian|ayuso|miriam nogueras|ester munoz|salvador illa|juanma moreno|patxi lopez|irene montero|yolanda diaz|felix bolanos|oscar puente|urtasun|albiol)\b"
+POLITICAL_INSTITUTIONS=r"\b(?:gobierno de espana|gobierno espanol|presidente del gobierno|consejo de ministros|congreso de los diputados|senado espanol|parlament de cataluna|parlamento de cataluna|asamblea de madrid|elecciones generales|debate electoral|investidura|mocion de censura)\b"
 CULTURE=r"\b(?:cine|pelicula|series? de television|actor|actriz|director de cine|festival de cine|museo|exposicion|teatro|artista|musica|concierto|literatura|novela|escritor|escritora|premios goya)\b"
 HISTORY=r"\b(?:arqueolog\w*|civilizaciones?|edad del hierro|edad del bronce|edad media|imperio romano|restos historicos|momia|yacimientos?|prehistoria|medieval|dinastia|egipto antiguo)\b"
 EDUCATION=r"\b(?:colegio|universidad|estudiantes|educacion|profesores|profesoras|escuela|estudiar|aulas|becas escolares|curriculo escolar)\b"
