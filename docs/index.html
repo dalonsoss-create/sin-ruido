@@ -221,27 +221,22 @@ body.settings-open{overflow:hidden}
 .night-status[hidden]{display:none}
 @media(max-width:760px){.night-status{padding:12px;font-size:12px}}
 
-.latest-panel{margin:13px 0 20px;padding:13px 15px;background:#fffdfa;border:1px solid #d7d2c6;
-  border-top:4px solid #1e2930;border-radius:11px;box-shadow:0 2px 10px #302c2410}
+/* Misma tarjeta editorial e ilustración para Lo último, Última hora y el resto. */
+.latest-panel{margin:0 0 18px;padding:0;border:0;background:transparent;box-shadow:none}
 .latest-panel[hidden]{display:none}
-.latest-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding-bottom:8px}
-.latest-head h2{font:800 clamp(19px,2.5vw,26px)/1.15 Georgia,serif;letter-spacing:-.025em;margin:0}
+.latest-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
+  margin:0 0 10px;padding:0 0 9px;border-bottom:2px solid #252a2c}
+.latest-head h2{font:800 clamp(20px,2.5vw,27px)/1.15 Georgia,serif;letter-spacing:-.025em;margin:0}
 .latest-head span{font:600 11px ui-sans-serif,system-ui,sans-serif;color:#6a655d}
-.latest-list{display:flex;flex-direction:column}
-.latest-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #e8e2da;padding:11px 0}
-.latest-item-text{min-width:0}
-.latest-item-meta{display:block;font:650 11px ui-sans-serif,system-ui,sans-serif;color:#796d60;margin:0 0 3px}
-.latest-item-link{display:block;font:800 clamp(15px,1.8vw,18px)/1.27 Georgia,serif;color:#252725;text-decoration:none}
-.latest-item-link:hover{text-decoration:underline;color:#9a3c29}
-.latest-item-reviewed{flex:none;width:44px;height:44px;min-width:44px;border-radius:50%;border:2px solid #fdfaf3;
-  background:#26333b;color:white;box-shadow:0 1px 7px #0003;font:900 24px/1 ui-sans-serif,system-ui,sans-serif;
-  touch-action:manipulation;cursor:pointer}
-.latest-item-reviewed:hover,.latest-item-reviewed:focus-visible{background:#267d55}
+.latest-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
+.latest-list .story.hero{grid-column:1 / -1;margin:0}
+.last-minute-body{display:block}
+.last-minute-body .story{width:100%;margin:0}
 @media(max-width:760px){
-  .latest-panel{margin:9px 0 16px;padding:10px 12px}
-  .latest-item{gap:9px;padding:11px 0}
-  .latest-item-meta{font-size:10px}
-  .latest-item-link{font-size:16px}
+ .latest-panel{margin:0 0 15px}
+ .latest-list{grid-template-columns:minmax(0,1fr)}
+ .latest-list .story.hero{grid-column:auto}
+ .latest-head h2{font-size:23px}
 }
 .order-info{font:750 12px ui-sans-serif,system-ui,sans-serif;color:#53646a;white-space:nowrap}
 </style>
@@ -445,11 +440,7 @@ body.settings-open{overflow:hidden}
         <div class="last-minute-label"><span class="last-minute-pulse" aria-hidden="true"></span><strong id="last-minute-heading">Últimas noticias</strong><span id="last-minute-kind"></span></div>
         <span id="last-minute-edition" class="last-minute-edition"></span>
       </div>
-      <div class="last-minute-body">
-        <div class="last-minute-copy">
-          <a id="last-minute-link" class="last-minute-link" target="_blank" rel="noopener noreferrer"></a>
-          <span id="last-minute-source" class="last-minute-source"></span>
-        </div>
+      <div class="last-minute-body" id="last-minute-body"></div>
         <button id="last-minute-reviewed" class="last-minute-reviewed" type="button" title="Marcar como ya vista y retirarla" aria-label="Marcar la última noticia como ya vista">✓ Ya vista</button>
       </div>
     </section>
@@ -778,7 +769,7 @@ function updateReviewedCount(){el("reviewed-count").textContent=String(reviewedS
 function toggleReviewed(a,button){
   if(!/^https:\/\//.test(a.link||""))return;
   const card=button?.closest(".story")||null;
-  const displayed=card?[...document.querySelectorAll("#features .story, #news-list .story")]:[];
+  const displayed=card?[...document.querySelectorAll("#latest-list .story, #last-minute-body .story, #features .story, #news-list .story")]:[];
   const position=displayed.indexOf(card);
   const topOnScreen=card?card.getBoundingClientRect().top:null;
   const key=storyId(a),restoring=isReviewed(a),updated=new Map(reviewedStories);
@@ -799,7 +790,7 @@ function toggleReviewed(a,button){
   render();
   if(position>=0&&topOnScreen!==null){
     // El titular siguiente ocupa el lugar del retirado, sin saltarse noticias.
-    const after=[...document.querySelectorAll("#features .story, #news-list .story")];
+    const after=[...document.querySelectorAll("#latest-list .story, #last-minute-body .story, #features .story, #news-list .story")];
     const next=after[Math.min(position,after.length-1)];
     if(next)window.scrollTo(0,Math.max(0,window.scrollY+next.getBoundingClientRect().top-topOnScreen));
     else window.scrollTo(0,oldScroll);
@@ -964,13 +955,9 @@ function renderLastMinute(excludeIds=new Set()){
   const ageLabel=hours>0?"hace "+hours+" h "+minutes+" min":"hace "+minutes+" min";
   el("last-minute-edition").textContent=lastEdition&&Number.isFinite(editionDate.valueOf())
     ?"Edición comprobada: "+fmt.format(editionDate):"Edición sin hora confirmada";
-  const anchor=el("last-minute-link");
-  anchor.textContent=a.title;anchor.href=a.link;
-  anchor.onclick=()=>trackClick(a);
-  el("last-minute-source").textContent=a.source+" · "+a.category+" · Publicada "+ageLabel;
-  const button=el("last-minute-reviewed");
-  button.onclick=()=>toggleReviewed(a,button);
-  button.setAttribute("aria-label","Marcar como ya vista: "+a.title);
+  // Exactamente la misma tarjeta que en el resto del periódico:
+  // imagen, titular, enlace, Guardar, WhatsApp y ✓ Ya vista.
+  el("last-minute-body").replaceChildren(makeCard(a));
   return storyId(a);
 }
 // La sección "Lo último" NO usa la puntuación editorial. Siempre fecha descendente,
@@ -989,19 +976,10 @@ function renderLatest(allowed,highlightedId){
   el("latest-heading").textContent="🕒 Lo último para ti";
   el("latest-description").textContent="Los 5 titulares más recientes de tus medios y temas";
   const taken=new Set();
-  for(const a of picked){
+  picked.forEach((a,index)=>{
     taken.add(storyId(a));
-    const item=mk("article","latest-item"),text=mk("div","latest-item-text");
-    const stamp=mk("span","latest-item-meta",a.source+" · "+readableDate(a.date)+" · "+a.category);
-    const headline=titleAnchor(a);
-    headline.classList.add("latest-item-link");
-    const mark=mk("button","latest-item-reviewed","✓");
-    mark.type="button";
-    mark.title="Ya vista · Quitar de las últimas noticias";
-    mark.setAttribute("aria-label","Marcar como ya vista: "+a.title);
-    mark.onclick=()=>toggleReviewed(a,mark);
-    text.append(stamp,headline);item.append(text,mark);list.append(item);
-  }
+    list.append(makeCard(a,index===0));
+  });
   return taken;
 }
 function render(){
