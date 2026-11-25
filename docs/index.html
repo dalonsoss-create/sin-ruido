@@ -750,7 +750,15 @@ function eligibleToday(){
     .filter(a=>Number.isFinite(Date.parse(a.date)))
     .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
 }
-function filtered(){return eligibleToday()}
+// La portada general permanece limitada a HOY. Al entrar en un tema,
+ // consultar TODO el archivo disponible y paginarlo de 20 en 20.
+function eligibleForView(){
+  if(activeTopic==="Todas")return eligibleToday();
+  return articles.filter(a=>!isReviewed(a)&&matchesReader(a))
+    .filter(a=>Number.isFinite(Date.parse(a.date)))
+    .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
+}
+function filtered(){return eligibleForView()}
 function titleAnchor(a){
   const anchor=mk("a","headline-link",a.title);
   if(a.link&&/^https:\/\//i.test(a.link)){anchor.href=a.link;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.title="Leer en "+a.source;anchor.addEventListener("click",()=>trackClick(a))}
@@ -1008,7 +1016,7 @@ function renderLastMinute(){
   return storyId(a);
 }
 function render(){
-  el("headline-heading").textContent="Noticias de hoy · Más recientes primero";
+  el("headline-heading").textContent=activeTopic==="Todas"?"Noticias de hoy · Más recientes primero":activeTopic+" · Todas las disponibles · Más recientes primero";
   el("night-status").hidden=true;
   if(collectionMode==="saved"){el("last-minute-panel").hidden=true;renderSaved();return}
   if(collectionMode==="reviewed"){el("last-minute-panel").hidden=true;renderReviewed();return}
@@ -1018,10 +1026,10 @@ function render(){
   // Estructura editorial original: una tarjeta principal y a continuación
   // la cuadrícula compacta de siempre. Solo cambia qué noticias aparecen:
   // filtradas y ordenadas por fecha de publicación, sin duplicados ni ayer.
-  const highlightedId=renderLastMinute();
-  const list=eligibleToday().filter(a=>!highlightedId||storyId(a)!==highlightedId);
+  const highlightedId=activeTopic==="Todas"?renderLastMinute():(el("last-minute-panel").hidden=true,null);
+  const list=eligibleForView().filter(a=>!highlightedId||storyId(a)!==highlightedId);
   const visible=Math.min(shownCount,list.length);
-  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares";
+  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares"+(activeTopic==="Todas"?" de hoy":" disponibles (incluye días anteriores)");
   const more=el("more-wrap");
   more.hidden=visible>=list.length;
   el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
