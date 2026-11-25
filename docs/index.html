@@ -536,7 +536,7 @@ async function applyPendingAppUpdate(){
   try{
     let last=null;
     try{last=JSON.parse(sessionStorage.getItem(APP_RELOAD_GUARD)||"null")}catch(e){}
-    if(last?.version===version&&Date.now()-last.at<300000)return;
+    if(last?.version===version&&Date.now()-last.at<90000)return;
     // GitHub publica la edición de noticias y la web por vías distintas.
     // No recargar hasta que GitHub Pages sirva ya el HTML correcto.
     const res=await fetch("./index.html?comprobar-app="+Date.now(),{cache:"no-store"});
@@ -564,6 +564,29 @@ function checkAppVersion(data){
       applyPendingAppUpdate();
     }else appUpdatePending=null;
   });
+}
+// Comprobación independiente del HTML: si GitHub Pages ya ofrece una
+// versión distinta, el móvil puede instalarla aunque los titulares no cambien.
+let appProbePending=false,lastAppProbeAt=0;
+async function checkLiveAppVersion(force=false){
+  if((document.hidden&&!force)||appProbePending||(!force&&Date.now()-lastAppProbeAt<60000))return false;
+  appProbePending=true;
+  lastAppProbeAt=Date.now();
+  try{
+    const res=await fetch("./index.html?verificar-version="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw Error("No se pudo comprobar la versión web");
+    const page=new DOMParser().parseFromString(await res.text(),"text/html");
+    const inline=[...page.scripts].filter(s=>!s.src).at(-1)?.textContent;
+    if(!inline)return false;
+    const [publishedHash,runningHash]=await Promise.all([appHash(inline),runningAppHash]);
+    if(!publishedHash||!runningHash||publishedHash===runningHash)return false;
+    appUpdatePending={version:publishedHash.slice(0,24),scriptHash:publishedHash};
+    await applyPendingAppUpdate();
+    return true;
+  }catch(e){
+    // No interrumpir la lectura si no hay red o GitHub Pages aún está desplegando.
+    return false;
+  }finally{appProbePending=false}
 }
 const GROUPS=[["Política nacional","🏛️",2],["Internacional","🌍",2],["Conflictos","🕊️",1],["Sucesos","🚨",1],["Economía","📈",4],["Empresas","🏢",3],["Ciencia","🔬",5],["Tecnología","💻",5],["IA","🤖",5],["Salud","🩺",4],["Naturaleza","🌿",4],["Medio ambiente","🌱",4],["Sociedad","👥",2],["Cultura","🎭",2],["Educación","🎓",2],["Historia","🏺",2],["Viajes","🧳",2],["Gastronomía","🍽️",2],["Deportes","🏅",2],["Fútbol","⚽",2],["Tenis","🎾",2],["Motor","🏎️",2]];
 const DEFAULT={topics:Object.fromEntries(GROUPS.map(g=>[g[0],["Tecnología","IA","Ciencia","Salud","Naturaleza","Medio ambiente","Economía","Internacional","Deportes"].includes(g[0])])),blocked:[],hidden:[],sources:{},proposals:[],positiveOnly:false,interests:""};
@@ -1518,7 +1541,7 @@ function applyEdition(data){
 }
 let refreshPending=false;
 async function refreshPublishedEdition(manual=false){
-  if(document.hidden||refreshPending)return false;
+  if((document.hidden&&!manual)||refreshPending)return false;
   refreshPending=true;
   const btn=el("refresh-news"),status=el("refresh-status");
   if(manual){
@@ -1529,18 +1552,40 @@ async function refreshPublishedEdition(manual=false){
   }
   let changed=false;
   try{
-    const url=location.hostname==="dalonsoss-create.github.io"
-      ?"https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json?t="+Date.now()
-      :"./noticias.json?t="+Date.now();
-    const res=await fetch(url,{cache:"no-store"});
-    if(!res.ok)throw new Error("No se pudo consultar la edición");
-    const data=await res.json();
-    if(Date.parse(data.updated)>lastEdition&&Array.isArray(data.articles)&&data.articles.length){
+    const query="?t="+Date.now();
+    const urls=location.hostname==="dalonsoss-create.github.io"
+      ?["https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json"+query,
+        "./noticias.json"+query]
+      :["./noticias.json"+query];
+    let data=null;
+    // En Safari y apps instaladas la conexión a raw.githubusercontent.com
+    // puede fallar; GitHub Pages sirve como alternativa.
+    for(const url of urls){
+      try{
+        const res=await fetch(url,{cache:"no-store"});
+        if(!res.ok)continue;
+        const candidate=await res.json();
+        if(Array.isArray(candidate.articles)&&candidate.articles.length&&Number.isFinite(Date.parse(candidate.updated))){
+          data=candidate;break;
+        }
+      }catch(e){/* Intentar la siguiente fuente, sin perder las noticias actuales. */}
+    }
+    if(!data)throw new Error("No se pudo consultar la edición");
+    // Comprobar también la versión cuando no haya titulares nuevos.
+    checkAppVersion(data);
+    if(Date.parse(data.updated)>lastEdition){
       applyEdition(data);renderSources();render();changed=true;
     }
-    if(manual)status.textContent=changed
-      ?"✓ Se ha descargado una edición más reciente. Tu portada muestra solo titulares de hoy."
-      :"✓ Comprobado. Todavía no hay una edición más reciente. Los RSS se actualizan automáticamente en GitHub.";
+    // Además de las noticias, comprobar el código HTML realmente publicado
+    // al pulsar Actualizar, sin exigir cerrar/reabrir la app.
+    if(manual){
+      const softwareNuevo=await checkLiveAppVersion(true);
+      status.textContent=softwareNuevo
+        ?"✓ Nueva versión detectada. Actualizando la aplicación…"
+        :changed
+          ?"✓ Noticias nuevas cargadas. Software comprobado."
+          :"✓ Noticias y software comprobados. Ya tienes la última edición disponible.";
+    }
   }catch(err){
     if(manual)status.textContent="No se ha podido comprobar. Conservamos la edición descargada.";
   }finally{
@@ -1645,15 +1690,16 @@ init().then(()=>{
     if(current!==shownDate){shownDate=current;render();refreshPublishedEdition()}
   },60000);
   refreshPublishedEdition();
+  checkLiveAppVersion();
   // Cuando se vuelve a la app desde el icono o tras leer una noticia,
   // solicitamos la última edición publicada, sin tocar los filtros personales.
   document.addEventListener("visibilitychange",()=>{
-    if(!document.hidden)refreshPublishedEdition();
+    if(!document.hidden){refreshPublishedEdition();checkLiveAppVersion()}
   });
   window.addEventListener("pageshow",event=>{
-    if(event.persisted)refreshPublishedEdition();
+    if(event.persisted){refreshPublishedEdition();checkLiveAppVersion()}
   });
-  window.addEventListener("focus",()=>{refreshPublishedEdition();applyPendingAppUpdate()});
+  window.addEventListener("focus",()=>{refreshPublishedEdition();checkLiveAppVersion();applyPendingAppUpdate()});
   // Noticias cada cinco minutos; cambios de código se comprueban en esas
   // mismas respuestas JSON, sin peticiones adicionales por lector.
   setInterval(refreshPublishedEdition,300000);
