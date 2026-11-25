@@ -66,6 +66,19 @@ const sorted=ctx.eligibleToday();
 assert.equal(sorted.length,3,"La fecha de ayer nunca debe aparecer");
 assert.equal(sorted[0].title,moreRecent.title,"La noticia más reciente debe ir primero");
 assert.equal(sorted[1].title,science.title,"Las demás deben conservar el orden de publicación");
+
+// Un tema muestra también las noticias de días anteriores y las pagina de 20 en 20.
+ctx.activeTopic="Ciencia";
+const scienceArchive=Array.from({length:20},(_,i)=>
+  a("Investigación científica archivada "+i,"Ciencia","medio-a","2026-11-22T09:00:00Z"));
+ctx.articles=[old,science,moreRecent,health,...scienceArchive];
+assert.equal(ctx.eligibleToday().length,2,"Solo las dos noticias científicas de hoy corresponden al día");
+assert.equal(ctx.eligibleForView().length,23,"Ciencia debe incluir 23 noticias, no solo las dos de hoy");
+assert.equal(ctx.eligibleForView().slice(0,20).length,20,"Primera página del tema: 20 titulares");
+assert.equal(ctx.eligibleForView().slice(20,40).length,3,"Segunda página del tema: los 3 restantes");
+ctx.activeTopic="Todas";
+assert.equal(ctx.eligibleForView().length,3,"La portada general debe seguir limitada a hoy");
+
 assert(!html.includes('id="mustread-panel"'),"No debe quedar un bloque de noticias de ayer");
 assert(!html.includes('id="sort"'),"No debe quedar un selector que contradiga el orden cronológico");
 // El diseño original no debe cambiar al actualizar criterios de actualidad.
