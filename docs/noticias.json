@@ -1,34 +1,34 @@
 {
-  "updated": "2026-11-24T23:53:18.556276+00:00",
+  "updated": "2026-11-25T01:18:05.827114+00:00",
   "edition_date_madrid": "2026-11-25",
-  "articles_today_madrid": 56,
+  "articles_today_madrid": 108,
   "app_version": "fd38c33c7e6d56eab62cb492",
   "app_script_sha256": "d395028df4a5a667d5946de3932ea65566a139d4ae12839e7b08da88d25c499a",
-  "collected_before_balance": 1255,
+  "collected_before_balance": 1256,
   "balance_max_per_publisher": 95,
   "publisher_counts": {
-    "20minutos": 67,
-    "ABC": 71,
-    "AS": 69,
-    "Cinco Días": 25,
+    "20minutos": 63,
+    "ABC": 84,
+    "AS": 63,
+    "Cinco Días": 37,
     "Diario de Pozuelo": 3,
     "Directo al Paladar": 20,
-    "EL PAÍS": 68,
+    "EL PAÍS": 62,
     "El Blog Salmón": 16,
     "El Confidencial": 19,
     "El Correo de Pozuelo": 20,
     "El Diario de Madrid": 6,
     "El Español": 59,
     "El Mundo": 95,
-    "Expansión": 24,
+    "Expansión": 28,
     "Genbeta": 16,
     "Hipertextual": 16,
-    "La Vanguardia": 66,
-    "MARCA": 66,
+    "La Vanguardia": 70,
+    "MARCA": 59,
     "Motorpasión": 20,
     "The Conversation España": 25,
-    "Xataka": 63,
-    "elDiario.es": 66
+    "Xataka": 60,
+    "elDiario.es": 59
   },
   "public_sitemaps_status": [
     {
@@ -134,7 +134,7 @@
     {
       "id": "elmundo-espana",
       "ok": true,
-      "count": 45
+      "count": 46
     },
     {
       "id": "elmundo-internacional",
@@ -144,7 +144,7 @@
     {
       "id": "elmundo-portada",
       "ok": true,
-      "count": 22
+      "count": 23
     },
     {
       "id": "elmundo-salud",
@@ -219,7 +219,7 @@
     {
       "id": "lavanguardia-portada",
       "ok": true,
-      "count": 110
+      "count": 109
     },
     {
       "id": "madridiario-sucesos",
@@ -253,6 +253,687 @@
     }
   ],
   "articles": [
+    {
+      "title": "Luis de los Santos, candidato de Adelante Andalucía: \"Nos van a votar los conservadores que no quieren el retroceso que plantean el PP y Vox\"",
+      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/25/6b05ddb5e85ecec2568b4579.html",
+      "date": "2026-11-25T01:10:42+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "¿Qué está matando a los reclusos británicos?",
+      "link": "https://www.abc.es/internacional/matando-reclusos-britanicos-20261125020701-nt.html",
+      "date": "2026-11-25T01:07:01+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La guerra de Irán dispara en 100.000 millones la factura de gas y petróleo en la Unión Europea",
+      "link": "https://www.abc.es/economia/transporte-industria-espanola-parte-factura-europea-100000-20261125020647-nt.html",
+      "date": "2026-11-25T01:06:47+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Conflictos",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Los latigazos a una cantante iraní por no llevar velo reabren el debate sobre los castigos de las leyes musulmanas",
+      "link": "https://www.abc.es/internacional/latigazos-cantante-irani-llevar-velo-reabren-debate-20261125020632-nt.html",
+      "date": "2026-11-25T01:06:32+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El periodo más alcista en Bolsa aviva el riesgo de \"sobrerreacción\"",
+      "link": "https://www.expansion.com/mercados/2026/11/25/periodo-alcista-bolsa-aviva-riesgo-sobrerreaccion.html",
+      "date": "2026-11-25T01:04:28+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "Expansión",
+      "source_id": "expansion-mercados",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Pagar con cuotas reducidas de 'revolving' las compras de Black Friday y Navidad las encarece un 75%",
+      "link": "https://www.abc.es/economia/cuentas-corrientes/pagar-cuotas-reducidas-revolving-compras-black-friday-20261125020312-nt.html",
+      "date": "2026-11-25T01:03:12+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El pico de ventas del Black Friday llega el viernes a las 19.00 horas con 2.200 millones de gasto en apenas 60 minutos",
+      "link": "https://www.abc.es/economia/cuentas-corrientes/pico-ventas-black-friday-llega-viernes-1900-20261125020257-nt.html",
+      "date": "2026-11-25T01:02:57+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Un día en la vida de Miguel Ángel Blanco: «Esta es la película más importante que se ha hecho sobre ETA»",
+      "link": "https://www.abc.es/cultura/cine/dia-rodaje-blanco-pelicula-importante-sobre-eta-20261125020222-nt.html",
+      "date": "2026-11-25T01:02:22+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Cultura",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El plan del Partido Comunista de España para regalar Ceuta y Melilla a Marruecos en los años 80",
+      "link": "https://www.abc.es/historia/plan-partido-comunista-espana-regalar-ceuta-melilla-20261124020215-nt.html",
+      "date": "2026-11-25T01:02:15+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Historia",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La compulsividad que aflora en el Black Friday: «Muchas compras son en realidad necesidades emocionales»",
+      "link": "https://www.abc.es/bienestar/dificil-control-compulsivo-black-friday-compras-realidad-20261125020114-nt.html",
+      "date": "2026-11-25T01:01:14+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Las hechuras de Robert Pattinson como tertuliano",
+      "link": "https://www.abc.es/play/series/noticias/fernando-munoz-hechuras-robert-pattinson-tertuliano-20261125020028-nt.html",
+      "date": "2026-11-25T01:00:28+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Tarantino, Fincher y Brad Pitt: tres genios y un Hollywood que ya no existe",
+      "link": "https://www.abc.es/play/cine/noticias/brad-pitt-tarantino-david-fincher-tres-hombres-20261124020013-nt.html",
+      "date": "2026-11-25T01:00:13+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Cultura",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Real Madrid 5-1 PSV: resumen, goles y resultado",
+      "link": "https://as.com/futbol/champions/real-madrid-psv-hoy-en-directo-partido-de-fase-liga-de-champions-league-ultima-hora-en-el-bernabeu-f202611-d/",
+      "date": "2026-11-25T01:00:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "AS",
+      "source_id": "as-futbol",
+      "category": "Fútbol",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Polvorones, fentanilo, muérdago y muerte",
+      "link": "https://www.abc.es/play/television/polvorones-fentanilo-muerdago-muerte-20261124020000-nt.html",
+      "date": "2026-11-25T01:00:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El gran olvido de Rosalía en los Latin Grammy: ni una mención a Loli Bahía",
+      "link": "https://www.abc.es/gente/gran-olvido-rosalia-latin-grammy-mencion-loli-20261124015945-nt.html",
+      "date": "2026-11-25T00:59:45+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Los vehículos superan a las viviendas como el bien más comprado para blanquear dinero en España",
+      "link": "https://www.elmundo.es/economia/2026/11/25/6b05b946e9cf4add278b45be.html",
+      "date": "2026-11-25T00:58:53+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Aagesen exigió cambiar el acta clave del rescate de Air Europa para salvar su responsabilidad personal",
+      "link": "https://www.elmundo.es/espana/2026/11/25/6b05e280fc6c83fd3a8b457b.html",
+      "date": "2026-11-25T00:58:52+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-espana",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El rival de Hernández de Cos por la presidencia del BCE lleva el pulso hasta el final a pesar de sus escasas opciones: \"Pablo es brillante\"",
+      "link": "https://www.elmundo.es/economia/2026/11/25/6b05b6a7e4d4d8064a8b45a1.html",
+      "date": "2026-11-25T00:58:52+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Los vikingos llaman a las puertas del Metropolitano",
+      "link": "https://www.abc.es/deportes/futbol/vikingos-llaman-puertas-metropolitano-20261124015733-nt.html",
+      "date": "2026-11-25T00:57:33+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Fútbol",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "De ganar un concurso a entrenar en la Champions: la insólita historia del técnico del Sabah, rival del Barça",
+      "link": "https://www.abc.es/deportes/futbol/ganar-concurso-entrenar-champions-insolita-historia-entrenador-20261124015704-nt.html",
+      "date": "2026-11-25T00:57:04+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Fútbol",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Cártama revive la pesadilla de los 'pisos fantasma' del Grupo 21: \"He pagado 10.000 euros y no sé si recuperaré mi dinero\"",
+      "link": "https://www.elmundo.es/economia/vivienda/2026/11/24/6b045654fc6c83da638b4589.html",
+      "date": "2026-11-25T00:56:13+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "María Corina Machado: \"La verdad de los negocios oscuros del chavismo con España se sabrá y será peor\"",
+      "link": "https://www.elmundo.es/internacional/2026/11/24/6b05e07ae85ecea73c8b45a0.html",
+      "date": "2026-11-25T00:55:26+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Internacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Bienvenidos a Kourou, el puerto espacial desde el que Bezos desafía a Musk: \"Nuestro objetivo es realizar 9 o 10 despegues anuales a partir de 2027\"",
+      "link": "https://www.elmundo.es/papel/historias/2026/11/24/6b05955921efa085418b45a7.html",
+      "date": "2026-11-25T00:54:30+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Ciencia",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Geri Halliwell y su marido compran la histórica mansión de 'Orgullo y Prejuicio' por 62 millones de euros",
+      "link": "https://www.abc.es/gente/geri-halliwell-marido-compran-historica-mansion-orgullo-20261124015315-nt.html",
+      "date": "2026-11-25T00:53:15+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Javier Díaz Esterri, el 'chef de la longevidad': \"Para vivir más hay que evitar acabar hinchado cada comida\"",
+      "link": "https://www.elmundo.es/yodona/vida-saludable/2026/11/24/6afdc24ee9cf4aeb368b4584.html",
+      "date": "2026-11-25T00:52:46+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Gastronomía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Los pecados originales del controvertido (no) bulevar de Alcalá: un render a destiempo que alimenta la oposición, el aval de la Unesco y el 'empujón' de Ayuso",
+      "link": "https://www.elmundo.es/madrid/2026/11/24/6b05f805e9cf4a81718b456e.html",
+      "date": "2026-11-25T00:51:22+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Condenada una adolescente de 15 años por empujar a su novio a apuñalar a otro menor de edad",
+      "link": "https://www.elmundo.es/andalucia/2026/11/25/6b05ce06fc6c8372188b4597.html",
+      "date": "2026-11-25T00:48:57+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "¿Recién dado de alta como autónomo? Esto es lo que nadie te cuenta y te ahorrará dinero",
+      "link": "https://www.abc.es/economia/cuentas-corrientes/recien-dado-alta-autonomo-cuenta-ahorrara-dinero-20261125014839-nt.html",
+      "date": "2026-11-25T00:48:39+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Divorcio y dinero oculto: pasos legales para rastrear cuentas secretas",
+      "link": "https://www.abc.es/economia/cuentas-corrientes/divorcio-dinero-oculto-pasos-legales-rastrear-cuentas-20261125014820-nt.html",
+      "date": "2026-11-25T00:48:20+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Madrid refuerza el Metro hasta un 130% durante el Black Friday para afrontar el aumento de viajeros",
+      "link": "https://www.abc.es/espana/madrid/madrid-refuerza-metro-130-black-friday-afrontar-20261125014647-nt.html",
+      "date": "2026-11-25T00:46:47+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La falta de trenes complica la campaña de Navidad de la hostelería pese al Black Friday",
+      "link": "https://www.abc.es/espana/madrid/falta-trenes-complica-campana-navidad-hosteleria-pese-20261125014624-nt.html",
+      "date": "2026-11-25T00:46:24+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La noche extranjera",
+      "link": "https://www.abc.es/espana/madrid/angel-antonio-herrera-noche-extranjera-20261125014606-nt.html",
+      "date": "2026-11-25T00:46:06+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "ABC",
+      "source_id": "abc-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Sibbern: \"Esperamos tener cientos de ETF del mercado español en dos años\"",
+      "link": "https://www.expansion.com/mercados/2026/11/25/sibbern-esperamos-cientos-etf-mercado-espanol-dos-anos.html",
+      "date": "2026-11-25T00:40:18+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "Expansión",
+      "source_id": "expansion-mercados",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Dani Mérida: “Estar aquí es un premio a mi año”",
+      "link": "https://as.com/tenis/dani-merida-estar-aqui-es-un-premio-a-mi-ano-f202611-n/",
+      "date": "2026-11-25T00:38:03+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "AS",
+      "source_id": "as-tenis",
+      "category": "Tenis",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El rey Felipe de los belgas recibe las cartas credenciales del embajador de Colombia",
+      "link": "https://www.elmundo.es/loc/2026/11/25/6b062cd9e85ece9d038b4591.html",
+      "date": "2026-11-25T00:34:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "news_sitemap_publication_date",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Singular AM ve al Ibex en los 22.00 puntos en 2027",
+      "link": "https://www.expansion.com/inversion/2026/11/25/singular-am-ve-ibex-22-00-puntos-2027.html",
+      "date": "2026-11-25T00:29:43+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "Expansión",
+      "source_id": "expansion-mercados",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Qué esperar de bancos, ‘utilities’ e inmobiliarias tras el 29-N",
+      "link": "https://www.expansion.com/mercados/2026/11/25/esperar-bancos-utilities-e-inmobiliarias-29-n.html",
+      "date": "2026-11-25T00:25:47+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "Expansión",
+      "source_id": "expansion-mercados",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Ley de nietos: urnas de cartón, participación masiva y muchas dudas",
+      "link": "https://www.elmundo.es/podcasts/el-mundo-al-dia/2026/11/25/6b05e783e4d4d8251d8b457c.html",
+      "date": "2026-11-25T00:23:12+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "news_sitemap_publication_date",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Siete detenidos en la operación contra la banda del 'Pelón' por el atraco a la joyería de La Vaguada, asaltos a comercios y un tiroteo en Vallecas",
+      "link": "https://www.elmundo.es/madrid/2026/11/25/6b062615fdddff9b068b458a.html",
+      "date": "2026-11-25T00:19:58+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "news_sitemap_publication_date",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "De los nueve kilómetros por el tocino a la pesca de cada noche, la infancia de Miguel Ángel Revilla: \"Llegaba con cuatro truchas\"",
+      "link": "https://www.20minutos.es/television/los-nueve-kilometros-por-tocino-pesca-cada-noche-infancia-miguel-angel-revilla-llegaba-con-cuatro-truchas_7065414_0.html",
+      "date": "2026-11-25T00:14:43+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "20minutos",
+      "source_id": "20minutos-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Nacho Cano, de la visita a su casa sin robo a una detención por las becas de 'Malinche': \"Estaba flipando\"",
+      "link": "https://www.20minutos.es/television/nacho-cano-visita-su-casa-sin-robo-una-detencion-por-las-becas-malinche-yo-estaba-flipando_7065413_0.html",
+      "date": "2026-11-25T00:07:30+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "20minutos",
+      "source_id": "20minutos-portada",
+      "category": "Sucesos",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
     {
       "title": "El enfado de Mourinho con la rueda de prensa del PSV: la escena es digna de ver",
       "link": "https://as.com/futbol/videos/el-enfado-de-mourinho-con-la-rueda-de-prensa-del-psv-la-escena-es-digna-de-ver-f202611-v/",
@@ -290,9 +971,9 @@
       "link": "https://www.elmundo.es/cataluna/2026/11/25/6b061017e9cf4a280b8b45be.html",
       "date": "2026-11-24T23:35:18+00:00",
       "publication_date_madrid": "2026-11-25",
-      "date_source": "rss_published",
+      "date_source": "news_sitemap_publication_date",
       "source": "El Mundo",
-      "source_id": "elmundo-portada",
+      "source_id": "elmundo-espana",
       "category": "Política nacional",
       "place": "",
       "classification_version": 6,
@@ -320,18 +1001,71 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Real Madrid 5-1 PSV: resumen, goles y resultado",
-      "link": "https://as.com/futbol/champions/real-madrid-psv-hoy-en-directo-partido-de-fase-liga-de-champions-league-ultima-hora-en-el-bernabeu-f202611-d/",
-      "date": "2026-11-24T23:30:01+00:00",
+      "title": "Aitana “la roja” y Marcos Llorente “el facha”",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692437/aitana-roja-marcos-llorente-facha.html",
+      "date": "2026-11-24T23:30:00+00:00",
       "publication_date_madrid": "2026-11-25",
       "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-futbol",
-      "category": "Fútbol",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
-      "editorial_portadas": [],
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El derecho a odiar",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692076/derecho-odiar.html",
+      "date": "2026-11-24T23:30:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Nos queremos vivas",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692218/queremos-vivas.html",
+      "date": "2026-11-24T23:30:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Mujer e integridad",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692102/mujer-e-integridad.html",
+      "date": "2026-11-24T23:30:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
       "editorial_coincidencias": 0
     },
     {
@@ -350,7 +1084,41 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El salvadoreño Kilmar Ábrego abandonará EEUU rumbo a España, según anuncian los medios locales",
+      "title": "La Moncloa es una tómbola",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692222/moncloa-tombola.html",
+      "date": "2026-11-24T23:30:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La hipoteca del arzobispo",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692475/hipoteca-arzobispo.html",
+      "date": "2026-11-24T23:30:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Kilmar Ábrego, el salvadoreño que se enfrentó a Trump para no ser deportado a las cárceles de Bukele y se convirtió en un símbolo, tira la toalla y se va a España",
       "link": "https://www.elmundo.es/internacional/2026/11/25/6b061c55fdddff330d8b4595.html",
       "date": "2026-11-24T23:29:09+00:00",
       "publication_date_madrid": "2026-11-25",
@@ -367,7 +1135,7 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El enfado y el vídeo de Mourinho en el descanso, y el genio de Bellingham: “Es el mejor centrocampista del mundo”",
+      "title": "El enfado y el vídeo de Mourinho en el descanso, y la genialidad de Bellingham: “Es el mejor centrocampista del mundo”",
       "link": "https://elpais.com/deportes/futbol/2026-11-24/el-enfado-y-el-video-de-mourinho-en-el-descanso-y-el-genio-de-bellingham-es-el-mejor-centrocampista-del-mundo.html",
       "date": "2026-11-24T23:27:44+00:00",
       "publication_date_madrid": "2026-11-25",
@@ -564,8 +1332,8 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Insúlteme de usted",
-      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b059e25e4d4d8a0438b45a6.html",
+      "title": "La factura que encontrará el próximo Gobierno",
+      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b057d6721efa080208b456e.html",
       "date": "2026-11-24T23:14:06+00:00",
       "publication_date_madrid": "2026-11-25",
       "date_source": "news_sitemap_publication_date",
@@ -581,8 +1349,8 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "La factura que encontrará el próximo Gobierno",
-      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b057d6721efa080208b456e.html",
+      "title": "Insúlteme de usted",
+      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b059e25e4d4d8a0438b45a6.html",
       "date": "2026-11-24T23:14:06+00:00",
       "publication_date_madrid": "2026-11-25",
       "date_source": "news_sitemap_publication_date",
@@ -632,6 +1400,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Que viva la Bartoli, con o sin Lang Lang",
+      "link": "https://www.lavanguardia.com/cultura/20261125/11692595/viva-bartoli-lang-lang.html",
+      "date": "2026-11-24T23:13:57+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Cultura",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Electoralismo final de Sánchez",
       "link": "https://www.elmundo.es/opinion/editorial/2026/11/25/6b05f835fc6c836e368b45a3.html",
       "date": "2026-11-24T23:13:41+00:00",
@@ -677,6 +1462,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Vivienda o política",
+      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b05c17b21efa013288b4596.html",
+      "date": "2026-11-24T23:13:39+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "news_sitemap_publication_date",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Pucheros de cartón",
       "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b05d7fffdddff48038b4576.html",
       "date": "2026-11-24T23:13:39+00:00",
@@ -694,14 +1496,14 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Vivienda o política",
-      "link": "https://www.elmundo.es/opinion/columnistas/2026/11/25/6b05c17b21efa013288b4596.html",
-      "date": "2026-11-24T23:13:39+00:00",
+      "title": "Que no te pille diciembre sin reserva: 15 restaurantes de Madrid para las cenas navideñas con amigos o en grupo",
+      "link": "https://www.elmundo.es/metropoli/gastronomia/2026/11/25/6b05643921efa045418b458b.html",
+      "date": "2026-11-24T23:13:35+00:00",
       "publication_date_madrid": "2026-11-25",
-      "date_source": "news_sitemap_publication_date",
+      "date_source": "rss_published",
       "source": "El Mundo",
       "source_id": "elmundo-portada",
-      "category": "Sociedad",
+      "category": "Gastronomía",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -723,6 +1525,23 @@
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "La guerra eterna en el Colegio de Arquitectos de Madrid: un decano \"atrincherado con un vigilante de seguridad en la puerta\" y dos juntas enfrentadas",
+      "link": "https://www.elmundo.es/madrid/2026/11/25/6b05e4befc6c8372188b45a1.html",
+      "date": "2026-11-24T23:13:17+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Conflictos",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
       "editorial_coincidencias": 0
     },
     {
@@ -760,8 +1579,8 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Margarita García Robayo y un mensaje en una botella lanzado hacia el pasado",
-      "link": "https://www.elmundo.es/la-lectura/2026/11/25/6afb08ebfdddff4e2f8b458b.html",
+      "title": "El canon literario de Jesús G. Maestro: \"Los chistes de Chiquito tienen más valor literario que las letras de Bob Dylan\"",
+      "link": "https://www.elmundo.es/la-lectura/2026/11/25/6af60a6de9cf4a1b048b45b9.html",
       "date": "2026-11-24T23:12:51+00:00",
       "publication_date_madrid": "2026-11-25",
       "date_source": "news_sitemap_publication_date",
@@ -777,8 +1596,8 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El canon literario de Jesús G. Maestro: \"Los chistes de Chiquito tienen más valor literario que las letras de Bob Dylan\"",
-      "link": "https://www.elmundo.es/la-lectura/2026/11/25/6af60a6de9cf4a1b048b45b9.html",
+      "title": "Margarita García Robayo y un mensaje en una botella lanzado hacia el pasado",
+      "link": "https://www.elmundo.es/la-lectura/2026/11/25/6afb08ebfdddff4e2f8b458b.html",
       "date": "2026-11-24T23:12:51+00:00",
       "publication_date_madrid": "2026-11-25",
       "date_source": "news_sitemap_publication_date",
@@ -888,7 +1707,7 @@
       "link": "https://www.elmundo.es/espana/2026/11/25/6b05f7a3e4d4d80a2d8b45a9.html",
       "date": "2026-11-24T23:12:42+00:00",
       "publication_date_madrid": "2026-11-25",
-      "date_source": "news_sitemap_publication_date",
+      "date_source": "rss_published",
       "source": "El Mundo",
       "source_id": "elmundo-portada",
       "category": "Sociedad",
@@ -1057,6 +1876,57 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Huang, pelillos a la mar",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692589/huang-pelillos-mar.html",
+      "date": "2026-11-24T23:05:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "“Estar pensando en otra cosa cuando haces algo te hace infeliz”",
+      "link": "https://www.lavanguardia.com/lacontra/20261125/11692443/javier-garcia-campayo-pensando-cosa-te-infeliz.html",
+      "date": "2026-11-24T23:05:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Acabar con la violencia contra las mujeres",
+      "link": "https://www.lavanguardia.com/opinion/20261125/11692566/acabar-violencia-mujeres.html",
+      "date": "2026-11-24T23:05:00+00:00",
+      "publication_date_madrid": "2026-11-25",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Horóscopo del Miércoles, 25 de noviembre de 2026 (Santa Catalina de Alejandría (Virgen y mártir), San Pedro de Alejandría (Obispo y mártir), San Moisés (Profeta y patriarca), Santa Beatriz de Silva (Virgen y fundadora) y San Erasmo de Formia (Obispo y mártir))",
       "link": "https://elcorreodepozuelo.com/2026/11/25/horoscopo-del-miercoles-25-de-noviembre-de-2026-santa-catalina-de-alejandria-virgen-y-martir-san-pedro-de-alejandria-obispo-y-martir-san-moises-profeta-y-patriarca-santa-beatriz-de-silva-v/",
       "date": "2026-11-24T23:04:24+00:00",
@@ -1194,6 +2064,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Paco Ibáñez, galope entre aplausos",
+      "link": "https://www.lavanguardia.com/cultura/musica/20261124/11692594/paco-ibanez-galope-aplausos.html",
+      "date": "2026-11-24T22:49:25+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Cultura",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Pellegrini: “El primer logro ya está pero no hay que conformarse”",
       "link": "https://as.com/futbol/pellegrini-el-primer-logro-ya-esta-pero-no-hay-que-conformarse-f202611-n/",
       "date": "2026-11-24T22:42:37+00:00",
@@ -1314,6 +2201,23 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El Barça va de mal en peor y encaja su tercera derrota europea seguida en el Palau",
+      "link": "https://www.lavanguardia.com/deportes/baloncesto/20261124/11692586/barca-fenerbahce-euroliga-resumen.html",
+      "date": "2026-11-24T22:29:42+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Deportes",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
       ],
       "editorial_coincidencias": 0
     },
@@ -1440,6 +2344,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Cherki salva un punto para un City irregular",
+      "link": "https://www.lavanguardia.com/deportes/futbol/20261124/11692582/cherki-salva-punto-city-irregular.html",
+      "date": "2026-11-24T22:15:17+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Fútbol",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Bellingham hierve y el Madrid se lleva por delante al PSV",
       "link": "https://www.elmundo.es/deportes/futbol/champions-league/2026/11/24/6b06090921efa01a7d8b4582.html",
       "date": "2026-11-24T22:12:36+00:00",
@@ -1553,6 +2474,23 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "ABC"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Bellingham es Zidane reencarnado",
+      "link": "https://www.lavanguardia.com/deportes/20261124/11692579/bellingham-zidane-reencarnado.html",
+      "date": "2026-11-24T22:05:16+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "La Vanguardia",
+      "source_id": "lavanguardia-portada",
+      "category": "Deportes",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "La Vanguardia"
       ],
       "editorial_coincidencias": 0
     },
@@ -1771,6 +2709,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "El PSOE se aferra a un milagro en la \"España periférica\" mientras asume \"la fortaleza de PP y Vox\"",
+      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/24/6b05f94821efa094338b4587.html",
+      "date": "2026-11-24T21:53:43+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Juno House reúne a más de cien profesionales para impulsar el liderazgo femenino en las empresas",
       "link": "https://www.abc.es/espana/cataluna/juno-house-reune-cien-profesionales-impulsar-liderazgo-20261124225329-nt.html",
       "date": "2026-11-24T21:53:29+00:00",
@@ -1854,21 +2809,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El PSOE duda en el final de campaña: asume \"la fortaleza de PP y Vox\" mientras se aferra a un milagro en la \"España periférica\"",
-      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/24/6b05f94821efa094338b4587.html",
-      "date": "2026-11-24T21:52:34+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Manchester City 2-2 Nápoles: goles, resumen y resultado",
       "link": "https://as.com/futbol/champions/manchester-city-napoles-en-directo-champions-league-en-vivo-hoy-f202611-d/",
       "date": "2026-11-24T21:52:16+00:00",
@@ -1905,14 +2845,16 @@
       "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/24/6b05ea1d21efa03e588b4576.html",
       "date": "2026-11-24T21:49:58+00:00",
       "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
+      "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-espana",
+      "source_id": "elmundo-portada",
       "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
-      "editorial_portadas": [],
+      "editorial_portadas": [
+        "El Mundo"
+      ],
       "editorial_coincidencias": 0
     },
     {
@@ -1952,14 +2894,16 @@
       "link": "https://www.elmundo.es/economia/2026/11/24/6b058154fc6c835c2b8b4589.html",
       "date": "2026-11-24T21:48:53+00:00",
       "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
+      "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-espana",
+      "source_id": "elmundo-portada",
       "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
-      "editorial_portadas": [],
+      "editorial_portadas": [
+        "El Mundo"
+      ],
       "editorial_coincidencias": 0
     },
     {
@@ -1969,54 +2913,24 @@
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
+      "source_id": "elmundo-portada",
+      "category": "Sociedad",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [
         "El Mundo"
       ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "María Corina Machado: \"La verdad de los negocios oscuros del chavismo con España se sabrá y será peor\"",
-      "link": "https://www.elmundo.es/internacional/2026/11/24/6b05e07ae85ecea73c8b45a0.html",
-      "date": "2026-11-24T21:46:22+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
       "editorial_coincidencias": 0
     },
     {
       "title": "La década del prodigioso hundimiento de las 'izquierdas Podemos': mil guerras y sin proyecto nacional hasta la puntilla de Sánchez",
       "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/24/6b05bd62fdddffba288b45a1.html",
-      "date": "2026-11-24T21:46:10+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Desbordado de cayucos el puerto de El Hierro: tantos inmigrantes como habitantes en menos de un mes",
-      "link": "https://www.elmundo.es/espana/2026/11/24/6b05f20121efa017398b4587.html",
-      "date": "2026-11-24T21:45:10+00:00",
+      "date": "2026-11-24T21:46:11+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-espana",
+      "source_id": "elmundo-portada",
       "category": "Política nacional",
       "place": "",
       "classification_version": 6,
@@ -2024,21 +2938,6 @@
       "editorial_portadas": [
         "El Mundo"
       ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Bienvenidos a Kourou, el puerto espacial desde el que Bezos desafía a Musk: \"Nuestro objetivo es realizar 9 o 10 despegues anuales a partir de 2027\"",
-      "link": "https://www.elmundo.es/papel/historias/2026/11/24/6b05955921efa085418b45a7.html",
-      "date": "2026-11-24T21:41:24+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-ciencia",
-      "category": "Ciencia",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
       "editorial_coincidencias": 0
     },
     {
@@ -2050,36 +2949,6 @@
       "source": "20minutos",
       "source_id": "20minutos-portada",
       "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Los pecados originales del controvertido (no) bulevar de Alcalá: un render a destiempo que alimenta la oposición, el aval de la Unesco y el 'empujón' de Ayuso",
-      "link": "https://www.elmundo.es/madrid/2026/11/24/6b05f805e9cf4a81718b456e.html",
-      "date": "2026-11-24T21:40:32+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Posible alineación del Barça ante el Sabah: Fermín y diez más",
-      "link": "https://as.com/futbol/champions/posible-alineacion-del-barca-ante-el-sabah-fermin-y-diez-mas-f202611-n/",
-      "date": "2026-11-24T21:33:25+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-futbol",
-      "category": "Fútbol",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -2272,7 +3141,7 @@
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-portada",
+      "source_id": "elmundo-internacional",
       "category": "Internacional",
       "place": "",
       "classification_version": 6,
@@ -2330,21 +3199,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Un Bicho, un escupitajo y un Puskás",
-      "link": "https://as.com/futbol/internacional/un-bicho-un-gapo-y-un-puskas-f202611-n/",
-      "date": "2026-11-24T21:02:25+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-futbol",
-      "category": "Fútbol",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Rueda se abraza a la prudencia y llama a la movilización para «vaciar la Moncloa de Sánchez y sus socios»",
       "link": "https://www.abc.es/espana/galicia/rueda-abraza-prudencia-llama-movilizacion-vaciar-moncloa-20261124220218-nt.html",
       "date": "2026-11-24T21:02:18+00:00",
@@ -2385,38 +3239,6 @@
       "source": "Xataka",
       "source_id": "xataka-general",
       "category": "Tecnología",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Así fue el lanzamiento del Arianne 6 con 36 nuevos satélites de la red de Amazon Leo",
-      "link": "https://www.elmundo.es/papel/historias/2026/11/24/6b05e6a6fc6c83a2118b4590-video.html",
-      "date": "2026-11-24T21:00:00+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Sergio Arribas se convierte en el máximo goleador del Almería en el fútbol profesional",
-      "link": "https://as.com/futbol/segunda/sergio-arribas-se-convierte-en-el-maximo-goleador-del-almeria-en-el-futbol-profesional-f202611-n/",
-      "date": "2026-11-24T20:55:46+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-futbol",
-      "category": "Fútbol",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -2516,23 +3338,6 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La Bonoloto: comprobar resultado y premios del sorteo del martes 24 de noviembre de 2026",
-      "link": "https://www.elmundo.es/loterias/2026/11/24/6b05f75621efa0b23c8b45b2.html",
-      "date": "2026-11-24T20:45:20+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
       ],
       "editorial_coincidencias": 0
     },
@@ -2650,91 +3455,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "La FAPE irrumpe en el conflicto entre Silvia Intxaurrondo y la Junta Electoral: \"Es una respuesta desproporcionada\"",
-      "link": "https://www.elmundo.es/television/2026/11/24/6b05f2ee21efa0ae248b4591.html",
-      "date": "2026-11-24T20:33:46+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La historia de Billie Jean King: la bulimia, la \"batalla de los sexos\" y la revelación de su orientación sexual. \"Nací para cambiar el mundo\"",
-      "link": "https://www.elmundo.es/loc/celebrities/2026/11/24/6b056a13fdddffe3308b458a.html",
-      "date": "2026-11-24T20:31:45+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La insólita aparición en una alfombra roja del protagonista de RoboCop: su nueva vida tras abandonar Hollywood, casarse casi a los 60 y doctorarse",
-      "link": "https://www.elmundo.es/loc/que-fue-de/2026/11/24/6b05772bfc6c83c7228b456d.html",
-      "date": "2026-11-24T20:31:44+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Hacia las monarquías-rollo",
-      "link": "https://www.elmundo.es/loc/famosos/2026/11/24/6b05a014fdddff307d8b456d.html",
-      "date": "2026-11-24T20:31:43+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Elettra Lamborghini: \"En mi país ya he hecho muchas cosas y ahora necesito hacer un poco de desmadre en España. Quiero crear problemas, quiero crear peleas\"",
-      "link": "https://www.elmundo.es/loc/celebrities/2026/11/24/6b057e90fc6c8312238b4574.html",
-      "date": "2026-11-24T20:31:43+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Algunas señales silenciosas podrían alertarte de un infarto hasta treinta años antes de sufrirlo",
       "link": "https://www.20minutos.es/salud/algunas-senales-silenciosas-podrian-alertarte-un-infarto-hasta-30-anos-antes-sufrirlo_7065335_0.html",
       "date": "2026-11-24T20:31:36+00:00",
@@ -2814,6 +3534,21 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Sánchez mete a Loles León y a Serrat en campaña tras el apoyo de Bardem y otras personalidades de la cultura a Frente Amplio",
+      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/24/6b05d44c21efa0d9778b456d.html",
+      "date": "2026-11-24T20:20:33+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-espana",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "La acusación del caso Sendaviva pide investigar si Elma Saiz era consejera de la empresa que adjudicó los contratos troceados",
       "link": "https://www.elespanol.com/espana/politica/20261124/acusacion-caso-sendaviva-pide-investigar-elma-saiz-consejera-empresa-adjudico-contratos-troceados/1003744471012_0.html",
       "date": "2026-11-24T20:19:26+00:00",
@@ -2861,7 +3596,7 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Sonsoles Ónega, espantada ante la receta de Samantha Vallejo-Nágera",
+      "title": "Sonsoles Ónega no puede disimular su espanto ante la receta de Samantha Vallejo-Nágera: \"¡Me voy a morir!\"",
       "link": "https://www.20minutos.es/television/sonsoles-onega-no-puede-disimular-su-espanto-ante-receta-samantha-vallejo-nagera-me-voy-morir_7065344_0.html",
       "date": "2026-11-24T20:16:28+00:00",
       "publication_date_madrid": "2026-11-24",
@@ -3313,6 +4048,21 @@
       "editorial_coincidencias": 1
     },
     {
+      "title": "Feijóo enarbola la bandera del feminismo para disputar al PSOE el voto de las mujeres: \"No habrá sitio para quien ejerza la violencia contra ellas\"",
+      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/24/6b05c9e621efa046268b4573.html",
+      "date": "2026-11-24T19:41:18+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-espana",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Alegría en un zoo de Brasil: nace Hope, el primer polluelo de una especie de guacamayo casi extinta",
       "link": "https://www.20minutos.es/internacional/alegria-un-zoo-brasil-nace-hope-primer-polluelo-una-especie-guacamayo-casi-extinta_7065370_0.html",
       "date": "2026-11-24T19:40:09+00:00",
@@ -3528,6 +4278,21 @@
       "source": "20minutos",
       "source_id": "20minutos-portada",
       "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Los drones a reacción trasladan la guerra al oeste de Ucrania",
+      "link": "https://www.elmundo.es/internacional/2026/11/24/6b0432efe9cf4a96248b4583.html",
+      "date": "2026-11-24T19:25:17+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-internacional",
+      "category": "Conflictos",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -4322,6 +5087,21 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "El 'cachorro' de ETA que ejecutó con su escopeta de caza a dos ertzainas en Itsasondo cumple su condena tras 25 años en prisión",
+      "link": "https://www.elmundo.es/pais-vasco/2026/11/24/6b05c120e85eceb4668b456d.html",
+      "date": "2026-11-24T18:28:26+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-espana",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "China investiga al jefe del Partido Comunista en Shanghái, uno de los dirigentes con más proyección del país",
       "link": "https://elpais.com/internacional/2026-11-24/china-investiga-al-jefe-del-partido-comunista-en-shanghai-uno-de-los-dirigentes-con-mas-proyeccion-del-pais.html",
       "date": "2026-11-24T18:28:09+00:00",
@@ -4604,40 +5384,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Trump se enfrenta a republicanos y demócratas por la vuelta de Jensen Huang a Nvidia",
-      "link": "https://www.abc.es/internacional/trump-enfrenta-republicanos-democratas-jensen-huang-20261124190641-nt.html",
-      "date": "2026-11-24T18:06:41+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Isabel Rodríguez aborda con Hydnum Steel su papel en la construcción de vivienda industrializada",
-      "link": "https://www.abc.es/espana/castilla-la-mancha/isabel-rodriguez-aborda-hydnum-steel-papel-construccion-20261124190539-nt.html",
-      "date": "2026-11-24T18:05:40+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El Gobierno niega intenciones electoralistas en la cascada de decretos antes del 29-N: \"Estamos legislando con normalidad\"",
       "link": "https://www.20minutos.es/nacional/gobierno-niega-intenciones-electoralistas-cascada-decretos-antes-29-n-estamos-legislando-con-normalidad_7065274_0.html",
       "date": "2026-11-24T18:04:19+00:00",
@@ -4646,6 +5392,21 @@
       "source": "20minutos",
       "source_id": "20minutos-portada",
       "category": "Sociedad",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El presidente de las Cortes de Castilla-La Mancha rapea por la infancia con gorra y gafas: \"Hagamos los discursos rapeando, bro\"",
+      "link": "https://www.elmundo.es/espana/2026/11/24/6b05cacde85ece1c448b456d.html",
+      "date": "2026-11-24T18:03:33+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-espana",
+      "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -4665,23 +5426,6 @@
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "'El juego' de María José Llergo llega al Teatro de la Maestranza",
-      "link": "https://www.abc.es/queplan/sevilla/conciertos/juego-maria-jose-llergo-llega-teatro-maestranza-20261124190302-nts.html",
-      "date": "2026-11-24T18:03:02+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Cultura",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
-      ],
       "editorial_coincidencias": 0
     },
     {
@@ -4743,74 +5487,6 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Blanca Paloma y Cayetana Guillén Cuervo, entre otros, se convierten en cantantes de ópera",
-      "link": "https://www.abc.es/cultura/musica/blanca-paloma-cayetana-guillen-cuervo-convierten-cantantes-20261124185934-nt.html",
-      "date": "2026-11-24T17:59:34+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Cultura",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Nevenka Fernández recibe la Encomienda de la Orden del Mérito Civil",
-      "link": "https://www.abc.es/espana/castilla-leon/nevenka-fernandez-recibe-encomienda-orden-merito-civil-20261124185834-nt.html",
-      "date": "2026-11-24T17:58:35+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Mazón pide un año y medio de prisión a una profesora por amenazas tras la dana",
-      "link": "https://www.abc.es/espana/comunidad-valenciana/mazon-pide-ano-medio-prision-profesora-amenazas-20261124185832-nt.html",
-      "date": "2026-11-24T17:58:32+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Frente Amplio apuesta por aliviar el «infierno burocrático» de los autónomos y blindar el pequeño comercio",
-      "link": "https://www.abc.es/espana/castilla-la-mancha/toledo/frente-amplio-apuesta-aliviar-infierno-burocratico-autonomos-20261124185720-nt.html",
-      "date": "2026-11-24T17:57:21+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "ABC",
-      "source_id": "abc-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "ABC"
       ],
       "editorial_coincidencias": 0
     },
@@ -5011,21 +5687,6 @@
       "source": "20minutos",
       "source_id": "20minutos-portada",
       "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Un confidente marroquí declara a la juez que el día antes de la oleada avisó a la Delegación del Gobierno de la acumulación de personas, pero no de una entrada \"masiva\"",
-      "link": "https://www.elmundo.es/espana/2026/11/24/6b05c881fdddffb43c8b459b.html",
-      "date": "2026-11-24T17:34:00+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Sucesos",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -5542,8 +6203,8 @@
       "date": "2026-11-24T16:57:40+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
       "category": "Economía",
       "place": "",
       "classification_version": 6,
@@ -6148,21 +6809,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "La suegra de Tamara Falcó recibe un premio por su trayectoria empresarial",
-      "link": "https://www.20minutos.es/gente/suegra-tamara-falco-recibe-una-condecoracion-por-su-trayectoria-empresarial_7065269_0.html",
-      "date": "2026-11-24T16:23:30+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "“Más tiempo de estudio no significa más aprendizaje”: por qué el ejercicio ayuda a mejorar el rendimiento académico",
       "link": "https://www.eldiario.es/consumoclaro/tiempo-estudio-no-significa-aprendizaje-ejercicio-ayuda-mejorar-rendimiento-academico-xp_1_13686659.html",
       "date": "2026-11-24T16:21:23+00:00",
@@ -6255,36 +6901,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Sánchez entrega a Nevenka Fernández la Encomienda de la Orden del Mérito Civil: \"Es un regalo a la memoria y la dignidad\"",
-      "link": "https://www.20minutos.es/castilla-y-leon/leon/nevenka-fernandez-recibe-encomienda-orden-merito-civil-es-un-regalo-colectivo-memoria-dignidad_7065243_0.html",
-      "date": "2026-11-24T16:12:19+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La plataforma Tidal prohibirá la música generada completamente por inteligencia artificial",
-      "link": "https://www.20minutos.es/musica/plataforma-tidal-prohibira-musica-generada-completamente-por-inteligencia-artificial_7065264_0.html",
-      "date": "2026-11-24T16:11:48+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "IA",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Estrasburgo avisa: que un país use a migrantes para presionar a otro no es excusa para vulnerar sus derechos",
       "link": "https://www.eldiario.es/desalambre/estrasburgo-avisa-pais-use-migrantes-presionar-no-excusa-vulnerar-derechos_1_13689203.html",
       "date": "2026-11-24T16:09:18+00:00",
@@ -6293,36 +6909,6 @@
       "source": "elDiario.es",
       "source_id": "eldiario-portada",
       "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "¿Qué se sabe del estudiante español de 22 años detenido por el ICE? Estados Unidos alega problemas en el visado",
-      "link": "https://www.20minutos.es/cataluna/barcelona/que-se-sabe-estudiante-espanol-detenido-por-ice-eeuu-alega-problemas-con-visado-su-abogada-denuncia-trato-criminal_7065064_0.html",
-      "date": "2026-11-24T16:08:15+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "Sucesos",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "EEUU notifica la primera muerte humana en el mundo por gripe aviar vinculada al contacto con ganado lechero",
-      "link": "https://www.20minutos.es/internacional/eeuu-notifica-primera-muerte-humana-mundo-por-gripe-aviar-vinculada-contacto-con-ganado-lechero-infectado_7065261_0.html",
-      "date": "2026-11-24T16:07:49+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "Internacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -6353,21 +6939,6 @@
       "source": "Directo al Paladar",
       "source_id": "directopaladar-general",
       "category": "Educación",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Aagesen facilita el autoconsumo colectivo y regula las comunidades energéticas en el último Consejo de Ministros",
-      "link": "https://www.20minutos.es/nacional/aagesen-facilita-autoconsumo-colectivo-regula-las-comunidades-energeticas-ultimo-consejo-ministros-antes-29-n_7065132_0.html",
-      "date": "2026-11-24T16:02:29+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "20minutos",
-      "source_id": "20minutos-portada",
-      "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -6775,21 +7346,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Un campeón en crisis y un aspirante lanzado inician el Mundial de ajedrez en Ginebra",
-      "link": "https://elpais.com/ajedrez/actualidad/2026-11-24/un-campeon-en-crisis-y-un-aspirante-lanzado-inician-el-mundial-de-ajedrez-en-ginebra.html",
-      "date": "2026-11-24T15:25:12+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-deportes",
-      "category": "Deportes",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El PP vuelve a usar la IA para \"vestir\" a Sánchez con la camiseta de la selección de Marruecos",
       "link": "https://www.eldiario.es/rastreador/pp-vuelve-ia-vestir-sanchez-camiseta-seleccion-marruecos_132_13689808.html",
       "date": "2026-11-24T15:17:15+00:00",
@@ -6859,8 +7415,8 @@
       "date": "2026-11-24T15:04:10+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
       "category": "Economía",
       "place": "",
       "classification_version": 6,
@@ -7037,7 +7593,7 @@
       "editorial_portadas": [
         "La Vanguardia"
       ],
-      "editorial_coincidencias": 1
+      "editorial_coincidencias": 0
     },
     {
       "title": "El colegio Decroly en Chamberí anuncia su cierre por falta de “relevo generacional familiar”",
@@ -7518,21 +8074,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Miguel Ángel Gil Marín dimite como vicepresidente de LaLiga",
-      "link": "https://elpais.com/deportes/futbol/2026-11-24/miguel-angel-gil-marin-dimite-como-vicepresidente-de-laliga.html",
-      "date": "2026-11-24T13:43:00+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-deportes",
-      "category": "Fútbol",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 2
-    },
-    {
       "title": "Viñales no estará en Valencia",
       "link": "https://as.com/motor/motociclismo/vinales-no-estara-en-valencia-f202611-n/",
       "date": "2026-11-24T13:40:45+00:00",
@@ -7916,8 +8457,8 @@
       "date": "2026-11-24T13:00:13+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
       "category": "Economía",
       "place": "",
       "classification_version": 6,
@@ -7973,21 +8514,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Un centenar de veteranos socialistas sevillanos muestran su apoyo a Sánchez en respuesta al voto en blanco de Felipe González",
-      "link": "https://elpais.com/espana/elecciones-generales/2026-11-24/un-centenar-de-veteranos-socialistas-sevillanos-muestran-su-apoyo-a-sanchez-en-respuesta-al-voto-en-blanco-de-felipe-gonzalez.html",
-      "date": "2026-11-24T12:58:11+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-espana",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "La participación en los consulados se dispara con el coladero de la 'ley de nietos': urnas de cartón y colas de horas",
       "link": "https://www.elespanol.com/espana/politica/20261124/participacion-consulados-dispara-coladero-ley-nietos-urnas-carton-colas-horas/1003744469908_0.html",
       "date": "2026-11-24T12:57:15+00:00",
@@ -8001,23 +8527,6 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "El Español"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Muere en el hospital el narco colombiano tiroteado en un garaje de Madrid",
-      "link": "https://www.lavanguardia.com/local/madrid/20261124/11692232/muere-hospital-narco-colombiano-tiroteado-garaje-madrid.html",
-      "date": "2026-11-24T12:56:04+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Salud",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
       ],
       "editorial_coincidencias": 0
     },
@@ -8067,23 +8576,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Detenidos dos jóvenes por violar a una menor en un coche junto a una discoteca en Lleida",
-      "link": "https://www.lavanguardia.com/local/lleida/20261124/11692206/detenidos-dos-jovenes-violar-menor-coche-discoteca-lleida.html",
-      "date": "2026-11-24T12:43:12+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Miguel Ángel Gil Marín dimite como vicepresidente de LaLiga por la financiación de Tebas a la Unión de Clubes Europeos",
       "link": "https://www.elespanol.com/deportes/futbol/20261124/gil-marin-dimite-vicepresidente-laliga-financiacion-tebas-union-clubes-europeos-rival-efc/1003744470158_0.html",
       "date": "2026-11-24T12:42:37+00:00",
@@ -8098,7 +8590,7 @@
       "editorial_portadas": [
         "El Español"
       ],
-      "editorial_coincidencias": 1
+      "editorial_coincidencias": 0
     },
     {
       "title": "\"Va a ser una locura\": Elon Musk advierte de que el atasco en los centros de datos dejará a la IA sin dinero para pagar sus deudas",
@@ -8191,23 +8683,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Las inmobiliarias valencianas constatan la “pérdida de dinamismo” en el mercado",
-      "link": "https://www.lavanguardia.com/local/valencia/20261124/11692194/inmobiliarias-valencianas-constatan-perdida-dinamismo-mercado.html",
-      "date": "2026-11-24T12:29:44+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "La jefa de los Rochos insiste a Pedraz que Sáenz de Tejada le habló de \"eliminar\" a Biedma pero no guarda pruebas",
       "link": "https://www.eldiario.es/politica/jefa-rochos-insiste-pedraz-saenz-tejada-le-hablo-eliminar-biedma-no-guarda-pruebas_1_13688243.html",
       "date": "2026-11-24T12:28:38+00:00",
@@ -8253,23 +8728,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El Gobierno pone por primera vez topes a los intereses de los créditos rápidos al consumo",
-      "link": "https://www.lavanguardia.com/economia/20261124/11692185/gobierno-pone-topes-intereses-creditos-consumo.html",
-      "date": "2026-11-24T12:22:25+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El Gobierno echa el resto en el último Consejo de Ministros antes de las elecciones con una cascada de medidas sociales",
       "link": "https://www.eldiario.es/economia/ultimo-consejo-ministros-elecciones-da-luz-verde-gran-paquete-permisos-ayudas-impuesto-banca_1_13688755.html",
       "date": "2026-11-24T12:22:05+00:00",
@@ -8282,23 +8740,6 @@
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La liga saudí sopesa elevar al menos a 14 el cupo de extranjeros para dar un salto de calidad",
-      "link": "https://www.lavanguardia.com/deportes/futbol/20261124/11692179/liga-saudi-sopesa-elevar-14-cupo-extranjeros-dar-salto-calidad.html",
-      "date": "2026-11-24T12:09:29+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Fútbol",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
       "editorial_coincidencias": 0
     },
     {
@@ -8514,23 +8955,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "¿Hamburguesa al punto? “Una barbaridad desde el punto de vista de la seguridad alimentaria”",
-      "link": "https://www.lavanguardia.com/vida/20261124/11692130/hamburguesa-punto-barbaridad-punto-vista-seguridad-alimentaria.html",
-      "date": "2026-11-24T12:01:26+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Los buenos resultados de las energéticas disparan los beneficios de las empresas un 36%, según el Banco de España",
       "link": "https://www.eldiario.es/economia/buenos-resultados-energeticas-disparan-beneficios-empresas-36-banco-espana_1_13688760.html",
       "date": "2026-11-24T12:01:20+00:00",
@@ -8546,81 +8970,13 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Las empresas ganaron un 35% más e ingresaron un 10% más hasta septiembre",
-      "link": "https://www.lavanguardia.com/economia/20261124/11691901/empresas-ganaron-35-mas-e-ingresaron-10-mas-septiembre.html",
-      "date": "2026-11-24T12:00:00+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Empresas",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Aprobada 'in extremis' la rebaja de ratios en infantil y bachillerato",
-      "link": "https://www.lavanguardia.com/vida/20261124/11692149/educadoras-infantiles-tendran-cargo-cuatro-bebes-menores-ano-maximo.html",
-      "date": "2026-11-24T11:59:02+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "El Gobierno acude a los mercados financieros para costear las dos desalinizadoras catalanas",
-      "link": "https://www.lavanguardia.com/natural/20261124/11692153/gobierno-acudira-mercados-financieros-costear-desalinizadoras-catalanas.html",
-      "date": "2026-11-24T11:58:35+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Desmantelan una gran plantación de marihuana en un bosque del Pirineo aragonés",
-      "link": "https://www.lavanguardia.com/local/aragon/20261124/11692158/desmantelan-gran-plantacion-marihuana-bosque-pirineo-aragones.html",
-      "date": "2026-11-24T11:57:29+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "La Vanguardia",
-      "source_id": "lavanguardia-portada",
-      "category": "Naturaleza",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El Gobierno remodela el impuesto a la banca para obligar a destinar los 1.400 millones de recaudación a la vivienda",
       "link": "https://elpais.com/economia/2026-11-24/el-gobierno-remodela-el-impuesto-a-la-banca-para-obligar-a-repartir-los-1400-millones-de-recaudacion-en-la-conferencia-sectorial-de-vivienda.html",
       "date": "2026-11-24T11:55:01+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
       "category": "Economía",
       "place": "",
       "classification_version": 6,
@@ -8846,8 +9202,8 @@
       "date": "2026-11-24T11:37:02+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-economia",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
       "category": "Economía",
       "place": "",
       "classification_version": 6,
@@ -9909,21 +10265,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El alto cargo de Mazón investigado por la filtración del audio manipulado de Aemet en la dana señala a Pradas",
-      "link": "https://www.eldiario.es/comunitat-valenciana/alto-cargo-mazon-investigado-filtracion-audio-aemet-senala-pradas_1_13688341.html",
-      "date": "2026-11-24T09:59:49+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Diez años del concepto que revolucionó la oficina bancaria",
       "link": "https://elpais.com/economia/2026-11-24/diez-anos-del-concepto-que-revoluciono-la-oficina-bancaria.html",
       "date": "2026-11-24T09:59:33+00:00",
@@ -10016,21 +10357,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Ni los cactus se libran del cambio climático: un estudio advierte de que están gravemente amenazados",
-      "link": "https://www.eldiario.es/spin/cactus-libran-cambio-climatico-estudio-advierte-gravemente-amenazados-pm_1_13688250.html",
-      "date": "2026-11-24T09:46:08+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Medio ambiente",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Se olvidan del mantenimiento… y dejan a oscuras el Commanders - Bengals",
       "link": "https://www.marca.com/nfl/2026/11/24/olvidan-mantenimiento-dejan-oscuras-commanders-bengals.html",
       "date": "2026-11-24T09:45:42+00:00",
@@ -10054,21 +10380,6 @@
       "source": "Hipertextual",
       "source_id": "hipertextual-general",
       "category": "Tecnología",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Nuevo choque entre los gobiernos de Page y Sánchez por la ley que permite a los municipios vetar el biometano",
-      "link": "https://www.eldiario.es/castilla-la-mancha/social/nuevo-choque-page-sanchez-ley-permite-municipios-vetar-biometano_1_13688219.html",
-      "date": "2026-11-24T09:43:30+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -10324,21 +10635,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El ICE de EEUU detiene a un estudiante catalán de 22 años que, según su abogada, tenía el visado en vigor",
-      "link": "https://www.eldiario.es/catalunya/policia-migratoria-eeuu-detiene-estudiante-catalan-22-anos-abogada-tenia-visado-vigor_1_13688163.html",
-      "date": "2026-11-24T09:14:30+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Sociedad",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Ayuso responde a Sánchez por recurrir la ley madrileña del no nacido: vuelve a usar el aborto con las \"mismas monsergas\"",
       "link": "https://www.elespanol.com/madrid/comunidad/20261124/ayuso-acusa-sanchez-volver-utilizar-aborto-eutanasia-mismas-monsergas-no-no-da-verguenza/1003744469589_0.html",
       "date": "2026-11-24T09:12:12+00:00",
@@ -10435,21 +10731,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "La Justicia condena a la Junta de Castilla y León por tardar un año y cuatro meses en diagnosticar un cáncer de pulmón",
-      "link": "https://www.eldiario.es/castilla-y-leon/tribunales/justicia-condena-junta-castilla-leon-tardar-ano-cuatro-meses-diagnosticar-cancer-pulmon_1_13688074.html",
-      "date": "2026-11-24T09:02:47+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Sucesos",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Confirmado por el BOE: los propietarios de viviendas necesitan una visita técnica para el certificado energético",
       "link": "https://www.elblogsalmon.com/vivienda/confirmado-boe-propietarios-viviendas-necesitan-visita-tecnica-para-certificado-energetico",
       "date": "2026-11-24T09:00:50+00:00",
@@ -10525,21 +10806,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Los arqueólogos creen haber encontrado en Turquía la tumba de Áyax, uno de los grandes guerreros de la guerra de Troya",
-      "link": "https://www.eldiario.es/spin/arqueologos-creen-haber-encontrado-turquia-tumba-ayax-grandes-guerreros-guerra-troya-pm_1_13682220.html",
-      "date": "2026-11-24T09:00:31+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Conflictos",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El Dépor confía en el ‘break even’ en 2026-27 tras apostar 12 millones al ascenso a Primera",
       "link": "https://www.marca.com/sport-business/2playbook/2026/11/24/depor-confia-break-even-2026-27-apostar-12-millones-ascenso-primera.html",
       "date": "2026-11-24T09:00:15+00:00",
@@ -10569,21 +10835,6 @@
       "editorial_portadas": [
         "El Español"
       ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "El Gobierno amplía una semana más hasta las 20 los permisos por nacimiento",
-      "link": "https://www.eldiario.es/economia/gobierno-eleva-20-semanas-permiso-nacimiento-34-semanas-familias-monomarentales_1_13688066.html",
-      "date": "2026-11-24T08:55:52+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "elDiario.es",
-      "source_id": "eldiario-portada",
-      "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
       "editorial_coincidencias": 0
     },
     {
@@ -10863,21 +11114,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "En 1990, un hombre descubrió una cueva donde cabían 15 pirámides de Guiza. Lo más insólito es que después la perdió, y tardó 18 años en encontrarla",
-      "link": "https://www.xataka.com/magnet/1990-hombre-descubrio-cueva-donde-cabian-15-piramides-guiza-insolito-que-despues-perdio-tardo-18-anos-encontrarla",
-      "date": "2026-11-24T08:00:54+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "Xataka",
-      "source_id": "xataka-general",
-      "category": "Tecnología",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "EFPA crea una certificación para profesionales que informan sobre criptoactivos",
       "link": "https://www.expansion.com/mercados/criptomonedas/2026/11/24/efpa-crea-certificacion-profesionales-informan-sobre-criptoactivos.html",
       "date": "2026-11-24T08:00:20+00:00",
@@ -11047,21 +11283,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Trump y Xi acuerdan mantener a los humanos al mando de la IA militar",
-      "link": "https://www.elmundo.es/internacional/2026/11/22/6b016f05fc6c833b4d8b456e.html",
-      "date": "2026-11-24T07:13:53+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El cambio de vida de Jutta Leerdam tras ser la reina viral de los Juegos Olímpicos de Invierno",
       "link": "https://www.marca.com/deportes-invierno/album/2026/11/24/cambio-vida-jutta-leerdam-reina-viral-juegos-olimpicos-invierno.html",
       "date": "2026-11-24T07:01:44+00:00",
@@ -11085,51 +11306,6 @@
       "source": "El Blog Salmón",
       "source_id": "elblogsalmon-general",
       "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Hace casi 30 años encontramos vida dentro del sarcófago de Chernóbil. Hoy es la clave para degradar pesticidas y agentes nerviosos",
-      "link": "https://www.xataka.com/ecologia-y-naturaleza/hace-casi-30-anos-encontramos-vida-dentro-sarcofago-chernobil-hoy-clave-para-degradar-pesticidas-agentes-nerviosos",
-      "date": "2026-11-24T07:00:50+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "Xataka",
-      "source_id": "xataka-general",
-      "category": "Tecnología",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Rescatan a un hombre de 74 años con Alzheimer tras sobrevivir 11 días en el Amazonas",
-      "link": "https://www.elmundo.es/internacional/2026/11/24/6b053495fdddff175c8b4592.html",
-      "date": "2026-11-24T06:54:17+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Salud",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "El Papa Francisco aseguró en su diario personal que vio al diablo",
-      "link": "https://www.elmundo.es/internacional/2026/11/24/6b053224e85ecea73c8b457e.html",
-      "date": "2026-11-24T06:46:05+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Internacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -11167,21 +11343,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Una nueva ley permite a los australianos denunciar a las redes sociales y desactivar sus algoritmos",
-      "link": "https://www.elmundo.es/internacional/2026/11/24/6b052f57fc6c83da638b45ab.html",
-      "date": "2026-11-24T06:32:26+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Marcos Llorente da de comer caviar a su hija",
       "link": "https://www.marca.com/futbol/atletico/2026/11/24/marcos-llorente-le-da-comer-caviar-hija-unica-capaz-hacerme-disfrutar-quitandome-media-lata-video.html",
       "date": "2026-11-24T06:30:32+00:00",
@@ -11194,23 +11355,6 @@
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Un atentado con coche bomba en el centro de Colombia deja al menos 23 heridos y graves daños materiales",
-      "link": "https://www.elmundo.es/internacional/2026/11/24/6b052de121efa0bb1e8b457e.html",
-      "date": "2026-11-24T06:25:41+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Conflictos",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
       "editorial_coincidencias": 0
     },
     {
@@ -11267,21 +11411,6 @@
       "source": "MARCA",
       "source_id": "marca-portada",
       "category": "Deportes",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Lidl tiene hoy (y rebajada por Black Friday) esta freidora de aire Philips ideal para cocinas pequeñas",
-      "link": "https://www.xataka.com/seleccion/lidl-tiene-hoy-rebajada-black-friday-esta-freidora-aire-philips-ideal-para-cocinas-pequenas",
-      "date": "2026-11-24T06:16:48+00:00",
-      "publication_date_madrid": "2026-11-24",
-      "date_source": "rss_published",
-      "source": "Xataka",
-      "source_id": "xataka-general",
-      "category": "Tecnología",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -11424,6 +11553,51 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Alemania planea poner fin al carbón empleando más centrales de gas para garantizar el suministro eléctrico",
+      "link": "https://elpais.com/economia/2026-11-24/alemania-planea-poner-fin-al-carbon-empleando-mas-centrales-de-gas-para-garantizar-el-suministro-electrico.html",
+      "date": "2026-11-24T04:45:01+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Vía de urgencia para una necesaria ley de crédito al consumo",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-24/via-de-urgencia-para-una-necesaria-ley-de-credito-al-consumo.html",
+      "date": "2026-11-24T04:40:00+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Las claves: la IA y los centros de datos están en revisión desde septiembre",
+      "link": "https://cincodias.elpais.com/opinion/2026-11-24/las-claves-la-ia-y-los-centros-de-datos-estan-en-revision-desde-septiembre.html",
+      "date": "2026-11-24T04:40:00+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "Citi: “Una política restrictiva con la inmigración es el mayor riesgo para el PIB” en un Gobierno de PP y Vox",
       "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-24/citi-una-politica-restrictiva-con-la-inmigracion-es-el-mayor-riesgo-para-el-pib-en-un-gobierno-de-pp-y-vox.html",
       "date": "2026-11-24T04:30:01+00:00",
@@ -11462,6 +11636,21 @@
       "source": "EL PAÍS",
       "source_id": "elpais-ciencia",
       "category": "Ciencia",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Los ultrarricos españoles a los que quiere gravar la izquierda: 21 milmillonarios entre 623 contribuyentes con más de 100 millones",
+      "link": "https://elpais.com/economia/2026-11-24/los-ultrarricos-espanoles-a-los-que-quiere-gravar-la-izquierda-21-milmillonarios-entre-623-contribuyentes-con-mas-de-100-millones.html",
+      "date": "2026-11-24T04:30:01+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -11544,6 +11733,21 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Los analistas se preparan para nuevos episodios de inestabilidad en un mercado más frágil",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-24/los-analistas-se-preparan-para-nuevos-episodios-de-inestabilidad-en-un-mercado-mas-fragil.html",
+      "date": "2026-11-24T04:30:01+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "En ningún sitio como en casa de Miki Leal",
       "link": "https://elpais.com/cultura/2026-11-24/en-ningun-sitio-como-en-casa-de-miki-leal.html",
       "date": "2026-11-24T04:30:01+00:00",
@@ -11559,14 +11763,29 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "La compositora Cecilia Bercovich dedica su primera ópera a las Trece Rosas fusiladas en 1939",
-      "link": "https://elpais.com/cultura/2026-11-24/la-compositora-cecilia-bercovich-dedica-su-primera-opera-a-las-trece-rosas-fusiladas-en-1939.html",
+      "title": "El mercado levanta parcialmente el castigo a Nvidia: “La reincorporación de Huang elimina el principal lastre”",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-24/el-mercado-levanta-parcialmente-el-castigo-a-nvidia-la-reincorporacion-de-huang-elimina-el-principal-lastre.html",
       "date": "2026-11-24T04:30:01+00:00",
       "publication_date_madrid": "2026-11-24",
       "date_source": "rss_published",
       "source": "EL PAÍS",
-      "source_id": "elpais-cultura",
-      "category": "Cultura",
+      "source_id": "elpais-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Mi marido tuvo que volver a nuestro país y yo sigo pagando el alquiler. ¿Puedo exigir a la casera que ponga el contrato a mi nombre?",
+      "link": "https://elpais.com/economia/vivienda/consultorio/2026-11-24/mi-marido-tuvo-que-volver-a-nuestro-pais-y-yo-sigo-pagando-el-alquiler-puedo-exigir-a-la-casera-que-ponga-el-contrato-a-mi-nombre.html",
+      "date": "2026-11-24T04:30:00+00:00",
+      "publication_date_madrid": "2026-11-24",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -12537,21 +12756,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Suspenden 18 meses al tenista colombiano Daniel Salazar por amaño de partidos y apuestas",
-      "link": "https://www.marca.com/co/2026/11/23/suspenden-18-meses-tenista-colombiano-daniel-salazar-amano-partidos-apuestas.html",
-      "date": "2026-11-23T19:48:52+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
-      "category": "Tenis",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Márquez es la cabra",
       "link": "https://as.com/opinion/marquez-es-la-cabra-f202611-n/",
       "date": "2026-11-23T19:46:27+00:00",
@@ -12559,21 +12763,6 @@
       "date_source": "rss_published",
       "source": "AS",
       "source_id": "as-motor",
-      "category": "Deportes",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "El &#039;11 ideal&#039; de De la Fuente: Almeida, José Mercé y el &quot;discurso más corto de la historia&quot;",
-      "link": "https://www.marca.com/premios/marca-leyenda/2026/11/23/11-ideal-fuente-almeida-jose-merce-discurso-corto-historia-video.html",
-      "date": "2026-11-23T19:33:34+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
       "category": "Deportes",
       "place": "",
       "classification_version": 6,
@@ -12597,21 +12786,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Emocionante discurso de De la Fuente",
-      "link": "https://www.marca.com/premios/marca-leyenda/2026/11/23/luis-fuente-hoy-dias-dificiles-describir-video-1-video.html",
-      "date": "2026-11-23T19:29:29+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
-      "category": "Deportes",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Agostini a Márquez: “Que no llegue a mis 15 y no supere a Nieto”",
       "link": "https://as.com/motor/motociclismo/agostini-a-marquez-que-no-llegue-a-mis-15-y-no-supere-a-nieto-f202611-n/",
       "date": "2026-11-23T19:27:25+00:00",
@@ -12620,36 +12794,6 @@
       "source": "AS",
       "source_id": "as-motor",
       "category": "Motor",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Luis de la Fuente: &quot;Hoy es uno de esos días difíciles de describir&quot;",
-      "link": "https://www.marca.com/premios/marca-leyenda/2026/11/23/luis-fuente-hoy-dias-dificiles-describir-video.html",
-      "date": "2026-11-23T19:26:41+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
-      "category": "Deportes",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Karanka se &#039;rinde&#039; a De la Fuente: &quot;Trabajar con él es muy fácil; te ríes, trabajas, lloras&quot;",
-      "link": "https://www.marca.com/premios/marca-leyenda/2026/11/23/karanka-rinde-fuente-trabajar-facil-te-ries-trabajas-lloras-video.html",
-      "date": "2026-11-23T19:18:30+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
-      "category": "Deportes",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -12734,21 +12878,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "El &#039;100&#039; de De la Fuente y una exclusiva nómina",
-      "link": "https://www.marca.com/premios/marca-leyenda/2026/11/23/100-fuente-exclusiva-nomina-video.html",
-      "date": "2026-11-23T18:54:55+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
-      "category": "Deportes",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Los reguladores de EEUU eligen un mal momento para reducir la transparencia sobre la remuneración de los altos directivos",
       "link": "https://www.expansion.com/economia/financial-times/2026/11/23/reguladores-eeuu-eligen-mal-momento-reducir-transparencia-sobre-remuneracion-altos-directivos.html",
       "date": "2026-11-23T18:39:03+00:00",
@@ -12757,21 +12886,6 @@
       "source": "Expansión",
       "source_id": "expansion-mercados",
       "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Aganzo: &quot;Lo más urgente es solucionar el calendario&quot;",
-      "link": "https://www.marca.com/premios/marca-leyenda/2026/11/23/aganzo-urgente-solucionar-calendar-video.html",
-      "date": "2026-11-23T18:38:54+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "MARCA",
-      "source_id": "marca-portada",
-      "category": "Deportes",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -12802,6 +12916,21 @@
       "source": "Motorpasión",
       "source_id": "motorpasion-general",
       "category": "Motor",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El Gobierno ampliará este martes el permiso de duelo por fallecimiento a 10 días",
+      "link": "https://elpais.com/economia/2026-11-23/el-gobierno-ampliara-este-martes-el-permiso-de-fallecimiento-a-10-dias.html",
+      "date": "2026-11-23T17:55:55+00:00",
+      "publication_date_madrid": "2026-11-23",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -13085,21 +13214,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Cáncer de mama metastásico: \"Si me hubieran diagnosticado este tumor hace diez años, hoy no estaría aquí\"",
-      "link": "https://www.elmundo.es/uestudio/2026/11/23/6b045b72fc6c83ee2d8b458f.html",
-      "date": "2026-11-23T15:44:50+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "news_sitemap_publication_date",
-      "source": "El Mundo",
-      "source_id": "elmundo-salud",
-      "category": "Salud",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Un hombre, en estado crítico tras recibir un disparo en la cabeza en Valdebebas",
       "link": "https://www.eldiariodemadrid.es/sociedad/sucesos-en-madrid/hombre-disparo-cabeza-parking-gimnasio-valdebebas-estado-critico/20261123161628147756.html",
       "date": "2026-11-23T15:16:28+00:00",
@@ -13163,6 +13277,36 @@
       "title": "Nvidia recupera a Jensen Huang como consejero delegado",
       "link": "https://elpais.com/economia/2026-11-23/nvidia-recupera-a-jensen-huang-como-consejero-delegado.html",
       "date": "2026-11-23T14:16:53+00:00",
+      "publication_date_madrid": "2026-11-23",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El Gobierno aprobará la limitación de los intereses del crédito al consumo en un paquete de medidas que afectan a la banca",
+      "link": "https://elpais.com/economia/2026-11-23/el-gobierno-aprobara-la-limitacion-de-los-intereses-del-credito-al-consumo-en-un-paquete-de-medidas-que-afectan-a-la-banca.html",
+      "date": "2026-11-23T13:41:21+00:00",
+      "publication_date_madrid": "2026-11-23",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "CC OO y UGT llaman a votar a la izquierda: “Lo mejor para España es reeditar el Gobierno de coalición progresista”",
+      "link": "https://elpais.com/economia/2026-11-23/cc-oo-y-ugt-llaman-a-votar-a-la-izquierda-lo-mejor-para-espana-es-reeditar-el-gobierno-de-coalicion-progresista.html",
+      "date": "2026-11-23T13:19:53+00:00",
       "publication_date_madrid": "2026-11-23",
       "date_source": "rss_published",
       "source": "Cinco Días",
@@ -13476,14 +13620,14 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "México consolida el apoyo en inteligencia de Estados Unidos contra el narco",
-      "link": "https://elpais.com/mexico/2026-11-23/mexico-consolida-el-apoyo-en-inteligencia-de-estados-unidos-contra-el-narco.html",
-      "date": "2026-11-23T09:30:00+00:00",
+      "title": "Sánchez propone un impuesto para “ultrarricos” con fortunas superiores a 100 millones de euros",
+      "link": "https://elpais.com/economia/2026-11-23/sanchez-propone-un-impuesto-para-ultrarricos-con-fortunas-superiores-a-100-millones-de-euros.html",
+      "date": "2026-11-23T09:51:45+00:00",
       "publication_date_madrid": "2026-11-23",
       "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-internacional",
-      "category": "Internacional",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -13566,36 +13710,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "¿A qué hora es el GP de Valencia de MotoGP? TV, horario y cómo ver en vivo las carreras en Cheste",
-      "link": "https://as.com/motor/motociclismo/a-que-hora-es-el-gp-de-valencia-de-motogp-tv-horario-y-como-ver-en-vivo-las-carreras-en-cheste-f202611-n/",
-      "date": "2026-11-23T08:03:39+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-motor",
-      "category": "Motor",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Proyecto Sagutxoa: el Ratoncito Pérez se alía con la computación cuántica para luchar contra las enfermedades neurodegenerativas raras",
-      "link": "https://www.elmundo.es/salud/2026/11/23/6b005dbce4d4d8be058b45be.html",
-      "date": "2026-11-23T07:47:10+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-salud",
-      "category": "Salud",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "El PSOE exige bajar los alquileres públicos en Pozuelo",
       "link": "https://www.diariodepozuelo.es/114493-el-psoe-exige-bajar-los-alquileres-publicos-en-pozuelo",
       "date": "2026-11-23T07:30:42+00:00",
@@ -13605,21 +13719,6 @@
       "source_id": "diariodepozuelo-local",
       "category": "Política nacional",
       "place": "Pozuelo de Alarcón",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "¿A qué hora es el GP de Qatar de F1? TV, horario, cómo y dónde ver la carrera en Losail en vivo",
-      "link": "https://as.com/motor/formula_1/a-que-hora-es-el-gp-de-qatar-de-f1-tv-horario-como-y-donde-ver-la-carrera-en-losail-en-vivo-f202611-n/",
-      "date": "2026-11-23T07:27:03+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-motor",
-      "category": "Motor",
-      "place": "",
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
@@ -13779,21 +13878,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Promesas electorales bajo sospecha",
-      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
-      "date": "2026-11-23T04:30:01+00:00",
-      "publication_date_madrid": "2026-11-23",
-      "date_source": "rss_published",
-      "source": "Cinco Días",
-      "source_id": "cincodias-economia",
-      "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Luciano Floridi, filósofo: “La teoría del apocalipsis de la IA es la suma de desinformación, propaganda, intereses y codicia”",
       "link": "https://elpais.com/tecnologia/2026-11-23/luciano-floridi-filosofo-la-teoria-del-apocalipsis-de-la-ia-es-la-suma-de-desinformacion-propaganda-intereses-y-codicia.html",
       "date": "2026-11-23T04:30:01+00:00",
@@ -13802,6 +13886,21 @@
       "source": "EL PAÍS",
       "source_id": "elpais-tecnologia",
       "category": "Tecnología",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "Promesas electorales bajo sospecha",
+      "link": "https://elpais.com/economia/2026-11-23/promesas-electorales-bajo-sospecha.html",
+      "date": "2026-11-23T04:30:01+00:00",
+      "publication_date_madrid": "2026-11-23",
+      "date_source": "rss_published",
+      "source": "Cinco Días",
+      "source_id": "cincodias-economia",
+      "category": "Economía",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -13944,21 +14043,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Resumen del Zverev vs. Alcaraz de la final del ATP Finals",
-      "link": "https://as.com/tenis/videos/resumen-del-zverev-vs-alcaraz-de-la-final-del-atp-finals-f202611-v/",
-      "date": "2026-11-22T22:14:13+00:00",
-      "publication_date_madrid": "2026-11-22",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-tenis",
-      "category": "Tenis",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "De la máquina de Turing a la pizarra de Broncano: 167 años de locura tras el enigma matemático del millón dólares",
       "link": "https://www.elmundo.es/ciencia/2026/11/22/6b02cef8fc6c8388428b4579.html",
       "date": "2026-11-22T21:50:29+00:00",
@@ -13967,21 +14051,6 @@
       "source": "El Mundo",
       "source_id": "elmundo-ciencia",
       "category": "Ciencia",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Resumen, resultado y ganador del Alcaraz - Zverev: sigue la final de las ATP Finals 2026 hoy, en vivo",
-      "link": "https://as.com/tenis/final_atp/alcaraz-zverev-en-directo-final-de-las-atp-finals-hoy-en-vivo-online-f202611-d/",
-      "date": "2026-11-22T21:21:45+00:00",
-      "publication_date_madrid": "2026-11-22",
-      "date_source": "rss_published",
-      "source": "AS",
-      "source_id": "as-tenis",
-      "category": "Tenis",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -14122,21 +14191,6 @@
       "source": "El Mundo",
       "source_id": "elmundo-ciencia",
       "category": "Medio ambiente",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Cuatro casos de salmonelosis en el País Vasco por el consumo de huevos",
-      "link": "https://www.elmundo.es/salud/2026/11/22/6b02d94de85ece402c8b4571.html",
-      "date": "2026-11-22T12:07:25+00:00",
-      "publication_date_madrid": "2026-11-22",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-salud",
-      "category": "Salud",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
