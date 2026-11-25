@@ -82,24 +82,24 @@ def classify(title,link,default="Sociedad",tags=(),source=""):
     default=default if default in CATEGORIES else "Sociedad"
     # Desambiguar primero el significado: una palabra aislada no convierte
     # un certamen de belleza en astronomía ni una metáfora en guerra.
-    if has(t,r"\\b(?:miss universo|concurso de belleza|certamen de belleza|reina de belleza|corona de miss)\\b") or has(p,r"/(?:celebrities|famosos|gente|corazon|moda)(?:/|$)"):
+    if has(t,r"\b(?:miss universo|concurso de belleza|certamen de belleza|reina de belleza|corona de miss)\b") or has(p,r"/(?:celebrities|famosos|gente|corazon|moda)(?:/|$)"):
         return "Sociedad"
-    if has(t,r"\\b(?:presentador[ao]|expresentador[ao]|horoscopo)\\b") and not has(t,r"\\b(?:estudio cientifico|investigacion cientifica|biodiversidad)\\b"):
+    if has(t,r"\b(?:presentador[ao]|expresentador[ao]|horoscopo)\b") and not has(t,r"\b(?:estudio cientifico|investigacion cientifica|biodiversidad)\b"):
         return "Sociedad"
-    if has(t,r"\\b(?:pelicula|cineasta|director de cine|serie de netflix|serie de television|filme|film belico)\\b") or has(p,r"/(?:cinemania|cine-television|cultura/cine)(?:/|$)"):
+    if has(t,r"\b(?:pelicula|cineasta|director de cine|serie de netflix|serie de television|filme|film belico)\b") or has(p,r"/(?:cinemania|cine-television|cultura/cine)(?:/|$)"):
         return "Cultura"
-    if has(t,r"\\b(?:rehenes|secuestrad[oa]s?|secuestro)\\b") and has(t,r"\\b(?:supermercado|tienda|atracador|robo|delincuente|policia|secuestrador)\\b"):
+    if has(t,r"\b(?:rehenes|secuestrad[oa]s?|secuestro)\b") and has(t,r"\b(?:supermercado|tienda|atracador|robo|delincuente|policia|secuestrador)\b"):
         return "Sucesos"
-    if has(t,r"\\b(?:guerra de culturas|guerra de ofertas|guerra de precios|guerra comercial|guerra eterna|guerra de metaforas)\\b") and not has(t,r"\\b(?:ejercito|misiles|bombardeo|soldados)\\b"):
-        if has(t,r"\\b(?:cine|peliculas?|cineasta|director)\\b"):return "Cultura"
-        if has(t,r"\\b(?:economia|precios|ofertas|comercial)\\b"):return "Economía"
+    if has(t,r"\b(?:guerra de culturas|guerra de ofertas|guerra de precios|guerra comercial|guerra eterna|guerra de metaforas)\b") and not has(t,r"\b(?:ejercito|misiles|bombardeo|soldados)\b"):
+        if has(t,r"\b(?:cine|peliculas?|cineasta|director)\b"):return "Cultura"
+        if has(t,r"\b(?:economia|precios|ofertas|comercial)\b"):return "Economía"
         return "Sociedad"
-    if has(p,r"/(?:economia|empresas-y-economia)(?:/|$)") and has(t,r"\\b(?:fiscal|tributan|impuestos|bolsa|financiacion|mercados?|nvidia|beneficios)\\b"):
+    if has(p,r"/(?:economia|empresas-y-economia)(?:/|$)") and has(t,r"\b(?:fiscal|tributan|impuestos|bolsa|financiacion|mercados?|nvidia|beneficios)\b"):
         return "Economía"
-    if has(t,r"\\b(?:ley de bienestar animal|bienestar animal|maltrato animal)\\b"):
+    if has(t,r"\b(?:ley de bienestar animal|bienestar animal|maltrato animal)\b"):
         return "Sociedad"
     if has(p,r"/(?:cine-television)(?:/|$)"):return "Cultura"
-    if has(p,r"/(?:movilidad)(?:/|$)") and has(t,r"\\b(?:coche|vehiculo|pick.up|electrico|hibrido)\\b"):return "Motor"
+    if has(p,r"/(?:movilidad)(?:/|$)") and has(t,r"\b(?:coche|vehiculo|pick.up|electrico|hibrido)\b"):return "Motor"
     # Una noticia de declaraciones políticas sigue siendo política aunque hable
     # de salud o economía, o el RSS generalista la llame «Sociedad».
     if has(t,POLITICAL_ACTORS) or has(t,POLITICAL_INSTITUTIONS):
