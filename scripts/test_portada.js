@@ -75,7 +75,11 @@ assert(html.includes('id="last-minute-link"'),"La franja original no se conviert
 assert(!html.includes('id="last-minute-body"'),"No usar el contenedor gigante que sustituyó al diseño original");
 assert(html.includes('cover.append(makeCard(list[0],true))'),"Conservar tarjeta principal original");
 assert(html.includes('for(const a of list.slice(1,visible))bottom.append(makeCard(a))'),"Conservar tarjetas compactas originales");
-assert(html.includes('const list=eligibleToday().filter('),"La portada debe ordenar hoy sin duplicar Última hora");
+assert(html.includes('const list=eligibleForView().filter('),"Los temas deben consultar toda la edición disponible");
+assert(html.includes('if(activeTopic==="Todas")return eligibleToday();'),"La portada general debe mantener exclusivamente noticias de hoy");
+assert(html.includes('const PAGE_SIZE=20')||html.includes('const PAGE_SIZE=20,'),"Mantener páginas de 20 titulares");
+assert(html.includes('shownCount+=PAGE_SIZE'),"El botón debe cargar 20 titulares adicionales");
+assert(html.includes('activeTopic+" · Todas las disponibles'),"Indicar que el tema permite consultar noticias anteriores");
 assert(html.includes('function makeCard(a,lead=false)'),"No modificar componente original de tarjetas");
 assert(html.includes('const illustration=visual(a,lead)'),"Conservar ilustraciones de tarjetas");
 const css=fs.readFileSync("docs/portada.css","utf8");
