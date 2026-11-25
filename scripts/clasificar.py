@@ -54,10 +54,10 @@ MOTOR=r"\b(?:formula 1|formula uno|formula e|f1|f2|motogp|moto gp|motor|piloto d
 CONFLICT=r"\b(?:guerra|invasion|bombarde|bombas?|drones? (?:militares?|de ataque)|misiles?|ataques? aereos?|ofensiva militar|soldados|ejercito|tropas|rehenes|alto el fuego|armisticio|otan|nato|hamas|hezbola|combates? armados?|ataque militar|conflicto armado|ucrania|ucranianos?|ucranianas?|gaza)\b"
 EVENTS=r"\b(?:accidente|atropello|choque mortal|asesinat|homicidio|crimen|detenido|detienen|sucesos|policia|policial|herido|fallec|incendio|desaparecid|secuestro|robo|violacion|juicio|condenan|tribunal|sentencia|juez|jueza)\b"
 HEALTH=r"\b(?:salud|medicina|medico|medica|paciente|enfermedad|terapia|tratamiento|vacuna|cancer|oncolog|alzheimer|hospital|farmaco|diagnostic|cirugia|sindrome|cardiolog|diabetes|enfermer|obesidad|mortalidad|trastorno|genetic|trasplante|inmunolog)\b"
-SCIENCE=r"\b(?:cientific|investigacion cientifica|experimento|laboratorio|fisica cuantica|quimica|astronom|astrofisic|nasa|esa|espacial|exoplaneta|planeta|galaxia|universo|agujero negro|paleontolog|fosil|regolito|misiones? lunar|hallazgo cientifico|investigadores? descubren)\b"
+SCIENCE=r"\b(?:cientific|investigacion cientifica|experimento|laboratorio|fisica cuantica|quimica|astronom|astrofisic|nasa|esa|espacial|exoplaneta|planeta|galaxia|agujero negro|paleontolog|fosil|regolito|misiones? lunar|hallazgo cientifico|investigadores? descubren)\b"
 TECH=r"\b(?:tecnolog|smartphone|movil(?:es)?|iphone|ipad|android|ordenador|software|hardware|chip|procesador|robot(?:ica)?|ciberseguridad|aplicacion|apps?|internet|digital|internet|informatic|computacion|consola|videojuego|gadget)\b"
 AI=r"\b(?:inteligencia artificial|machine learning|aprendizaje automatico|modelo de lenguaje|chatgpt|openai|gemini|claude|gpt[- ]?[456]|ia generativa|red neuronal|agentes? de ia)\b"
-NATURE=r"\b(?:fauna|flora|biodiversidad|especies?|bosques?|selva|ecosistemas?|marino|ocean|ballenas?|tiburones?|lobos?|osos?|osas?|jabal[ií]es?|elefantes?|aves|pinguinos?|corales?|parque natural|jaguares?|cordilleras?|geologia|geologico|glaciares?|animales? salvajes?|caza furtiva|vida silvestre)\b"
+NATURE=r"\b(?:fauna|biodiversidad|especies?|bosques?|selva|ecosistemas?|marino|ocean|ballenas?|tiburones?|lobos?|osos?|osas?|jabal[ií]es?|elefantes?|aves|pinguinos?|corales?|parque natural|jaguares?|cordilleras?|geologia|geologico|glaciares?|animales? salvajes?|caza furtiva|vida silvestre)\b"
 CLIMATE=r"\b(?:cambio climatico|cumbre del clima|el tiempo de la semana|pronostico del tiempo|calentamiento global|emisiones de co2|emisiones de carbono|contaminacion atmosferica|descarboniz|sequias?|fenomenos meteorologicos|inundac|energias? renovables|medio ambiente|climatico|climatica|cop3[012])\b"
 ECON=r"\b(?:inflacion|pib|euribor|tipos de interes|tipos del bce|economia|economico|economica|mercado bursatil|bolsa de|cotizacion|salarios?|hipotecas?|fiscalidad|recaudacion|presupuestos?|inversiones?|crisis financiera|subida de precios|deuda publica)\b"
 BIZ=r"\b(?:empresa|empresas|companias|multinacional|ceo|startups?|emprendedor|empresari|plantilla|empleo|trabajadores|contratacion|despidos|fusion|adquisicion|financiacion|facturacion|beneficios empresariales)\b"
@@ -80,6 +80,26 @@ def classify(title,link,default="Sociedad",tags=(),source=""):
     labels=" ".join(norm(v) for v in tags if v)[:900]
     src=norm(source)
     default=default if default in CATEGORIES else "Sociedad"
+    # Desambiguar primero el significado: una palabra aislada no convierte
+    # un certamen de belleza en astronomía ni una metáfora en guerra.
+    if has(t,r"\\b(?:miss universo|concurso de belleza|certamen de belleza|reina de belleza|corona de miss)\\b") or has(p,r"/(?:celebrities|famosos|gente|corazon|moda)(?:/|$)"):
+        return "Sociedad"
+    if has(t,r"\\b(?:presentador[ao]|expresentador[ao]|horoscopo)\\b") and not has(t,r"\\b(?:estudio cientifico|investigacion cientifica|biodiversidad)\\b"):
+        return "Sociedad"
+    if has(t,r"\\b(?:pelicula|cineasta|director de cine|serie de netflix|serie de television|filme|film belico)\\b") or has(p,r"/(?:cinemania|cine-television|cultura/cine)(?:/|$)"):
+        return "Cultura"
+    if has(t,r"\\b(?:rehenes|secuestrad[oa]s?|secuestro)\\b") and has(t,r"\\b(?:supermercado|tienda|atracador|robo|delincuente|policia|secuestrador)\\b"):
+        return "Sucesos"
+    if has(t,r"\\b(?:guerra de culturas|guerra de ofertas|guerra de precios|guerra comercial|guerra eterna|guerra de metaforas)\\b") and not has(t,r"\\b(?:ejercito|misiles|bombardeo|soldados)\\b"):
+        if has(t,r"\\b(?:cine|peliculas?|cineasta|director)\\b"):return "Cultura"
+        if has(t,r"\\b(?:economia|precios|ofertas|comercial)\\b"):return "Economía"
+        return "Sociedad"
+    if has(p,r"/(?:economia|empresas-y-economia)(?:/|$)") and has(t,r"\\b(?:fiscal|tributan|impuestos|bolsa|financiacion|mercados?|nvidia|beneficios)\\b"):
+        return "Economía"
+    if has(t,r"\\b(?:ley de bienestar animal|bienestar animal|maltrato animal)\\b"):
+        return "Sociedad"
+    if has(p,r"/(?:cine-television)(?:/|$)"):return "Cultura"
+    if has(p,r"/(?:movilidad)(?:/|$)") and has(t,r"\\b(?:coche|vehiculo|pick.up|electrico|hibrido)\\b"):return "Motor"
     # Una noticia de declaraciones políticas sigue siendo política aunque hable
     # de salud o economía, o el RSS generalista la llame «Sociedad».
     if has(t,POLITICAL_ACTORS) or has(t,POLITICAL_INSTITUTIONS):
@@ -165,6 +185,12 @@ if __name__=="__main__":
         ("Rufián contesta al PP y cita a su médico", "https://example.com/salud/medicina", "Salud", "Política nacional"),
         ("Sánchez Vicario entra en el salón de la fama del tenis", "https://example.com/tenis/hall-fame", "Tenis", "Tenis"),
         ("El Parlament de Cataluña recibe a Puigdemont tras la amnistía", "https://example.com/sociedad/politica", "Sociedad", "Política nacional"),
+        ("Jennifer Barreto gana Miss Universo y logra la corona", "https://www.elmundo.es/loc/celebrities/2026/miss.html", "Sociedad", "Sociedad"),
+        ("La presentadora Flora González anuncia su embarazo", "https://example.com/gente/flora-embarazo", "Sociedad", "Sociedad"),
+        ("La historia real de la película bélica sobre una guerra", "https://example.com/cinemania/noticias/pelicula", "Sociedad", "Cultura"),
+        ("Liberados veinte rehenes de un supermercado tras un robo", "https://example.com/internacional/rescate", "Internacional", "Sucesos"),
+        ("El agujero negro fiscal: los millonarios tributan poco", "https://elpais.com/economia/2026/11/25/fiscal.html", "Ciencia", "Economía"),
+        ("La ley de bienestar animal prohíbe dejar un perro atado", "https://example.com/economia/animales", "Economía", "Sociedad"),
         ("La bolsa registra una nueva subida del 5%", "https://example.com/economia/bolsa", "Economía", "Economía")
     ]
     errors=[]
