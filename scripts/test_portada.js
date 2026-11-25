@@ -93,6 +93,8 @@ assert(html.includes('if(activeTopic==="Todas")return eligibleToday();'),"La por
 assert(html.includes('const PAGE_SIZE=20')||html.includes('const PAGE_SIZE=20,'),"Mantener páginas de 20 titulares");
 assert(html.includes('shownCount+=PAGE_SIZE'),"El botón debe cargar 20 titulares adicionales");
 assert(html.includes('activeTopic+" · Todas las disponibles'),"Indicar que el tema permite consultar noticias anteriores");
+assert(html.includes('const totalInTopic=activeTopic==="Todas"?null:'),"Conservar contador independiente de noticias del archivo");
+assert(html.includes('excludedInTopic'),"Indicar noticias ocultas por fuentes y filtros del lector");
 assert(html.includes('function makeCard(a,lead=false)'),"No modificar componente original de tarjetas");
 assert(html.includes('const illustration=visual(a,lead)'),"Conservar ilustraciones de tarjetas");
 const css=fs.readFileSync("docs/portada.css","utf8");
