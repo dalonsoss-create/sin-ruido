@@ -1052,7 +1052,15 @@ function render(){
   const highlightedId=activeTopic==="Todas"?renderLastMinute():(el("last-minute-panel").hidden=true,null);
   const list=eligibleForView().filter(a=>!highlightedId||storyId(a)!==highlightedId);
   const visible=Math.min(shownCount,list.length);
-  el("visible-count").textContent="Mostrando "+visible+" de "+list.length+" titulares"+(activeTopic==="Todas"?" de hoy":" disponibles (incluye días anteriores)");
+  // Distinguir el archivo completo de la selección personal. Así el lector
+  // entiende por qué puede ver 8 noticias aunque la edición almacene 23.
+  const totalInTopic=activeTopic==="Todas"?null:
+    articles.filter(a=>a.category===activeTopic&&Number.isFinite(Date.parse(a.date))).length;
+  const excludedInTopic=totalInTopic===null?0:Math.max(0,totalInTopic-list.length);
+  el("visible-count").textContent=activeTopic==="Todas"
+    ?"Mostrando "+visible+" de "+list.length+" titulares de hoy"
+    :"Mostrando "+visible+" de "+list.length+" de tu selección · "+totalInTopic+
+      " en el archivo"+(excludedInTopic?" · "+excludedInTopic+" fuera por tus filtros, fuentes o ya vistas":"");
   const more=el("more-wrap");
   more.hidden=visible>=list.length;
   el("more-counter").textContent="Has visto "+visible+" de "+list.length+" noticias.";
