@@ -91,4 +91,16 @@ assert(html.includes('checkAppVersion(data);'),"Al recibir noticias debe comprob
 assert(html.includes('function appIsBeingEdited()'),"No interrumpir personalización en curso");
 assert(html.includes('url.searchParams.set("app_version",version)'),"Recargar HTML sin conservar caché antiguo");
 assert(html.includes('setInterval(applyPendingAppUpdate,20000)'),"Reintentar cambio de versión pendiente");
+
+assert(html.includes('async function checkLiveAppVersion(force=false)'),"Comprobar versión real de GitHub Pages en el móvil");
+assert(html.includes('await checkLiveAppVersion(true)'),"El botón Actualizar debe comprobar también el software");
+assert(html.includes('checkAppVersion(data);\n    if(Date.parse(data.updated)>lastEdition)'),"Verificar software aun sin titulares nuevos");
+assert(html.includes('if(!data)throw new Error("No se pudo consultar la edición")'),"No reemplazar noticias si fallan ambas fuentes");
+assert(html.includes('["https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json"+query,')||
+       html.includes('"https://raw.githubusercontent.com/dalonsoss-create/sin-ruido/main/docs/noticias.json"+query'),
+       "Conservar el origen de noticias más actualizado");
+assert(html.includes('"./noticias.json"+query'),"Tener alternativa local si GitHub Raw falla");
+assert(html.includes('if(!document.hidden){refreshPublishedEdition();checkLiveAppVersion()}'),"Al regresar desde el móvil revisar código y titulares");
+assert(html.includes('if(event.persisted){refreshPublishedEdition();checkLiveAppVersion()}'),"Volver desde caché bfcache debe revisar la aplicación");
+assert(html.includes('appIsBeingEdited()'),"No interrumpir personalización durante actualización");
 console.log("OK: filtros de usuario, fuentes, vetos, noticias de hoy y orden cronológico verificados.");
