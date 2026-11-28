@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-28T02:35:35.878095+00:00",
+  "updated": "2026-11-28T03:35:48.647600+00:00",
   "edition_date_madrid": "2026-11-28",
   "articles_today_madrid": 74,
   "app_version": "7e0d3433339332ccbbbab101",
   "app_script_sha256": "65e31cf3da0b08137b88232565104581304dfa94097d820288a65424083e9ede",
-  "collected_before_balance": 1264,
+  "collected_before_balance": 1256,
   "balance_max_per_publisher": 95,
   "publisher_counts": {
     "20minutos": 61,
@@ -42,7 +42,7 @@
       "count": 0
     }
   ],
-  "sources_ok": 36,
+  "sources_ok": 38,
   "classification_version": 6,
   "feed_count": 41,
   "sources_status": [
@@ -88,8 +88,8 @@
     },
     {
       "id": "diariodepozuelo-local",
-      "ok": false,
-      "count": 0
+      "ok": true,
+      "count": 24
     },
     {
       "id": "directopaladar-general",
@@ -108,8 +108,8 @@
     },
     {
       "id": "elcorreodepozuelo-portada",
-      "ok": false,
-      "count": 0
+      "ok": true,
+      "count": 10
     },
     {
       "id": "eldiario-portada",
@@ -628,6 +628,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "La salud mental de todo un país",
+      "link": "https://www.elmundo.es/espana/2026/11/28/6b09e33021efa08e3e8b456e.html",
+      "date": "2026-11-28T00:36:54+00:00",
+      "publication_date_madrid": "2026-11-28",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-espana",
+      "category": "Salud",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "\"No está hecho\": prudencia en Vox ante la movilización de la izquierda y con traspiés en el final de campaña",
       "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/28/6b09f08d21efa0525f8b456f.html",
       "date": "2026-11-28T00:36:54+00:00",
@@ -640,23 +657,6 @@
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La salud mental de todo un país",
-      "link": "https://www.elmundo.es/espana/2026/11/28/6b09e33021efa08e3e8b456e.html",
-      "date": "2026-11-28T00:36:54+00:00",
-      "publication_date_madrid": "2026-11-28",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Salud",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
-      ],
       "editorial_coincidencias": 0
     },
     {
@@ -785,7 +785,7 @@
       "publication_date_madrid": "2026-11-28",
       "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-portada",
+      "source_id": "elmundo-internacional",
       "category": "Internacional",
       "place": "",
       "classification_version": 6,
@@ -1370,7 +1370,7 @@
       "publication_date_madrid": "2026-11-28",
       "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-portada",
+      "source_id": "elmundo-internacional",
       "category": "Internacional",
       "place": "",
       "classification_version": 6,
@@ -1948,8 +1948,8 @@
       "publication_date_madrid": "2026-11-27",
       "date_source": "rss_published",
       "source": "El Mundo",
-      "source_id": "elmundo-portada",
-      "category": "Sociedad",
+      "source_id": "elmundo-espana",
+      "category": "Política nacional",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -2010,6 +2010,23 @@
       "editorial_coincidencias": 0
     },
     {
+      "title": "Un día en el 'frente' de la guerra energética de Ucrania",
+      "link": "https://www.elmundo.es/internacional/2026/11/27/6b09b026fc6c8353758b4581.html",
+      "date": "2026-11-27T21:44:20+00:00",
+      "publication_date_madrid": "2026-11-27",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-internacional",
+      "category": "Conflictos",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
+      "editorial_coincidencias": 0
+    },
+    {
       "title": "China ensaya el desembarco en Taiwán y estrecha el cerco militar sobre la isla en vísperas de las elecciones locales",
       "link": "https://www.elmundo.es/internacional/2026/11/27/6ad73546e85ece22528b45b0.html",
       "date": "2026-11-27T21:44:13+00:00",
@@ -2022,6 +2039,23 @@
       "classification_version": 6,
       "access_status": "unknown",
       "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "El mito Márquez, según el mito Agostini: \"La vida, al final, es lo más importante\"",
+      "link": "https://www.elmundo.es/deportes/motociclismo/2026/11/27/6b09c6cee85ecee3028b4587.html",
+      "date": "2026-11-27T21:43:57+00:00",
+      "publication_date_madrid": "2026-11-27",
+      "date_source": "rss_published",
+      "source": "El Mundo",
+      "source_id": "elmundo-portada",
+      "category": "Motor",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [
+        "El Mundo"
+      ],
       "editorial_coincidencias": 0
     },
     {
@@ -3209,23 +3243,6 @@
       "access_status": "unknown",
       "editorial_portadas": [
         "La Vanguardia"
-      ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "Pablo Iglesias irrumpe en el cierre de campaña para rescatar a Podemos: \"Somos una minoría que no se vende y nunca vota con la nariz tapada\"",
-      "link": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/27/6b09ba03e85ecee3358b45b2.html",
-      "date": "2026-11-27T20:02:37+00:00",
-      "publication_date_madrid": "2026-11-27",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-espana",
-      "category": "Política nacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [
-        "El Mundo"
       ],
       "editorial_coincidencias": 0
     },
@@ -6084,6 +6101,21 @@
       "editorial_portadas": [
         "El Español"
       ],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "36 horas para dar con los secuestradores que pasaron con un todoterreno por encima de su víctima",
+      "link": "https://elpais.com/espana/2026-11-27/36-horas-para-dar-con-los-secuestradores-que-pasaron-con-un-todoterreno-por-encima-de-su-victima.html",
+      "date": "2026-11-27T16:09:15+00:00",
+      "publication_date_madrid": "2026-11-27",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-espana",
+      "category": "Política nacional",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
       "editorial_coincidencias": 0
     },
     {
@@ -9663,21 +9695,6 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Lula nombra a un alto directivo de la banca privada como ministro de Hacienda de Brasil",
-      "link": "https://www.elmundo.es/internacional/2026/11/27/6b09278ce9cf4a74378b4573.html",
-      "date": "2026-11-27T06:47:44+00:00",
-      "publication_date_madrid": "2026-11-27",
-      "date_source": "rss_published",
-      "source": "El Mundo",
-      "source_id": "elmundo-internacional",
-      "category": "Internacional",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
       "title": "Detenido un hombre en Bilbao por matar a puñaladas a su expareja, una mujer de 34 años",
       "link": "https://www.elespanol.com/reportajes/20261127/detenido-hombre-bilbao-matar-punaladas-expareja-mujer-anos/1003744474363_0.html",
       "date": "2026-11-27T06:44:56+00:00",
@@ -10055,14 +10072,14 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Marc Márquez: “Mi cuerpo me obliga a vivir año a año, mes a mes, día a día”",
-      "link": "https://elpais.com/deportes/motociclismo/2026-11-27/marc-marquez-mi-cuerpo-me-obliga-a-vivir-ano-a-ano-mes-a-mes-dia-a-dia.html",
+      "title": "Quién es quién en la nueva cúpula del BCE",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-27/quien-es-quien-en-la-nueva-cupula-del-bce.html",
       "date": "2026-11-27T04:30:01+00:00",
       "publication_date_madrid": "2026-11-27",
       "date_source": "rss_published",
       "source": "EL PAÍS",
-      "source_id": "elpais-deportes",
-      "category": "Motor",
+      "source_id": "elpais-economia",
+      "category": "Economía",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -10085,14 +10102,14 @@
       "editorial_coincidencias": 0
     },
     {
-      "title": "Quién es quién en la nueva cúpula del BCE",
-      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-27/quien-es-quien-en-la-nueva-cupula-del-bce.html",
+      "title": "Marc Márquez: “Mi cuerpo me obliga a vivir año a año, mes a mes, día a día”",
+      "link": "https://elpais.com/deportes/motociclismo/2026-11-27/marc-marquez-mi-cuerpo-me-obliga-a-vivir-ano-a-ano-mes-a-mes-dia-a-dia.html",
       "date": "2026-11-27T04:30:01+00:00",
       "publication_date_madrid": "2026-11-27",
       "date_source": "rss_published",
       "source": "EL PAÍS",
-      "source_id": "elpais-economia",
-      "category": "Economía",
+      "source_id": "elpais-deportes",
+      "category": "Motor",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -10138,6 +10155,21 @@
       "source": "EL PAÍS",
       "source_id": "elpais-economia",
       "category": "Economía",
+      "place": "",
+      "classification_version": 6,
+      "access_status": "unknown",
+      "editorial_portadas": [],
+      "editorial_coincidencias": 0
+    },
+    {
+      "title": "DPAM señala a Anthropic y OpenAI entre las grandes perjudicadas por el regreso de Jensen Huang",
+      "link": "https://cincodias.elpais.com/mercados-financieros/2026-11-27/dpam-senala-a-anthropic-y-openai-entre-las-grandes-perjudicadas-por-el-regreso-de-jensen-huang.html",
+      "date": "2026-11-27T04:25:00+00:00",
+      "publication_date_madrid": "2026-11-27",
+      "date_source": "rss_published",
+      "source": "EL PAÍS",
+      "source_id": "elpais-economia",
+      "category": "IA",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
@@ -10999,21 +11031,6 @@
       "editorial_portadas": [
         "El Español"
       ],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La UE lucha por aprobar un presupuesto antes de la posible llegada de Le Pen al poder en Francia",
-      "link": "https://elpais.com/internacional/2026-11-26/la-ue-lucha-por-aprobar-un-presupuesto-antes-de-la-posible-llegada-de-le-pen-al-poder-en-francia.html",
-      "date": "2026-11-26T21:27:41+00:00",
-      "publication_date_madrid": "2026-11-26",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-internacional",
-      "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
       "editorial_coincidencias": 0
     },
     {
@@ -13602,7 +13619,7 @@
       "publication_date_madrid": "2026-11-25",
       "date_source": "rss_published",
       "source": "EL PAÍS",
-      "source_id": "elpais-ciencia",
+      "source_id": "elpais-naturaleza",
       "category": "Naturaleza",
       "place": "",
       "classification_version": 6,
@@ -13926,21 +13943,6 @@
       "source": "Cinco Días",
       "source_id": "cincodias-economia",
       "category": "Economía",
-      "place": "",
-      "classification_version": 6,
-      "access_status": "unknown",
-      "editorial_portadas": [],
-      "editorial_coincidencias": 0
-    },
-    {
-      "title": "La lluvia, nieve y viento intensos de hoy, con 13 comunidades bajo aviso, darán paso a días estables",
-      "link": "https://elpais.com/el-tiempo/2026-11-25/la-lluvia-nieve-y-viento-intensos-de-hoy-con-13-comunidades-bajo-aviso-daran-paso-a-dias-estables.html",
-      "date": "2026-11-25T12:14:58+00:00",
-      "publication_date_madrid": "2026-11-25",
-      "date_source": "rss_published",
-      "source": "EL PAÍS",
-      "source_id": "elpais-naturaleza",
-      "category": "Naturaleza",
       "place": "",
       "classification_version": 6,
       "access_status": "unknown",
